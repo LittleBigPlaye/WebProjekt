@@ -38,38 +38,38 @@
         </div>
         <div class="card">
             <div class="container">
-                <img src="Static/assets/mask01.png" width="400">
+                <img src="Static/assets/Mask/mask01.png" width="400">
                 <a href="">Maske 1</a>
             </div>
         </div>
         <div class="card">
             <div class="container">
-                <img src="Static/assets/mask01.png" width="400">
+                <img src="Static/assets/Mask/mask01.png" width="400">
                 <a href="">Maske 2</a>
             </div>
         </div>
         <div class="card">
             <div class="container">
-                <img src="Static/assets/mask01.png" width="400">
+                <img src="Static/assets/Mask/mask01.png" width="400">
                 <a href="">Maske 3</a>
             </div>
         </div>
     </div>
     <div class="card">
         <div class="container">
-            <img src="Static/assets/mask01.png" width="400">
+            <img src="Static/assets/Mask/mask01.png" width="400">
             M<a href="">Maske 4</a>
         </div>
     </div>
     <div class="card">
         <div class="container">
-            <img src="Static/assets/mask01.png" width="400">
+            <img src="Static/assets/Mask/mask01.png" width="400">
             <a href="">Maske 5</a>
         </div>
     </div>
     <div class="card">
         <div class="container">
-            <img src="Static/assets/mask01.png" width="400">
+            <img src="Static/assets/Mask/mask01.png" width="400">
             <a href="">Maske 6</a>
         </div>
     </div>
@@ -93,38 +93,38 @@
     </div>
     <div class="card">
         <div class="container">
-            <img src="Static/assets/mask01.png" width="400">
+            <img src="Static/assets/Mask/mask01.png" width="400">
             <a href="">Maske 7</a>
         </div>
     </div>
     <div class="card">
         <div class="container">
-            <img src="Static/assets/mask01.png" width="400">
+            <img src="Static/assets/Mask/mask01.png" width="400">
             <a href="">Maske 8</a>
         </div>
     </div>
     <div class="card">
         <div class="container">
-            <img src="Static/assets/mask01.png" width="400">
+            <img src="Static/assets/Mask/mask01.png" width="400">
             <a href="">Maske 9</a>
         </div>
     </div>
     </div>
     <div class="card">
         <div class="container">
-            <img src="Static/assets/mask01.png" width="400">
+            <img src="Static/assets/Mask/mask01.png" width="400">
             M<a href="">Maske 10</a>
         </div>
     </div>
     <div class="card">
         <div class="container">
-            <img src="Static/assets/mask01.png" width="400">
+            <img src="Static/assets/Mask/mask01.png" width="400">
             <a href="">Maske 12</a>
         </div>
     </div>
     <div class="card">
         <div class="container">
-            <img src="Static/assets/mask01.png" width="400">
+            <img src="Static/assets/Mask/mask01.png" width="400">
             <a href="">Maske 13</a>
         </div>
 
@@ -136,6 +136,6 @@
     </div>
 </footer>
 
-<? include ("./Shared/up_button.html") ?>
+    <? include ("./Shared/up_button.html") ?>
 </body>
 </html>
