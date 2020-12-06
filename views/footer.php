@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    Die Seite ist hier Schluss. <br>
+    Gehen Sie nun!
+</body>
+</html>

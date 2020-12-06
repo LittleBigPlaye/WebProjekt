@@ -5,15 +5,16 @@
 <head>
     <meta charset="UTF-8">
     <title>MaskYourFace</title>
-    <link rel="stylesheet" href="./Static/css/Slideshow.css" />
+    <link rel="stylesheet" href="./assets/styles/main.css">
+    <link rel="stylesheet" href="./assets/styles/slide_show.css" />
 </head>
 <body>
 <header>
-    <?include ("./Shared/Header.html");?>
+    <?include ("./views/header.php");?>
 </header>
 <section>
    <div>
-       <?include ("./Shared/Navbar.html");?>
+       <?include ("./views/nav_bar.php");?>
    </div>
 
 
@@ -22,11 +23,12 @@
 </div>
         <div>
             <!-- Product Spotlight -->
-            <?php include './Shared/Product_Spotlight.php' ?>
-        </div>>
+            
+            <?php include './views/product_spotlight.php' ?>
+        </div>
 
 </section>
-<section>
+<section class="cards">
     <div>
         <div>
             <h2>Masken, Masken, Masken</h2>
@@ -38,38 +40,38 @@
         </div>
         <div class="card">
             <div class="container">
-                <img src="Static/assets/Mask/mask01.png" width="400">
+            <img src="./assets/images/masks/mask01.png" width="400">
                 <a href="">Maske 1</a>
             </div>
         </div>
         <div class="card">
             <div class="container">
-                <img src="Static/assets/Mask/mask01.png" width="400">
+            <img src="./assets/images/masks/mask01.png" width="400">
                 <a href="">Maske 2</a>
             </div>
         </div>
         <div class="card">
             <div class="container">
-                <img src="Static/assets/Mask/mask01.png" width="400">
+            <img src="./assets/images/masks/mask01.png" width="400">
                 <a href="">Maske 3</a>
             </div>
         </div>
     </div>
     <div class="card">
         <div class="container">
-            <img src="Static/assets/Mask/mask01.png" width="400">
+        <img src="./assets/images/masks/mask01.png" width="400">
             M<a href="">Maske 4</a>
         </div>
     </div>
     <div class="card">
         <div class="container">
-            <img src="Static/assets/Mask/mask01.png" width="400">
+        <img src="./assets/images/masks/mask01.png" width="400">
             <a href="">Maske 5</a>
         </div>
     </div>
     <div class="card">
         <div class="container">
-            <img src="Static/assets/Mask/mask01.png" width="400">
+        <img src="./assets/images/masks/mask01.png" width="400">
             <a href="">Maske 6</a>
         </div>
     </div>
@@ -79,7 +81,7 @@
 
 </section>
 <br>
-<section>
+<section class="cards">
 
     <div>
         <h2>Schöner können Sie ihr Gesicht nicht verstecken. Die Götter wissen, dass sie es brauchen</h2>
@@ -93,38 +95,38 @@
     </div>
     <div class="card">
         <div class="container">
-            <img src="Static/assets/Mask/mask01.png" width="400">
+        <img src="./assets/images/masks/mask01.png" width="400">
             <a href="">Maske 7</a>
         </div>
     </div>
     <div class="card">
         <div class="container">
-            <img src="Static/assets/Mask/mask01.png" width="400">
+        <img src="./assets/images/masks/mask01.png" width="400">
             <a href="">Maske 8</a>
         </div>
     </div>
     <div class="card">
         <div class="container">
-            <img src="Static/assets/Mask/mask01.png" width="400">
+        <img src="./assets/images/masks/mask01.png" width="400">
             <a href="">Maske 9</a>
         </div>
     </div>
     </div>
     <div class="card">
         <div class="container">
-            <img src="Static/assets/Mask/mask01.png" width="400">
+        <img src="./assets/images/masks/mask01.png" width="400">
             M<a href="">Maske 10</a>
         </div>
     </div>
     <div class="card">
         <div class="container">
-            <img src="Static/assets/Mask/mask01.png" width="400">
+        <img src="./assets/images/masks/mask01.png" width="400">
             <a href="">Maske 12</a>
         </div>
     </div>
     <div class="card">
         <div class="container">
-            <img src="Static/assets/Mask/mask01.png" width="400">
+        <img src="./assets/images/masks/mask01.png" width="400">
             <a href="">Maske 13</a>
         </div>
 
@@ -132,10 +134,10 @@
 
 <footer>
     <div class="footer">
-    <?include ("./Shared/Footer.html");?>
+    <?include ("./views/footer.php");?>
     </div>
 </footer>
 
-    <? include ("./Shared/up_button.html") ?>
+    <? include ("./views/up_button.php") ?>
 </body>
 </html>
