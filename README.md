@@ -1,2 +1,0 @@
-# WebProjekt
-WebProjekt FH
