@@ -9,7 +9,7 @@
 require_once 'config/init.php';
 require_once 'config/database.php';
 
-// loas core files
+// load core files
 require_once COREPATH . 'functions.php';
 require_once COREPATH . 'controller.class.php';
 require_once COREPATH . 'model.class.php';
