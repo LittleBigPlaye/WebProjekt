@@ -4,9 +4,7 @@
     <?include (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'header.php');?>
 </header>
 
-<div>
-    <?include (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'navBar.php');?>
-</div>
+<?include (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'navBar.php');?>
 
 <section>
     <div>

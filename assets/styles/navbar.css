@@ -1,0 +1,170 @@
+nav {
+    position: sticky;
+    top: 0;
+    z-index: +100;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+nav .mainNav {
+    display: none;
+}
+
+nav a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* hide and show the navigation */
+
+#navToggle:checked+.mainNav {
+    display: block;
+}
+
+nav input[type="checkbox"],
+nav ul span.dropIcon {
+    display: none;
+}
+
+nav li,
+#navToggleLabel {
+    border-width: 0 0 1px;
+}
+
+nav .subNav {
+    background-color: #222222;
+    border-width: 1px 1px 0;
+    /* margin: 0 1em; */
+}
+
+nav .subNav li:last-child {
+    border-width: 0;
+}
+
+nav li,
+#navToggleLabel,
+nav a {
+    position: relative;
+    display: block;
+    color: #f6f6f6;
+    text-shadow: 1px 1px 0 #00000020;
+}
+
+nav,
+#navToggleLabel {
+    background-color: #191919;
+}
+
+#navToggleLabel,
+nav a {
+    padding: 1em 1.5em;
+}
+
+nav a {
+    transition: all 0.125s ease-in-out;
+    -webkit-transition: all 0.125s ease-in-out;
+}
+
+nav a:hover {
+    background-color: #e4e4e4;
+    color: #191919;
+}
+
+.mainNav li:not(.active) a {
+    border-bottom: solid #191919 0.38em;
+}
+
+.mainNav li a:hover {
+    border-bottom: solid #e4e4e4 0.38em;
+}
+
+nav .subNav {
+    display: none;
+}
+
+
+/* hide and show sub navigations */
+
+nav input[type="checkbox"]:checked+.subNav {
+    display: block;
+}
+
+nav .subNav a:hover {
+    color: #444;
+}
+
+#navToggleLabel .dropIcon,
+nav li label.dropIcon {
+    position: absolute;
+    right: 1.5em;
+    top: 1.25em;
+}
+
+nav label.dropIcon,
+#navToggle span.dropIcon {
+    border-radius: 50%;
+    width: 1em;
+    height: 1em;
+    text-align: center;
+    background-color: #1414142a;
+    text-shadow: 0 0 0 transparent;
+    color: #b6b6b6;
+}
+
+nav .dropIcon {
+    line-height: 1;
+}
+
+nav .active {
+    border-bottom: solid #eb7d00 0.38em;
+}
+
+@media screen and (min-width: 900px) {
+    nav .mainNav {
+        display: block;
+        height: 3.5em;
+        background-color: #191919;
+    }
+    #navToggleLabel,
+    nav label.dropIcon {
+        display: none;
+    }
+    nav ul span.dropIcon {
+        display: inline-block;
+    }
+    nav li {
+        float: left;
+        border-width: 0 0 1px 0;
+        background-color: #191919;
+    }
+    nav li.right {
+        float: right;
+    }
+    nav .subNav li {
+        float: none;
+    }
+    nav .subNav {
+        border-width: 0;
+        margin: 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 12em;
+        z-index: 3000;
+        box-shadow: 0px 8px 16px 0px #00000033;
+    }
+    nav .subNav,
+    nav input[type="checkbox"]:checked+.subNav {
+        display: none;
+    }
+    nav .subNav li {
+        border-width: 0 0 1px;
+    }
+    nav li:hover>input[type="checkbox"]+.subNav {
+        display: block;
+    }
+}
