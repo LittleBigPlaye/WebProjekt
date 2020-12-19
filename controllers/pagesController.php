@@ -17,4 +17,13 @@
      {  
         $this->setParam('currentPosition', 'impressum');
      }
+
+     public function actionLogin()
+     {
+         $this->setParam('currentPosition', 'login');
+     }
+     public function actionRegister()
+     {
+         $this->setParam('currentPosition', 'register');
+     }
  }

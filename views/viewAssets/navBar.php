@@ -22,7 +22,7 @@
 
         <li class="right"><a href="#">Warenkorb</a></li>
         <li <?= ($currentPosition == 'impressum') ? 'class="right active"' : 'class="right"'?>><a href="?c=pages&a=impressum">Impressum</a></li>
-        <li class="right"><a href="#">Login</a></li>
+        <li <?= ($currentPosition == 'login') ? 'class="right active"': 'class="right"'?>><a href="?c=pages&a=login">Login</a></li>
         
         <!-- Administration -->
         <li class="right"><a>Administration
