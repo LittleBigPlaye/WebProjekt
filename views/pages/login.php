@@ -29,6 +29,6 @@
 
         <button type="submit">Sign In</button>
       </form>
-      <p>No account yet? <a href="http://localhost:8088/Project/?c=pages&a=register">Register here!</a></p>
+      <p>No account yet? <a href="?c=pages&a=register">Register here!</a></p>
     </body>
 </html>
