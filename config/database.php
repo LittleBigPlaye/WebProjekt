@@ -20,5 +20,5 @@ try
 }
 catch (PDOException $e)
 {
-    die ('Connection to Database was not successful: ' . $e->getMessage());
+    die ('Unable to establish database connection: ' . $e->getMessage());
 }
