@@ -2,13 +2,19 @@
 /**
  * @author John Klippstein
  */
+namespace myf\core;
+
 
 abstract class BaseModel
 {
-    const TYPE_INT = 'int';
-    const TYPE_FLOAT = 'float';
-    const TYPE_STRING = 'string';
+    const TYPE_INT      = 'int';
+    const TYPE_FLOAT    = 'float';
+    const TYPE_STRING   = 'string';
+    const TYPE_DECIMAL  = 'dec';
+    const TYPE_DATE     = 'date';
 
+    protected $data = [];
+    protected $params = [];
 
     /**
      * _baseModellClass constructor.
@@ -58,7 +64,7 @@ abstract class BaseModel
             return;
         }
 
-        throw new Exception('You can not write top property "'.$key.'" for the class "'.get_called_class());
+        throw new \Exception('You can not write top property "'.$key.'" for the class "'.get_called_class());
     }
 
 
@@ -68,7 +74,7 @@ abstract class BaseModel
      */
     protected function insert(&$errors)
     {
-        $db = $GLOBALS['maskyourface'];
+        $db = $GLOBALS['database'];
 
         try
         {
@@ -117,7 +123,7 @@ abstract class BaseModel
      */
     protected function update(&$errors)
     {
-        $db = $GLOBALS['db'];
+        $db = $GLOBALS['database'];
 
         try
         {
@@ -230,7 +236,7 @@ abstract class BaseModel
      */
     public static function find($where = '')
     {
-        $db  = $GLOBALS['maskyourface'];
+        $db  = $GLOBALS['database'];
         $result = null;
 
         try
@@ -257,21 +263,21 @@ abstract class BaseModel
      * @param string $where
      * @return mixed
      */
-    public static function findeOne($where='')
+    public static function findOne($where='')
     {
-        $db  = $GLOBALS['maskyourface'];
+        $db  = $GLOBALS['database'];
         $result = null;
 
         try
         {
 
-                $sql = 'SELECT * FROM '-self::tablename();
+                $sql = 'SELECT * FROM ' . self::tablename();
 
                 if(!empty($where))
                 {
                     $sql.=' WHERE '.$where.';';
                 }
-                $result = $db->query($sql)->fetchOne();
+                $result = $db->query($sql)->fetch();
 
         }
         catch(\PDOException $e)
@@ -304,7 +310,7 @@ abstract class BaseModel
      */
     public function delete(&$errors = null)
     {
-        $db = $GLOBALS['maskyourface'];
+        $db = $GLOBALS['database'];
 
         try
         {
