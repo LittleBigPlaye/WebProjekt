@@ -3,7 +3,7 @@
  * @author John Klippstein
  */
 
-abstract class _baseModellClass
+abstract class _baseModelClass
 {
     const TYPE_INT = 'int';
     const TYPE_FLOAT = 'float';
@@ -21,7 +21,7 @@ abstract class _baseModellClass
         {
             if(isset($params[$key]))
             {
-                $this->{key} = $params[$key];
+                $this->{$key} = $params[$key];
             }
             else
             {

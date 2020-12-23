@@ -11,8 +11,8 @@ require_once 'config/database.php';
 
 // load core files
 require_once COREPATH . 'functions.php';
-require_once COREPATH . 'controller.class.php';
-require_once COREPATH . 'model.class.php';
+require_once COREPATH . 'controllerClass.php';
+require_once COREPATH . '_baseModelClass.php';
 
 // load all models
 foreach(glob('models/*.php') as $modelClass)
