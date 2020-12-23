@@ -3,7 +3,7 @@
  * @author John Klippstein
  */
 
-abstract class _baseModelClass
+abstract class BaseModel
 {
     const TYPE_INT = 'int';
     const TYPE_FLOAT = 'float';
