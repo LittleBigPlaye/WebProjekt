@@ -252,9 +252,9 @@ abstract class BaseModel
 
             if(!empty($where))
             {
-                $sql .= ' WHERE ' . $where .  ';';
+                $sql .= ' WHERE ' . $where;
             }
-
+            $sql .= ';';
             $result = $db->query($sql)->fetchAll();
         }
         catch(\PDOException $e)
@@ -282,8 +282,9 @@ abstract class BaseModel
 
                 if(!empty($where))
                 {
-                    $sql.=' WHERE '.$where.';';
+                    $sql.=' WHERE ' . $where;
                 }
+                $sql .= ';';
                 $result = $db->query($sql)->fetch();
 
         }
@@ -294,6 +295,29 @@ abstract class BaseModel
         return $result;
     }
 
+    public static function findRange($offset, $length, $where='')
+    {
+        $db  = $GLOBALS['database'];
+        $result = null;
+
+        try
+        {
+            $sql = 'SELECT * FROM ' . self::tablename();
+
+            if(!empty($where))
+            {
+                $sql .= ' WHERE ' . $where .  ';';
+            }
+            $sql .= 'LIMIT ' . $offset . ', ' . $length . ';';
+            $result = $db->query($sql)->fetchAll();
+        }
+        catch(\PDOException $e)
+        {
+            die('Select statment failed: ' . $e->getMessage());
+        }
+
+        return $result;
+    }
 
     /**
      * @param null $errors

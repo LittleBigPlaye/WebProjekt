@@ -93,8 +93,29 @@ namespace myf\controller;
 
      public function actionListProducts()
      {
-        $this->setParam('currentPosition', 'products'); 
-        $productResults = \myf\models\Product::find();
+        $this->setParam('currentPosition', 'products');
+        $page = $_GET['page'] ?? 1; 
+        
+        //check how many products are available
+        $numberOfProducts = count(\myf\models\Product::find());
+        //calculate the number of pages
+        $numberOfPages = ceil($numberOfProducts / PRODUCTS_PER_PAGE);
+
+        $this->setParam('numberOfPages', $numberOfPages);
+        $page = ($page > $numberOfPages) ? $numberOfPages : $page;
+        if($numberOfPages > 0 && $page > $numberOfPages)
+        {
+            $page = $numberOfPages;
+        }
+        else if($page < 1)
+        {
+            $page = 1;
+        }
+
+        $this->setParam('currentPage', $page);
+        
+
+        $productResults = \myf\models\Product::findRange(($page-1) * PRODUCTS_PER_PAGE, PRODUCTS_PER_PAGE);
          if(is_array($productResults))
          {
              $products = [];
