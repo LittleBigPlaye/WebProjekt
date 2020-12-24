@@ -38,7 +38,13 @@ class Controller
 
         extract($this->params);
 
+        
+        include (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'header.php');
+        include (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'navBar.php');
+        
         include ($viewPath);
+
+        include (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'footer.php');
     }
 
     protected function setParam($key, $value = null)
