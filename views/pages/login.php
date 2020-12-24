@@ -1,6 +1,3 @@
-<div>
-        <?include (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'navBar.php');?>
-</div>
 <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">

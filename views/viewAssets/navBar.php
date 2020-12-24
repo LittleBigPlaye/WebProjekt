@@ -14,7 +14,7 @@
             </a>
             <input type="checkbox" id="dropToggle01">
             <ul class="subNav">
-                <li><a href="#">Alle Artikel</a></li>
+                <li><a href="?c=products&a=listProducts">Alle Artikel</a></li>
                 <li><a href="#">Kategorien</a>
                 <li><a href="#">Suche</a></li>
             </ul>

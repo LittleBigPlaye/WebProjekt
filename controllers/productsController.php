@@ -42,4 +42,9 @@ namespace myf\controller;
              //TODO - Redirect to 404 page
          }
      }
+
+     public function actionListProducts()
+     {
+         
+     }
  }

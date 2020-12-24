@@ -1,11 +1,5 @@
 <?php $numberOfSlides = 4 ?>
 
-<header>
-    <?include (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'header.php');?>
-</header>
-
-<?include (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'navBar.php');?>
-
 <section>
     <div>
         <h2>Unsere Dauerbrenner - Die halten alles auf!</h2>
@@ -120,11 +114,5 @@
         </div>
 
 </section>
-
-<footer>
-    <div class="footer">
-        <?include (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'footer.php');?>
-    </div>
-</footer>
 
 <? include (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'upButton.php') ?>
