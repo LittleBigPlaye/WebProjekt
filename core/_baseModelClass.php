@@ -83,24 +83,26 @@ abstract class BaseModel
 
             foreach ($this->schema as $key => $schemaOptions)
             {
-                $sql .= '`'.$key.'`,';
-
-                if($this->data[$key] === null)
+                if(!isset($schemaOptions['autoincrement']) || $schemaOptions['autoincrement'] === false)
                 {
-                    $valueString .='NULL,';
-                }
-                else
-                {
-                    $valueString .= $db->quote($this->data[$key]).',';
-                }
+                    $sql .= '`'.$key.'`,';
 
+                    if($this->data[$key] === null)
+                    {
+                        $valueString .='NULL,';
+                    }
+                    else
+                    {
+                        $valueString .= $db->quote($this->data[$key]).',';
+                    }
+                }
             }
 
             $sql = trim($sql,',');
             $valueString = trim($valueString, ',');
 
             $sql .= ')'.$valueString.')';
-
+            echo $sql;
             $statment = $db->prepare($sql);
             $statment->execute();
 
@@ -110,6 +112,7 @@ abstract class BaseModel
         catch (\PDOException $e)
         {
             $errors[]='Error inserting '.get_called_class();
+            die($e->getMessage());
         }
         return false;
 
@@ -202,12 +205,16 @@ abstract class BaseModel
                 {
                     if(isset($schemaOptions['min']) && mb_strlen($value) < $schemaOptions['min'])
                     {
-                        $errors[]=$attribute.': String needs min. '.$schemaOptions['min'].' charackters!';
+                        $errors[] = $attribute.': String needs min. '.$schemaOptions['min'].' charackters!';
                     }
 
                     if(isset($schemaOptions['max']) && mb_strlen($value) > $schemaOptions['max'])
                     {
-                        $errors[]=$attribute.': String can have max. '.$schemaOptions['max'].' charackters!';
+                        $errors[] = $attribute.': String can have max. '.$schemaOptions['max'].' charackters!';
+                    }
+                    if(isset($schemaOptions['null']) && $schemaOptions['null'] == 'not null' && empty($value))
+                    {
+                        $errors[] = $attribute . ": Must not be NULL!";
                     }
                 }
                 break;

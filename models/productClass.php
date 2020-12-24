@@ -9,7 +9,7 @@ class Product extends BaseModel
     const TABLENAME = '`products`';
 
     protected $schema = [
-        'id'                    =>  ['type' => BaseModel::TYPE_INT     , 'null' => 'not null' ],
+        'id'                    =>  ['type' => BaseModel::TYPE_INT     , 'null' => 'not null' , 'autoincrement' => true],
         'createdAt'             =>  ['type' => BaseModel::TYPE_DATE    , 'null' => 'not null' ],
         'updatedAt'             =>  ['type' => BaseModel::TYPE_DATE    , 'null' => 'null'     ],
         'productName'           =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'not null' ],
@@ -20,11 +20,13 @@ class Product extends BaseModel
         'vendorID'              =>  ['type' => BaseModel::TYPE_INT     , 'null' => 'not null']
     ];
 
-    private $vendor   = null;
-    private $category = null;
+    private $vendor        = null;
+    private $category      = null;
+    private $productImages = null;
 
     public function __get($key) 
     {
+        //relation to table "vendors"
         if($key == 'vendor')
         {
             if($this->vendor == null)
@@ -34,6 +36,7 @@ class Product extends BaseModel
             }
             return $this->vendor;
         }
+        //relation to table "categories"
         else if($key == 'category')
         {
             if($this->category == null)
@@ -43,15 +46,43 @@ class Product extends BaseModel
             }
             return $this->category;
         }
+        //relation to table "productImages"
+        else if($key == 'images')
+        {
+            if($this->productImages == null)
+            {
+                $imageResults = ProductImage::find('productsID=' . $this->id);
+                if(count($imageResults) > 0)
+                {
+                    $this->productImages = array();
+                    foreach($imageResults as $result)
+                    {
+                        array_push($this->productImages, new ProductImage($result));
+                    }    
+                }
+            }
+            return $this->productImages;
+        }
         else
         {
             return parent::__get($key);
         }
     }
 
+    public function save(&$errors = NULL) {
+        $this->productImages->save();
+        parent::save();
+    }
+
     public function __destruct()
     {
-        $vendor   = null;
-        $category = null;
+        $vendor        = null;
+        $category      = null;
+        $productImages = null;
+    }
+
+    public function addImage() 
+    {
+        //TODO add logic to add an image to the image collection
     }
 }

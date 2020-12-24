@@ -6,7 +6,55 @@ namespace myf\controller;
  {
      public function actionNewProduct()
      {
+        $errorMessage = '';
         //TODO check if user is logged in and is admin
+        //obtain vendors from database
+        $this->setParam('vendors', \myf\core\loadVendors());
+
+        //obtain categories from database
+        $this->setParam('categories', \myf\core\loadCategories());
+
+        //check, if form has been submitted
+        if(isset($_POST['submit']))
+        {
+            //check, if inputs are valid
+            $name        = $_POST['productName'];
+            $catchPhrase = $_POST['catchPhrase'];
+            $description = $_POST['productDescription'];
+            $price       = $_POST['productPrice'];
+            $vendor      = $_POST['vendor'];
+            $category    = $_POST['category'];
+
+            if(!empty($name) && !empty($description) && \myf\core\validateNumberInput($price, 2) && !empty($vendor) && !empty($category))
+            {
+                //check if product with same name already exists
+                if(is_array(\myf\models\Product::findOne('productName LIKE "' . $name .'"')))
+                {
+                    $errorMessage = 'Ein Produkt mit dem angegebenen Namen existiert bereits!';
+                }
+                else
+                {
+                    //TODO add function to upload and validate images
+                    //build new product
+                    $product = new \myf\models\Product(array());
+                    $product->productName        = $name;
+                    $product->catchPhrase        = $catchPhrase;
+                    $product->productDescription = $description;
+                    $product->vendorID           = $vendor;
+                    $product->categoryID         = $category;
+                    $product->standardPrice      = $price;
+                    
+                    //insert product into database
+                    $product->save();
+                }
+
+            }
+            else
+            {
+                $errorMessage = 'Bitte alle Felder ausfüllen!';
+            }
+        }
+        $this->setParam('errorMessage', $errorMessage);
      }
 
      public function actionEditProduct()
@@ -45,6 +93,16 @@ namespace myf\controller;
 
      public function actionListProducts()
      {
-         
+        $this->setParam('currentPosition', 'products'); 
+        $productResults = \myf\models\Product::find();
+         if(is_array($productResults))
+         {
+             $products = [];
+             foreach($productResults as $result)
+             {
+                array_push($products, new \myf\models\Product($result));
+             }
+             $this->setParam('products', $products);
+         }
      }
  }

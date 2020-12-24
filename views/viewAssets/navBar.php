@@ -8,7 +8,7 @@
         <li <?= ($currentPosition == 'index') ? 'class="active"' : '' ?>><a href="?c=pages&a=index" >Startseite</a></li>
 
         <!-- Products -->
-        <li><a>Produkte
+        <li <?= ($currentPosition == 'products') ? 'class="active"' : '' ?>><a>Produkte
                 <span class="dropIcon">▾</span>
                 <label title="toggle dropDown" class="dropIcon" for="dropToggle01">▾</label>
             </a>
@@ -32,7 +32,7 @@
             <input type="checkbox" id="dropToggle02">
             <ul class="subNav">
                 <li><a href="#">Mein Konto</a></li>
-                <li><a href="?c=products&a=newProduct">Produkte verwalten</a>
+                <li><a href="?c=products&a=newProduct">Neues Produkt anlegen</a>
                 <li><a href="#">Benutzer verwalten</a></li>
             </ul>
         </li>
