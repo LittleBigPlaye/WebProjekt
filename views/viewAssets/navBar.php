@@ -32,7 +32,7 @@
             <input type="checkbox" id="dropToggle02">
             <ul class="subNav">
                 <li><a href="#">Mein Konto</a></li>
-                <li><a href="#">Produkte verwalten</a>
+                <li><a href="?c=products&a=newProduct">Produkte verwalten</a>
                 <li><a href="#">Benutzer verwalten</a></li>
             </ul>
         </li>

@@ -12,11 +12,11 @@ $options    = [
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
 ];
 
-$db = null;
+$database = null;
 
 try
 {
-    $db = new PDO($dns, $user, $password, $options);
+    $database = new PDO($dns, $user, $password, $options);
 }
 catch (PDOException $e)
 {
