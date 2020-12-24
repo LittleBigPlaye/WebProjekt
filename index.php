@@ -6,8 +6,9 @@
 
 //region load required files
 // load required variables / defines / configs
-require_once 'config/init.php';
-require_once 'config/database.php';
+require_once 'config' . DIRECTORY_SEPARATOR . 'init.php';
+require_once 'config' . DIRECTORY_SEPARATOR . 'database.php';
+require_once 'config' . DIRECTORY_SEPARATOR . 'imageSettings.php';
 
 // load core files
 require_once COREPATH . 'functions.php';
