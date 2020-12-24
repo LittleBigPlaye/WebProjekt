@@ -104,7 +104,11 @@ abstract class BaseModel
             $sql .= ')'.$valueString.')';
             echo $sql;
             $statment = $db->prepare($sql);
-            $statment->execute();
+            $result = $statment->execute();
+            if($result !== 0)
+            {
+                $this->id = $db->lastInsertId();
+            }
 
             return true;
 

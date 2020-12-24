@@ -69,8 +69,11 @@ class Product extends BaseModel
         }
     }
 
-    public function save(&$errors = NULL) {
-        $this->productImages->save();
+    public function save(&$errors = null) {
+        if($this->productImages != null)
+        {
+            $this->productImages->save();
+        }
         parent::save();
     }
 

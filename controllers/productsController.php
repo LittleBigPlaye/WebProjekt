@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author Robin Beck
+ */
+
 
 namespace myf\controller;
 
@@ -17,7 +21,7 @@ namespace myf\controller;
         //check, if form has been submitted
         if(isset($_POST['submit']))
         {
-            //check, if inputs are valid
+            //get inputs from form
             $name        = $_POST['productName'];
             $catchPhrase = $_POST['catchPhrase'];
             $description = $_POST['productDescription'];
@@ -25,6 +29,7 @@ namespace myf\controller;
             $vendor      = $_POST['vendor'];
             $category    = $_POST['category'];
 
+            //check, if inputs are valid
             if(!empty($name) && !empty($description) && \myf\core\validateNumberInput($price, 2) && !empty($vendor) && !empty($category))
             {
                 //check if product with same name already exists
@@ -46,8 +51,10 @@ namespace myf\controller;
                     
                     //insert product into database
                     $product->save();
-                }
 
+                    //redirect to product page
+                    header('Location: ?c=products&a=viewProduct&prod=' . $product->id);
+                }
             }
             else
             {
@@ -59,7 +66,74 @@ namespace myf\controller;
 
      public function actionEditProduct()
      {
+        $errorMessage = '';
         //TODO check if user is logged in and is admin
+        //check if product exists
+        $productID = $_GET['product'] ?? null;
+        $productResult = null;
+        if($productID != null)
+        {
+            $productResult = \myf\models\Product::findOne('id=' . $productID);
+        }
+        if($productResult != null && is_array($productResult))
+        {
+            //load Product
+            $product = new \myf\models\Product($productResult);
+
+            //obtain vendors from database
+            $this->setParam('vendors', \myf\core\loadVendors());
+
+            //obtain categories from database
+            $this->setParam('categories', \myf\core\loadCategories());
+            $this->setParam('product', $product);
+            //get inputs from from
+            if(isset($_POST['submit']))
+            {
+                $name        = $_POST['productName'];
+                $catchPhrase = $_POST['catchPhrase'];
+                $description = $_POST['productDescription'];
+                $price       = $_POST['productPrice'];
+                $vendor      = $_POST['vendor'];
+                $category    = $_POST['category'];
+
+                //check if inputs are valid
+                if(!empty($name) && !empty($description) && \myf\core\validateNumberInput($price, 2) && !empty($vendor) && !empty($category))
+                {
+                    //check if product with same name already exists
+                    if($name != $product->productName && is_array(\myf\models\Product::findOne('productName LIKE "' . $name .'"')))
+                    {
+                        $errorMessage = 'Ein Produkt mit dem angegebenen Namen existiert bereits!';
+                    }
+                    else
+                    {
+                        //TODO: image handling
+                        //apply changes to product
+                        $product->productName        = $name;
+                        $product->catchPhrase        = $catchPhrase;
+                        $product->productDescription = $description;
+                        $product->vendorID           = $vendor;
+                        $product->categoryID         = $category;
+                        $product->standardPrice      = $price;
+
+                        //save product to database
+                        $product->save();
+
+                        //redirect to product page
+                        header('Location: ?c=products&a=viewProduct&prod=' . $product->id);
+                    }
+                }
+                else
+                {
+                    $errorMessage = 'Bitte alle Felder ausfüllen!';
+                }
+            }
+            $this->setParam('errorMessage', $errorMessage);
+        }
+        else
+        {
+            //TODO: direct to 404 page
+            die();
+        }
      }
 
      public function actionViewProduct()
