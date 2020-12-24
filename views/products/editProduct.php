@@ -1,3 +1,10 @@
+<?php
+/**
+ * @author Robin Beck
+ */
+?>
+
+
 <h1>Bestehendes Produkt bearbeiten</h1>
 
 <?php if(isset($errorMessage) && $errorMessage !== null) : ?>

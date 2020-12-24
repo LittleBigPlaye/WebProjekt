@@ -1,3 +1,9 @@
+<?php
+/**
+ * @author Robin Beck
+ */
+?>
+
 <h1>Produkte</h1>
 
 <?php

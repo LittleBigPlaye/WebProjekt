@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @author Robin Beck
+ */
 namespace myf\models;
 
 use \myf\core\BaseModel as BaseModel;

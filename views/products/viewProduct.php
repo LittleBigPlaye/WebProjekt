@@ -1,4 +1,8 @@
-
+<?php
+/**
+ * @author Robin Beck
+ */
+?>
 
 <h1><?= $product->productName ?></h1>
 <img src=

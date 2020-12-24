@@ -1,3 +1,9 @@
+<?php
+/**
+ * @author Robin Beck
+ */
+?>
+
 <h1>Neues Produkt anlegen</h1>
 
 <?php if(isset($errorMessage) && $errorMessage !== null) : ?>
