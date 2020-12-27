@@ -35,4 +35,4 @@
 <p><b>Preis:</b> <?=$product->standardPrice?></p>
 <p><b>Marke: </b><?=$product->vendor->vendorName ?></p>
 <p><b>Typ: </b><?=$product->category->categoryName ?></p>
-<a href="?c=products&a=editProduct&product=<?= $product->id?>">Produkt bearbeiten</a>
+<a href="?c=products&a=edit&product=<?= $product->id?>">Produkt bearbeiten</a>

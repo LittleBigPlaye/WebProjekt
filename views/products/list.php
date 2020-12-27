@@ -33,19 +33,29 @@ if (isset($products) === false)
             
             <b><?= $product->productName ?></b><br>
                 <i><?= $product->catchPhrase ?><br></i>
-                <a href="?c=products&a=viewProduct&prod=<?= $product->id ?>">Anzeigen</a>
+                <a href="?c=products&a=view&prod=<?= $product->id ?>">Anzeigen</a>
         </div>
     </div>
 <?php endforeach ?>
 
 
 <br>
-    
+    <!-- Button to return to previoud product list -->
     <?php if($currentPage > 1) :?>
-    <a href="?c=products&a=listProducts&page=<?=$currentPage-1?>"><</a>
+        <a href="?c=products&a=list&page=<?=$currentPage-1?>"><</a>
     <?php endif ?>
     
+    <!-- Buttons to go to specific product page within range -->
+    
+    <?php for($i = $startIndex-2; $i < $startIndex+PRODUCT_LIST_RANGE; $i++) : ?>
+        <?php if($i > 0 && $i < $numberOfPages) : ?>
+            <a href="?c=products&a=list&page=<?=$i?>"><?=$i?></a>
+        <? endif ?>
+    <? endfor ?>
+
+
+    <!-- Button to go to next product List -->
     <?php if($currentPage < $numberOfPages) : ?>
-    <a href="?c=products&a=listProducts&page=<?=$currentPage+1?>">></a>
+        <a href="?c=products&a=list&page=<?=$currentPage+1?>">></a>
     <?php endif ?>
-    </section>
+</section>

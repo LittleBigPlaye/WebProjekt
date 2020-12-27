@@ -14,7 +14,7 @@
             </a>
             <input type="checkbox" id="dropToggle01">
             <ul class="subNav">
-                <li><a href="?c=products&a=listProducts">Alle Artikel</a></li>
+                <li><a href="?c=products&a=list">Alle Artikel</a></li>
                 <li><a href="#">Kategorien</a>
                 <li><a href="#">Suche</a></li>
             </ul>
@@ -32,7 +32,7 @@
             <input type="checkbox" id="dropToggle02">
             <ul class="subNav">
                 <li><a href="#">Mein Konto</a></li>
-                <li><a href="?c=products&a=newProduct">Neues Produkt anlegen</a>
+                <li><a href="?c=products&a=new">Neues Produkt anlegen</a>
                 <li><a href="#">Benutzer verwalten</a></li>
             </ul>
         </li>

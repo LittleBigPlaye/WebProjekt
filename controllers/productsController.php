@@ -8,7 +8,7 @@ namespace myf\controller;
 
  class ProductsController extends \myf\core\controller
  {
-     public function actionNewProduct()
+     public function actionNew()
      {
         $errorMessage = '';
         //TODO check if user is logged in and is admin
@@ -53,7 +53,7 @@ namespace myf\controller;
                     $product->save();
 
                     //redirect to product page
-                    header('Location: ?c=products&a=viewProduct&prod=' . $product->id);
+                    header('Location: ?c=products&a=view&prod=' . $product->id);
                 }
             }
             else
@@ -64,7 +64,7 @@ namespace myf\controller;
         $this->setParam('errorMessage', $errorMessage);
      }
 
-     public function actionEditProduct()
+     public function actionEdit()
      {
         $errorMessage = '';
         //TODO check if user is logged in and is admin
@@ -119,7 +119,7 @@ namespace myf\controller;
                         $product->save();
 
                         //redirect to product page
-                        header('Location: ?c=products&a=viewProduct&prod=' . $product->id);
+                        header('Location: ?c=products&a=view&prod=' . $product->id);
                     }
                 }
                 else
@@ -136,7 +136,7 @@ namespace myf\controller;
         }
      }
 
-     public function actionViewProduct()
+     public function actionView()
      {
          if(isset($_GET['prod']))
          {
@@ -165,7 +165,7 @@ namespace myf\controller;
          }
      }
 
-     public function actionListProducts()
+     public function actionList()
      {
         $this->setParam('currentPosition', 'products');
         $page = $_GET['page'] ?? 1; 
@@ -176,6 +176,8 @@ namespace myf\controller;
         $numberOfPages = ceil($numberOfProducts / PRODUCTS_PER_PAGE);
 
         $this->setParam('numberOfPages', $numberOfPages);
+        
+        //determine current page
         $page = ($page > $numberOfPages) ? $numberOfPages : $page;
         if($numberOfPages > 0 && $page > $numberOfPages)
         {
@@ -185,9 +187,24 @@ namespace myf\controller;
         {
             $page = 1;
         }
-
         $this->setParam('currentPage', $page);
-        
+
+        //prepare bottom navigation to always display the same number of sites (except there are less pages than defined in PRODUCT_LIST_RANGE)
+        $startIndex = 0;
+
+        if($numberOfPages - $page < PRODUCT_LIST_RANGE)
+        {
+            $deltaPages = PRODUCT_LIST_RANGE - ($numberOfPages - $page);
+            
+            $startIndex = max($page-$deltaPages, 0);
+            echo $startIndex;
+            
+        }
+        else
+        {
+            $startIndex = $page;
+        }
+        $this->setParam('startIndex', $startIndex);
 
         $productResults = \myf\models\Product::findRange(($page-1) * PRODUCTS_PER_PAGE, PRODUCTS_PER_PAGE);
          if(is_array($productResults))
