@@ -8,7 +8,7 @@ namespace myf\controller;
 
  class ProductsController extends \myf\core\controller
  {
-     public function actionNewProduct()
+     public function actionNew()
      {
         $errorMessage = '';
         //TODO check if user is logged in and is admin
@@ -40,20 +40,85 @@ namespace myf\controller;
                 else
                 {
                     //TODO add function to upload and validate images
-                    //build new product
-                    $product = new \myf\models\Product(array());
-                    $product->productName        = $name;
-                    $product->catchPhrase        = $catchPhrase;
-                    $product->productDescription = $description;
-                    $product->vendorID           = $vendor;
-                    $product->categoryID         = $category;
-                    $product->standardPrice      = $price;
-                    
-                    //insert product into database
-                    $product->save();
+                    //check if there are files to be uploaded
+                    $fileNames = array_filter($_FILES['productImages']['name']);
+                    if(!empty($fileNames))
+                    {
+                        //make sure to replace directory separator symbols in product name
+                        //replace all characters that are not allowed within file names
+                        $directoryName = mb_ereg_replace("([^\w\s\d\-_~,;\[\]\(\).])", '', $name);
+                        // remove ramaining whitespaces, make sure the path is in lower case
+                        $directoryName = strtolower(str_replace(' ', '_', $directoryName));
+                        $directoryName = PRODUCT_IMAGE_PATH . DIRECTORY_SEPARATOR . $directoryName;
+                        //create directory, if it does not exist
+                        if(!file_exists($directoryName))
+                        {
+                            mkdir($directoryName, 0755, true);
+                        }
+                        echo $directoryName;
 
-                    //redirect to product page
-                    header('Location: ?c=products&a=viewProduct&prod=' . $product->id);
+                        //check if images are okay
+                        foreach($_FILES['productImages']['name'] as $key => $value)
+                        {
+                            $currentFileName = basename($_FILES['productImages']['name'][$key]);
+                            $fileType = pathinfo($currentFileName, PATHINFO_EXTENSION);
+                            //check, if file type is okay
+                            if(!in_array($fileType, $GLOBALS['supportedFiles']))
+                            {
+                                $errorMessage = 'Der Dateityp von ' . $currentFileName . ' wird nicht unterstützt!';
+                                break;
+                            }
+                            //check if image size is okay
+                            if($_FILES['productImages']['size'][$key] > MAX_FILE_SIZE)
+                            {
+                                $errorMessage = 'Die Datei ' . $currentFileName . ' übersteigt die maximale Dateigröße von ' . MAX_FILE_SIZE . ' KB!';
+                                break;
+                            }
+                        }
+
+                        //echo  date('Ydmhis', time());
+
+                        if(empty($errorMessage))
+                        {
+                            $product = new \myf\models\Product(array());
+
+                            //upload images
+                            foreach($_FILES['productImages']['name'] as $key => $value)
+                            {
+                                //make sure the file name is unique
+                                $currentFileName = str_replace(' ', '_', basename($_FILES['productImages']['name'][$key]));
+                                $imageName       = substr(pathinfo($currentFileName, PATHINFO_BASENAME), 0, 10) . date('Ydmhis', time());
+                                $fileType        = pathinfo($currentFileName, PATHINFO_EXTENSION); 
+                                $targetPath      = $directoryName . DIRECTORY_SEPARATOR . $imageName . '.' . $fileType;
+
+                                //try to upload the file
+                                //try to upload the file
+                                $uploadWasSuccessful = \move_uploaded_file($_FILES['productImages']['tmp_name'][$key], $targetPath);
+                                if($uploadWasSuccessful)
+                                {
+                                    $product->addImage($targetPath);
+                                }
+                            }
+
+                            //build new product
+                            
+                            $product->productName        = $name;
+                            $product->catchPhrase        = $catchPhrase;
+                            $product->productDescription = $description;
+                            $product->vendorID           = $vendor;
+                            $product->categoryID         = $category;
+                            $product->standardPrice      = $price;
+                            //insert product into database
+                            $product->save();
+
+                            //redirect to product page
+                            header('Location: ?c=products&a=view&prod=' . $product->id);
+                        }
+                    }
+                    else
+                    {
+                        $errorMessage = 'Bitte wählen Sie mindestens ein Bild zum Upload für das Produkt aus!';
+                    }
                 }
             }
             else
@@ -64,7 +129,8 @@ namespace myf\controller;
         $this->setParam('errorMessage', $errorMessage);
      }
 
-     public function actionEditProduct()
+     
+     public function actionEdit()
      {
         $errorMessage = '';
         //TODO check if user is logged in and is admin
@@ -119,7 +185,7 @@ namespace myf\controller;
                         $product->save();
 
                         //redirect to product page
-                        header('Location: ?c=products&a=viewProduct&prod=' . $product->id);
+                        header('Location: ?c=products&a=view&prod=' . $product->id);
                     }
                 }
                 else
@@ -136,7 +202,7 @@ namespace myf\controller;
         }
      }
 
-     public function actionViewProduct()
+     public function actionView()
      {
          if(isset($_GET['prod']))
          {
@@ -165,7 +231,7 @@ namespace myf\controller;
          }
      }
 
-     public function actionListProducts()
+     public function actionList()
      {
         $this->setParam('currentPosition', 'products');
         $page = $_GET['page'] ?? 1; 
@@ -176,6 +242,8 @@ namespace myf\controller;
         $numberOfPages = ceil($numberOfProducts / PRODUCTS_PER_PAGE);
 
         $this->setParam('numberOfPages', $numberOfPages);
+        
+        //determine current page
         $page = ($page > $numberOfPages) ? $numberOfPages : $page;
         if($numberOfPages > 0 && $page > $numberOfPages)
         {
@@ -185,10 +253,23 @@ namespace myf\controller;
         {
             $page = 1;
         }
-
         $this->setParam('currentPage', $page);
-        
 
+        //prepare bottom navigation to always display the same number of sites (except there are less pages than defined in PRODUCT_LIST_RANGE)
+        $startIndex = 0;
+
+        if($numberOfPages - $page < PRODUCT_LIST_RANGE)
+        {
+            $deltaPages = PRODUCT_LIST_RANGE - ($numberOfPages - $page);
+            $startIndex = max($page-$deltaPages, 0);
+        }
+        else
+        {
+            $startIndex = $page;
+        }
+        $this->setParam('startIndex', $startIndex);
+
+        //get products from database
         $productResults = \myf\models\Product::findRange(($page-1) * PRODUCTS_PER_PAGE, PRODUCTS_PER_PAGE);
          if(is_array($productResults))
          {

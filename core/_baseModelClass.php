@@ -102,7 +102,7 @@ abstract class BaseModel
             $valueString = trim($valueString, ',');
 
             $sql .= ')'.$valueString.')';
-            echo $sql;
+
             $statment = $db->prepare($sql);
             $result = $statment->execute();
             if($result !== 0)

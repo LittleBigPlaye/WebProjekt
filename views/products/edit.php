@@ -14,7 +14,7 @@
 <?php endif ?>
 
 <?php if(isset($product)) : ?>
-<form action="index.php?c=products&a=editProduct&product=<?=$product->id?>" method="post" enctype="multipart/form-data">
+<form action="index.php?c=products&a=edit&product=<?=$product->id?>" method="post" enctype="multipart/form-data">
     
     <label for="images"></label>
     <input type="file" id="images" name="productImages[]" multiple/>

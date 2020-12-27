@@ -39,4 +39,24 @@ class ProductImage extends BaseModel
     {
         $image = null;
     }
+
+    public function save(&$errors = null) {
+        //make sure that the image has an id
+        $this->image->save();
+        //make sure to reference to the image
+        $this->imagesID = $this->image->id;
+        //save this image
+        parent::save();
+    }
+
+    public function setImage($imageURL, $imageName='')
+    {
+        if($this->image == null)
+        {   
+            $this->image = new Image(array());
+        }
+        $this->image->imageURL  = $imageURL;
+        $this->image->imageName = $imageName;
+        
+    }
 }

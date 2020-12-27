@@ -6,6 +6,7 @@
 $supportedFiles = array('jpg', 'png', 'jpeg');
 
 //max image size : 800 KB
-$maxFileSize = 800000;
+define('MAX_FILE_SIZE', 3000000);
 
 define('FALLBACK_IMAGE'      , 'assets' . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'fallback.jpg');
+define('PRODUCT_IMAGE_PATH'  , 'assets' . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'products');
