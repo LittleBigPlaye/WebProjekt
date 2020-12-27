@@ -12,7 +12,7 @@ if (isset($products) === false)
     echo 'Es wurden keine Produkte gefunden';
 }
 ?>
-
+<?php  ?>
             
 <section class="cards"> 
 <?php foreach ($products as $product) : ?>
@@ -22,7 +22,7 @@ if (isset($products) === false)
             <?php
                 if($product->images != NULL && file_exists($product->images[0]->path))
                 {
-                    echo $product->images[0]->path;
+                    echo htmlspecialchars($product->images[0]->path);
                 }
                 else
                 {
@@ -31,9 +31,9 @@ if (isset($products) === false)
             ?>" width="400px">
             <br>
             
-            <b><?= $product->productName ?></b><br>
-                <i><?= $product->catchPhrase ?><br></i>
-                <a href="?c=products&a=view&prod=<?= $product->id ?>">Anzeigen</a>
+            <b><?= htmlspecialchars($product->productName) ?></b><br>
+                <i><?= htmlspecialchars($product->catchPhrase) ?><br></i>
+                <a href="?c=products&a=view&prod=<?= htmlspecialchars($product->id) ?>">Anzeigen</a>
         </div>
     </div>
 <?php endforeach ?>
@@ -47,8 +47,8 @@ if (isset($products) === false)
     
     <!-- Buttons to go to specific product page within range -->
     
-    <?php for($i = $startIndex-2; $i < $startIndex+PRODUCT_LIST_RANGE; $i++) : ?>
-        <?php if($i > 0 && $i < $numberOfPages) : ?>
+    <?php for($i = $startIndex-2; $i <= $startIndex+PRODUCT_LIST_RANGE; $i++) : ?>
+        <?php if($i > 0 && $i <= $numberOfPages) : ?>
             <a href="?c=products&a=list&page=<?=$i?>"><?=$i?></a>
         <? endif ?>
     <? endfor ?>

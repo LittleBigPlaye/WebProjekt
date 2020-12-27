@@ -24,7 +24,7 @@ class Product extends BaseModel
 
     private $vendor        = null;
     private $category      = null;
-    private $productImages = null;
+    private $productImages = [];
 
     public function __get($key) 
     {
@@ -72,22 +72,36 @@ class Product extends BaseModel
     }
 
     public function save(&$errors = null) {
-        if($this->productImages != null)
-        {
-            $this->productImages->save();
-        }
+        
         parent::save();
+        foreach($this->productImages as $productImage)
+        {
+            if($productImage != null)
+            {
+                $productImage->productsID = $this->id;
+                $productImage->save();
+            }
+        }
     }
 
     public function __destruct()
     {
         $vendor        = null;
         $category      = null;
-        $productImages = null;
+        $productImages = [];
     }
 
-    public function addImage() 
+    public function addImage($imagePath) 
     {
-        //TODO add logic to add an image to the image collection
+        if(is_array(Image::findOne('imageURL="' . $imagePath . '"')))
+        {
+            return false;
+        }
+        else
+        {
+            $currentProductImage = new ProductImage(array());
+            $currentProductImage->setImage($imagePath);
+            array_push($this->productImages, $currentProductImage);
+        }
     }
 }

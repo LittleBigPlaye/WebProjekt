@@ -12,7 +12,7 @@
     </div>
 <?php endif ?>
 
-<form action="index.php?c=products&a=newProduct" method="post" enctype="multipart/form-data">
+<form action="index.php?c=products&a=new" method="post" enctype="multipart/form-data">
     
     <label for="images"></label>
     <input type="file" id="images" name="productImages[]" multiple/>

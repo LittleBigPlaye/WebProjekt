@@ -4,35 +4,37 @@
  */
 ?>
 
-<h1><?= $product->productName ?></h1>
-<img src=
+<h1><?= htmlspecialchars($product->productName) ?></h1>
+
 <?php
-    echo '"';
     if($product->images != null)
     {
         foreach($product->images as $image)
         {
-            
+            echo '<img src="';
             if(file_exists($image->path))
             {
-                echo $image->path;
+                echo htmlspecialchars($image->path);
             }
             else
             {
-                echo FALLBACK_IMAGE;
+                echo htmlspecialchars(FALLBACK_IMAGE);
             }
+            echo '" width="250px">';
         }
     }
     else
     {
-        echo FALLBACK_IMAGE;
+        echo '<img src=';
+        echo htmlspecialchars(FALLBACK_IMAGE);
+        echo '" width="250px">';
     }
-    echo '"';
-?> width="250px">
+    
+?> 
 
-<p><?=$product->catchPhrase ?></p>
-<p><?=$product->productDescription ?></p>
-<p><b>Preis:</b> <?=$product->standardPrice?></p>
-<p><b>Marke: </b><?=$product->vendor->vendorName ?></p>
-<p><b>Typ: </b><?=$product->category->categoryName ?></p>
-<a href="?c=products&a=edit&product=<?= $product->id?>">Produkt bearbeiten</a>
+<p><?=htmlspecialchars($product->catchPhrase) ?></p>
+<p><?=htmlspecialchars($product->productDescription) ?></p>
+<p><b>Preis:</b> <?=htmlspecialchars($product->standardPrice)?></p>
+<p><b>Marke: </b><?=htmlspecialchars($product->vendor->vendorName) ?></p>
+<p><b>Typ: </b><?=htmlspecialchars($product->category->categoryName) ?></p>
+<a href="?c=products&a=edit&product=<?= htmlspecialchars($product->id)?>">Produkt bearbeiten</a>
