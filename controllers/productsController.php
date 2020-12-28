@@ -255,7 +255,7 @@ namespace myf\controller;
         }
         $this->setParam('currentPage', $page);
 
-        //prepare bottom navigation to always display the same number of sites (except there are less pages than defined in PRODUCT_LIST_RANGE)
+        // prepare bottom navigation to always display the same number of sites (except there are less pages than defined in PRODUCT_LIST_RANGE)
         $startIndex = 0;
 
         if($numberOfPages - $page < PRODUCT_LIST_RANGE)
