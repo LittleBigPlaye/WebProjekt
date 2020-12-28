@@ -26,4 +26,9 @@
      {
          $this->setParam('currentPosition', 'register');
      }
+
+     public function actionShoppingCart()
+     {
+         $this->setParam('currentPosition', 'shoppingcart');
+     }
  }

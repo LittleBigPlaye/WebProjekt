@@ -21,7 +21,7 @@
             </ul>
         </li>
 
-        <li class="right"><a href="#">Warenkorb</a></li>
+        <li <?= ($currentPosition == 'shoppingcart') ? 'class="right active"': 'class="right"'?>><a href="?c=pages&a=shoppingcart">Warenkorb</a></li>
         <li <?= ($currentPosition == 'impressum') ? 'class="right active"' : 'class="right"'?>><a href="?c=pages&a=impressum">Impressum</a></li>
         <li <?= ($currentPosition == 'login') ? 'class="right active"': 'class="right"'?>><a href="?c=pages&a=login">Login</a></li>
         
