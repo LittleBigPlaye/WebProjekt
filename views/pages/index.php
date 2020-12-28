@@ -23,18 +23,21 @@
         <div class="card">
             <div class="container">
                 <img src="./assets/images/masks/mask01.png" width="400">
+                <br>
                 <a href="">Maske 1</a>
             </div>
         </div>
         <div class="card">
             <div class="container">
                 <img src="./assets/images/masks/mask01.png" width="400">
+                <br>
                 <a href="">Maske 2</a>
             </div>
         </div>
         <div class="card">
             <div class="container">
                 <img src="./assets/images/masks/mask01.png" width="400">
+                <br>
                 <a href="">Maske 3</a>
             </div>
         </div>
@@ -42,18 +45,21 @@
     <div class="card">
         <div class="container">
             <img src="./assets/images/masks/mask01.png" width="400">
-            M<a href="">Maske 4</a>
+            <br>
+            <a href="">Maske 4</a>
         </div>
     </div>
     <div class="card">
         <div class="container">
             <img src="./assets/images/masks/mask01.png" width="400">
+            <br>
             <a href="">Maske 5</a>
         </div>
     </div>
     <div class="card">
         <div class="container">
             <img src="./assets/images/masks/mask01.png" width="400">
+            <br>
             <a href="">Maske 6</a>
         </div>
     </div>
@@ -79,18 +85,21 @@
     <div class="card">
         <div class="container">
             <img src="./assets/images/masks/mask01.png" width="400">
+            <br>
             <a href="">Maske 7</a>
         </div>
     </div>
     <div class="card">
         <div class="container">
             <img src="./assets/images/masks/mask01.png" width="400">
+            <br>
             <a href="">Maske 8</a>
         </div>
     </div>
     <div class="card">
         <div class="container">
             <img src="./assets/images/masks/mask01.png" width="400">
+            <br>
             <a href="">Maske 9</a>
         </div>
     </div>
@@ -98,18 +107,21 @@
     <div class="card">
         <div class="container">
             <img src="./assets/images/masks/mask01.png" width="400">
-            M<a href="">Maske 10</a>
+            <br>
+            <a href="">Maske 10</a>
         </div>
     </div>
     <div class="card">
         <div class="container">
             <img src="./assets/images/masks/mask01.png" width="400">
+            <br>
             <a href="">Maske 12</a>
         </div>
     </div>
     <div class="card">
         <div class="container">
             <img src="./assets/images/masks/mask01.png" width="400">
+            <br>
             <a href="">Maske 13</a>
         </div>
 

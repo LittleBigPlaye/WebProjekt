@@ -2,30 +2,32 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Sign Up Form</title>
-        <link rel="stylesheet" href="assets/styles/login-style.css">
     </head>
     <body>
+        <div class="containerlogin">
+          <form class="cardlogin"  action="index.html" method="post">
 
-      <form action="index.html" method="post">
-      
-        <h1>Sign In</h1>
-        
-        <fieldset>
-          <legend><span class="number">1</span>Your Login</legend>
-          <label for="mail">Email:</label>
-          <input type="email" id="mail" name="user_email">
-          
-          <label for="password">Password:</label>
-          <input type="password" id="password" name="user_password">
-        </fieldset>
+            <h1>Sign In</h1>
 
 
-</html>
+              <h2>Your Login</h2>
+                <div class="loginlabelinput">
+              <label for="mail">Email:</label>
 
+                <br>
+              <input class="input_login" type="email" id="mail" name="user_email">
+                </div>
+                <br>
+              <div class="loginlabelinput">
+              <label for="password">Password:</label>
+                <br>
+              <input class="input_login" type="password" id="password" name="user_password">
+              </div>
+              <br>
+            <button class="button_login" type="submit">Sign In</button>
+              <br>
+              <p>No account yet? <a href="?c=pages&a=register">Register here!</a></p>
+          </form>
+        </div>
 
-
-        <button type="submit">Sign In</button>
-      </form>
-      <p>No account yet? <a href="?c=pages&a=register">Register here!</a></p>
     </body>
-</html>
