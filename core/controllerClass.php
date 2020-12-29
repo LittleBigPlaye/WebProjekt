@@ -18,6 +18,7 @@ class Controller
         if($this->loggedIn())
         {
             //TODO: stuff, when user is logged in
+            //TODO: store current user in $currentUser
         }
     }
 
