@@ -20,7 +20,7 @@
             {
                 echo htmlspecialchars(FALLBACK_IMAGE);
             }
-            echo '" width="250px">';
+            echo '" width="250px" title="' . $image->name .'">';
         }
     }
     else

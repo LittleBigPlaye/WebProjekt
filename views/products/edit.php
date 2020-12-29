@@ -16,7 +16,20 @@
 <?php if(isset($product)) : ?>
 <form action="index.php?c=products&a=edit&product=<?=$product->id?>" method="post" enctype="multipart/form-data">
     
-    <label for="images"></label>
+    <!-- delete or change current images -->
+    <?php foreach($product->images as $productImage) : ?>
+        <img src="<?= $productImage->path?>" width="400px"/><br>
+        <label for="imageName<?=$productImage->id?>">Bildtitel</label>
+        <input type="input" placeHolder="Bildtitel" name="imageName<?=$productImage->id?>" id="imageName<?=$productImage->id?>" value="<?=$productImage->name?>">
+        <br>
+
+        <label for="deleteImage<?=$productImage->id?>">Bild "<?= $productImage->name?>" löschen?</label>
+        <input type="checkbox" id="deleteImage<?=$productImage->id?>" name="deleteImage<?=$productImage->id?>">
+        <br>
+    <?php endforeach ?>
+
+    <!-- Add new images -->
+    <label for="images">Bilder zu Produkt hinzufügen</label>
     <input type="file" id="images" name="productImages[]" multiple/>
     <br>
 

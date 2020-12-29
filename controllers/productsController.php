@@ -177,6 +177,25 @@ namespace myf\controller;
                     else
                     {
                         //TODO: image handling
+                        //go through all images of the current product
+                        foreach($product->images as $productImage)
+                        {
+                            //TODO: check if image should be deleted
+                            $deleteImage = isset($_POST['deleteImage' . $productImage->id]) ? true : false;
+                            if($deleteImage)
+                            {
+                                $productImage->delete();
+                            }
+                            else
+                            {
+                                //change image title
+                                $newTitle = $_POST['imageName' . $productImage->id] ?? $productImage->name;
+                                $productImage->image->imageName = $newTitle;
+                                $productImage->image->save();
+                            }
+                        }
+
+
                         //apply changes to product
                         $product->productName        = $name;
                         $product->catchPhrase        = $catchPhrase;
@@ -190,7 +209,7 @@ namespace myf\controller;
                         $product->save();
 
                         //redirect to product page
-                        header('Location: ?c=products&a=view&prod=' . $product->id);
+                        //header('Location: ?c=products&a=view&prod=' . $product->id);
                     }
                 }
                 else
@@ -214,7 +233,7 @@ namespace myf\controller;
             // get product id from url
             $productID = $_GET['prod'];
             //TODO replace isAdmin as soon as the login is done
-            $isAdmin = false;
+            $isAdmin = true;
             $whereClause = $isAdmin ? '' : ' AND isHidden=0';
             // try to find product with id in database
             $productResult = \myf\models\Product::findOne('id=' . $productID . $whereClause);
