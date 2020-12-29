@@ -9,7 +9,7 @@ namespace myf\models;
 
 use myf\core\BaseModel as BaseModel;
 
-class userClass
+class User extends BaseModel
 {
     const TABLENAME = '`users`';
 
@@ -20,10 +20,10 @@ class userClass
         'firstName'             =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'not null'],
         'lastName'              =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'not null'],
         'secondName'            =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'null'],
-        'gender'                =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'null'],
+        'gender'                =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'null','allowedValues' => array('m','f','n')],
         'addressID'             =>  ['type' => BaseModel::TYPE_INT     , 'null' => 'not null'],
         'birthDate'             =>  ['type' => BaseModel::TYPE_DATE    , 'null' => 'not null' ],
-        'role'                  =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'null']
+        'role'                  =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'null', 'allowedValues' => array('u','a')]
         ];
 
     private  $addresses = null;
@@ -35,8 +35,8 @@ class userClass
         {
             if($this->addresses == null)
             {
-                $addressesResult = Addresses::findOne('id=' .$this->adressID);
-                $this->addresses = new Adresses($addressesResult);
+                $addressesResult = Address::findOne('id=' .$this->adressID);
+                $this->addresses = new Address($addressesResult);
             }
             return $this->addresses;
         }
