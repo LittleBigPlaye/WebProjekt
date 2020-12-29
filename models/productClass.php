@@ -19,7 +19,8 @@ class Product extends BaseModel
         'productDescription'    =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'not null', 'min' => 10, 'max' => 5000],  
         'standardPrice'         =>  ['type' => BaseModel::TYPE_DECIMAL , 'null' => 'not null'],
         'categoryID'            =>  ['type' => BaseModel::TYPE_INT     , 'null' => 'not null'],
-        'vendorID'              =>  ['type' => BaseModel::TYPE_INT     , 'null' => 'not null']
+        'vendorID'              =>  ['type' => BaseModel::TYPE_INT     , 'null' => 'not null'],
+        'isHidden'              => ['type'  => BaseMOdel::TYPE_INT     , 'null' => 'null']
     ];
 
     private $vendor        = null;

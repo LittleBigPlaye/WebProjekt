@@ -67,6 +67,8 @@
         <?php endforeach ?>
     </select>
 
+    
+
     <br>
     <input type="submit" name="submit" value="Produkt anlegen"/>
 </form>
