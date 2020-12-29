@@ -23,7 +23,7 @@ class userClass
         'gender'                =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'null'],
         'addressID'             =>  ['type' => BaseModel::TYPE_INT     , 'null' => 'not null'],
         'birthDate'             =>  ['type' => BaseModel::TYPE_DATE    , 'null' => 'not null' ],
-        'role'                  =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'null']
+        'role'                  =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'null', 'allowedValues' => array('u', 'a')]
         ];
 
     private  $addresses = null;
