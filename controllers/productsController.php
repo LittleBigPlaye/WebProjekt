@@ -40,7 +40,6 @@ namespace myf\controller;
                 }
                 else
                 {
-                    //TODO add function to upload and validate images
                     //check if there are files to be uploaded
                     $fileNames = array_filter($_FILES['productImages']['name']);
                     if(!empty($fileNames))
@@ -88,7 +87,7 @@ namespace myf\controller;
                             {
                                 //make sure the file name is unique
                                 $currentFileName = str_replace(' ', '_', basename($_FILES['productImages']['name'][$key]));
-                                $imageName       = substr(pathinfo($currentFileName, PATHINFO_BASENAME), 0, 10) . date('Ydmhis', time());
+                                $imageName       = substr(pathinfo($currentFileName, PATHINFO_BASENAME), 0, 10) . date('Ydmhis', time()) . uniqid('', true);
                                 $fileType        = pathinfo($currentFileName, PATHINFO_EXTENSION); 
                                 $targetPath      = $directoryName . DIRECTORY_SEPARATOR . $imageName . '.' . $fileType;
 
@@ -209,7 +208,7 @@ namespace myf\controller;
                         $product->save();
 
                         //redirect to product page
-                        //header('Location: ?c=products&a=view&prod=' . $product->id);
+                        header('Location: ?c=products&a=view&prod=' . $product->id);
                     }
                 }
                 else
