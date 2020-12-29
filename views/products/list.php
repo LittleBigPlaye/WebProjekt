@@ -31,6 +31,7 @@ if (isset($products) === false)
             ?>" width="400px">
             <br>
             
+            <i><?= $product->isHidden ? '[unsichtbar]' : ''?></i><br>
             <b><?= htmlspecialchars($product->productName) ?></b><br>
                 <i><?= htmlspecialchars($product->catchPhrase) ?><br></i>
                 <a href="?c=products&a=view&prod=<?= htmlspecialchars($product->id) ?>">Anzeigen</a>

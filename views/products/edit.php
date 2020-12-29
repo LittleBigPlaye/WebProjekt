@@ -102,6 +102,10 @@
     </select>
 
     <br>
+    <label for="isHidden">Produkt "verstecken"?</label>
+    <input type="checkbox" id="isHidden" name="isHidden" <?= ($product->isHidden) ? 'checked' : '' ?>/>
+
+    <br>
     <input type="submit" name="submit" value="Änderung speichern"/>
 </form>
 <?php endif ?>

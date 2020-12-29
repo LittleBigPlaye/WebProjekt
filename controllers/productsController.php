@@ -22,12 +22,13 @@ namespace myf\controller;
         if(isset($_POST['submit']))
         {
             //get inputs from form
-            $name        = $_POST['productName'];
-            $catchPhrase = $_POST['catchPhrase'];
-            $description = $_POST['productDescription'];
-            $price       = $_POST['productPrice'];
-            $vendor      = $_POST['vendor'];
-            $category    = $_POST['category'];
+            $name        = $_POST['productName'] ?? '';
+            $catchPhrase = $_POST['catchPhrase'] ?? '';
+            $description = $_POST['productDescription'] ?? '';
+            $price       = $_POST['productPrice'] ?? '';
+            $vendor      = $_POST['vendor'] ?? '';
+            $category    = $_POST['category'] ?? '';
+            $isHidden    = isset($_POST['isHidden']) ? true : false;
 
             //check, if inputs are valid
             if(!empty($name) && !empty($description) && \myf\core\validateNumberInput($price, 2) && !empty($vendor) && !empty($category))
@@ -108,6 +109,8 @@ namespace myf\controller;
                             $product->vendorID           = $vendor;
                             $product->categoryID         = $category;
                             $product->standardPrice      = $price;
+                            $product->isHidden           = $isHidden;
+
                             //insert product into database
                             $product->save();
 
@@ -155,12 +158,13 @@ namespace myf\controller;
             //get inputs from from
             if(isset($_POST['submit']))
             {
-                $name        = $_POST['productName'];
-                $catchPhrase = $_POST['catchPhrase'];
-                $description = $_POST['productDescription'];
-                $price       = $_POST['productPrice'];
-                $vendor      = $_POST['vendor'];
-                $category    = $_POST['category'];
+                $name        = $_POST['productName'] ?? '';
+                $catchPhrase = $_POST['catchPhrase'] ?? '';
+                $description = $_POST['productDescription'] ?? '';
+                $price       = $_POST['productPrice'] ?? '';
+                $vendor      = $_POST['vendor'] ?? '';
+                $category    = $_POST['category'] ?? '';
+                $isHidden    = isset($_POST['isHidden']) ? true : false;
 
                 //check if inputs are valid
                 if(!empty($name) && !empty($description) && \myf\core\validateNumberInput($price, 2) && !empty($vendor) && !empty($category))
@@ -180,6 +184,7 @@ namespace myf\controller;
                         $product->vendorID           = $vendor;
                         $product->categoryID         = $category;
                         $product->standardPrice      = $price;
+                        $product->isHidden           = $isHidden;
 
                         //save product to database
                         $product->save();
@@ -208,14 +213,18 @@ namespace myf\controller;
          {
             // get product id from url
             $productID = $_GET['prod'];
+            //TODO replace isAdmin as soon as the login is done
+            $isAdmin = false;
+            $whereClause = $isAdmin ? '' : ' AND isHidden=0';
             // try to find product with id in database
-            $productResult = \myf\models\Product::findOne('id=' . $productID);
+            $productResult = \myf\models\Product::findOne('id=' . $productID . $whereClause);
 
             // check if product has been found
             if(is_array($productResult))
             {
                 // create new product
                 $product = new \myf\models\Product($productResult);
+
                 // save product temporary in controller to have access from view
                 $this->setParam('product', $product);
             }
@@ -237,8 +246,13 @@ namespace myf\controller;
         $page = $_GET['page'] ?? 1; 
         
         //check how many products are available
-        $numberOfProducts = count(\myf\models\Product::find());
+        //TODO: replace $isAdmin as soon as login is done
+        $isAdmin = true;
+        //determine if users should see all products or just hidden products
+        $whereClause = $isAdmin ? '' : 'isHidden = 0'; 
+
         //calculate the number of pages
+        $numberOfProducts = count(\myf\models\Product::find($whereClause));
         $numberOfPages = ceil($numberOfProducts / PRODUCTS_PER_PAGE);
 
         $this->setParam('numberOfPages', $numberOfPages);
@@ -270,7 +284,7 @@ namespace myf\controller;
         $this->setParam('startIndex', $startIndex);
 
         //get products from database
-        $productResults = \myf\models\Product::findRange(($page-1) * PRODUCTS_PER_PAGE, PRODUCTS_PER_PAGE);
+        $productResults = \myf\models\Product::findRange(($page-1) * PRODUCTS_PER_PAGE, PRODUCTS_PER_PAGE, $whereClause);
          if(is_array($productResults))
          {
              $products = [];
