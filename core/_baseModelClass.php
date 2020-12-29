@@ -220,9 +220,9 @@ abstract class BaseModel
                     {
                         $errors[] = $attribute . ": Must not be NULL!";
                     }
-                    if(isset($schemaOptions['allowedValues']) && !array($value, $schemaOptions['allowedValues']))
+                    if(isset($schemaOptions['allowedValues']) && !in_array($value, $schemaOptions['allowedValues']))
                     {
-                        $errors[] = $attribute.": Must be valid Range";
+                        $errors[] = $attribute . ": Must be in valid range";
                     }
                 }
                 break;
