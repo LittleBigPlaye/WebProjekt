@@ -6,38 +6,82 @@
     </head>
     <body>
 
-      <form action="index.html" method="post">
-      
-        <h1>Sign Up</h1>
-        
-        <fieldset>
-          <legend><span class="number">1</span>Your basic info</legend>
-          <label for="name">Firstname:</label>
-          <input type="text" id="name" name="user_firstname">
-          
-          <label for="name">Lastname:</label>
-          <input type="text" id="name" name="user_lastname">
+    <div class="cardregister">
+        <div class="containerregister">
+      <form  action="index.html" method="post">
 
-          <label for="mail">Email:</label>
-          <input type="email" id="mail" name="user_email">
-          
-          <label for="password">Password:</label>
-          <input type="password" id="password" name="user_password">
-          
-          <label>Gender:</label>
-          <input type="radio" id="female" value="female" name="gender"><label for="female" class="light">Female</label><br>
-          <input type="radio" id="male" value="male" name="gender"><label for="male" class="light">Male</label><br>
-          <input type="radio" id="divers" value="divers" name="divers"><label for="divers" class="light">Divers</label><br><br>
-          <label>Age:</label>
-          <input type="date" id="date" name="birthdate">
-          <label>Adresse</label>
-          <input type="text" id="date" name="addressID">
-          
-          
-        
-        </fieldset>
-        <button type="submit">Sign Up</button>
+          <h1>Registrierung</h1>
+
+          <div class="cardregister">
+              <div class="containerregister">
+
+
+
+
+                  <h2>Persönliche Daten</h2>
+                  <br>
+                  <label class="registerlabel" for="name">Vorname:</label>
+                  <input class="input_register1" type="text" id="name" name="firstname">
+                  <br>
+
+                    <label class="registerlabel" for="name">Zweitname:</label>
+                    <input class="input_register1" type="text" id="name" name="secondname">
+                  <br>
+
+                  <label class="registerlabel" for="name">Nachname:</label>
+                  <input class="input_register1" type="text" id="name" name="lastname">
+                  <br>
+
+                  <label class="registerlabel" for="mail">Email:</label>
+                  <input class="input_register1" type="email" id="mail" name="email">
+                  <br>
+
+                  <label class="registerlabel" for="password">Passwort:</label>
+                  <input class="input_register1" type="password" id="password" name="password">
+                  <br>
+                  <label class="registerlabel" for="password2">Passwort wiederholen:</label>
+                  <input class="input_register1" type="password" id="password2" name="password2">
+                  <br>
+
+                  <label>Gender:</label>
+                  <input type="radio" id="female" value="female" name="gender"><label for="female" class="light">Female</label><br>
+                  <input type="radio" id="male" value="male" name="gender"><label for="male" class="light">Male</label><br>
+                  <input type="radio" id="divers" value="divers" name="divers"><label for="divers" class="light">Divers</label><br><br>
+                  <br>
+                  <label>Age:</label>
+                  <input class="input_register1" type="date" id="date" name="birthdate">
+                  <br>
+
+
+              </div>
+          </div>
+
+          <div class="cardregister">
+              <div class="containerregister">
+                  <h2>Adresse</h2>
+                  <br>
+
+                  <label class="registerlabel">Strasse</label>
+                  <input class="input_register1" type="text" id="street" name="street">
+                  <br>
+                  <label class="registerlabel">Hausnummer</label>
+                  <input class="input_register1" type="text" id="streetnumer" name="streetnumber">
+                  <br>
+                  <label class="registerlabel" >Postleitzahl</label>
+                  <input class="input_register1" type="text" id="zipcode" name="zipcode">
+                  <br>
+                  <label class="registerlabel">Stadt</label>
+                  <input class="input_register1" type="text" id="town" name="town">
+                  <br>
+
+
+              </div>
+          </div>
+          <br>
+          <button class="button_login" type="submit">Sign Up</button>
       </form>
+        </div>
+    </div>
       
     </body>
 </html>

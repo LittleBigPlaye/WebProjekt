@@ -7,10 +7,9 @@
         <div class="containerlogin">
           <form class="cardlogin"  action="index.html" method="post">
 
-            <h1>Sign In</h1>
+            <h1>Login</h1>
+              <br>
 
-
-              <h2>Your Login</h2>
                 <div class="loginlabelinput">
               <label for="mail">Email:</label>
 
@@ -26,7 +25,7 @@
               <br>
             <button class="button_login" type="submit">Sign In</button>
               <br>
-              <p>No account yet? <a href="?c=pages&a=register">Register here!</a></p>
+              <p>Sie haben noch keinen Account? <a href="?c=pages&a=register">Hier registrieren!</a></p>
           </form>
         </div>
 
