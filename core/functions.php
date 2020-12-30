@@ -15,6 +15,11 @@ function loadVendors()
     return $vendors;
 }
 
+/**
+ * Undocumented function
+ *
+ * @return void
+ */
 function loadCategories()
 {
     $categoryResults = \myf\models\Category::find();
@@ -26,6 +31,13 @@ function loadCategories()
     return $categories;
 }
 
+/**
+ * Checks if a given string is a number with the given amount of decimals
+ *
+ * @param [type] $number
+ * @param [type] $numberOfDecimals
+ * @return void
+ */
 function validateNumberInput($number, $numberOfDecimals)
 {
     if(is_numeric($number) && preg_match('/(^[1-9]+[0-9]*)| (^[0-9]+\.[0-9]{'.$numberOfDecimals.'}$)/', $number))
@@ -38,6 +50,12 @@ function validateNumberInput($number, $numberOfDecimals)
     }
 }
 
+/**
+ * uses a given product name to generate a valid path
+ *
+ * @param [type] $productName
+ * @return void
+ */
 function generateDirectoryPath($productName)
 {
     //make sure to replace directory separator symbols in product name
@@ -49,6 +67,14 @@ function generateDirectoryPath($productName)
     return $directoryName;
 }
 
+/**
+ * Undocumented function
+ *
+ * @param [type] $productName
+ * @param [type] $imagesKey
+ * @param [type] $errorMessage
+ * @return void
+ */
 function validateImages($productName, $imagesKey, &$errorMessage)
 {
     $directoryName = generateDirectoryPath($productName);
@@ -79,6 +105,13 @@ function validateImages($productName, $imagesKey, &$errorMessage)
     return true;
 }
 
+/**
+ * Undocumented function
+ *
+ * @param [type] $product
+ * @param [type] $imagesKey
+ * @return void
+ */
 function addImagesToProduct(&$product, $imagesKey)
 {
     $directoryName = generateDirectoryPath($product->productName);
@@ -103,6 +136,12 @@ function addImagesToProduct(&$product, $imagesKey)
     }
 }
 
+/**
+ * Undocumented function
+ *
+ * @param string $where
+ * @return void
+ */
 function calculateNumberOfProductPages($where = '')
 {
     //calculate the number of pages
@@ -111,21 +150,33 @@ function calculateNumberOfProductPages($where = '')
     return $numberOfPages;
 }
 
-function determineCurrentPage($numberOfPages)
+/**
+ * Undocumented function
+ *
+ * @param [type] $numberOfPages
+ * @return void
+ */
+function determineCurrentPage($currentPage = 1, $numberOfPages)
 {
-    $page = 1;
-    $page = ($page > $numberOfPages) ? $numberOfPages : $page;
-    if($numberOfPages > 0 && $page > $numberOfPages)
+    $currentPage = ($currentPage > $numberOfPages) ? $numberOfPages : $currentPage;
+    if($numberOfPages > 0 && $currentPage > $numberOfPages)
     {
-        $page = $numberOfPages;
+        $currentPage = $numberOfPages;
     }
-    else if($page < 1)
+    else if($currentPage < 1)
     {
-        $page = 1;
+        $currentPage = 1;
     }
-    return $page;
+    return $currentPage;
 }
 
+/**
+ * Undocumented function
+ *
+ * @param [type] $numberOfPages
+ * @param [type] $currentPage
+ * @return void
+ */
 function calculateStartIndex($numberOfPages, $currentPage)
 {
     if($numberOfPages - $currentPage < PRODUCT_LIST_RANGE)
@@ -140,16 +191,24 @@ function calculateStartIndex($numberOfPages, $currentPage)
     return $startIndex;
 }
 
+/**
+ * Undocumented function
+ *
+ * @param [type] $numberOfPages
+ * @param [type] $currentPage
+ * @param [type] $startIndex
+ * @param string $where
+ * @param string $orderBy
+ * @return void
+ */
 function prepareProductList(&$numberOfPages, &$currentPage, &$startIndex, $where = '', $orderBy = '')
 {
     $numberOfPages = calculateNumberOfProductPages($where);
 
-    $currentPage = determineCurrentPage($numberOfPages);
+    $currentPage = determineCurrentPage($currentPage, $numberOfPages);
 
     // prepare bottom navigation to always display the same number of sites (except there are less pages than defined in PRODUCT_LIST_RANGE)
     $startIndex = calculateStartIndex($numberOfPages, $currentPage);
-    
-    
 
     //get products from database
     $productResults = \myf\models\Product::findRange(($currentPage-1) * PRODUCTS_PER_PAGE, PRODUCTS_PER_PAGE, $where, $orderBy);
