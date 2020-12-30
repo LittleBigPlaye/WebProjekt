@@ -18,7 +18,18 @@
     
     <!-- delete or change current images -->
     <?php foreach($product->images as $productImage) : ?>
-        <img src="<?= $productImage->path?>" width="400px"/><br>
+        <img src="
+        <?php
+            if(file_exists($productImage->path))
+            {
+                echo $productImage->path;
+            }
+            else
+            {
+                echo FALLBACK_IMAGE;
+            }
+        ?>
+        " width="400px"/><br>
         <label for="imageName<?=$productImage->id?>">Bildtitel</label>
         <input type="input" placeHolder="Bildtitel" name="imageName<?=$productImage->id?>" id="imageName<?=$productImage->id?>" value="<?=$productImage->name?>">
         <br>
