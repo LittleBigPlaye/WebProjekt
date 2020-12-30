@@ -10,6 +10,6 @@ define('CONTROLLERSPATH', 'controllers' . DIRECTORY_SEPARATOR);
 define('MODELSPATH'     , 'models' . DIRECTORY_SEPARATOR);
 define('IMAGEPATH'      , 'assets' . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'products' . DIRECTORY_SEPARATOR);
 
-define('PRODUCTS_PER_PAGE', 15);
+define('PRODUCTS_PER_PAGE', 3);
 define('PRODUCT_LIST_RANGE', 5);
 

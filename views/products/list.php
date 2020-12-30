@@ -38,25 +38,26 @@ if (isset($products) === false)
         </div>
     </div>
 <?php endforeach ?>
-
+</section>
 
 <br>
+<div class="pagesList">
     <!-- Button to return to previoud product list -->
     <?php if($currentPage > 1) :?>
-        <a href="?c=products&a=list&page=<?=$currentPage-1?>"><</a>
+        <a href="index.php?c=products&a=list&page=<?=$currentPage-1?>">&laquo;</a>
     <?php endif ?>
     
     <!-- Buttons to go to specific product page within range -->
     
     <?php for($i = $startIndex-2; $i <= $startIndex+PRODUCT_LIST_RANGE; $i++) : ?>
         <?php if($i > 0 && $i <= $numberOfPages) : ?>
-            <a href="?c=products&a=list&page=<?=$i?>"><?=$i?></a>
+            <a href="index.php?c=products&a=list&page=<?=$i?>" <?= ($i == $currentPage) ? 'class="active"' : ''?>><?=$i?></a>
         <? endif ?>
     <? endfor ?>
 
 
     <!-- Button to go to next product List -->
     <?php if($currentPage < $numberOfPages) : ?>
-        <a href="?c=products&a=list&page=<?=$currentPage+1?>">></a>
+        <a href="index.php?c=products&a=list&page=<?=$currentPage+1?>">&raquo;</a>
     <?php endif ?>
-</section>
+</div>

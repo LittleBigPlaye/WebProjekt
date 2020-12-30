@@ -8,7 +8,8 @@ namespace myf\controller;
 
  class ProductsController extends \myf\core\controller
  {
-     public function actionNew()
+     
+    public function actionNew()
      {
         $errorMessage = '';
         //TODO check if user is logged in and is admin
@@ -44,64 +45,12 @@ namespace myf\controller;
                     $fileNames = array_filter($_FILES['productImages']['name']);
                     if(!empty($fileNames))
                     {
-                        //make sure to replace directory separator symbols in product name
-                        //replace all characters that are not allowed within file names
-                        $directoryName = mb_ereg_replace("([^\w\s\d\-_~,;\[\]\(\).])", '', $name);
-                        // remove ramaining whitespaces, make sure the path is in lower case
-                        $directoryName = strtolower(str_replace(' ', '_', $directoryName));
-                        $directoryName = PRODUCT_IMAGE_PATH . DIRECTORY_SEPARATOR . $directoryName;
-                        //create directory, if it does not exist
-                        if(!file_exists($directoryName))
-                        {
-                            mkdir($directoryName, 0755, true);
-                        }
-                        echo $directoryName;
-
-                        //check if images are okay
-                        foreach($_FILES['productImages']['name'] as $key => $value)
-                        {
-                            $currentFileName = basename($_FILES['productImages']['name'][$key]);
-                            $fileType = pathinfo($currentFileName, PATHINFO_EXTENSION);
-                            //check, if file type is okay
-                            if(!in_array($fileType, $GLOBALS['supportedFiles']))
-                            {
-                                $errorMessage = 'Der Dateityp von ' . $currentFileName . ' wird nicht unterstützt!';
-                                break;
-                            }
-                            //check if image size is okay
-                            if($_FILES['productImages']['size'][$key] > MAX_FILE_SIZE)
-                            {
-                                $errorMessage = 'Die Datei ' . $currentFileName . ' übersteigt die maximale Dateigröße von ' . MAX_FILE_SIZE . ' KB!';
-                                break;
-                            }
-                        }
-
-                        //echo  date('Ydmhis', time());
+                        \myf\core\validateImages($name, 'productImages', $errorMessage);
 
                         if(empty($errorMessage))
                         {
-                            $product = new \myf\models\Product(array());
-
-                            //upload images
-                            foreach($_FILES['productImages']['name'] as $key => $value)
-                            {
-                                //make sure the file name is unique
-                                $currentFileName = str_replace(' ', '_', basename($_FILES['productImages']['name'][$key]));
-                                $imageName       = substr(pathinfo($currentFileName, PATHINFO_BASENAME), 0, 10) . date('Ydmhis', time()) . uniqid('', true);
-                                $fileType        = pathinfo($currentFileName, PATHINFO_EXTENSION); 
-                                $targetPath      = $directoryName . DIRECTORY_SEPARATOR . $imageName . '.' . $fileType;
-
-                                //try to upload the file
-                                //try to upload the file
-                                $uploadWasSuccessful = \move_uploaded_file($_FILES['productImages']['tmp_name'][$key], $targetPath);
-                                if($uploadWasSuccessful)
-                                {
-                                    $product->addImage($targetPath);
-                                }
-                            }
-
                             //build new product
-                            
+                            $product = new \myf\models\Product(array());
                             $product->productName        = $name;
                             $product->catchPhrase        = $catchPhrase;
                             $product->productDescription = $description;
@@ -109,6 +58,9 @@ namespace myf\controller;
                             $product->categoryID         = $category;
                             $product->standardPrice      = $price;
                             $product->isHidden           = $isHidden;
+
+                            //add images
+                            \myf\core\addImagesToProduct($product, 'productImages');
 
                             //insert product into database
                             $product->save();
@@ -194,21 +146,35 @@ namespace myf\controller;
                             }
                         }
 
+                        //check if there are files to be uploaded
+                        $fileNames = array_filter($_FILES['productImages']['name']);
+                        if(!empty($fileNames))
+                        {
+                            //check if all images are okay
+                            \myf\core\validateImages($name, 'productImages', $errorMessage);
+                            if(empty($errorMessage))
+                            {
+                                \myf\core\addImagesToProduct($product, 'productImages');
+                            }
+                        }
 
-                        //apply changes to product
-                        $product->productName        = $name;
-                        $product->catchPhrase        = $catchPhrase;
-                        $product->productDescription = $description;
-                        $product->vendorID           = $vendor;
-                        $product->categoryID         = $category;
-                        $product->standardPrice      = $price;
-                        $product->isHidden           = $isHidden;
+                        if(empty($errorMessage))
+                        {
+                            //apply changes to product
+                            $product->productName        = $name;
+                            $product->catchPhrase        = $catchPhrase;
+                            $product->productDescription = $description;
+                            $product->vendorID           = $vendor;
+                            $product->categoryID         = $category;
+                            $product->standardPrice      = $price;
+                            $product->isHidden           = $isHidden;
 
-                        //save product to database
-                        $product->save();
+                            //save product to database
+                            $product->save();
 
-                        //redirect to product page
-                        header('Location: ?c=products&a=view&prod=' . $product->id);
+                            //redirect to product page
+                            header('Location: ?c=products&a=view&prod=' . $product->id);
+                        }
                     }
                 }
                 else
