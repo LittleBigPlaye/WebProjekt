@@ -102,3 +102,64 @@ function addImagesToProduct(&$product, $imagesKey)
         }
     }
 }
+
+function calculateNumberOfProductPages($where = '')
+{
+    //calculate the number of pages
+    $numberOfProducts = count(\myf\models\Product::find($where));
+    $numberOfPages = ceil($numberOfProducts / PRODUCTS_PER_PAGE);
+    return $numberOfPages;
+}
+
+function determineCurrentPage($numberOfPages)
+{
+    $page = 1;
+    $page = ($page > $numberOfPages) ? $numberOfPages : $page;
+    if($numberOfPages > 0 && $page > $numberOfPages)
+    {
+        $page = $numberOfPages;
+    }
+    else if($page < 1)
+    {
+        $page = 1;
+    }
+    return $page;
+}
+
+function calculateStartIndex($numberOfPages, $currentPage)
+{
+    if($numberOfPages - $currentPage < PRODUCT_LIST_RANGE)
+    {
+        $deltaPages = PRODUCT_LIST_RANGE - ($numberOfPages - $currentPage);
+        $startIndex = max($currentPage-$deltaPages, 0);
+    }
+    else
+    {
+        $startIndex = $currentPage;
+    }
+    return $startIndex;
+}
+
+function prepareProductList(&$numberOfPages, &$currentPage, &$startIndex, $where = '', $orderBy = '')
+{
+    $numberOfPages = calculateNumberOfProductPages($where);
+
+    $currentPage = determineCurrentPage($numberOfPages);
+
+    // prepare bottom navigation to always display the same number of sites (except there are less pages than defined in PRODUCT_LIST_RANGE)
+    $startIndex = calculateStartIndex($numberOfPages, $currentPage);
+    
+    
+
+    //get products from database
+    $productResults = \myf\models\Product::findRange(($currentPage-1) * PRODUCTS_PER_PAGE, PRODUCTS_PER_PAGE, $where, $orderBy);
+    if(is_array($productResults))
+    {
+        $products = [];
+        foreach($productResults as $result)
+        {
+           array_push($products, new \myf\models\Product($result));
+        }
+        return $products;
+    }
+}

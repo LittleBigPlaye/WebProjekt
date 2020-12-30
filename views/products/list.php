@@ -41,6 +41,7 @@ if (isset($products) === false)
 </section>
 
 <br>
+<?=$numberOfPages?>
 <div class="pagesList">
     <!-- Button to return to previoud product list -->
     <?php if($currentPage > 1) :?>

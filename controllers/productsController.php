@@ -221,62 +221,30 @@ namespace myf\controller;
          else
          {
              //TODO - Redirect to 404 page
+             die();
          }
      }
+  
 
-     public function actionList()
-     {
+    public function actionList()
+    {
+        //set current position for nav bar highlight
         $this->setParam('currentPosition', 'products');
-        $page = $_GET['page'] ?? 1; 
         
-        //check how many products are available
         //TODO: replace $isAdmin as soon as login is done
         $isAdmin = true;
-        //determine if users should see all products or just hidden products
-        $whereClause = $isAdmin ? '' : 'isHidden = 0'; 
-
-        //calculate the number of pages
-        $numberOfProducts = count(\myf\models\Product::find($whereClause));
-        $numberOfPages = ceil($numberOfProducts / PRODUCTS_PER_PAGE);
-
-        $this->setParam('numberOfPages', $numberOfPages);
         
-        //determine current page
-        $page = ($page > $numberOfPages) ? $numberOfPages : $page;
-        if($numberOfPages > 0 && $page > $numberOfPages)
-        {
-            $page = $numberOfPages;
-        }
-        else if($page < 1)
-        {
-            $page = 1;
-        }
-        $this->setParam('currentPage', $page);
-
-        // prepare bottom navigation to always display the same number of sites (except there are less pages than defined in PRODUCT_LIST_RANGE)
+        //determine if users should see all products or just hidden products
+        $where = $isAdmin ? '' : 'isHidden = 0'; 
+        //check how many products are available
+        $numberOfPages = 0;
+        $currentPage = $_GET['page'] ?? 1; ;
         $startIndex = 0;
-
-        if($numberOfPages - $page < PRODUCT_LIST_RANGE)
-        {
-            $deltaPages = PRODUCT_LIST_RANGE - ($numberOfPages - $page);
-            $startIndex = max($page-$deltaPages, 0);
-        }
-        else
-        {
-            $startIndex = $page;
-        }
+               
+        $products = \myf\core\prepareProductList($numberOfPages, $currentPage, $startIndex, $where);
+        $this->setParam('numberOfPages', $numberOfPages);
+        $this->setParam('currentPage', $currentPage);
         $this->setParam('startIndex', $startIndex);
-
-        //get products from database
-        $productResults = \myf\models\Product::findRange(($page-1) * PRODUCTS_PER_PAGE, PRODUCTS_PER_PAGE, $whereClause);
-         if(is_array($productResults))
-         {
-             $products = [];
-             foreach($productResults as $result)
-             {
-                array_push($products, new \myf\models\Product($result));
-             }
-             $this->setParam('products', $products);
-         }
-     }
+        $this->setParam('products', $products);
+    }
  }
