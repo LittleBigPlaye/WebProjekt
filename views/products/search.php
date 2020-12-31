@@ -112,4 +112,3 @@
         <a href="index.php?<?=$getString?>&page=<?=$currentPage+1?>">&raquo;</a>
     <?php endif ?>
 </div>
-

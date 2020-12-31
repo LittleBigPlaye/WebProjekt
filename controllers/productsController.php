@@ -35,7 +35,7 @@ namespace myf\controller;
             if(!empty($name) && !empty($description) && \myf\core\validateNumberInput($price, 2) && !empty($vendor) && !empty($category))
             {
                 //check if product with same name already exists
-                if(is_array(\myf\models\Product::findOne('productName LIKE "' . $name .'"')))
+                if(is_array(\myf\models\Product::findOne('productName LIKE "' . addslashes($name) .'"')))
                 {
                     $errorMessage = 'Ein Produkt mit dem angegebenen Namen existiert bereits!';
                 }
@@ -51,7 +51,7 @@ namespace myf\controller;
                         {
                             //build new product
                             $product = new \myf\models\Product(array());
-                            $product->productName        = $name;
+                            $product->productName        = addslashes($name);
                             $product->catchPhrase        = $catchPhrase;
                             $product->productDescription = $description;
                             $product->vendorID           = $vendor;
@@ -313,7 +313,7 @@ namespace myf\controller;
             $where .= 'standardPrice < ' . $maxPrice;
         }
 
-        //build order
+        //build order part of the sql statement
         $order = '';
         $sort = $_GET['sort'] ?? '';
         switch($sort)
@@ -337,7 +337,6 @@ namespace myf\controller;
                 $order = 'createdAt DESC';
                 break;
         }
-
         
         //check how many products are available
         $numberOfPages = 0;
@@ -393,7 +392,7 @@ namespace myf\controller;
             
             $where .= '(';
             //replace quotes
-            $searchString = str_replace('"', '', $searchString);
+            $searchString = $this->escapeSQLString($searchString);
             $splitSearchString = explode(' ', $searchString);
             foreach($splitSearchString as $search)
             {
@@ -408,6 +407,16 @@ namespace myf\controller;
             $where = trim($where, ' OR ');
             $where .= ')';
         }       
+    }
+
+    private function escapeSQLString($sqlString)
+    {
+        $sqlString = str_replace('\\', '\\\\', $sqlString);
+        $sqlString = str_replace('\'', '\\\'', $sqlString);
+        $sqlString = str_replace('"', '\\"', $sqlString);
+        $sqlString = str_replace('%', '\\%', $sqlString);
+        $sqlString = str_replace('_', '\\_', $sqlString);
+        return $sqlString;
     }
 
     
