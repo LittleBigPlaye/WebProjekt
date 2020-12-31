@@ -33,7 +33,8 @@ if (isset($products) === false)
             
             <i><?= $product->isHidden ? '[unsichtbar]' : ''?></i><br>
             <b><?= htmlspecialchars($product->productName) ?></b><br>
-                <i><?= htmlspecialchars($product->catchPhrase) ?><br></i>
+            <i><?= htmlspecialchars($product->catchPhrase) ?><br></i>
+            <b><?= htmlspecialchars($product->standardPrice . ' €')?></b><br>
                 <a href="?c=products&a=view&prod=<?= htmlspecialchars($product->id) ?>">Anzeigen</a>
         </div>
     </div>

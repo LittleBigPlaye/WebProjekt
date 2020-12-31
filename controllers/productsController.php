@@ -247,4 +247,168 @@ namespace myf\controller;
         $this->setParam('startIndex', $startIndex);
         $this->setParam('products', $products);
     }
+
+    public function actionSearch()
+    {
+        //obtain vendors from database
+        $vendors = \myf\core\loadVendors();
+        $this->setParam('vendors', $vendors);
+
+        //obtain categories from database
+        $categories = \myf\core\loadCategories();
+        $this->setParam('categories', $categories);
+
+        //TODO: replace $isAdmin as soon as login is done
+        $isAdmin = true;
+
+        //determine if users should see all products or just hidden products
+        $where = $isAdmin ? '' : 'isHidden = 0'; 
+
+
+        $searchString = $_GET['s'] ?? '';
+       
+        //retrieve vendorFilters
+        $vendorFilters = [];
+        foreach($vendors as $vendor)
+        {
+            if(isset($_GET['v' . $vendor->id]))
+            {
+                array_push($vendorFilters, $vendor->id);
+            }
+        }
+
+        //retrieve CategoryFilters
+        $categoryFilters = [];
+        foreach($categories as $category)
+        {
+            if(isset($_GET['c' . $category->id]))
+            {
+                array_push($categoryFilters, $category->id);
+            }
+        }
+        $minPrice = $_GET['minPrice'] ?? '';
+        $maxPrice = $_GET['maxPrice'] ?? '';
+
+        //build where
+        $this->appendSearchQuery($searchString, $where, array('productName', 'catchPhrase', 'productDescription'));
+        $this->appendINQuery($vendorFilters, $where, 'vendorID');
+        $this->appendINQuery($categoryFilters, $where, 'categoryID');
+        
+       
+        if(!empty($where) && !empty($minPrice))
+        {
+            $where .= ' AND ';
+        }
+        if(!empty($minPrice))
+        {
+            $where .= 'standardPrice > ' . $minPrice;
+        }
+
+        if(!empty($where) && !empty($maxPrice))
+        {
+            $where .= ' AND ';
+        }
+        if(!empty($maxPrice))
+        {
+            $where .= 'standardPrice < ' . $maxPrice;
+        }
+
+        //build order
+        $order = '';
+        $sort = $_GET['sort'] ?? '';
+        switch($sort)
+        {
+            case 'nameASC':
+                $order = 'productName ASC';
+                break;
+            case 'nameDESC':
+                $order = 'productName DESC';
+                break;
+            case 'priceASC':
+                $order = 'standardPrice ASC';
+                break;
+            case 'priceDESC':
+                $order = 'standardPrice DESC';
+                break;
+            case 'dateASC':
+                $order = 'createdAt ASC';
+                break;
+            case 'dateDESC':
+                $order = 'createdAt DESC';
+                break;
+        }
+
+        
+        //check how many products are available
+        $numberOfPages = 0;
+        $currentPage = $_GET['page'] ?? 1; ;
+        $startIndex = 0;        
+        
+        $products = \myf\core\prepareProductList($numberOfPages, $currentPage, $startIndex, $where, $order);
+        $this->setParam('numberOfPages', $numberOfPages);
+        $this->setParam('currentPage', $currentPage);
+        $this->setParam('startIndex', $startIndex);
+        $this->setParam('products', $products);
+
+
+        //prepare getString fornavigation
+        $getString = 'c=products&a=search';
+        foreach($_GET AS $name => $value)
+        {
+            if($name != 'c' && $name != 'a' && $name != 'page')
+            {
+                $getString .= '&' . $name . '=' . urlencode($value);
+            }
+        }
+        $this->setParam('getString', $getString);
+
+    }
+
+    private function appendINQuery($filterList, &$where, $attributeName)
+    {
+        if(!empty($filterList))
+        {
+            if(!empty($where))
+            {
+                $where .= ' AND ';
+            }
+            $where .= $attributeName .' IN (';
+                foreach($filterList as $key => $id)
+                {
+                    $where .= $id . ', ';
+                }
+            $where = trim($where, ' ,');
+            $where .= ')';
+        }
+    }
+    
+    private function appendSearchQuery($searchString, &$where, $attributes)
+    {
+        if(!empty($where) && !empty($searchString))
+        {
+            $where .= ' AND ';
+        }
+        if(!empty($searchString))
+        {
+            
+            $where .= '(';
+            //replace quotes
+            $searchString = str_replace('"', '', $searchString);
+            $splitSearchString = explode(' ', $searchString);
+            foreach($splitSearchString as $search)
+            {
+                if(!empty($search))
+                {
+                    foreach($attributes as $attribute)
+                    {
+                        $where .= $attribute . ' LIKE "%' . $search . '%" OR ';
+                    }
+                }
+            }
+            $where = trim($where, ' OR ');
+            $where .= ')';
+        }       
+    }
+
+    
  }
