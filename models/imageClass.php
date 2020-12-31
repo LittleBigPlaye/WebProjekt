@@ -17,4 +17,14 @@ class Image extends BaseModel
         'imageName'     =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'not null', 'min' =>  5, 'max' => 150],
         'imageURL'      =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'not null', 'min' =>  5, 'max' => 150]
     ];
+
+    public function delete(&$errors = null)
+    {
+        //make sure to delete the image file before deleting the image database entry
+        if(file_exists($this->imageURL))
+        {
+            unlink($this->imageURL);
+        }
+        parent::delete($errors);
+    }
 }

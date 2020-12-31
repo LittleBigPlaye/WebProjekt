@@ -15,7 +15,6 @@ html {
     float: left;
     margin: 20px;
     margin-left: 33%;
-
 }
 
 
@@ -49,7 +48,7 @@ html {
 }
 
 body {
-    font-family:'Nunito', sans-serif;
+    font-family: 'Nunito', sans-serif;
     margin: 0px;
     background: #e1e1e1;
     color: #384047;
@@ -72,7 +71,8 @@ p {
     display: inline-block;
     height: 350px;
     width: 500px;
-    background: #f9f9f9;;
+    background: #f9f9f9;
+    ;
 }
 
 .card:hover {
@@ -84,8 +84,10 @@ p {
     text-align: center;
 }
 
+
 /*Login css*/
-.cardlogin{
+
+.cardlogin {
     box-shadow: 1px 4px 8px 1px lightgrey;
     transition: 0.3s;
     border-radius: 10px;
@@ -97,7 +99,7 @@ p {
     text-align: center;
 }
 
-.loginlabelinput{
+.loginlabelinput {
     text-align: left;
     padding-left: 70px;
 }
@@ -111,8 +113,7 @@ p {
     text-align: center;
 }
 
-
-.input_login{
+.input_login {
     background: rgba(255, 255, 255, 0.1);
     border: none;
     font-size: 16px;
@@ -309,4 +310,35 @@ p {
     to {
         opacity: 1;
     }
+}
+
+
+/* pages list */
+
+.pagesList {
+    text-align: center;
+    padding: 5px;
+}
+
+.pagesList a {
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .2s;
+}
+
+
+/* pages list - highlight current page */
+
+.pagesList a.active {
+    background-color: #333;
+    color: #e4e4e4;
+}
+
+
+/* pages list hover effect */
+
+.pagesList a:hover:not(.active) {
+    background-color: #686868;
+    color: #e4e4e4;
 }

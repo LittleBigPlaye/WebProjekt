@@ -8,7 +8,8 @@ namespace myf\controller;
 
  class ProductsController extends \myf\core\controller
  {
-     public function actionNew()
+     
+    public function actionNew()
      {
         $errorMessage = '';
         //TODO check if user is logged in and is admin
@@ -22,12 +23,13 @@ namespace myf\controller;
         if(isset($_POST['submit']))
         {
             //get inputs from form
-            $name        = $_POST['productName'];
-            $catchPhrase = $_POST['catchPhrase'];
-            $description = $_POST['productDescription'];
-            $price       = $_POST['productPrice'];
-            $vendor      = $_POST['vendor'];
-            $category    = $_POST['category'];
+            $name        = $_POST['productName'] ?? '';
+            $catchPhrase = $_POST['catchPhrase'] ?? '';
+            $description = $_POST['productDescription'] ?? '';
+            $price       = $_POST['productPrice'] ?? '';
+            $vendor      = $_POST['vendor'] ?? '';
+            $category    = $_POST['category'] ?? '';
+            $isHidden    = isset($_POST['isHidden']) ? true : false;
 
             //check, if inputs are valid
             if(!empty($name) && !empty($description) && \myf\core\validateNumberInput($price, 2) && !empty($vendor) && !empty($category))
@@ -39,75 +41,27 @@ namespace myf\controller;
                 }
                 else
                 {
-                    //TODO add function to upload and validate images
                     //check if there are files to be uploaded
                     $fileNames = array_filter($_FILES['productImages']['name']);
                     if(!empty($fileNames))
                     {
-                        //make sure to replace directory separator symbols in product name
-                        //replace all characters that are not allowed within file names
-                        $directoryName = mb_ereg_replace("([^\w\s\d\-_~,;\[\]\(\).])", '', $name);
-                        // remove ramaining whitespaces, make sure the path is in lower case
-                        $directoryName = strtolower(str_replace(' ', '_', $directoryName));
-                        $directoryName = PRODUCT_IMAGE_PATH . DIRECTORY_SEPARATOR . $directoryName;
-                        //create directory, if it does not exist
-                        if(!file_exists($directoryName))
-                        {
-                            mkdir($directoryName, 0755, true);
-                        }
-                        echo $directoryName;
-
-                        //check if images are okay
-                        foreach($_FILES['productImages']['name'] as $key => $value)
-                        {
-                            $currentFileName = basename($_FILES['productImages']['name'][$key]);
-                            $fileType = pathinfo($currentFileName, PATHINFO_EXTENSION);
-                            //check, if file type is okay
-                            if(!in_array($fileType, $GLOBALS['supportedFiles']))
-                            {
-                                $errorMessage = 'Der Dateityp von ' . $currentFileName . ' wird nicht unterstützt!';
-                                break;
-                            }
-                            //check if image size is okay
-                            if($_FILES['productImages']['size'][$key] > MAX_FILE_SIZE)
-                            {
-                                $errorMessage = 'Die Datei ' . $currentFileName . ' übersteigt die maximale Dateigröße von ' . MAX_FILE_SIZE . ' KB!';
-                                break;
-                            }
-                        }
-
-                        //echo  date('Ydmhis', time());
+                        \myf\core\validateImages($name, 'productImages', $errorMessage);
 
                         if(empty($errorMessage))
                         {
-                            $product = new \myf\models\Product(array());
-
-                            //upload images
-                            foreach($_FILES['productImages']['name'] as $key => $value)
-                            {
-                                //make sure the file name is unique
-                                $currentFileName = str_replace(' ', '_', basename($_FILES['productImages']['name'][$key]));
-                                $imageName       = substr(pathinfo($currentFileName, PATHINFO_BASENAME), 0, 10) . date('Ydmhis', time());
-                                $fileType        = pathinfo($currentFileName, PATHINFO_EXTENSION); 
-                                $targetPath      = $directoryName . DIRECTORY_SEPARATOR . $imageName . '.' . $fileType;
-
-                                //try to upload the file
-                                //try to upload the file
-                                $uploadWasSuccessful = \move_uploaded_file($_FILES['productImages']['tmp_name'][$key], $targetPath);
-                                if($uploadWasSuccessful)
-                                {
-                                    $product->addImage($targetPath);
-                                }
-                            }
-
                             //build new product
-                            
+                            $product = new \myf\models\Product(array());
                             $product->productName        = $name;
                             $product->catchPhrase        = $catchPhrase;
                             $product->productDescription = $description;
                             $product->vendorID           = $vendor;
                             $product->categoryID         = $category;
                             $product->standardPrice      = $price;
+                            $product->isHidden           = $isHidden;
+
+                            //add images
+                            \myf\core\addImagesToProduct($product, 'productImages');
+
                             //insert product into database
                             $product->save();
 
@@ -155,12 +109,13 @@ namespace myf\controller;
             //get inputs from from
             if(isset($_POST['submit']))
             {
-                $name        = $_POST['productName'];
-                $catchPhrase = $_POST['catchPhrase'];
-                $description = $_POST['productDescription'];
-                $price       = $_POST['productPrice'];
-                $vendor      = $_POST['vendor'];
-                $category    = $_POST['category'];
+                $name        = $_POST['productName'] ?? '';
+                $catchPhrase = $_POST['catchPhrase'] ?? '';
+                $description = $_POST['productDescription'] ?? '';
+                $price       = $_POST['productPrice'] ?? '';
+                $vendor      = $_POST['vendor'] ?? '';
+                $category    = $_POST['category'] ?? '';
+                $isHidden    = isset($_POST['isHidden']) ? true : false;
 
                 //check if inputs are valid
                 if(!empty($name) && !empty($description) && \myf\core\validateNumberInput($price, 2) && !empty($vendor) && !empty($category))
@@ -173,19 +128,53 @@ namespace myf\controller;
                     else
                     {
                         //TODO: image handling
-                        //apply changes to product
-                        $product->productName        = $name;
-                        $product->catchPhrase        = $catchPhrase;
-                        $product->productDescription = $description;
-                        $product->vendorID           = $vendor;
-                        $product->categoryID         = $category;
-                        $product->standardPrice      = $price;
+                        //go through all images of the current product
+                        foreach($product->images as $productImage)
+                        {
+                            //TODO: check if image should be deleted
+                            $deleteImage = isset($_POST['deleteImage' . $productImage->id]) ? true : false;
+                            if($deleteImage)
+                            {
+                                $productImage->delete();
+                            }
+                            else
+                            {
+                                //change image title
+                                $newTitle = $_POST['imageName' . $productImage->id] ?? $productImage->name;
+                                $productImage->image->imageName = $newTitle;
+                                $productImage->image->save();
+                            }
+                        }
 
-                        //save product to database
-                        $product->save();
+                        //check if there are files to be uploaded
+                        $fileNames = array_filter($_FILES['productImages']['name']);
+                        if(!empty($fileNames))
+                        {
+                            //check if all images are okay
+                            \myf\core\validateImages($name, 'productImages', $errorMessage);
+                            if(empty($errorMessage))
+                            {
+                                \myf\core\addImagesToProduct($product, 'productImages');
+                            }
+                        }
 
-                        //redirect to product page
-                        header('Location: ?c=products&a=view&prod=' . $product->id);
+                        if(empty($errorMessage))
+                        {
+                            //apply changes to product
+                            $product->productName        = $name;
+                            $product->catchPhrase        = $catchPhrase;
+                            $product->productDescription = $description;
+                            $product->vendorID           = $vendor;
+                            $product->categoryID         = $category;
+                            $product->standardPrice      = $price;
+                            $product->isHidden           = $isHidden;
+
+                            //save product to database
+                            $product->save();
+
+                            //redirect to product page
+                            header('Location: ?c=products&a=view&prod=' . $product->id);
+                        }
                     }
                 }
                 else
@@ -208,14 +197,18 @@ namespace myf\controller;
          {
             // get product id from url
             $productID = $_GET['prod'];
+            //TODO replace isAdmin as soon as the login is done
+            $isAdmin = true;
+            $whereClause = $isAdmin ? '' : ' AND isHidden=0';
             // try to find product with id in database
-            $productResult = \myf\models\Product::findOne('id=' . $productID);
+            $productResult = \myf\models\Product::findOne('id=' . $productID . $whereClause);
 
             // check if product has been found
             if(is_array($productResult))
             {
                 // create new product
                 $product = new \myf\models\Product($productResult);
+
                 // save product temporary in controller to have access from view
                 $this->setParam('product', $product);
             }
@@ -228,57 +221,194 @@ namespace myf\controller;
          else
          {
              //TODO - Redirect to 404 page
+             die();
          }
      }
+  
 
-     public function actionList()
-     {
+    public function actionList()
+    {
+        //set current position for nav bar highlight
         $this->setParam('currentPosition', 'products');
-        $page = $_GET['page'] ?? 1; 
+        
+        //TODO: replace $isAdmin as soon as login is done
+        $isAdmin = true;
+        
+        //determine if users should see all products or just hidden products
+        $where = $isAdmin ? '' : 'isHidden = 0'; 
+        //check how many products are available
+        $numberOfPages = 0;
+        $currentPage = $_GET['page'] ?? 1; ;
+        $startIndex = 0;
+               
+        $products = \myf\core\prepareProductList($numberOfPages, $currentPage, $startIndex, $where);
+        $this->setParam('numberOfPages', $numberOfPages);
+        $this->setParam('currentPage', $currentPage);
+        $this->setParam('startIndex', $startIndex);
+        $this->setParam('products', $products);
+    }
+
+    public function actionSearch()
+    {
+        //obtain vendors from database
+        $vendors = \myf\core\loadVendors();
+        $this->setParam('vendors', $vendors);
+
+        //obtain categories from database
+        $categories = \myf\core\loadCategories();
+        $this->setParam('categories', $categories);
+
+        //TODO: replace $isAdmin as soon as login is done
+        $isAdmin = true;
+
+        //determine if users should see all products or just hidden products
+        $where = $isAdmin ? '' : 'isHidden = 0'; 
+
+
+        $searchString = $_GET['s'] ?? '';
+       
+        //retrieve vendorFilters
+        $vendorFilters = [];
+        foreach($vendors as $vendor)
+        {
+            if(isset($_GET['v' . $vendor->id]))
+            {
+                array_push($vendorFilters, $vendor->id);
+            }
+        }
+
+        //retrieve CategoryFilters
+        $categoryFilters = [];
+        foreach($categories as $category)
+        {
+            if(isset($_GET['c' . $category->id]))
+            {
+                array_push($categoryFilters, $category->id);
+            }
+        }
+        $minPrice = $_GET['minPrice'] ?? '';
+        $maxPrice = $_GET['maxPrice'] ?? '';
+
+        //build where
+        $this->appendSearchQuery($searchString, $where, array('productName', 'catchPhrase', 'productDescription'));
+        $this->appendINQuery($vendorFilters, $where, 'vendorID');
+        $this->appendINQuery($categoryFilters, $where, 'categoryID');
+        
+       
+        if(!empty($where) && !empty($minPrice))
+        {
+            $where .= ' AND ';
+        }
+        if(!empty($minPrice))
+        {
+            $where .= 'standardPrice > ' . $minPrice;
+        }
+
+        if(!empty($where) && !empty($maxPrice))
+        {
+            $where .= ' AND ';
+        }
+        if(!empty($maxPrice))
+        {
+            $where .= 'standardPrice < ' . $maxPrice;
+        }
+
+        //build order
+        $order = '';
+        $sort = $_GET['sort'] ?? '';
+        switch($sort)
+        {
+            case 'nameASC':
+                $order = 'productName ASC';
+                break;
+            case 'nameDESC':
+                $order = 'productName DESC';
+                break;
+            case 'priceASC':
+                $order = 'standardPrice ASC';
+                break;
+            case 'priceDESC':
+                $order = 'standardPrice DESC';
+                break;
+            case 'dateASC':
+                $order = 'createdAt ASC';
+                break;
+            case 'dateDESC':
+                $order = 'createdAt DESC';
+                break;
+        }
+
         
         //check how many products are available
-        $numberOfProducts = count(\myf\models\Product::find());
-        //calculate the number of pages
-        $numberOfPages = ceil($numberOfProducts / PRODUCTS_PER_PAGE);
-
-        $this->setParam('numberOfPages', $numberOfPages);
+        $numberOfPages = 0;
+        $currentPage = $_GET['page'] ?? 1; ;
+        $startIndex = 0;        
         
-        //determine current page
-        $page = ($page > $numberOfPages) ? $numberOfPages : $page;
-        if($numberOfPages > 0 && $page > $numberOfPages)
-        {
-            $page = $numberOfPages;
-        }
-        else if($page < 1)
-        {
-            $page = 1;
-        }
-        $this->setParam('currentPage', $page);
-
-        //prepare bottom navigation to always display the same number of sites (except there are less pages than defined in PRODUCT_LIST_RANGE)
-        $startIndex = 0;
-
-        if($numberOfPages - $page < PRODUCT_LIST_RANGE)
-        {
-            $deltaPages = PRODUCT_LIST_RANGE - ($numberOfPages - $page);
-            $startIndex = max($page-$deltaPages, 0);
-        }
-        else
-        {
-            $startIndex = $page;
-        }
+        $products = \myf\core\prepareProductList($numberOfPages, $currentPage, $startIndex, $where, $order);
+        $this->setParam('numberOfPages', $numberOfPages);
+        $this->setParam('currentPage', $currentPage);
         $this->setParam('startIndex', $startIndex);
+        $this->setParam('products', $products);
 
-        //get products from database
-        $productResults = \myf\models\Product::findRange(($page-1) * PRODUCTS_PER_PAGE, PRODUCTS_PER_PAGE);
-         if(is_array($productResults))
-         {
-             $products = [];
-             foreach($productResults as $result)
-             {
-                array_push($products, new \myf\models\Product($result));
-             }
-             $this->setParam('products', $products);
-         }
-     }
+
+        //prepare getString fornavigation
+        $getString = 'c=products&a=search';
+        foreach($_GET AS $name => $value)
+        {
+            if($name != 'c' && $name != 'a' && $name != 'page')
+            {
+                $getString .= '&' . $name . '=' . urlencode($value);
+            }
+        }
+        $this->setParam('getString', $getString);
+
+    }
+
+    private function appendINQuery($filterList, &$where, $attributeName)
+    {
+        if(!empty($filterList))
+        {
+            if(!empty($where))
+            {
+                $where .= ' AND ';
+            }
+            $where .= $attributeName .' IN (';
+                foreach($filterList as $key => $id)
+                {
+                    $where .= $id . ', ';
+                }
+            $where = trim($where, ' ,');
+            $where .= ')';
+        }
+    }
+    
+    private function appendSearchQuery($searchString, &$where, $attributes)
+    {
+        if(!empty($where) && !empty($searchString))
+        {
+            $where .= ' AND ';
+        }
+        if(!empty($searchString))
+        {
+            
+            $where .= '(';
+            //replace quotes
+            $searchString = str_replace('"', '', $searchString);
+            $splitSearchString = explode(' ', $searchString);
+            foreach($splitSearchString as $search)
+            {
+                if(!empty($search))
+                {
+                    foreach($attributes as $attribute)
+                    {
+                        $where .= $attribute . ' LIKE "%' . $search . '%" OR ';
+                    }
+                }
+            }
+            $where = trim($where, ' OR ');
+            $where .= ')';
+        }       
+    }
+
+    
  }
