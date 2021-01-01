@@ -175,8 +175,7 @@ namespace myf\controller;
                         //redirect to product page
                         header('Location: ?c=products&a=view&prod=' . $product->id);
                     }
-                }
-                else
+                }else
                 {
                     $errorMessage = 'Bitte alle Felder ausfüllen!';
                 }
