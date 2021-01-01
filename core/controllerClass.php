@@ -2,7 +2,7 @@
 
 namespace myf\core;
 
-class Controller
+abstract class Controller
 {
     protected $controllerName   = null;
     protected $actionName       = null;

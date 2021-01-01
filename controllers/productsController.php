@@ -233,6 +233,12 @@ namespace myf\controller;
 
      public function actionList()
      {
+         if(isset($_GET['IDForCart']))
+         {
+             $this->addToCart($_GET['IDForCart']);
+         }
+
+
         $this->setParam('currentPosition', 'products');
         $page = $_GET['page'] ?? 1; 
         
@@ -281,4 +287,19 @@ namespace myf\controller;
              $this->setParam('products', $products);
          }
      }
+
+     public function addToCart($productID)
+     {
+            if(is_array(\myf\models\Product::findOne('id=' . $productID)))
+            {
+                if(!isset($_SESSION['cartInfos']))
+                {
+                    $_SESSION['cartInfos']= array(); //erzeugt ein leeres Array
+                }
+
+                array_push($_SESSION['cartInfos'], $productID);
+            }
+
+     }
+
  }

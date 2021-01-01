@@ -1,8 +1,9 @@
 <?php
 
 /**
- * 
+ * @Author Robin Beck
  */
+
 
 define('COREPATH'       , 'core' . DIRECTORY_SEPARATOR);
 define('VIEWSPATH'      , 'views' . DIRECTORY_SEPARATOR);
