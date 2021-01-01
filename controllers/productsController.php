@@ -82,6 +82,7 @@ namespace myf\controller;
         }
         $this->setParam('errorMessage', $errorMessage);
      }
+    
 
      
      public function actionEdit()
@@ -169,13 +170,15 @@ namespace myf\controller;
                             $product->standardPrice      = $price;
                             $product->isHidden           = $isHidden;
 
-                        //save product to database
-                        $product->save();
+                            //save product to database
+                            $product->save();
 
-                        //redirect to product page
-                        header('Location: ?c=products&a=view&prod=' . $product->id);
+                            //redirect to product page
+                            header('Location: ?c=products&a=view&prod=' . $product->id);
+                        }
                     }
-                }else
+                }
+                else
                 {
                     $errorMessage = 'Bitte alle Felder ausfüllen!';
                 }
@@ -216,17 +219,14 @@ namespace myf\controller;
                 echo "Produkt nicht gefunden";
             }
          }
-         else
-         {
-             //TODO - Redirect to 404 page
-             die();
-         }
-     }
+        else
+        {
+           //TODO - Redirect to 404 page
+            die();
+        }
+    }
+    
 
-
-    public function actionList()
-    {
-        //set current position for nav bar highlight
      public function actionList()
      {
          if(isset($_GET['IDForCart']))
@@ -416,33 +416,15 @@ namespace myf\controller;
         }
     }
 
-
-
-        //get products from database
-        $productResults = \myf\models\Product::findRange(($page-1) * PRODUCTS_PER_PAGE, PRODUCTS_PER_PAGE);
-         if(is_array($productResults))
-         {
-             $products = [];
-             foreach($productResults as $result)
-             {
-                array_push($products, new \myf\models\Product($result));
-             }
-             $this->setParam('products', $products);
-         }
-     }
-
-     public function addToCart($productID)
-     {
-            if(is_array(\myf\models\Product::findOne('id=' . $productID)))
+    public function addToCart($productID)
+    {
+        if(is_array(\myf\models\Product::findOne('id=' . $productID)))
+        {
+            if(!isset($_SESSION['cartInfos']))
             {
-                if(!isset($_SESSION['cartInfos']))
-                {
-                    $_SESSION['cartInfos']= array(); //erzeugt ein leeres Array
-                }
-
+                $_SESSION['cartInfos']= array(); //erzeugt ein leeres Array
+            }
                 array_push($_SESSION['cartInfos'], $productID);
             }
-
      }
-
  }
