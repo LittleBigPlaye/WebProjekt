@@ -1,57 +1,29 @@
 html {
     scroll-behavior: smooth;
-}
-
-.logo1 {
-    position: absolute;
-    float: left;
-    margin: 10px;
-    margin-left: 45%;
-    display: none;
-}
-
-.logo2 {
-    position: absolute;
-    float: left;
-    margin: 20px;
-    margin-left: 33%;
-}
-
-
-/* Add a black background color to the top navigation */
-
-.header {
-    background-color: #333;
-    overflow: hidden;
-    min-width: 910px;
-    height: 280px;
-}
-
-
-/* Style the links inside the navigation bar */
-
-.header a {
-    float: left;
-    display: block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 1.0625em;
-}
-
-
-/* Hide the link that should open and close the topnav on small screens */
-
-.header .icon {
-    display: none;
+    margin: 0;
 }
 
 body {
     font-family: 'Nunito', sans-serif;
-    margin: 0px;
+    margin: 0;
     background: #e1e1e1;
     color: #384047;
+}
+
+.logo1 {
+    display: none;
+}
+
+.logo2 {
+    display: inline-block;
+    text-align: center;
+}
+
+.header {
+    background-color: #333;
+    overflow: hidden;
+    height: 280px;
+    text-align: center;
 }
 
 h2,
@@ -151,12 +123,15 @@ p {
     padding-right: 30px;
     padding-bottom: 50px;
     padding-left: 30px;
+    position: relative;
     left: 0;
+    bottom: 0;
     background-color: #333;
     color: white;
     text-align: center;
     margin-top: 10px;
-    min-width: 910px;
+    /* width: 100%; */
+    /* min-width: 910px; */
     height: 281px;
     bottom: 0px;
 }
@@ -341,4 +316,118 @@ p {
 .pagesList a:hover:not(.active) {
     background-color: #686868;
     color: #e4e4e4;
+}
+
+
+/* error dialog */
+
+.errorMessage {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4433670;
+    border-left: 5px solid #e40000;
+    color: #520000;
+    margin-bottom: 15px;
+}
+
+.messageClose {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.errorMessage .messageClose:hover {
+    color: #520000;
+}
+
+.infoMessage .messageClose:hover {
+    color: rgb(0, 24, 88);
+}
+
+
+/* forms */
+
+.formWrapper {
+    text-align: center;
+}
+
+
+/* new product form */
+
+.productForm {
+    display: inline-block;
+    text-align: left;
+    width: 90%;
+    padding: 10px;
+}
+
+
+/* text inputs */
+
+input[type=text],
+input[type=number],
+input[type=submit],
+select,
+textarea {
+    width: 100%;
+    padding: 12px 20px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+    box-sizing: border-box;
+    background-color: white;
+    border: none;
+}
+
+input[type=text]:hover,
+input[type=number]:hover,
+input[type=submit]:hover,
+select:hover,
+textarea:hover {
+    background-color: #f8f8f8;
+}
+
+select option {
+    padding: 12px 20px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+}
+
+input[type=submit] {
+    color: #FFF;
+    background-color: #eb7d00;
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 10px;
+}
+
+input[type=submit]:hover {
+    background-color: #a55800;
+    transition: .1s;
+}
+
+input,
+label,
+textarea {
+    display: block;
+}
+
+
+/* remove arrows from number input */
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
 }

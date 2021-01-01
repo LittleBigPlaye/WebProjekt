@@ -6,8 +6,7 @@
 
 
 <h1>Bestehendes Produkt bearbeiten</h1>
-
-<?php if(isset($errorMessage) && $errorMessage !== null) : ?>
+<?php if(isset($errorMessage) && !empty($errorMessage)) : ?>
     <div class="errorMessage">
         <?= $errorMessage ?>
     </div>

@@ -8,7 +8,7 @@ namespace myf\controller;
 
  class ProductsController extends \myf\core\controller
  {
-
+     
     public function actionNew()
      {
         $errorMessage = '';
@@ -35,7 +35,7 @@ namespace myf\controller;
             if(!empty($name) && !empty($description) && \myf\core\validateNumberInput($price, 2) && !empty($vendor) && !empty($category))
             {
                 //check if product with same name already exists
-                if(is_array(\myf\models\Product::findOne('productName LIKE "' . $name .'"')))
+                if(is_array(\myf\models\Product::findOne('productName LIKE "' . addslashes($name) .'"')))
                 {
                     $errorMessage = 'Ein Produkt mit dem angegebenen Namen existiert bereits!';
                 }
@@ -51,7 +51,7 @@ namespace myf\controller;
                         {
                             //build new product
                             $product = new \myf\models\Product(array());
-                            $product->productName        = $name;
+                            $product->productName        = addslashes($name);
                             $product->catchPhrase        = $catchPhrase;
                             $product->productDescription = $description;
                             $product->vendorID           = $vendor;
@@ -82,7 +82,6 @@ namespace myf\controller;
         }
         $this->setParam('errorMessage', $errorMessage);
      }
-    
 
      
      public function actionEdit()
@@ -219,34 +218,29 @@ namespace myf\controller;
                 echo "Produkt nicht gefunden";
             }
          }
-        else
-        {
-           //TODO - Redirect to 404 page
-            die();
-        }
-    }
-    
-
-     public function actionList()
-     {
-         if(isset($_GET['IDForCart']))
+         else
          {
-             $this->addToCart($_GET['IDForCart']);
+             //TODO - Redirect to 404 page
+             die();
          }
+     }
+  
 
-
+    public function actionList()
+    {
+        //set current position for nav bar highlight
         $this->setParam('currentPosition', 'products');
         
         //TODO: replace $isAdmin as soon as login is done
         $isAdmin = true;
-
+        
         //determine if users should see all products or just hidden products
-        $where = $isAdmin ? '' : 'isHidden = 0';
+        $where = $isAdmin ? '' : 'isHidden = 0'; 
         //check how many products are available
         $numberOfPages = 0;
         $currentPage = $_GET['page'] ?? 1; ;
         $startIndex = 0;
-
+               
         $products = \myf\core\prepareProductList($numberOfPages, $currentPage, $startIndex, $where);
         $this->setParam('numberOfPages', $numberOfPages);
         $this->setParam('currentPage', $currentPage);
@@ -268,11 +262,11 @@ namespace myf\controller;
         $isAdmin = true;
 
         //determine if users should see all products or just hidden products
-        $where = $isAdmin ? '' : 'isHidden = 0';
+        $where = $isAdmin ? '' : 'isHidden = 0'; 
 
 
         $searchString = $_GET['s'] ?? '';
-
+       
         //retrieve vendorFilters
         $vendorFilters = [];
         foreach($vendors as $vendor)
@@ -299,8 +293,8 @@ namespace myf\controller;
         $this->appendSearchQuery($searchString, $where, array('productName', 'catchPhrase', 'productDescription'));
         $this->appendINQuery($vendorFilters, $where, 'vendorID');
         $this->appendINQuery($categoryFilters, $where, 'categoryID');
-
-
+        
+       
         if(!empty($where) && !empty($minPrice))
         {
             $where .= ' AND ';
@@ -319,7 +313,7 @@ namespace myf\controller;
             $where .= 'standardPrice < ' . $maxPrice;
         }
 
-        //build order
+        //build order part of the sql statement
         $order = '';
         $sort = $_GET['sort'] ?? '';
         switch($sort)
@@ -343,13 +337,12 @@ namespace myf\controller;
                 $order = 'createdAt DESC';
                 break;
         }
-
-
+        
         //check how many products are available
         $numberOfPages = 0;
         $currentPage = $_GET['page'] ?? 1; ;
-        $startIndex = 0;
-
+        $startIndex = 0;        
+        
         $products = \myf\core\prepareProductList($numberOfPages, $currentPage, $startIndex, $where, $order);
         $this->setParam('numberOfPages', $numberOfPages);
         $this->setParam('currentPage', $currentPage);
@@ -357,7 +350,7 @@ namespace myf\controller;
         $this->setParam('products', $products);
 
 
-        //prepare getString fornavigation
+        //prepare getString for navigation
         $getString = 'c=products&a=search';
         foreach($_GET AS $name => $value)
         {
@@ -387,7 +380,7 @@ namespace myf\controller;
             $where .= ')';
         }
     }
-
+    
     private function appendSearchQuery($searchString, &$where, $attributes)
     {
         if(!empty($where) && !empty($searchString))
@@ -396,10 +389,10 @@ namespace myf\controller;
         }
         if(!empty($searchString))
         {
-
+            
             $where .= '(';
             //replace quotes
-            $searchString = str_replace('"', '', $searchString);
+            $searchString = $this->escapeSQLString($searchString);
             $splitSearchString = explode(' ', $searchString);
             foreach($splitSearchString as $search)
             {
@@ -413,18 +406,18 @@ namespace myf\controller;
             }
             $where = trim($where, ' OR ');
             $where .= ')';
-        }
+        }       
     }
 
-    public function addToCart($productID)
+    private function escapeSQLString($sqlString)
     {
-        if(is_array(\myf\models\Product::findOne('id=' . $productID)))
-        {
-            if(!isset($_SESSION['cartInfos']))
-            {
-                $_SESSION['cartInfos']= array(); //erzeugt ein leeres Array
-            }
-                array_push($_SESSION['cartInfos'], $productID);
-            }
-     }
+        $sqlString = str_replace('\\', '\\\\', $sqlString);
+        $sqlString = str_replace('\'', '\\\'', $sqlString);
+        $sqlString = str_replace('"', '\\"', $sqlString);
+        $sqlString = str_replace('%', '\\%', $sqlString);
+        $sqlString = str_replace('_', '\\_', $sqlString);
+        return $sqlString;
+    }
+
+    
  }
