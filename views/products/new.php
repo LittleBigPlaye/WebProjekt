@@ -66,7 +66,9 @@
             ><?= $category->categoryName ?></option>
         <?php endforeach ?>
     </select>
-
+    <br>
+    <label for="isHidden">Produkt "versteckt" anlegen?</label>
+    <input type="checkbox" id="isHidden" name="isHidden"/>
     
 
     <br>

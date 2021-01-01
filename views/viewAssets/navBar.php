@@ -17,7 +17,7 @@
             <ul class="subNav">
                 <li><a href="?c=products&a=list">Alle Artikel</a></li>
                 <li><a href="#">Kategorien</a>
-                <li><a href="#">Suche</a></li>
+                <li><a href="index.php?c=products&a=search">Suche</a></li>
             </ul>
         </li>
 

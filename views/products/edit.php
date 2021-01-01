@@ -16,7 +16,31 @@
 <?php if(isset($product)) : ?>
 <form action="index.php?c=products&a=edit&product=<?=$product->id?>" method="post" enctype="multipart/form-data">
     
-    <label for="images"></label>
+    <!-- delete or change current images -->
+    <?php foreach($product->images as $productImage) : ?>
+        <img src="
+        <?php
+            if(file_exists($productImage->path))
+            {
+                echo $productImage->path;
+            }
+            else
+            {
+                echo FALLBACK_IMAGE;
+            }
+        ?>
+        " width="400px"/><br>
+        <label for="imageName<?=$productImage->id?>">Bildtitel</label>
+        <input type="input" placeHolder="Bildtitel" name="imageName<?=$productImage->id?>" id="imageName<?=$productImage->id?>" value="<?=$productImage->name?>">
+        <br>
+
+        <label for="deleteImage<?=$productImage->id?>">Bild "<?= $productImage->name?>" löschen?</label>
+        <input type="checkbox" id="deleteImage<?=$productImage->id?>" name="deleteImage<?=$productImage->id?>">
+        <br>
+    <?php endforeach ?>
+
+    <!-- Add new images -->
+    <label for="images">Bilder zu Produkt hinzufügen</label>
     <input type="file" id="images" name="productImages[]" multiple/>
     <br>
 
@@ -100,6 +124,10 @@
             ><?= $category->categoryName ?></option>
         <?php endforeach ?>
     </select>
+
+    <br>
+    <label for="isHidden">Produkt "verstecken"?</label>
+    <input type="checkbox" id="isHidden" name="isHidden" <?= ($product->isHidden) ? 'checked' : '' ?>/>
 
     <br>
     <input type="submit" name="submit" value="Änderung speichern"/>

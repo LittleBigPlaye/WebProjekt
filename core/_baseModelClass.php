@@ -303,7 +303,7 @@ abstract class BaseModel
         return $result;
     }
 
-    public static function findRange($offset, $length, $where='')
+    public static function findRange($offset, $length, $where='', $orderBy='')
     {
         $db  = $GLOBALS['database'];
         $result = null;
@@ -314,9 +314,14 @@ abstract class BaseModel
 
             if(!empty($where))
             {
-                $sql .= ' WHERE ' . $where .  ';';
+                $sql .= ' WHERE ' . $where;
             }
-            $sql .= 'LIMIT ' . $offset . ', ' . $length . ';';
+            if(!empty($orderBy))
+            {
+                $sql .= ' ORDER BY ' . $orderBy;
+            }
+
+            $sql .= ' LIMIT ' . $offset . ', ' . $length . ';';
             $result = $db->query($sql)->fetchAll();
         }
         catch(\PDOException $e)

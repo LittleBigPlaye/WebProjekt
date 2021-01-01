@@ -4,7 +4,7 @@
  */
 ?>
 
-<h1><?= htmlspecialchars($product->productName) ?></h1>
+<h1><?= htmlspecialchars($product->productName ?? '') ?></h1>
 
 <?php
     if($product->images != null)
@@ -20,12 +20,12 @@
             {
                 echo htmlspecialchars(FALLBACK_IMAGE);
             }
-            echo '" width="250px">';
+            echo '" width="250px" title="' . $image->name .'">';
         }
     }
     else
     {
-        echo '<img src=';
+        echo '<img src="';
         echo htmlspecialchars(FALLBACK_IMAGE);
         echo '" width="250px">';
     }
