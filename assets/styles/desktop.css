@@ -54,7 +54,7 @@
         text-align: center;
     }
     /*Login css*/
-    .cardlogin {
+    /* .cardlogin {
         box-shadow: 1px 4px 8px 1px lightgrey;
         transition: 0.3s;
         border-radius: 10px;
@@ -103,7 +103,7 @@
         border-width: 1px 1px 3px;
         box-shadow: 0 -1px 0 rgba(255, 255, 255, 0) inset;
         margin-bottom: 10px;
-    }
+    } */
     /*Register css*/
     .cardregister {
         box-shadow: 1px 4px 8px 1px lightgrey;
@@ -158,7 +158,13 @@
         margin-bottom: 30px;
         width: 100px;
     }
+    .formWrapper {
+        text-align: center
+    }
     .productForm {
         width: 60%;
+    }
+    .loginForm {
+        width: 450px;
     }
 }

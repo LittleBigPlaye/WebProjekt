@@ -34,8 +34,9 @@ namespace myf\controller;
             //check, if inputs are valid
             if(!empty($name) && !empty($description) && \myf\core\validateNumberInput($price, 2) && !empty($vendor) && !empty($category))
             {
+                $db = $GLOBALS['database'];
                 //check if product with same name already exists
-                if(is_array(\myf\models\Product::findOne('productName LIKE "' . addslashes($name) .'"')))
+                if(is_array(\myf\models\Product::findOne('productName LIKE "' . $db->quote($name) .'"')))
                 {
                     $errorMessage = 'Ein Produkt mit dem angegebenen Namen existiert bereits!';
                 }
@@ -51,7 +52,7 @@ namespace myf\controller;
                         {
                             //build new product
                             $product = new \myf\models\Product(array());
-                            $product->productName        = addslashes($name);
+                            $product->productName        = $name;
                             $product->catchPhrase        = $catchPhrase;
                             $product->productDescription = $description;
                             $product->vendorID           = $vendor;
@@ -291,7 +292,7 @@ namespace myf\controller;
 
         //build where
         $this->appendSearchQuery($searchString, $where, array('productName', 'catchPhrase', 'productDescription'));
-        $this->appendINQuery($vendorFilters, $where, 'vendorID');
+        $this->appendINQuery($vendorFilters,   $where, 'vendorID');
         $this->appendINQuery($categoryFilters, $where, 'categoryID');
         
        
@@ -367,6 +368,7 @@ namespace myf\controller;
     {
         if(!empty($filterList))
         {
+            $db = $GLOBALS['database'];
             if(!empty($where))
             {
                 $where .= ' AND ';
@@ -374,7 +376,7 @@ namespace myf\controller;
             $where .= $attributeName .' IN (';
                 foreach($filterList as $key => $id)
                 {
-                    $where .= $id . ', ';
+                    $where .= $db->quote($id) . ', ';
                 }
             $where = trim($where, ' ,');
             $where .= ')';
@@ -389,10 +391,8 @@ namespace myf\controller;
         }
         if(!empty($searchString))
         {
-            
+            $db = $GLOBALS['database'];
             $where .= '(';
-            //replace quotes
-            $searchString = $this->escapeSQLString($searchString);
             $splitSearchString = explode(' ', $searchString);
             foreach($splitSearchString as $search)
             {
@@ -400,7 +400,7 @@ namespace myf\controller;
                 {
                     foreach($attributes as $attribute)
                     {
-                        $where .= $attribute . ' LIKE "%' . $search . '%" OR ';
+                        $where .= $attribute . ' LIKE "%' . $db->quote($search) . '%" OR ';
                     }
                 }
             }
@@ -408,16 +408,4 @@ namespace myf\controller;
             $where .= ')';
         }       
     }
-
-    private function escapeSQLString($sqlString)
-    {
-        $sqlString = str_replace('\\', '\\\\', $sqlString);
-        $sqlString = str_replace('\'', '\\\'', $sqlString);
-        $sqlString = str_replace('"', '\\"', $sqlString);
-        $sqlString = str_replace('%', '\\%', $sqlString);
-        $sqlString = str_replace('_', '\\_', $sqlString);
-        return $sqlString;
-    }
-
-    
  }

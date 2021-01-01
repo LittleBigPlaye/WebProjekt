@@ -4,18 +4,19 @@
  */
 ?>
 
-<h1>Neues Produkt anlegen</h1>
-
-<?php if(isset($errorMessage) && !empty($errorMessage)) : ?>
-    <div class="errorMessage">
-        <span class="messageClose" onclick="this.parentElement.style.display='none';">&times</span>
-        <?= $errorMessage ?>
-    </div>
-<?php endif ?>
-
 <div class="formWrapper">
     <form class="productForm" action="index.php?c=products&a=new" method="post" enctype="multipart/form-data">
-        
+
+        <h1>Neues Produkt anlegen</h1>
+
+        <?php if(isset($errorMessage) && !empty($errorMessage)) : ?>
+            <div class="errorMessage">
+                <span class="messageClose" onclick="this.parentElement.style.display='none';">&times</span>
+                <p><?= $errorMessage ?></p>
+            </div>
+        <?php endif ?>
+
+
         <label for="images">Produktbilder</label>
         <input type="file" id="images" name="productImages[]" multiple/>
         <br>

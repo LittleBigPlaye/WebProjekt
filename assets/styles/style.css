@@ -59,7 +59,8 @@ p {
 
 /*Login css*/
 
-.cardlogin {
+
+/* .cardlogin {
     box-shadow: 1px 4px 8px 1px lightgrey;
     transition: 0.3s;
     border-radius: 10px;
@@ -113,7 +114,7 @@ p {
     border-width: 1px 1px 3px;
     box-shadow: 0 -1px 0 rgba(255, 255, 255, 0) inset;
     margin-bottom: 10px;
-}
+} */
 
 
 /*footer css*/
@@ -322,21 +323,29 @@ p {
 /* error dialog */
 
 .errorMessage {
-    width: 80%;
+    width: 100%;
+    padding: 15px 0;
     margin: 0 auto;
-    padding: 20px;
     background-color: #f4433670;
     border-left: 5px solid #e40000;
     color: #520000;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    font-size: 1.3em;
+}
+
+.errorMessage p {
+    padding: 0px;
+    margin-left: 10px;
+    text-align: left;
 }
 
 .messageClose {
-    margin-left: 15px;
+    margin-left: 25px;
+    margin-right: 25px;
     color: white;
     font-weight: bold;
     float: right;
-    font-size: 22px;
+    font-size: 1.5em;
     line-height: 20px;
     cursor: pointer;
     transition: 0.2s;
@@ -358,66 +367,117 @@ p {
 }
 
 
-/* new product form */
+/* form for login */
 
-.productForm {
-    display: inline-block;
+.loginForm {
+    margin: 25px auto;
+    display: block;
     text-align: left;
     width: 90%;
-    padding: 10px;
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 5px;
+}
+
+.loginForm h1 {
+    text-align: center;
+}
+
+.loginForm input {
+    width: 100%;
+    padding: 12px 20px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    display: block;
+    box-sizing: border-box;
+    background-color: #e4e4e4;
+    border: none;
+    border-radius: 5px;
+}
+
+.loginForm input[type=submit] {
+    color: #FFF;
+    background-color: #eb7d00;
+    border-radius: 5px;
+    border: none;
+    margin-top: 35px;
+    margin-bottom: 10px;
+}
+
+.loginForm input,
+.loginForm label {
+    display: block;
+    font-size: 1.3em;
+}
+
+.loginForm input[type=submit]:hover {
+    background-color: #474747;
+    transition: .1s;
+}
+
+.loginForm label {
+    font-weight: bold;
 }
 
 
-/* text inputs */
+/* new form for new product and product editing */
 
-input[type=text],
-input[type=number],
-input[type=submit],
-select,
-textarea {
+.productForm {
+    display: block;
+    text-align: left;
+    margin: 25px auto;
+    width: 90%;
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 5px;
+}
+
+.productForm h1 {
+    text-align: center;
+}
+
+.productForm input,
+.productForm select,
+.productForm textarea {
     width: 100%;
     padding: 12px 20px;
-    margin-bottom: 8px;
-    margin-top: 8px;
+    margin-top: 10px;
+    margin-bottom: 25px;
     box-sizing: border-box;
-    background-color: white;
+    background-color: #e4e4e4;
+    border-radius: 5px;
     border: none;
 }
 
-input[type=text]:hover,
-input[type=number]:hover,
-input[type=submit]:hover,
-select:hover,
-textarea:hover {
+.productForm input:hover,
+.productForm select:hover,
+.productForm textarea:hover {
     background-color: #f8f8f8;
 }
 
-select option {
-    padding: 12px 20px;
-    margin-bottom: 8px;
-    margin-top: 8px;
-}
-
-input[type=submit] {
+.productForm input[type=submit] {
     color: #FFF;
     background-color: #eb7d00;
-    font-size: 18px;
-    text-align: center;
-    font-style: normal;
     border-radius: 5px;
     border: none;
     margin-bottom: 10px;
 }
 
-input[type=submit]:hover {
-    background-color: #a55800;
+.productForm input[type=submit]:hover {
+    background-color: #474747;
     transition: .1s;
 }
 
-input,
-label,
-textarea {
+.productForm input,
+.productForm label,
+.productForm textarea,
+.productForm select {
     display: block;
+    font-size: 1.3em;
+}
+
+.productForm label {
+    font-weight: bold;
 }
 
 
