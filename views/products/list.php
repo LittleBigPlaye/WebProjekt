@@ -35,7 +35,7 @@ if (isset($products) === false)
             <b><?= htmlspecialchars($product->productName) ?></b><br>
             <i><?= htmlspecialchars($product->catchPhrase) ?><br></i>
             <b><?= htmlspecialchars($product->standardPrice . ' €')?></b><br>
-                <a href="?c=products&a=view&prod=<?= htmlspecialchars($product->id) ?>">Anzeigen</a>
+                <a href="?c=products&a=view&pid=<?= htmlspecialchars($product->id) ?>">Anzeigen</a>
             <br>
                 <a href="?c=products&a=list&IDForCart=<?= htmlspecialchars($product->id) ?>">In den Wareknkorb</a>
         </div>
@@ -46,10 +46,8 @@ if (isset($products) === false)
 <br>
 <?=$numberOfPages?>
 <div class="pagesList">
-    <!-- Button to return to previoud product list -->
-    <?php if($currentPage > 1) :?>
-        <a href="index.php?c=products&a=list&page=<?=$currentPage-1?>">&laquo;</a>
-    <?php endif ?>
+        <a href="index.php?c=products&a=list&page=1">&laquo;</a>
+
     
     <!-- Buttons to go to specific product page within range -->
     
@@ -61,7 +59,5 @@ if (isset($products) === false)
 
 
     <!-- Button to go to next product List -->
-    <?php if($currentPage < $numberOfPages) : ?>
-        <a href="index.php?c=products&a=list&page=<?=$currentPage+1?>">&raquo;</a>
-    <?php endif ?>
+        <a href="index.php?c=products&a=list&page=<?=$numberOfPages?>">&raquo;</a>
 </div>

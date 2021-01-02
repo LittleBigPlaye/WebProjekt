@@ -19,27 +19,27 @@
 
         <label for="images">Produktbilder</label>
         <input type="file" id="images" name="productImages[]" multiple/>
-        <br>
+
 
         <label for="productName">Produktbezeichnung</label>
         <input type="text" name="productName" id="productName" placeholder="Hier Bezeichnung eingeben..."
             value="<?= $_POST['productName'] ?? '' ?>"/>
-        <br>
+
 
         <label for="catchPhrase">Catchphrase</label>
         <input type="text" name="catchPhrase" id="catchPhrase" placeholder="Hier Catchphrase eingeben..."
             value ="<?= $_POST['catchPhrase'] ?? '' ?>"/>
     
 
-        <br>
+
         <label for="productDescription">Produktbeschreibung</label>
         <textarea id="productDescription" name="productDescription" rows="10"><?= $_POST['productDescription'] ?? '' ?></textarea>
-        <br>
+
 
         <label for="productPrice">Produktpreis</label>
-        <input type="number" min="1" step="any" id="productPrice" name="productPrice"
+        <input type="number" class="errorHighlight"  min="1" step="any" id="productPrice" name="productPrice"
             value="<?= $_POST['productPrice'] ?? '' ?>"/>
-        <br>
+
 
         <label for="vendors">Marke</label>
         <select id="vendor" name="vendor">
@@ -54,7 +54,7 @@
                 ><?= $vendor->vendorName ?></option>
             <?php endforeach ?>
         </select>
-        <br>
+
 
         <label for="vendors">Kategorie</label>
         <select id="category" name="category">
@@ -69,12 +69,10 @@
                 ><?= $category->categoryName ?></option>
             <?php endforeach ?>
         </select>
-        <br>
-        <label for="isHidden">Produkt "versteckt" anlegen?</label>
-        <input type="checkbox" id="isHidden" name="isHidden"/>
-        
 
-        <br>
+        <label for="isHidden">Produkt "versteckt" anlegen?
+        <input type="checkbox" id="isHidden" name="isHidden"/></label>        
+
         <input type="submit" name="submit" value="Produkt anlegen"/>
     </form>
 </div>

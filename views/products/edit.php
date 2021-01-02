@@ -14,7 +14,7 @@
 
 <?php if(isset($product)) : ?>
 <div class="formWrapper">
-    <form class="productForm" action="index.php?c=products&a=edit&product=<?=$product->id?>" method="post" enctype="multipart/form-data">
+    <form class="productForm" action="index.php?c=products&a=edit&pid=<?=$product->id?>" method="post" enctype="multipart/form-data">
         
         <!-- delete or change current images -->
         <?php foreach($product->images as $productImage) : ?>
@@ -32,17 +32,14 @@
             " width="400px"/><br>
             <label for="imageName<?=$productImage->id?>">Bildtitel</label>
             <input type="input" placeHolder="Bildtitel" name="imageName<?=$productImage->id?>" id="imageName<?=$productImage->id?>" value="<?=$productImage->name?>">
-            <br>
 
-            <label for="deleteImage<?=$productImage->id?>">Bild "<?= $productImage->name?>" löschen?</label>
-            <input type="checkbox" id="deleteImage<?=$productImage->id?>" name="deleteImage<?=$productImage->id?>">
-            <br>
+            <label for="deleteImage<?=$productImage->id?>">Bild "<?= $productImage->name?>" löschen?
+            <input type="checkbox" id="deleteImage<?=$productImage->id?>" name="deleteImage<?=$productImage->id?>"></label>
         <?php endforeach ?>
 
         <!-- Add new images -->
         <label for="images">Bilder zu Produkt hinzufügen</label>
         <input type="file" id="images" name="productImages[]" multiple/>
-        <br>
 
         <label for="productName">Produktbezeichnung</label>
         <input type="text" name="productName" id="productName" placeholder="Bezeichnung eingeben..."
@@ -55,7 +52,6 @@
                 {
                     echo $_POST['productName'];
                 }?>">
-        <br>
 
         <label for="catchPhrase">Catchphrase</label>
         <input type="text" name="catchPhrase" id="catchPhrase"
@@ -69,7 +65,6 @@
                     echo $_POST['catchPhrase'];
                 }?>">  
 
-        <br>
         <label for="productDescription">Produktbeschreibung</label>
         <textarea id="productDescription" name="productDescription"><?php
                 if(!isset($_POST['productDescription']) || empty($_POST['productDescription']))
@@ -80,7 +75,6 @@
                 {
                     echo $_POST['productDescription'];
                 }?></textarea>
-        <br>
 
         <label for="productPrice">Produktpreis</label>
         <input type="number" min="1" step="any" id="productPrice" name="productPrice"
@@ -93,7 +87,6 @@
                 {
                     echo $_POST['productPrice'];
                 }?>">
-        <br>
 
         <label for="vendors">Marke</label>
         <select id="vendor" name="vendor">
@@ -109,7 +102,6 @@
                 ><?= $vendor->vendorName ?></option>
             <?php endforeach ?>
         </select>
-        <br>
 
         <label for="vendors">Kategorie</label>
         <select id="category" name="category">
@@ -125,11 +117,11 @@
             <?php endforeach ?>
         </select>
 
-        <br>
+
         <label for="isHidden">Produkt "verstecken"?</label>
         <input type="checkbox" id="isHidden" name="isHidden" <?= ($product->isHidden) ? 'checked' : '' ?>/>
 
-        <br>
+
         <input type="submit" name="submit" value="Änderung speichern"/>
     </form>
 </div>
