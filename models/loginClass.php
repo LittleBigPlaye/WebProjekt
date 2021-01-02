@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @author John Klippstein
+ */
 
 namespace myf\models;
 

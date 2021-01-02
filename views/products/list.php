@@ -36,6 +36,8 @@ if (isset($products) === false)
             <i><?= htmlspecialchars($product->catchPhrase) ?><br></i>
             <b><?= htmlspecialchars($product->standardPrice . ' €')?></b><br>
                 <a href="?c=products&a=view&prod=<?= htmlspecialchars($product->id) ?>">Anzeigen</a>
+            <br>
+                <a href="?c=products&a=list&IDForCart=<?= htmlspecialchars($product->id) ?>">In den Wareknkorb</a>
         </div>
     </div>
 <?php endforeach ?>

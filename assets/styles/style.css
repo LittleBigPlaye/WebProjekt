@@ -1,57 +1,29 @@
 html {
     scroll-behavior: smooth;
-}
-
-.logo1 {
-    position: absolute;
-    float: left;
-    margin: 10px;
-    margin-left: 45%;
-    display: none;
-}
-
-.logo2 {
-    position: absolute;
-    float: left;
-    margin: 20px;
-    margin-left: 33%;
-}
-
-
-/* Add a black background color to the top navigation */
-
-.header {
-    background-color: #333;
-    overflow: hidden;
-    min-width: 910px;
-    height: 280px;
-}
-
-
-/* Style the links inside the navigation bar */
-
-.header a {
-    float: left;
-    display: block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 1.0625em;
-}
-
-
-/* Hide the link that should open and close the topnav on small screens */
-
-.header .icon {
-    display: none;
+    margin: 0;
 }
 
 body {
     font-family: 'Nunito', sans-serif;
-    margin: 0px;
+    margin: 0;
     background: #e1e1e1;
     color: #384047;
+}
+
+.logo1 {
+    display: none;
+}
+
+.logo2 {
+    display: inline-block;
+    text-align: center;
+}
+
+.header {
+    background-color: #333;
+    overflow: hidden;
+    height: 280px;
+    text-align: center;
 }
 
 h2,
@@ -87,7 +59,8 @@ p {
 
 /*Login css*/
 
-.cardlogin {
+
+/* .cardlogin {
     box-shadow: 1px 4px 8px 1px lightgrey;
     transition: 0.3s;
     border-radius: 10px;
@@ -141,7 +114,7 @@ p {
     border-width: 1px 1px 3px;
     box-shadow: 0 -1px 0 rgba(255, 255, 255, 0) inset;
     margin-bottom: 10px;
-}
+} */
 
 
 /*footer css*/
@@ -151,12 +124,15 @@ p {
     padding-right: 30px;
     padding-bottom: 50px;
     padding-left: 30px;
+    position: relative;
     left: 0;
+    bottom: 0;
     background-color: #333;
     color: white;
     text-align: center;
     margin-top: 10px;
-    min-width: 910px;
+    /* width: 100%; */
+    /* min-width: 910px; */
     height: 281px;
     bottom: 0px;
 }
@@ -341,4 +317,177 @@ p {
 .pagesList a:hover:not(.active) {
     background-color: #686868;
     color: #e4e4e4;
+}
+
+
+/* error dialog */
+
+.errorMessage {
+    width: 100%;
+    padding: 15px 0;
+    margin: 0 auto;
+    background-color: #f4433670;
+    border-left: 5px solid #e40000;
+    color: #520000;
+    margin-bottom: 20px;
+    font-size: 1.3em;
+}
+
+.errorMessage p {
+    padding: 0px;
+    margin-left: 10px;
+    text-align: left;
+}
+
+.messageClose {
+    margin-left: 25px;
+    margin-right: 25px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 1.5em;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.errorMessage .messageClose:hover {
+    color: #520000;
+}
+
+.infoMessage .messageClose:hover {
+    color: rgb(0, 24, 88);
+}
+
+
+/* forms */
+
+.formWrapper {
+    text-align: center;
+}
+
+
+/* form for login */
+
+.loginForm {
+    margin: 25px auto;
+    display: block;
+    text-align: left;
+    width: 90%;
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 5px;
+}
+
+.loginForm h1 {
+    text-align: center;
+}
+
+.loginForm input {
+    width: 100%;
+    padding: 12px 20px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    display: block;
+    box-sizing: border-box;
+    background-color: #e4e4e4;
+    border: none;
+    border-radius: 5px;
+}
+
+.loginForm input[type=submit] {
+    color: #FFF;
+    background-color: #eb7d00;
+    border-radius: 5px;
+    border: none;
+    margin-top: 35px;
+    margin-bottom: 10px;
+}
+
+.loginForm input,
+.loginForm label {
+    display: block;
+    font-size: 1.3em;
+}
+
+.loginForm input[type=submit]:hover {
+    background-color: #474747;
+    transition: .1s;
+}
+
+.loginForm label {
+    font-weight: bold;
+}
+
+
+/* new form for new product and product editing */
+
+.productForm {
+    display: block;
+    text-align: left;
+    margin: 25px auto;
+    width: 90%;
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 5px;
+}
+
+.productForm h1 {
+    text-align: center;
+}
+
+.productForm input,
+.productForm select,
+.productForm textarea {
+    width: 100%;
+    padding: 12px 20px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    box-sizing: border-box;
+    background-color: #e4e4e4;
+    border-radius: 5px;
+    border: none;
+}
+
+.productForm input:hover,
+.productForm select:hover,
+.productForm textarea:hover {
+    background-color: #f8f8f8;
+}
+
+.productForm input[type=submit] {
+    color: #FFF;
+    background-color: #eb7d00;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 10px;
+}
+
+.productForm input[type=submit]:hover {
+    background-color: #474747;
+    transition: .1s;
+}
+
+.productForm input,
+.productForm label,
+.productForm textarea,
+.productForm select {
+    display: block;
+    font-size: 1.3em;
+}
+
+.productForm label {
+    font-weight: bold;
+}
+
+
+/* remove arrows from number input */
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
 }

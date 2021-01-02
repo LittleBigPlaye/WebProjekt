@@ -38,3 +38,5 @@
 <p><b>Marke: </b><?=htmlspecialchars($product->vendor->vendorName) ?></p>
 <p><b>Typ: </b><?=htmlspecialchars($product->category->categoryName) ?></p>
 <a href="?c=products&a=edit&product=<?= htmlspecialchars($product->id)?>">Produkt bearbeiten</a>
+<br>
+<a href="?c=products&a=view&IDForCart=<?= htmlspecialchars($product->id) ?>">In den Wareknkorb</a>

@@ -43,12 +43,12 @@
                   <input class="input_register1" type="password" id="password2" name="password2">
                   <br>
 
-                  <label>Gender:</label>
+                  <label>Geschlecht:</label>
                   <input type="radio" id="female" value="female" name="gender"><label for="female" class="light">Female</label><br>
                   <input type="radio" id="male" value="male" name="gender"><label for="male" class="light">Male</label><br>
-                  <input type="radio" id="divers" value="divers" name="divers"><label for="divers" class="light">Divers</label><br><br>
+                  <input type="radio" id="divers" value="divers" name="gender"><label for="divers" class="light">Divers</label><br><br>
                   <br>
-                  <label>Age:</label>
+                  <label>Geburtstag:</label>
                   <input class="input_register1" type="date" id="date" name="birthdate">
                   <br>
 
@@ -82,6 +82,6 @@
       </form>
         </div>
     </div>
-      
+
     </body>
 </html>
