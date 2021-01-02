@@ -511,12 +511,7 @@ namespace myf\controller;
         return $numberOfPages;
     }
 
-    /**
-     * Undocumented function
-     *
-     * @param [type] $numberOfPages
-     * @return void
-     */
+
     private function determineCurrentPage($currentPage = 1, $numberOfPages)
     {
         $currentPage = ($currentPage > $numberOfPages) ? $numberOfPages : $currentPage;
@@ -531,13 +526,6 @@ namespace myf\controller;
         return $currentPage;
     }
 
-    /**
-     * Undocumented function
-     *
-     * @param [type] $numberOfPages
-     * @param [type] $currentPage
-     * @return void
-     */
     private function calculateStartIndex($numberOfPages, $currentPage)
     {
         if($numberOfPages - $currentPage < PRODUCT_LIST_RANGE)
@@ -552,16 +540,6 @@ namespace myf\controller;
         return $startIndex;
     }
 
-    /**
-     * Undocumented function
-     *
-     * @param [type] $numberOfPages
-     * @param [type] $currentPage
-     * @param [type] $startIndex
-     * @param string $where
-     * @param string $orderBy
-     * @return void
-     */
     private function prepareProductList(&$numberOfPages, &$currentPage, &$startIndex, $where = '', $orderBy = '')
     {
         $numberOfPages = $this->calculateNumberOfProductPages($where);
@@ -578,7 +556,7 @@ namespace myf\controller;
             $products = [];
             foreach($productResults as $result)
             {
-            array_push($products, new \myf\models\Product($result));
+                array_push($products, new \myf\models\Product($result));
             }
             return $products;
         }
