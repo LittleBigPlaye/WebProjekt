@@ -176,7 +176,7 @@ namespace myf\controller;
                             $product->save();
 
                             //redirect to product page
-                            header('Location: ?c=products&a=view&prod=' . $product->id);
+                            header('Location: ?c=products&a=view&pid=' . $product->id);
                         }
                     }
                 }

@@ -14,7 +14,7 @@
 
 <?php if(isset($product)) : ?>
 <div class="formWrapper">
-    <form class="productForm" action="index.php?c=products&a=edit&product=<?=$product->id?>" method="post" enctype="multipart/form-data">
+    <form class="productForm" action="index.php?c=products&a=edit&pid=<?=$product->id?>" method="post" enctype="multipart/form-data">
         
         <!-- delete or change current images -->
         <?php foreach($product->images as $productImage) : ?>
