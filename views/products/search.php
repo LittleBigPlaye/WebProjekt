@@ -93,6 +93,7 @@
 
             <option value="dateDESC" <?= (isset($_GET['sort']) && $_GET['sort'] == 'dateDESC') ? ' selected' : ''?>>Neueste zuerst</option>
             <option value="dateASC" <?= (isset($_GET['sort']) && $_GET['sort'] == 'dateASC') ? ' selected' : ''?>>Älteste zuerst</option>
+
         </select>
         <br>
 

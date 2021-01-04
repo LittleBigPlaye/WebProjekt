@@ -93,7 +93,7 @@ namespace myf\controller;
         //check if product exists
         $productID = $_GET['pid'] ?? null;
         $productResult = null;
-        if($productID != null)
+        if($productID != null && is_numeric($productID))
         {
             $productResult = \myf\models\Product::findOne('id=' . $productID);
         }
@@ -266,10 +266,16 @@ namespace myf\controller;
 
     public function actionView()
     {
-         if(isset($_GET['pid']))
+         if(isset($_GET['pid']) && is_numeric($_GET['pid']))
          {
             // get product id from url
             $productID = $_GET['pid'];
+
+            if(isset($_GET['IDForCart']) && is_numeric($_GET['IDForCart']))
+            {
+                $this->addToCart($_GET['IDForCart']);
+            }
+
             //TODO replace isAdmin as soon as the login is done
             $isAdmin = true;
             $whereClause = $isAdmin ? '' : ' AND isHidden=0';
@@ -303,7 +309,10 @@ namespace myf\controller;
     {
         //set current position for nav bar highlight
         $this->setParam('currentPosition', 'products');
-        
+        if(isset($_GET['IDForCart']) && is_numeric($_GET['IDForCart']))
+        {
+            $this->addToCart($_GET['IDForCart']);
+        }
         //TODO: replace $isAdmin as soon as login is done
         $isAdmin = true;
         
@@ -561,4 +570,18 @@ namespace myf\controller;
             return $products;
         }
     }
+
+    public function addToCart($productID)
+     {
+            if(is_array(\myf\models\Product::findOne('id=' . $productID)))
+            {
+                if(!isset($_SESSION['cartInfos']))
+                {
+                    $_SESSION['cartInfos']= array(); //erzeugt ein leeres Array
+                }
+
+                array_push($_SESSION['cartInfos'], $productID);
+            }
+
+     }
  }
