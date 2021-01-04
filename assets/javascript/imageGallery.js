@@ -1,12 +1,19 @@
-var currentSlide = 1;
-setGalleryPosition(currentSlide);
+initializeImageGallery();
+
+function initializeImageGallery() {
+    var currentSlide = 0;
+    setGalleryPosition(currentSlide);
+}
 
 function setGalleryPosition(targetSlide) {
     var i;
     var slides = document.getElementsByClassName('gallerySlide');
+
     var thumbnails = document.getElementsByClassName('galleryThumbnail');
+
+    //check if desired slide is not inside the range of available slides
     if (targetSlide >= slides.length) {
-        targetSlide = 1;
+        targetSlide = 0;
     } else if (targetSlide < 0) {
         targetSlide = slides.length;
     }

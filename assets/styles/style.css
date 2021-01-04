@@ -686,9 +686,8 @@ input[type=number] {
 .imageGallery {
     display: block;
     box-sizing: border-box;
-    /* text-align: center; */
     margin: 0 auto;
-    width: 40%;
+    width: 95%;
 }
 
 .gallerySlide img {

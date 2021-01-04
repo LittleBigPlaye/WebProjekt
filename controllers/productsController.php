@@ -408,6 +408,9 @@ namespace myf\controller;
             case 'dateDESC':
                 $order = 'createdAt DESC';
                 break;
+            case 'random':
+                $order = 'RAND()';
+                break;
         }
         
         //check how many products are available
