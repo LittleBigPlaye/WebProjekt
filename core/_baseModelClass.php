@@ -255,6 +255,7 @@ abstract class BaseModel
 
         try
         {
+            $db->query('SET NAMES utf8')->execute();
             $sql = 'SELECT * FROM ' . self::tablename();
 
             if(!empty($where))
@@ -284,7 +285,7 @@ abstract class BaseModel
 
         try
         {
-
+                $db->query('SET NAMES utf8')->execute();
                 $sql = 'SELECT * FROM ' . self::tablename();
 
                 if(!empty($where))
@@ -309,6 +310,7 @@ abstract class BaseModel
 
         try
         {
+            $db->query('SET NAMES utf8')->execute();
             $sql = 'SELECT * FROM ' . self::tablename();
 
             if(!empty($where))

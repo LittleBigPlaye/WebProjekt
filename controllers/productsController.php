@@ -202,7 +202,7 @@ namespace myf\controller;
         // remove ramaining whitespaces, make sure the path is in lower case
         $directoryName = strtolower(str_replace(' ', '_', $directoryName));
         //create new directory path
-        $directoryName = PRODUCT_IMAGE_PATH . DIRECTORY_SEPARATOR . $directoryName;
+        $directoryName = PRODUCT_IMAGE_PATH . DIRECTORY_SEPARATOR . md5($productName);
         return $directoryName;
     }
 
