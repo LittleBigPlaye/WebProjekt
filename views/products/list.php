@@ -7,7 +7,7 @@
 <h1>Produkte</h1>
 
 <?php
-if (isset($products) === false) 
+if (!isset($products) || count($products) === 0) 
 {
     echo 'Es wurden keine Produkte gefunden';
 }
@@ -44,7 +44,6 @@ if (isset($products) === false)
 </section>
 
 <br>
-<?=$numberOfPages?>
 <div class="pagesList">
         <a href="index.php?c=products&a=list&page=1">&laquo;</a>
 
