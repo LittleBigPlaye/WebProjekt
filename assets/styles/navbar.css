@@ -2,6 +2,7 @@ nav {
     position: sticky;
     top: 0;
     z-index: +100;
+    font-size: 1.2em;
 }
 
 nav ul {
@@ -122,10 +123,38 @@ nav .active {
     border-bottom: solid #eb7d00 0.38em;
 }
 
+
+/* Cart item counter */
+
+
+/* .cartBadge {
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    padding: 5px 10px;
+    border-radius: 25%;
+    /* font-size: .7em; 
+    background: red;
+    color: white;
+} */
+
+.cartBadge {
+    border-radius: 45%;
+    float: right;
+    padding: 3px 3px;
+    font-size: 1em;
+    background: #eb7d00;
+    color: white;
+}
+
+nav li img {
+    height: 1em;
+}
+
 @media screen and (min-width: 900px) {
     nav .mainNav {
         display: block;
-        height: 3.5em;
+        height: 3.55em;
         background-color: #191919;
     }
     #navToggleLabel,
@@ -165,5 +194,16 @@ nav .active {
     }
     nav li:hover>input[type="checkbox"]+.subNav {
         display: block;
+    }
+    .cartBadge {
+        position: relative;
+        left: 5px;
+        bottom: 3px;
+        position: inline-block;
+    }
+    nav li img {
+        height: .9em;
+        padding: 0;
+        margin: 0;
     }
 }
