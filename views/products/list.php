@@ -35,9 +35,15 @@ if (!isset($products) || count($products) === 0)
             <b><?= htmlspecialchars($product->productName) ?></b><br>
             <i><?= htmlspecialchars($product->catchPhrase) ?><br></i>
             <b><?= htmlspecialchars($product->standardPrice . ' €')?></b><br>
-                <a href="?c=products&a=view&pid=<?= htmlspecialchars($product->id) ?>">Anzeigen</a>
-            <br>
-                <a href="?c=products&a=list&IDForCart=<?= htmlspecialchars($product->id) ?>">In den Wareknkorb</a>
+            <ul>
+                <li>
+                    <a href="?c=products&a=view&pid=<?= htmlspecialchars($product->id) ?>">Anzeigen</a>
+
+                    <a href="?c=products&a=list&IDForCart=<?= htmlspecialchars($product->id) ?>">
+                        <img src="assets/images/AddCartButton.png" alt="Zum Warenkorb hinzufügen" width="35px"/>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
 <?php endforeach ?>
