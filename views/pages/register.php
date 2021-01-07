@@ -1,14 +1,8 @@
-<head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Sign Up Form</title>
-        <link rel="stylesheet" href="assets/styles/login-style.css">
-    </head>
-    <body>
-
     <div class="cardregister">
         <div class="containerregister">
-      <form  action="index.html" method="post">
+
+
+            <form clas="loginForm"  action="?c=registration&a=registration" method="post">
 
           <h1>Registrierung</h1>
 
@@ -78,10 +72,7 @@
               </div>
           </div>
           <br>
-          <button class="button_login" type="submit">Sign Up</button>
+          <input type="submit" value="Registrieren" name="submit" >
       </form>
         </div>
     </div>
-
-    </body>
-</html>
