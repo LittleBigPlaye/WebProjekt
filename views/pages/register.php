@@ -38,9 +38,9 @@
                   <br>
 
                   <label>Geschlecht:</label>
-                  <input type="radio" id="female" value="female" name="gender"><label for="female" class="light">Female</label><br>
-                  <input type="radio" id="male" value="male" name="gender"><label for="male" class="light">Male</label><br>
-                  <input type="radio" id="divers" value="divers" name="gender"><label for="divers" class="light">Divers</label><br><br>
+                  <input type="radio" id="female" value="f" name="gender"><label for="female" class="light">Female</label><br>
+                  <input type="radio" id="male" value="m" name="gender"><label for="male" class="light">Male</label><br>
+                  <input type="radio" id="divers" value="u" name="gender"><label for="divers" class="light">Divers</label><br><br>
                   <br>
                   <label>Geburtstag:</label>
                   <input class="input_register1" type="date" id="date" name="birthdate">
@@ -59,13 +59,13 @@
                   <input class="input_register1" type="text" id="street" name="street">
                   <br>
                   <label class="registerlabel">Hausnummer</label>
-                  <input class="input_register1" type="text" id="streetnumer" name="streetnumber">
+                  <input class="input_register1" type="text" id="streetNumber" name="streetNumber">
                   <br>
                   <label class="registerlabel" >Postleitzahl</label>
-                  <input class="input_register1" type="text" id="zipcode" name="zipcode">
+                  <input class="input_register1" type="text" id="zipCode" name="zipCode">
                   <br>
                   <label class="registerlabel">Stadt</label>
-                  <input class="input_register1" type="text" id="town" name="town">
+                  <input class="input_register1" type="text" id="city" name="city">
                   <br>
 
 

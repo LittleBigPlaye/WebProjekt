@@ -56,6 +56,11 @@
          $this->setParam('currentPosition', 'register');
      }
 
+     public function actionRegistration()
+     {
+         $this->setParam('currentPosition', 'register');
+     }
+
      //TODO: logout action
 
 
