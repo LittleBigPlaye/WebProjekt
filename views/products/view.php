@@ -70,4 +70,4 @@
 <p><b>Typ: </b><?=htmlspecialchars($product->category->categoryName) ?></p>
 <a href="?c=products&a=edit&pid=<?= htmlspecialchars($product->id)?>">Produkt bearbeiten</a>
 <a href="?c=products&a=view&pid=<?= htmlspecialchars($product->id)?>&IDForCart=<?= htmlspecialchars($product->id) ?>">
-    <img src="assets/images/AddCartButton.png" alt="Zum Warenkorb hinzufügen" /></a>
+    <img src="assets\images\icons\addToCartButton.png" alt="Zum Warenkorb hinzufügen" /></a>

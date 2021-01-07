@@ -40,7 +40,7 @@ if (!isset($products) || count($products) === 0)
                     <a href="?c=products&a=view&pid=<?= htmlspecialchars($product->id) ?>">Anzeigen</a>
 
                     <a href="?c=products&a=list&IDForCart=<?= htmlspecialchars($product->id) ?>">
-                        <img src="assets/images/AddCartButton.png" alt="Zum Warenkorb hinzufügen" width="35px"/>
+                        <img src="assets\images\icons\addCartButton.png" alt="Zum Warenkorb hinzufügen" width="35px"/>
                     </a>
                 </li>
             </ul>

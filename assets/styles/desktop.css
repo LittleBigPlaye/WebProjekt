@@ -170,4 +170,7 @@
     .imageGallery {
         width: 40%;
     }
+    .errorPage img {
+        width: 40%;
+    }
 }

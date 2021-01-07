@@ -33,8 +33,7 @@ abstract class Controller
         $viewPath = VIEWSPATH . $this->controllerName . DIRECTORY_SEPARATOR .  $this->actionName . '.php';
         if(!file_exists($viewPath))
         {
-            //TODO: proper 404 page
-            die ('404 no view available');
+            header('Location: index.php?c=errors&a=404');
         }
 
         extract($this->params);
