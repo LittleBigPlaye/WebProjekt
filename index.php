@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 
+ *  Alle
  */
 
 //region load required files

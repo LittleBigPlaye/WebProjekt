@@ -21,19 +21,19 @@
                   <h2>Persönliche Daten</h2>
                   <br>
                   <label class="registerlabel" for="name">Vorname:</label>
-                  <input class="input_register1" type="text" id="name" name="firstname">
+                  <input class="input_register1" type="text" id="firstName" name="firstName">
                   <br>
 
                     <label class="registerlabel" for="name">Zweitname:</label>
-                    <input class="input_register1" type="text" id="name" name="secondname">
+                    <input class="input_register1" type="text" id="secondName" name="secondName">
                   <br>
 
                   <label class="registerlabel" for="name">Nachname:</label>
-                  <input class="input_register1" type="text" id="name" name="lastname">
+                  <input class="input_register1" type="text" id="lastName" name="lastName">
                   <br>
 
                   <label class="registerlabel" for="mail">Email:</label>
-                  <input class="input_register1" type="email" id="mail" name="email">
+                  <input class="input_register1" type="email" id="email" name="email">
                   <br>
 
                   <label class="registerlabel" for="password">Passwort:</label>
