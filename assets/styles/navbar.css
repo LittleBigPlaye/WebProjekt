@@ -126,25 +126,23 @@ nav .active {
 
 /* Cart item counter */
 
-
-/* .cartBadge {
-    position: absolute;
-    top: -7px;
-    right: -7px;
-    padding: 5px 10px;
-    border-radius: 25%;
-    /* font-size: .7em; 
-    background: red;
-    color: white;
-} */
-
 .cartBadge {
     border-radius: 45%;
     float: right;
-    padding: 3px 3px;
-    font-size: 1em;
+    display: block;
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    font-size: .8em;
     background: #eb7d00;
     color: white;
+}
+
+.cartBadge p {
+    margin: 0;
+    padding: 7px 3px;
+    text-align: center;
+    vertical-align: center;
 }
 
 nav li img {

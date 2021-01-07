@@ -52,8 +52,7 @@ if(file_exists(CONTROLLERSPATH . $controllerName . 'Controller.php'))
 
     if(!method_exists($controller, $actionMethod))
     {
-        //TODO: replace with actual 404 page - call
-        die('404 method is not available');
+        header('Location: index.php?c=errors&a=404');
     }
     else
     {
@@ -62,8 +61,7 @@ if(file_exists(CONTROLLERSPATH . $controllerName . 'Controller.php'))
 }
 else
 {
-    //TODO: replace with actual 404 page - call
-    die('404 controller is not available');
+    header('Location: index.php?c=errors&a=404');
 }
 //endregion
 

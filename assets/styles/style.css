@@ -202,8 +202,6 @@ p {
     color: white;
     text-align: center;
     margin-top: 10px;
-    /* width: 100%; */
-    /* min-width: 910px; */
     height: 281px;
     bottom: 0px;
 }
@@ -785,3 +783,16 @@ input[type=number] {
     max-width: 16.66%;
 }
 
+
+/* error page */
+
+.errorPage {
+    text-align: center;
+    margin: 20px auto;
+    width: 95%;
+    border-radius: 10px;
+}
+
+.errorPage img {
+    width: 80%;
+}

@@ -39,7 +39,7 @@ else if ($cartCount > 99) {
                 href="?c=orders&a=shoppingcart">Warenkorb <img src="assets\images\icons\shopping_cart.svg" alt="">
                 <?php if(!empty($cartCount)) : ?>
                 <span
-                class="cartBadge"><?= $cartCount ?></span>
+                class="cartBadge"><p><?= $cartCount ?></p></span>
                 <?php endif ?></a></li>
         
         <li <?= ($currentPosition == 'login') ? 'class="right active"' : 'class="right"' ?>><a
