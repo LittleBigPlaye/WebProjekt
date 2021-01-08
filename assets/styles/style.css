@@ -800,6 +800,12 @@ input[type=number] {
     width: 70%;
 }
 
+.productPreview form {
+    position: relative;
+    bottom: 40px;
+    right: -45%;
+}
+
 
 /* error page */
 
