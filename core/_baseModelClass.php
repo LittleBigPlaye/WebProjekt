@@ -255,6 +255,7 @@ abstract class BaseModel
 
         try
         {
+            $db->query('SET NAMES utf8')->execute();
             $sql = 'SELECT * FROM ' . self::tablename();
 
             if(!empty($where))
@@ -282,19 +283,24 @@ abstract class BaseModel
      * @param string $where
      * @return mixed
      */
-    public static function findOne($where='')
+    public static function findOne($where='', $orderBy='')
     {
         $db  = $GLOBALS['database'];
         $result = null;
 
         try
         {
-
+                $db->query('SET NAMES utf8')->execute();
                 $sql = 'SELECT * FROM ' . self::tablename();
 
                 if(!empty($where))
                 {
                     $sql.=' WHERE ' . $where;
+                }
+
+                if(!empty($orderBy))
+                {
+                    $sql .= ' ORDER BY ' . $orderBy;
                 }
                 $sql .= ';';
                 $resultSet = $db->query($sql)->fetch();
@@ -319,6 +325,7 @@ abstract class BaseModel
 
         try
         {
+            $db->query('SET NAMES utf8')->execute();
             $sql = 'SELECT * FROM ' . self::tablename();
 
             if(!empty($where))

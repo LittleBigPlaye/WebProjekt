@@ -4,6 +4,7 @@
 
 <?php foreach ($products as $product):?>
 
+    moin;
     <img src="<?= $product->images[0]->path?>" height="250"/>
     <br>
     <?= $product->productName?>

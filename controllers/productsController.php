@@ -211,7 +211,7 @@ namespace myf\controller;
         // remove ramaining whitespaces, make sure the path is in lower case
         $directoryName = strtolower(str_replace(' ', '_', $directoryName));
         //create new directory path
-        $directoryName = PRODUCT_IMAGE_PATH . DIRECTORY_SEPARATOR . $directoryName;
+        $directoryName = PRODUCT_IMAGE_PATH . DIRECTORY_SEPARATOR . md5($productName);
         return $directoryName;
     }
 
@@ -275,7 +275,7 @@ namespace myf\controller;
 
     public function actionView()
     {
-         if(isset($_GET['pid']) && is_numeric($_GET['pid']))
+         if(isset($_GET['pid']) && (is_numeric($_GET['pid']) || $_GET['pid'] == 'random'))
          {
             // get product id from url
             $productID = $_GET['pid'];
@@ -284,15 +284,26 @@ namespace myf\controller;
             $isAdmin = true;
             $whereClause = $isAdmin ? '' : ' AND isHidden=0';
             // try to find product with id in database
-            $product = \myf\models\Product::findOne('id=' . $productID . $whereClause);
+            $product = null;
+            
+            if($_GET['pid'] == 'random')
+            {
+                $product = \myf\models\Product::findOne('', 'RAND()');
+            }
+            else
+            {
+                $product = \myf\models\Product::findOne('id=' . $productID . $whereClause);
+            }
+            
 
             // check if product has been found
             if($product !== null)
             {
-                if(isset($_GET['IDForCart']) && is_numeric($_GET['IDForCart']))
+                if(isset($_POST['addToCart']) && is_numeric($_POST['addToCart']))
                 {
-                    $this->addToCart($_GET['IDForCart']);
+                    $this->addToCart($_POST['addToCart']);
                 }
+                
                 // save product temporary in controller to have access from view
                 $this->setParam('product', $product);
             }
@@ -307,34 +318,14 @@ namespace myf\controller;
          }
      }
   
-
-    public function actionList()
-    {
-        //set current position for nav bar highlight
-        $this->setParam('currentPosition', 'products');
-        if(isset($_GET['IDForCart']) && is_numeric($_GET['IDForCart']))
-        {
-            $this->addToCart($_GET['IDForCart']);
-        }
-        //TODO: replace $isAdmin as soon as login is done
-        $isAdmin = true;
-        
-        //determine if users should see all products or just hidden products
-        $where = $isAdmin ? '' : 'isHidden = 0'; 
-        //check how many products are available
-        $numberOfPages = 0;
-        $currentPage = $_GET['page'] ?? 1; ;
-        $startIndex = 0;
-               
-        $products = $this->prepareProductList($numberOfPages, $currentPage, $startIndex, $where);
-        $this->setParam('numberOfPages', $numberOfPages);
-        $this->setParam('currentPage', $currentPage);
-        $this->setParam('startIndex', $startIndex);
-        $this->setParam('products', $products);
-    }
-
     public function actionSearch()
     {
+        //check if products should be added to cart
+        if(isset($_POST['addToCart']) && is_numeric($_POST['addToCart']))
+        {
+            $this->addToCart($_POST['addToCart']);
+        }
+        
         //obtain vendors from database
         $vendors = \myf\models\Vendor::find();
         $this->setParam('vendors', $vendors);
