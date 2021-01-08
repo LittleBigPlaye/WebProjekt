@@ -42,30 +42,6 @@
             </div>
         </div>
     </div>
-    <div class="card">
-        <div class="container">
-            <img src="./assets/images/masks/mask01.png" width="400">
-            <br>
-            <a href="">Maske 4</a>
-        </div>
-    </div>
-    <div class="card">
-        <div class="container">
-            <img src="./assets/images/masks/mask01.png" width="400">
-            <br>
-            <a href="">Maske 5</a>
-        </div>
-    </div>
-    <div class="card">
-        <div class="container">
-            <img src="./assets/images/masks/mask01.png" width="400">
-            <br>
-            <a href="">Maske 6</a>
-        </div>
-    </div>
-    </div>
-
-
 
 </section>
 <br>
@@ -104,26 +80,7 @@
         </div>
     </div>
     </div>
-    <div class="card">
-        <div class="container">
-            <img src="./assets/images/masks/mask01.png" width="400">
-            <br>
-            <a href="">Maske 10</a>
-        </div>
-    </div>
-    <div class="card">
-        <div class="container">
-            <img src="./assets/images/masks/mask01.png" width="400">
-            <br>
-            <a href="">Maske 12</a>
-        </div>
-    </div>
-    <div class="card">
-        <div class="container">
-            <img src="./assets/images/masks/mask01.png" width="400">
-            <br>
-            <a href="">Maske 13</a>
-        </div>
+
 
 </section>
 
