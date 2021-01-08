@@ -26,9 +26,9 @@ else if ($cartCount > 99) {
             </label>
             <input type="checkbox" id="dropToggle01">
             <ul class="subNav">
-                <li><a href="?c=products&a=list">Alle Artikel</a></li>
+                <li><a href="index.php?c=products&a=search">Alle Artikel</a></li>
                 <li><a href="#">Kategorien</a>
-                <li><a href="index.php?c=products&a=search">Suche</a></li>
+                <li><a href="index.php?c=products&a=view&pid=random">Zufälliger Artikel</a></li>
             </ul>
         </li>
 

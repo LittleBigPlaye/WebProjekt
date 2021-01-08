@@ -283,7 +283,7 @@ abstract class BaseModel
      * @param string $where
      * @return mixed
      */
-    public static function findOne($where='')
+    public static function findOne($where='', $orderBy='')
     {
         $db  = $GLOBALS['database'];
         $result = null;
@@ -296,6 +296,11 @@ abstract class BaseModel
                 if(!empty($where))
                 {
                     $sql.=' WHERE ' . $where;
+                }
+
+                if(!empty($orderBy))
+                {
+                    $sql .= ' ORDER BY ' . $orderBy;
                 }
                 $sql .= ';';
                 $resultSet = $db->query($sql)->fetch();

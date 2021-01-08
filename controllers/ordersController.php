@@ -12,16 +12,14 @@ class ordersController extends Controller
     public function actionShoppingcart()
     {
         $products = [];
-
         foreach ($_SESSION['cartInfos'] as $productID )
         {
-            $productResult = \myf\models\Product::findOne('id='.$productID);
-            if(is_array($productResult))
+            $currentProduct = \myf\models\Product::findOne('id='.$productID);
+            if($currentProduct !== null)
             {
-                array_push($products, new Product($productResult));
+                array_push($products, $currentProduct);
             }
         }
-
         $this->setParam('products', $products);
         $this->setParam('currentPosition', 'shoppingcart');
     }

@@ -69,5 +69,8 @@
 <p><b>Marke: </b><?=htmlspecialchars($product->vendor->vendorName) ?></p>
 <p><b>Typ: </b><?=htmlspecialchars($product->category->categoryName) ?></p>
 <a href="?c=products&a=edit&pid=<?= htmlspecialchars($product->id)?>">Produkt bearbeiten</a>
-<a href="?c=products&a=view&pid=<?= htmlspecialchars($product->id)?>&IDForCart=<?= htmlspecialchars($product->id) ?>">
-    <img src="assets\images\icons\addToCartButton.png" alt="Zum Warenkorb hinzufügen" /></a>
+<form method="POST">
+    <button type="submit" name="addToCart" value="<?=$product->id?>">In den Warenkorb</button>
+</form>
+<!-- <a href="?c=products&a=view&pid=<?= htmlspecialchars($product->id)?>&IDForCart=<?= htmlspecialchars($product->id) ?>">
+    <img src="assets\images\icons\addToCartButton.png" alt="Zum Warenkorb hinzufügen" /></a> -->

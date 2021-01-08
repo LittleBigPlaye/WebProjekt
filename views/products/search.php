@@ -128,7 +128,10 @@
             <b><?= htmlspecialchars($product->productName) ?></b><br>
             <i><?= htmlspecialchars($product->catchPhrase) ?><br></i>
             <b><?= htmlspecialchars($product->standardPrice . ' €')?></b><br>
-                <a href="?c=products&a=view&pid=<?= htmlspecialchars($product->id) ?>">Anzeigen</a>
+            <a href="?c=products&a=view&pid=<?= htmlspecialchars($product->id) ?>">Anzeigen</a>
+            <form method="POST">
+                <button type="submit" name="addToCart" value="<?=$product->id?>">In den Warenkorb</button>
+            </form>
         </div>
     </div>
 <?php endforeach ?>
