@@ -2,9 +2,16 @@
         <div class="containerregister">
 
 
-            <form clas="loginForm"  action="?c=registration&a=registration" method="post">
+            <form clas="loginForm"  action="?c=accounts&a=register" method="post">
 
           <h1>Registrierung</h1>
+
+                <?php if(isset($errorMessage) && !empty($errorMessage)) : ?>
+                    <div class="errorMessage">
+                        <span class="messageClose" onclick="this.parentElement.style.display='none';">&times</span>
+                        <p><?= $errorMessage ?></p>
+                    </div>
+                <?php endif ?>
 
           <div class="cardregister">
               <div class="containerregister">

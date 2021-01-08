@@ -292,6 +292,7 @@ abstract class BaseModel
                     $sql.=' WHERE ' . $where;
                 }
                 $sql .= ';';
+                //echo($sql);
                 $result = $db->query($sql)->fetch();
 
         }

@@ -9,10 +9,11 @@ use myf\models\User;
 use myf\core\Controller;
 use myf\models\Login;
 
-class registrationController extends Controller
+class accountsController extends Controller
 {
 
-    public function actionRegistration()
+
+    public function actionRegister()
     {
         $errorMessage = "Der Benutzer existiert bereits.";
 
@@ -23,16 +24,17 @@ class registrationController extends Controller
             $secondName = $_POST['secondName']  ?? "";
             $lastName = $_POST['lastName']  ?? "";
             $email = $_POST['email'];
-
             $password = password_hash($_POST['password'],PASSWORD_DEFAULT)  ?? "";
-            $password2 = password_hash($_POST['password'],PASSWORD_DEFAULT)  ?? "";
+            $password2 = $_POST['password2']  ?? "";
             $gender = $_POST['gender']  ?? "";
             $birthdate = $_POST['birthdate']  ?? "";
 
             $street = $_POST['street'] ?? "";
-            $streetNumber = $_POST['streetNumber'] ?? "";
+            $streetNumber = str_replace(' ', '', $_POST['streetNumber'] ?? "");
             $city = $_POST['city'] ?? "";
             $zipCode = $_POST['zipCode'] ?? "";
+
+            $db = $GLOBALS['database'];
 
 
             if(empty($firstName) || empty($lastName) || empty($email) || empty($password) || empty($password2) || empty($birthdate) )
@@ -41,23 +43,23 @@ class registrationController extends Controller
             }
             else
             {
-                if($password !== $password2){
-                    $errorMessage = "Es wurden nicht alle nötigen Felder richtig ausgeüllt!";
+                if(!password_verify($password2,$password)){
+                    $errorMessage = "Schau mal Passwort";
                 }
                 else{
                     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                         $errorMessage = "Ungültige Eingabe";
                     }
                     else{
-                        $emailResult = Login::findOne('email='.$email);
+                        $emailResult = Login::findOne('email LIKE'.$db->quote($email));
                         if(is_array($emailResult))
                         {
                             $errorMessage = "Der Benutzer existiert bereits.";
                         }
                         else
                         {
-                            $adressResult=Address::find("street=".$street." AND streetnumber=".$streetNumber.
-                                " AND city=".$city." AND zipCode=".$zipCode);
+                            $adressResult=Address::findOne("street=".$db->quote($street)." AND streetnumber=".$db->quote($streetNumber).
+                                " AND city=".$db->quote($city)." AND zipCode=".$db->quote($zipCode));
 
                             if(is_array($adressResult))
                             {

@@ -8,7 +8,7 @@ use myf\core\BaseModel;
 
 class Address extends BaseModel
 {
-    const TABLENAME = '`categories`';
+    const TABLENAME = '`addresses`';
 
     protected $schema = [
         'id'            =>  ['type' => BaseModel::TYPE_INT     , 'null' => 'not null' , 'autoincrement' => true],
