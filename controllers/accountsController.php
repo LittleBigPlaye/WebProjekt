@@ -113,4 +113,14 @@ class accountsController extends Controller
 
         $this->setParam('errorMessage', $errorMessage);
     }
+
+    public function actionAdminusermanagement()
+    {
+        $users = User::find();
+        $this->setParam('users',$users);
+
+        $logins = Login::find();
+        $this->setParam('logins',$logins);
+
+    }
 }

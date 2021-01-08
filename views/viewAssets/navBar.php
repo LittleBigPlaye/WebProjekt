@@ -55,7 +55,7 @@ else if ($cartCount > 99) {
             <ul class="subNav">
                 <li><a href="#">Mein Konto</a></li>
                 <li><a href="?c=products&a=new">Neues Produkt anlegen</a>
-                <li><a href="#">Benutzer verwalten</a></li>
+                <li><a href="?c=accounts&a=adminusermanagement">Benutzer verwalten</a></li>
             </ul>
         </li>
     </ul>
