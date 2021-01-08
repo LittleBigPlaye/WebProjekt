@@ -12,7 +12,7 @@ namespace myf\controller;
     public function actionNew()
      {
         $errorMessage = '';
-        $isAdmin = false;
+        $isAdmin = true;
         if($isAdmin)
         {
             //obtain vendors from database
