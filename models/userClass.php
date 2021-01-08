@@ -35,8 +35,7 @@ class User extends BaseModel
         {
             if($this->addresses == null)
             {
-                $addressesResult = Addresses::findOne('id=' .$this->adressID);
-                $this->addresses = new Adresses($addressesResult);
+                $this->addresses = Address::findOne('id=' .$this->adressID);
             }
             return $this->addresses;
         }

@@ -19,19 +19,19 @@ class accountsController extends Controller
         if(isset($_POST['submit']))
         {
 
-            $firstName = $_POST['firstName'] ?? "";
-            $secondName = $_POST['secondName']  ?? "";
-            $lastName = $_POST['lastName']  ?? "";
-            $email = $_POST['email'];
-            $password = password_hash($_POST['password'],PASSWORD_DEFAULT)  ?? "";
-            $password2 = $_POST['password2']  ?? "";
-            $gender = $_POST['gender']  ?? "";
-            $birthdate = $_POST['birthdate']  ?? "";
+            $firstName      = $_POST['firstName'] ?? "";
+            $secondName     = $_POST['secondName']  ?? "";
+            $lastName       = $_POST['lastName']  ?? "";
+            $email          = $_POST['email'];
+            $password       = password_hash($_POST['password'],PASSWORD_DEFAULT)  ?? "";
+            $password2      = $_POST['password2']  ?? "";
+            $gender         = $_POST['gender']  ?? "";
+            $birthdate      = $_POST['birthdate']  ?? "";
 
-            $street = $_POST['street'] ?? "";
-            $streetNumber = str_replace(' ', '', $_POST['streetNumber'] ?? "");
-            $city = $_POST['city'] ?? "";
-            $zipCode = $_POST['zipCode'] ?? "";
+            $street         = $_POST['street'] ?? "";
+            $streetNumber   = str_replace(' ', '', $_POST['streetNumber'] ?? "");
+            $city           = $_POST['city'] ?? "";
+            $zipCode        = $_POST['zipCode'] ?? "";
 
             $db = $GLOBALS['database'];
 
@@ -50,23 +50,23 @@ class accountsController extends Controller
                         $errorMessage = "Ungültige Eingabe";
                     }
                     else{
-                        $emailResult = Login::findOne('email LIKE'.$db->quote($email));
-                        if(is_array($emailResult))
+                        if(Login::findOne('email LIKE'.$db->quote($email)) !== null)
                         {
                             $errorMessage = "Der Benutzer existiert bereits.";
                         }
                         else
                         {
-                            $adressResult=Address::findOne("street=".$db->quote($street)." AND streetnumber=".$db->quote($streetNumber).
+                            $address = Address::findOne("street=".$db->quote($street)." AND streetnumber=".$db->quote($streetNumber).
                                 " AND city=".$db->quote($city)." AND zipCode=".$db->quote($zipCode));
 
-                            if(is_array($adressResult))
+                            if($address !== null)
                             {
-                                $adressID = $adressResult['id'];
+                                $adressID = $address->id;
                             }
                             else
                             {
-                                $adressData=array('street'=> $street,
+                                $adressData=array(
+                                    'street'=> $street,
                                     'streetNumber' => $streetNumber,
                                     'city' => $city,
                                     'zipCode' => $zipCode);
@@ -76,21 +76,23 @@ class accountsController extends Controller
                             }
 
 
-                            $userData=array('firstName' => $firstName,
-                                'secondName' => $secondName,
-                                'lastName' => $lastName,
-                                'gender' => $gender,
-                                'birthDate' => $birthdate,
-                                'addressID' => $adressID);
+                            $userData = array(
+                                                'firstName' => $firstName,
+                                                'secondName' => $secondName,
+                                                'lastName' => $lastName,
+                                                'gender' => $gender,
+                                                'birthDate' => $birthdate,
+                                                'addressID' => $adressID);
                             $user = new User($userData);
                             $user->save();
                             $user->id;
 
                             $validated = true;
-                            $enabled = true;
+                            $enabled   = true;
                             $failedLoginCount = 0;
 
-                            $loginData = array('validated' => $validated,
+                            $loginData = array(
+                                                'validated' => $validated,
                                                 'enabled' => $enabled,
                                                 'email' => $email,
                                                 'failedLoginCount' => $failedLoginCount,
