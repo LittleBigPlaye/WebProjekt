@@ -8,6 +8,6 @@
     <input type="password" id="password" name="user_password">
 
     <input type="submit" name="submit" value="Anmelden"/>
-    <p>Sie haben noch keinen Account? <br><a href="index.php?c=pages&a=register">Hier registrieren!</a></p>
+    <p>Sie haben noch keinen Account? <br><a href="index.php?c=accounts&a=register">Hier registrieren!</a></p>
   </form>
 </div>

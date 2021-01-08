@@ -9,7 +9,7 @@ namespace myf\models;
 
 use myf\core\BaseModel as BaseModel;
 
-class userClass
+class User extends BaseModel
 {
     const TABLENAME = '`users`';
 
@@ -35,8 +35,7 @@ class userClass
         {
             if($this->addresses == null)
             {
-                $addressesResult = Addresses::findOne('id=' .$this->adressID);
-                $this->addresses = new Adresses($addressesResult);
+                $this->addresses = Address::findOne('id=' .$this->adressID);
             }
             return $this->addresses;
         }

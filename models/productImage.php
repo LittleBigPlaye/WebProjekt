@@ -27,8 +27,7 @@ class ProductImage extends BaseModel
         {
             if($this->image == null)
             {
-                $imageResult = Image::findOne('id=' . $this->imagesID);
-                $this->image = new Image($imageResult);
+                $this->image = Image::findOne('id=' . $this->imagesID);
             }
             if($key == 'path')
             {
@@ -72,6 +71,7 @@ class ProductImage extends BaseModel
         if($this->image == null)
         {   
             $this->image = new Image(array());
+            echo 'moin';
         }
         $this->image->imageURL  = $imageURL;
         $this->image->imageName = $imageName;
@@ -81,13 +81,10 @@ class ProductImage extends BaseModel
     {
         parent::delete($errors);
 
-        $imageResult = Image::findOne('id=' . $this->imagesID);
-        $this->image = new Image($imageResult);
+        $this->image = Image::findOne('id=' . $this->imagesID);
         if($this->image != null)
         {
             $numberOfImageReferences = count(ProductImage::find('imagesID=' . $this->imagesID));
-            echo $numberOfImageReferences;
-            //delete image, if no references are left
             if($numberOfImageReferences < 1)
             {
                 $this->image->delete($errors);

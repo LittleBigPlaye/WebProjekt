@@ -23,5 +23,6 @@ class ordersController extends Controller
         }
 
         $this->setParam('products', $products);
+        $this->setParam('currentPosition', 'shoppingcart');
     }
 }

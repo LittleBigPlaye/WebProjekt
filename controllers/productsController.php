@@ -12,105 +12,19 @@ namespace myf\controller;
     public function actionNew()
      {
         $errorMessage = '';
-        //TODO check if user is logged in and is admin
-        //obtain vendors from database
-        $this->setParam('vendors', $this->loadVendors());
-
-        //obtain categories from database
-        $this->setParam('categories', $this->loadCategories());
-
-        //check, if form has been submitted
-        if(isset($_POST['submit']))
+        $isAdmin = true;
+        if($isAdmin)
         {
-            //get inputs from form
-            $name        = $_POST['productName'] ?? '';
-            $catchPhrase = $_POST['catchPhrase'] ?? '';
-            $description = $_POST['productDescription'] ?? '';
-            $price       = $_POST['productPrice'] ?? '';
-            $vendor      = $_POST['vendor'] ?? '';
-            $category    = $_POST['category'] ?? '';
-            $isHidden    = isset($_POST['isHidden']) ? true : false;
-
-            //check, if inputs are valid
-            if(!empty($name) && !empty($description) && \myf\core\validateNumberInput($price, 2) && !empty($vendor) && !empty($category))
-            {
-                $db = $GLOBALS['database'];
-
-                //check if product with same name already exists
-                if(is_array(\myf\models\Product::findOne('productName LIKE ' . $db->quote($name))))
-                {
-                    $errorMessage = 'Ein Produkt mit dem angegebenen Namen existiert bereits!';
-                }
-                else
-                {
-                    //check if there are files to be uploaded
-                    $fileNames = array_filter($_FILES['productImages']['name']);
-                    if(!empty($fileNames))
-                    {
-                        $this->validateImages($name, 'productImages', $errorMessage);
-
-                        if(empty($errorMessage))
-                        {
-                            //build new product
-                            $product = new \myf\models\Product(array());
-                            $product->productName        = $name;
-                            $product->catchPhrase        = $catchPhrase;
-                            $product->productDescription = $description;
-                            $product->vendorID           = $vendor;
-                            $product->categoryID         = $category;
-                            $product->standardPrice      = $price;
-                            $product->isHidden           = $isHidden;
-
-                            //add images
-                            $this->addImagesToProduct($product, 'productImages');
-
-                            //insert product into database
-                            $product->save();
-
-                            //redirect to product page
-                            header('Location: ?c=products&a=view&pid=' . $product->id);
-                        }
-                    }
-                    else
-                    {
-                        $errorMessage = 'Bitte wählen Sie mindestens ein Bild zum Upload für das Produkt aus!';
-                    }
-                }
-            }
-            else
-            {
-                $errorMessage = 'Bitte füllen Sie alle Felder aus!';
-            }
-        }
-        $this->setParam('errorMessage', $errorMessage);
-     }
-
-     
-     public function actionEdit()
-     {
-        $errorMessage = '';
-        //TODO check if user is logged in and is admin
-        //check if product exists
-        $productID = $_GET['pid'] ?? null;
-        $productResult = null;
-        if($productID != null && is_numeric($productID))
-        {
-            $productResult = \myf\models\Product::findOne('id=' . $productID);
-        }
-        if($productResult != null && is_array($productResult))
-        {
-            //load Product
-            $product = new \myf\models\Product($productResult);
-
             //obtain vendors from database
-            $this->setParam('vendors', $this->loadVendors());
+            $this->setParam('vendors', \myf\models\Vendor::find());
 
             //obtain categories from database
-            $this->setParam('categories', $this->loadCategories());
-            $this->setParam('product', $product);
-            //get inputs from from
+            $this->setParam('categories', \myf\models\Category::find());
+
+            //check, if form has been submitted
             if(isset($_POST['submit']))
             {
+                //get inputs from form
                 $name        = $_POST['productName'] ?? '';
                 $catchPhrase = $_POST['catchPhrase'] ?? '';
                 $description = $_POST['productDescription'] ?? '';
@@ -119,78 +33,173 @@ namespace myf\controller;
                 $category    = $_POST['category'] ?? '';
                 $isHidden    = isset($_POST['isHidden']) ? true : false;
 
-                //check if inputs are valid
+                //check, if inputs are valid
                 if(!empty($name) && !empty($description) && \myf\core\validateNumberInput($price, 2) && !empty($vendor) && !empty($category))
                 {
                     $db = $GLOBALS['database'];
+
                     //check if product with same name already exists
-                    if($name != $product->productName && is_array(\myf\models\Product::findOne('productName LIKE ' . $db->quote($name))))
+                    if(\myf\models\Product::findOne('productName LIKE ' . $db->quote($name)) !== null)
                     {
                         $errorMessage = 'Ein Produkt mit dem angegebenen Namen existiert bereits!';
                     }
                     else
                     {
-                        //TODO: image handling
-                        //go through all images of the current product
-                        foreach($product->images as $productImage)
-                        {
-                            //TODO: check if image should be deleted
-                            $deleteImage = isset($_POST['deleteImage' . $productImage->id]) ? true : false;
-                            if($deleteImage)
-                            {
-                                $productImage->delete();
-                            }
-                            else
-                            {
-                                //change image title
-                                $newTitle = $_POST['imageName' . $productImage->id] ?? $productImage->name;
-                                $productImage->image->imageName = $newTitle;
-                                $productImage->image->save();
-                            }
-                        }
-
                         //check if there are files to be uploaded
                         $fileNames = array_filter($_FILES['productImages']['name']);
                         if(!empty($fileNames))
                         {
-                            //check if all images are okay
                             $this->validateImages($name, 'productImages', $errorMessage);
+
                             if(empty($errorMessage))
                             {
+                                //build new product
+                                $product = new \myf\models\Product(array());
+                                $product->productName        = $name;
+                                $product->catchPhrase        = $catchPhrase;
+                                $product->productDescription = $description;
+                                $product->vendorID           = $vendor;
+                                $product->categoryID         = $category;
+                                $product->standardPrice      = $price;
+                                $product->isHidden           = $isHidden;
+
+                                //add images
                                 $this->addImagesToProduct($product, 'productImages');
+
+                                //insert product into database
+                                $product->save();
+
+                                //redirect to product page
+                                header('Location: ?c=products&a=view&pid=' . $product->id);
                             }
                         }
-
-                        if(empty($errorMessage))
+                        else
                         {
-                            //apply changes to product
-                            $product->productName        = $name;
-                            $product->catchPhrase        = $catchPhrase;
-                            $product->productDescription = $description;
-                            $product->vendorID           = $vendor;
-                            $product->categoryID         = $category;
-                            $product->standardPrice      = $price;
-                            $product->isHidden           = $isHidden;
-
-                            //save product to database
-                            $product->save();
-
-                            //redirect to product page
-                            header('Location: ?c=products&a=view&pid=' . $product->id);
+                            $errorMessage = 'Bitte wählen Sie mindestens ein Bild zum Upload für das Produkt aus!';
                         }
                     }
                 }
                 else
                 {
-                    $errorMessage = 'Bitte alle Felder ausfüllen!';
+                    $errorMessage = 'Bitte füllen Sie alle Felder aus!';
                 }
             }
             $this->setParam('errorMessage', $errorMessage);
         }
         else
         {
-            //TODO: direct to 404 page
-            die();
+            header('Location: index.php?c=errors&a=403');
+        }
+     }
+
+     
+     public function actionEdit()
+     {
+        $errorMessage = '';
+        $isAdmin = true;
+        if($isAdmin)
+        {
+            //check if product exists
+            $productID = $_GET['pid'] ?? null;
+            $product = null;
+            if($productID != null && is_numeric($productID))
+            {
+                $product = \myf\models\Product::findOne('id=' . $productID);
+            }
+            if($product !== null)
+            {
+                //obtain vendors from database
+                $this->setParam('vendors', \myf\models\Vendor::find());
+
+                //obtain categories from database
+                $this->setParam('categories', \myf\models\Category::find());
+                $this->setParam('product', $product);
+                
+                //get inputs from from
+                if(isset($_POST['submit']))
+                {
+                    $name        = $_POST['productName'] ?? '';
+                    $catchPhrase = $_POST['catchPhrase'] ?? '';
+                    $description = $_POST['productDescription'] ?? '';
+                    $price       = $_POST['productPrice'] ?? '';
+                    $vendor      = $_POST['vendor'] ?? '';
+                    $category    = $_POST['category'] ?? '';
+                    $isHidden    = isset($_POST['isHidden']) ? true : false;
+
+                    //check if inputs are valid
+                    if(!empty($name) && !empty($description) && \myf\core\validateNumberInput($price, 2) && !empty($vendor) && !empty($category))
+                    {
+                        $db = $GLOBALS['database'];
+                        //check if product with same name already exists
+                        if(($name != $product->productName) && (\myf\models\Product::findOne('productName LIKE ' . $db->quote($name)) !== null))
+                        {
+                            $errorMessage = 'Ein Produkt mit dem angegebenen Namen existiert bereits!';
+                        }
+                        else
+                        {
+                            //go through all images of the current product
+                            foreach($product->images as $productImage)
+                            {
+                                $deleteImage = isset($_POST['deleteImage' . $productImage->id]) ? true : false;
+                                if($deleteImage)
+                                {
+                                    $productImage->delete();
+                                }
+                                else
+                                {
+                                    //change image title
+                                    $newTitle = $_POST['imageName' . $productImage->id] ?? $productImage->name;
+                                    $productImage->image->imageName = $newTitle;
+                                    $productImage->image->save();
+                                }
+                            }
+
+                            //check if there are files to be uploaded
+                            $fileNames = array_filter($_FILES['productImages']['name']);
+                            if(!empty($fileNames))
+                            {
+                                //check if all images are okay
+                                $this->validateImages($name, 'productImages', $errorMessage);
+                                if(empty($errorMessage))
+                                {
+                                    $this->addImagesToProduct($product, 'productImages');
+                                }
+                            }
+
+                            if(empty($errorMessage))
+                            {
+                                //apply changes to product
+                                $product->productName        = $name;
+                                $product->catchPhrase        = $catchPhrase;
+                                $product->productDescription = $description;
+                                $product->vendorID           = $vendor;
+                                $product->categoryID         = $category;
+                                $product->standardPrice      = $price;
+                                $product->isHidden           = $isHidden;
+
+                                //save product to database
+                                $product->save();
+
+                                //redirect to product page
+                                header('Location: ?c=products&a=view&pid=' . $product->id);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        $errorMessage = 'Bitte alle Felder ausfüllen!';
+                    }
+                }
+                $this->setParam('errorMessage', $errorMessage);
+            }
+            else
+            {
+                header('Location: index.php?c=errors&a=404');
+            }
+        }
+        else
+        {
+            header('Location: index.php?c=errors&a=403');
         }
      }
 
@@ -271,36 +280,30 @@ namespace myf\controller;
             // get product id from url
             $productID = $_GET['pid'];
 
-            if(isset($_GET['IDForCart']) && is_numeric($_GET['IDForCart']))
-            {
-                $this->addToCart($_GET['IDForCart']);
-            }
-
             //TODO replace isAdmin as soon as the login is done
             $isAdmin = true;
             $whereClause = $isAdmin ? '' : ' AND isHidden=0';
             // try to find product with id in database
-            $productResult = \myf\models\Product::findOne('id=' . $productID . $whereClause);
+            $product = \myf\models\Product::findOne('id=' . $productID . $whereClause);
 
             // check if product has been found
-            if(is_array($productResult))
+            if($product !== null)
             {
-                // create new product
-                $product = new \myf\models\Product($productResult);
-
+                if(isset($_GET['IDForCart']) && is_numeric($_GET['IDForCart']))
+                {
+                    $this->addToCart($_GET['IDForCart']);
+                }
                 // save product temporary in controller to have access from view
                 $this->setParam('product', $product);
             }
             else
             {
-                // TODO - Redirect to 404 page
-                echo "Produkt nicht gefunden";
+                header('Location: index.php?c=errors&a=404');
             }
          }
          else
          {
-             //TODO - Redirect to 404 page
-             die();
+            header('Location: index.php?c=errors&a=404');
          }
      }
   
@@ -333,11 +336,11 @@ namespace myf\controller;
     public function actionSearch()
     {
         //obtain vendors from database
-        $vendors = $this->loadVendors();
+        $vendors = \myf\models\Vendor::find();
         $this->setParam('vendors', $vendors);
 
         //obtain categories from database
-        $categories = $this->loadCategories();
+        $categories = \myf\models\Category::find();
         $this->setParam('categories', $categories);
 
         //TODO: replace $isAdmin as soon as login is done
@@ -490,28 +493,6 @@ namespace myf\controller;
         }       
     }
 
-    private function loadVendors()
-    {
-        $vendorResults = \myf\models\Vendor::find();
-            $vendors = [];
-            foreach($vendorResults as $result)
-            {
-                array_push($vendors, new \myf\models\Vendor($result));
-            }
-        return $vendors;
-    }
-
-    private function loadCategories()
-    {
-        $categoryResults = \myf\models\Category::find();
-            $categories = [];
-            foreach($categoryResults as $result)
-            {
-                array_push($categories, new \myf\models\Category($result));
-            }
-        return $categories;
-    }
-
     private function calculateNumberOfProductPages($where = '')
     {
         //calculate the number of pages
@@ -559,21 +540,13 @@ namespace myf\controller;
         $startIndex = $this->calculateStartIndex($numberOfPages, $currentPage);
 
         //get products from database
-        $productResults = \myf\models\Product::findRange(($currentPage-1) * PRODUCTS_PER_PAGE, PRODUCTS_PER_PAGE, $where, $orderBy);
-        if(is_array($productResults))
-        {
-            $products = [];
-            foreach($productResults as $result)
-            {
-                array_push($products, new \myf\models\Product($result));
-            }
-            return $products;
-        }
+        $products = \myf\models\Product::findRange(($currentPage-1) * PRODUCTS_PER_PAGE, PRODUCTS_PER_PAGE, $where, $orderBy);
+        return $products;
     }
 
     public function addToCart($productID)
      {
-            if(is_array(\myf\models\Product::findOne('id=' . $productID)))
+            if(\myf\models\Product::findOne('id=' . $productID) !== null)
             {
                 if(!isset($_SESSION['cartInfos']))
                 {

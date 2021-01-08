@@ -251,7 +251,7 @@ abstract class BaseModel
     public static function find($where = '')
     {
         $db  = $GLOBALS['database'];
-        $result = null;
+        $results = array();
 
         try
         {
@@ -263,14 +263,19 @@ abstract class BaseModel
                 $sql .= ' WHERE ' . $where;
             }
             $sql .= ';';
-            $result = $db->query($sql)->fetchAll();
+            $resultSets = $db->query($sql)->fetchAll();
+            $currentClass = get_called_class();
+            foreach($resultSets as $resultSet)
+            {
+                array_push($results, new $currentClass($resultSet));
+            }
         }
         catch(\PDOException $e)
         {
             die('Select statment failed: ' . $e->getMessage());
         }
 
-        return $result;
+        return $results;
     }
 
 
@@ -293,7 +298,12 @@ abstract class BaseModel
                     $sql.=' WHERE ' . $where;
                 }
                 $sql .= ';';
-                $result = $db->query($sql)->fetch();
+                $resultSet = $db->query($sql)->fetch();
+                $currentClass = get_called_class();
+                if(is_array($resultSet))
+                {
+                    $result = new $currentClass($resultSet);
+                }
 
         }
         catch(\PDOException $e)
@@ -306,7 +316,7 @@ abstract class BaseModel
     public static function findRange($offset, $length, $where='', $orderBy='')
     {
         $db  = $GLOBALS['database'];
-        $result = null;
+        $results = array();
 
         try
         {
@@ -323,14 +333,19 @@ abstract class BaseModel
             }
 
             $sql .= ' LIMIT ' . $offset . ', ' . $length . ';';
-            $result = $db->query($sql)->fetchAll();
+            $resultSets = $db->query($sql)->fetchAll();
+            $currentClass = get_called_class();
+            foreach($resultSets as $resultSet)
+            {
+                array_push($results, new $currentClass($resultSet));
+            }
         }
         catch(\PDOException $e)
         {
             die('Select statment failed: ' . $e->getMessage());
         }
 
-        return $result;
+        return $results;
     }
 
     /**

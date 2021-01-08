@@ -69,5 +69,5 @@
 <p><b>Marke: </b><?=htmlspecialchars($product->vendor->vendorName) ?></p>
 <p><b>Typ: </b><?=htmlspecialchars($product->category->categoryName) ?></p>
 <a href="?c=products&a=edit&pid=<?= htmlspecialchars($product->id)?>">Produkt bearbeiten</a>
-<br>
-<a href="?c=products&a=view&pid=<?= htmlspecialchars($product->id)?>&IDForCart=<?= htmlspecialchars($product->id) ?>">In den Wareknkorb</a>
+<a href="?c=products&a=view&pid=<?= htmlspecialchars($product->id)?>&IDForCart=<?= htmlspecialchars($product->id) ?>">
+    <img src="assets\images\icons\addToCartButton.png" alt="Zum Warenkorb hinzufügen" /></a>
