@@ -2,6 +2,7 @@
     $products = $products ?? array();
     $categories = $categories ?? array();
     $vendors = $vendors ?? array();
+    
 ?>
 
 <div class="formWrapper">
@@ -107,6 +108,7 @@
 
 <section class="cards"> 
 <?php foreach ($products as $product) : ?>
+    
     <div class="card">
         <div class="container">
         <img src="
@@ -131,6 +133,9 @@
     </div>
 <?php endforeach ?>
 </section>
+
+
+
 
 <br>
 <?=$numberOfPages?>

@@ -34,8 +34,7 @@ class Product extends BaseModel
         {
             if($this->vendor == null)
             {
-                $vendorResult = Vendor::findOne('id=' . $this->vendorID);
-                $this->vendor = new Vendor($vendorResult);
+                $this->vendor = Vendor::findOne('id=' . $this->vendorID);
             }
             return $this->vendor;
         }
@@ -44,25 +43,16 @@ class Product extends BaseModel
         {
             if($this->category == null)
             {
-                $categoryResult = Category::findOne('id=' . $this->categoryID);
-                $this->category = new Category($categoryResult);
+                $this->category = Category::findOne('id=' . $this->categoryID);
             }
             return $this->category;
         }
         //relation to table "productImages"
         else if($key == 'images')
         {
-            if($this->productImages == null)
+            if(count($this->productImages) === 0)
             {
-                $imageResults = ProductImage::find('productsID=' . $this->id);
-                if(count($imageResults) > 0)
-                {
-                    $this->productImages = array();
-                    foreach($imageResults as $result)
-                    {
-                        array_push($this->productImages, new ProductImage($result));
-                    }    
-                }
+                $this->productImages = ProductImage::find('productsID=' . $this->id);
             }
             return $this->productImages;
         }
@@ -94,8 +84,10 @@ class Product extends BaseModel
 
     public function addImage($imagePath) 
     {
-        if(is_array(Image::findOne('imageURL="' . $imagePath . '"')))
+        if(Image::findOne('imageURL="' . $imagePath . '"') !== null)
         {
+            echo 'geht net';
+            exit(1);
             return false;
         }
         else

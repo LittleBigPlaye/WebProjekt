@@ -38,9 +38,7 @@ class Login extends BaseModel
         {
             if($this->user == null)
             {
-                $userResult = User::findOne('id=' .$this->userID);
-                $this->user = new User($userResult);
-
+                $this->user = User::findOne('id=' .$this->userID);
             }
             return $this->user;
         }

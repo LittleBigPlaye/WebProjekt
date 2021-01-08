@@ -16,10 +16,10 @@ namespace myf\controller;
         if($isAdmin)
         {
             //obtain vendors from database
-            $this->setParam('vendors', $this->loadVendors());
+            $this->setParam('vendors', \myf\models\Vendor::find());
 
             //obtain categories from database
-            $this->setParam('categories', $this->loadCategories());
+            $this->setParam('categories', \myf\models\Category::find());
 
             //check, if form has been submitted
             if(isset($_POST['submit']))
@@ -39,7 +39,7 @@ namespace myf\controller;
                     $db = $GLOBALS['database'];
 
                     //check if product with same name already exists
-                    if(is_array(\myf\models\Product::findOne('productName LIKE ' . $db->quote($name))))
+                    if(\myf\models\Product::findOne('productName LIKE ' . $db->quote($name)) !== null)
                     {
                         $errorMessage = 'Ein Produkt mit dem angegebenen Namen existiert bereits!';
                     }
@@ -101,22 +101,20 @@ namespace myf\controller;
         {
             //check if product exists
             $productID = $_GET['pid'] ?? null;
-            $productResult = null;
+            $product = null;
             if($productID != null && is_numeric($productID))
             {
-                $productResult = \myf\models\Product::findOne('id=' . $productID);
+                $product = \myf\models\Product::findOne('id=' . $productID);
             }
-            if($productResult != null && is_array($productResult))
+            if($product !== null)
             {
-                //load Product
-                $product = new \myf\models\Product($productResult);
-
                 //obtain vendors from database
-                $this->setParam('vendors', $this->loadVendors());
+                $this->setParam('vendors', \myf\models\Vendor::find());
 
                 //obtain categories from database
-                $this->setParam('categories', $this->loadCategories());
+                $this->setParam('categories', \myf\models\Category::find());
                 $this->setParam('product', $product);
+                
                 //get inputs from from
                 if(isset($_POST['submit']))
                 {
@@ -133,7 +131,7 @@ namespace myf\controller;
                     {
                         $db = $GLOBALS['database'];
                         //check if product with same name already exists
-                        if($name != $product->productName && is_array(\myf\models\Product::findOne('productName LIKE ' . $db->quote($name))))
+                        if(($name != $product->productName) && (\myf\models\Product::findOne('productName LIKE ' . $db->quote($name)) !== null))
                         {
                             $errorMessage = 'Ein Produkt mit dem angegebenen Namen existiert bereits!';
                         }
@@ -286,14 +284,11 @@ namespace myf\controller;
             $isAdmin = true;
             $whereClause = $isAdmin ? '' : ' AND isHidden=0';
             // try to find product with id in database
-            $productResult = \myf\models\Product::findOne('id=' . $productID . $whereClause);
+            $product = \myf\models\Product::findOne('id=' . $productID . $whereClause);
 
             // check if product has been found
-            if(is_array($productResult))
+            if($product !== null)
             {
-                // create new product
-                $product = new \myf\models\Product($productResult);
-
                 if(isset($_GET['IDForCart']) && is_numeric($_GET['IDForCart']))
                 {
                     $this->addToCart($_GET['IDForCart']);
@@ -341,11 +336,11 @@ namespace myf\controller;
     public function actionSearch()
     {
         //obtain vendors from database
-        $vendors = $this->loadVendors();
+        $vendors = \myf\models\Vendor::find();
         $this->setParam('vendors', $vendors);
 
         //obtain categories from database
-        $categories = $this->loadCategories();
+        $categories = \myf\models\Category::find();
         $this->setParam('categories', $categories);
 
         //TODO: replace $isAdmin as soon as login is done
@@ -498,28 +493,6 @@ namespace myf\controller;
         }       
     }
 
-    private function loadVendors()
-    {
-        $vendorResults = \myf\models\Vendor::find();
-            $vendors = [];
-            foreach($vendorResults as $result)
-            {
-                array_push($vendors, new \myf\models\Vendor($result));
-            }
-        return $vendors;
-    }
-
-    private function loadCategories()
-    {
-        $categoryResults = \myf\models\Category::find();
-            $categories = [];
-            foreach($categoryResults as $result)
-            {
-                array_push($categories, new \myf\models\Category($result));
-            }
-        return $categories;
-    }
-
     private function calculateNumberOfProductPages($where = '')
     {
         //calculate the number of pages
@@ -567,21 +540,13 @@ namespace myf\controller;
         $startIndex = $this->calculateStartIndex($numberOfPages, $currentPage);
 
         //get products from database
-        $productResults = \myf\models\Product::findRange(($currentPage-1) * PRODUCTS_PER_PAGE, PRODUCTS_PER_PAGE, $where, $orderBy);
-        if(is_array($productResults))
-        {
-            $products = [];
-            foreach($productResults as $result)
-            {
-                array_push($products, new \myf\models\Product($result));
-            }
-            return $products;
-        }
+        $products = \myf\models\Product::findRange(($currentPage-1) * PRODUCTS_PER_PAGE, PRODUCTS_PER_PAGE, $where, $orderBy);
+        return $products;
     }
 
     public function addToCart($productID)
      {
-            if(is_array(\myf\models\Product::findOne('id=' . $productID)))
+            if(\myf\models\Product::findOne('id=' . $productID) !== null)
             {
                 if(!isset($_SESSION['cartInfos']))
                 {
