@@ -50,7 +50,7 @@
                   <input type="radio" id="divers" value="u" name="gender"><label for="divers" class="light">Divers</label><br><br>
                   <br>
                   <label>Geburtstag:</label>
-                  <input class="input_register1" type="date" id="date" name="birthdate">
+                  <input class="input_register1" type="date" id="birthdate" name="birthdate">
                   <br>
 
 

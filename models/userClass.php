@@ -9,7 +9,7 @@ namespace myf\models;
 
 use myf\core\BaseModel as BaseModel;
 
-class userClass
+class User extends BaseModel
 {
     const TABLENAME = '`users`';
 

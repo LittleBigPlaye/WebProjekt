@@ -15,7 +15,6 @@ class accountsController extends Controller
 
     public function actionRegister()
     {
-        $errorMessage = "Der Benutzer existiert bereits.";
 
         if(isset($_POST['submit']))
         {
@@ -63,7 +62,7 @@ class accountsController extends Controller
 
                             if(is_array($adressResult))
                             {
-                                $adressID = $adressResult->id;
+                                $adressID = $adressResult['id'];
                             }
                             else
                             {
@@ -81,7 +80,7 @@ class accountsController extends Controller
                                 'secondName' => $secondName,
                                 'lastName' => $lastName,
                                 'gender' => $gender,
-                                'birthdate' => $birthdate,
+                                'birthDate' => $birthdate,
                                 'addressID' => $adressID);
                             $user = new User($userData);
                             $user->save();
@@ -94,7 +93,7 @@ class accountsController extends Controller
                             $loginData = array('validated' => $validated,
                                                 'enabled' => $enabled,
                                                 'email' => $email,
-                                                'failedLoginCoun' => $failedLoginCount,
+                                                'failedLoginCount' => $failedLoginCount,
                                                 'passwordHash' => $password,
                                                 'userID' => $user->id);
                             $login = new Login($loginData);
