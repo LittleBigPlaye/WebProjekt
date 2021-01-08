@@ -70,7 +70,7 @@
 <p><b>Typ: </b><?=htmlspecialchars($product->category->categoryName) ?></p>
 <a href="?c=products&a=edit&pid=<?= htmlspecialchars($product->id)?>">Produkt bearbeiten</a>
 <form method="POST">
-    <button type="submit" name="addToCart" value="<?=$product->id?>">In den Warenkorb</button>
+    <button class="iconButton" type="submit" name="addToCart" value="<?=$product->id?>"><img src="assets\images\icons\shopping_cart.svg"/></button>
 </form>
 <!-- <a href="?c=products&a=view&pid=<?= htmlspecialchars($product->id)?>&IDForCart=<?= htmlspecialchars($product->id) ?>">
     <img src="assets\images\icons\addToCartButton.png" alt="Zum Warenkorb hinzufügen" /></a> -->

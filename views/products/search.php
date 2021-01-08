@@ -130,7 +130,7 @@
             <b><?= htmlspecialchars($product->standardPrice . ' €')?></b><br>
             <a href="?c=products&a=view&pid=<?= htmlspecialchars($product->id) ?>">Anzeigen</a>
             <form method="POST">
-                <button type="submit" name="addToCart" value="<?=$product->id?>">In den Warenkorb</button>
+                <button class="iconButton" type="submit" name="addToCart" value="<?=$product->id?>"><img src="assets\images\icons\shopping_cart.svg"/></button>
             </form>
         </div>
     </div>

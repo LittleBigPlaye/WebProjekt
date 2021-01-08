@@ -783,6 +783,23 @@ input[type=number] {
     max-width: 16.66%;
 }
 
+.iconButton {
+    background-color: #eb7d00;
+    border-radius: 50px;
+    border: none;
+    height: 60px;
+    width: 60px;
+    padding: 5px
+}
+
+.iconButton:hover {
+    background-color: grey;
+}
+
+.iconButton img {
+    width: 70%;
+}
+
 
 /* error page */
 
