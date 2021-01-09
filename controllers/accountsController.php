@@ -116,11 +116,63 @@ class accountsController extends Controller
 
     public function actionAdminusermanagement()
     {
-        $users = User::find();
-        $this->setParam('users',$users);
 
-        $logins = Login::find();
-        $this->setParam('logins',$logins);
+        if(isset($_POST['submit']))
+        {
+            $enabled =$_POST['enabled']; //select
+            $validated = $_POST['validated']; //select
+            $passwordReset = isset($_POST['validated']); //checkbox
+            $loginID = $_POST['user'];
+            $userRole = $_POST['role'];
+
+            $loginUpdate = Login::findOne('userID='.$loginID);
+
+            if($enabled === 'enabled')
+            {
+                $loginUpdate->enabled = 1;
+            }
+            else
+            {
+                $loginUpdate->enabled = 0;
+            }
+
+            if($validated === 'validated')
+            {
+                $loginUpdate->validated = 1;
+            }
+            else
+            {
+                $loginUpdate->validated = 0;
+            }
+
+            if($passwordReset === true)
+            {
+                //TODO PW setzen
+            }
+
+            if($userRole === 'admin')
+            {
+                $loginUpdate->userID->role = 'admin';
+            }
+            else
+            {
+                $loginUpdate->userID->role = 'user';
+            }
+
+            var_dump($loginUpdate);
+
+            $this->setParam('logins', $loginUpdate);
+            $loginUpdate->save();
+
+        }
+        else
+        {
+            $users = User::find();
+            $logins = Login::find();
+
+            $this->setParam('users',$users);
+            $this->setParam('logins',$logins);
+        }
 
     }
 
