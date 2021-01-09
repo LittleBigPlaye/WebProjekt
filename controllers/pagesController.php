@@ -103,7 +103,7 @@
              if(password_verify($password, $hashed_password)){
                  //TODO: Die Session wird bereits in der index.php gestartet, hier muss eine Session Variable gesetzt werden
                  //session_start();
-                 //TODO: Bitte anschauen, was die Fungion loggedIn im Controller macht und korrigieren
+                 //TODO: Bitte anschauen, was die Funktion loggedIn im Controller macht und korrigieren
                  $this->loggedIn();
              };
          }
