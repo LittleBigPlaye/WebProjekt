@@ -58,4 +58,18 @@ abstract class Controller
         $this->actionName       = null;
         $this->params           = null;
     }
+
+    protected function addToCart($productID)
+     {
+            if(\myf\models\Product::findOne('id=' . $productID) !== null)
+            {
+                if(!isset($_SESSION['cartInfos']))
+                {
+                    $_SESSION['cartInfos']= array(); //erzeugt ein leeres Array
+                }
+
+                array_push($_SESSION['cartInfos'], $productID);
+            }
+
+     }
 }

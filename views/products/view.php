@@ -20,15 +20,10 @@
                 echo '<div class=gallerySlide>';
                 // image slide
                 echo '<img src="';
-                if(file_exists($image->path))
-                {
+                
                     echo htmlspecialchars($image->path);
-                }
-                else
-                {
-                    echo htmlspecialchars(FALLBACK_IMAGE);
-                }
-                echo '"title="' . $image->name .'">';
+                
+                echo '"alt="' . $image->name .'">';
                 echo '</div>';
             }
 
@@ -38,15 +33,8 @@
                 // image thumbnail
                 echo '<div class=galleryThumbnail>';
                 echo '<img src="';
-                if(file_exists($image->path))
-                {
-                    echo htmlspecialchars($image->path);
-                }
-                else
-                {
-                    echo htmlspecialchars(FALLBACK_IMAGE);
-                }
-                echo '"title="' . $image->name .'" onclick="setGalleryPosition('. $key .')">';
+                echo htmlspecialchars($image->path);
+                echo '"title="' . htmlspecialchars($image->name) .'" onclick="setGalleryPosition('. $key .')">';
                 echo '</div>';
             }
             echo '</div>';
