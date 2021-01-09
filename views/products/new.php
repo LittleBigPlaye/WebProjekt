@@ -9,12 +9,12 @@
 
         <h1>Neues Produkt anlegen</h1>
 
-        <?php if(isset($errorMessage) && !empty($errorMessage)) : ?>
+        <?php foreach($errorMessages as $message) : ?>
             <div class="errorMessage">
                 <span class="messageClose" onclick="this.parentElement.style.display='none';">&times</span>
-                <p><?= $errorMessage ?></p>
+                <?= $message ?>
             </div>
-        <?php endif ?>
+        <? endforeach; ?>
 
 
         <label for="images">Produktbilder</label>
@@ -43,6 +43,7 @@
 
         <label for="vendors">Marke</label>
         <select id="vendor" name="vendor">
+            <option value="-1" <?= !isset($_POST['vendor']) ? 'selected' : ''?>  hidden="hidden" >Marke auswählen</option>
             <?php foreach ($vendors as $vendor) : ?>
                 <option value="<?= $vendor->id ?>" 
                 <?php 
@@ -58,6 +59,7 @@
 
         <label for="vendors">Kategorie</label>
         <select id="category" name="category">
+            <option value="-1" <?= !isset($_POST['category']) ? 'selected' : ''?>  hidden="hidden" >Kategorie auswählen</option>
             <?php foreach ($categories as $category) : ?>
                 <option value="<?= $category->id ?>" 
                     <?php 

@@ -7,9 +7,17 @@
 <h1><?= htmlspecialchars($product->productName ?? '') ?></h1>
 <noscript>
 <div class="warningMessage">
+    <span class="messageClose" onclick="this.parentElement.style.display='none';">&times</span>
     <p>Bitte beachten Sie, dass sie Javascript aktivieren müssen, um von allen komfortfunktionen dieser Seite profitieren zu können!</p>
 </div>
 </noscript>
+
+<?php if(isset($successMessage)) :?>
+    <div class="successMessage">
+        <span class="messageClose" onclick="this.parentElement.style.display='none';">&times</span>
+        <p><?=$successMessage?></p>
+    </div>
+<?php endif ?>
 
 <div class="imageGallery">
     <?php if($product->images != null) : ?>
