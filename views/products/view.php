@@ -44,7 +44,7 @@
 <!-- product text -->
 <div class="productInformation">
     <p><?=htmlspecialchars($product->catchPhrase) ?></p>
-    <p class="description"><?=htmlspecialchars($product->productDescription) ?></p>
+    <p class="description"><?=nl2br(htmlspecialchars($product->productDescription)) ?></p>
     <p><b>Preis:</b> <?=htmlspecialchars($product->standardPrice)?></p>
     <p><b>Marke: </b><?=htmlspecialchars($product->vendor->vendorName) ?></p>
     <p><b>Typ: </b><?=htmlspecialchars($product->category->categoryName) ?></p>
