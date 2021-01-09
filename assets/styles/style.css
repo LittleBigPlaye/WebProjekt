@@ -789,11 +789,14 @@ input[type=number] {
     border: none;
     height: 60px;
     width: 60px;
-    padding: 5px
+    padding: 5px;
+    transition: .1s;
+    outline: none;
 }
 
 .iconButton:hover {
     background-color: grey;
+    transition: .2s;
 }
 
 .iconButton img {
