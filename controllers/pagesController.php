@@ -6,6 +6,8 @@
 
  namespace myf\controller;
 
+ use myf\models\Login;
+
  class PagesController extends \myf\core\controller
  {
     public function actionIndex()
@@ -74,17 +76,37 @@
      {
         $this->setParam('currentPosition', 'login');
         //TODO: store error message
+
+         $db= $GLOBALS['database'];
         $errorMessage = null;
+         //check if form is submitted
+         if(isset($_POST['submit'])) {
+             // Check if email is empty
+             if (empty(trim($_POST["user_email"]))) {
+                 $errorMessage = "Bitte gib eine Email an.";
+             } else {
+                 $email = trim($_POST["user_email"]);
+             }
 
-        //TODO: check if form is submitted
-        
-            //TODO: retrieve input
+             // Check if password is empty
+             if (empty(trim($_POST["user_password"]))) {
+                 $errorMessage = "Bitte gib ein Passwort ein.";
+             } else {
+                 $password = trim($_POST["user_password"]);
+             }
+             //check if user exists
+             if (Login::findOne('email LIKE' . $db->quote($email)) == null) {
+                 $errorMessage = "Es existiert kein Benutzer mit dieser Email";
+             }
+             $login =\myf\models\Login::findOne('email='. $db->quote($email));
+             $hashed_password = $login-> passwordHash;
+             //check if password hash is valid
+             if(password_verify($password, $hashed_password)){
+                 session_start();
+                 $this->loggedIn();
+             };
+         }
 
-            //TODO: validate values
-
-                //TODO: check if user exists
-
-                //TODO: check if password hash is valid
                 
                     //TODO: get current user from Database
             
@@ -97,7 +119,6 @@
 
                 //TODO: increase failed login count, if password is wrong
 
-            //TODO: set error Message, if values are empty
 
             //TODO: set param to prefill input fields
             //$this->setParam('ParamName', $parameter);
