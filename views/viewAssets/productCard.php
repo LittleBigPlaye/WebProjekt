@@ -11,7 +11,7 @@
                 {
                     echo FALLBACK_IMAGE;
                 }
-            ?>" width="400px">
+            ?>">
             <br>
             <form method="POST">
                 <button class="iconButton" type="submit" name="addToCart" value="<?=$product->id?>"><img src="assets\images\icons\shopping_cart.svg"/></button>

@@ -7,12 +7,6 @@
     }
     .logo1 {
         display: inline-block;
-        /* position: inline-block;
-        float: left;
-        margin: 20px;
-        margin-left: 33%;
-        margin-right: 33%;
-        display: block; */
     }
     .logo2 {
         display: none;
@@ -122,6 +116,10 @@
     }
     .imageGallery {
         width: 40%;
+    }
+    .productInformation {
+        margin: 0 auto;
+        width: 40%
     }
     .errorPage img {
         width: 40%;

@@ -12,53 +12,42 @@
 </noscript>
 
 <div class="imageGallery">
-    <?php
-        if($product->images != null)
-        {
-            foreach($product->images as $key => $image)
-            {
-                echo '<div class=gallerySlide>';
-                // image slide
-                echo '<img src="';
-                
-                    echo htmlspecialchars($image->path);
-                
-                echo '"alt="' . $image->name .'">';
-                echo '</div>';
-            }
+    <?php if($product->images != null) : ?>
+        <!-- images -->
+        <?php foreach($product->images as $key => $image) :?>
+            <div class=gallerySlide>
+                <img src="<?=htmlspecialchars($image->path)?>" alt="<?=htmlspecialchars($image->name)?>">
+            </div>
+        <?php endforeach ?>
 
-            echo '<div class="row">';
-            foreach($product->images as $key => $image)
-            {
-                // image thumbnail
-                echo '<div class=galleryThumbnail>';
-                echo '<img src="';
-                echo htmlspecialchars($image->path);
-                echo '"title="' . htmlspecialchars($image->name) .'" onclick="setGalleryPosition('. $key .')">';
-                echo '</div>';
-            }
-            echo '</div>';
-        }
-        else
-        {
-            echo '<div class=gallerySlide>';
-            echo '<img src="';
-            echo htmlspecialchars(FALLBACK_IMAGE);
-            echo '">';
-            echo '</div>';
-        }
-        
-    ?> 
-<script src="assets/javascript/imageGallery.js"></script>
+        <!-- thumbnails -->
+        <div class="row">
+            <?php foreach($product->images as $key => $image) :?>
+                <div class=galleryThumbnail>
+                    <img src="<?=htmlspecialchars($image->path)?>" alt="<?=htmlspecialchars($image->name)?>" onclick="setGalleryPosition(<?=$key?>)">
+                </div>
+            <?php endforeach ?>
+        </div>
+
+    <?php else :?>
+        <div class=gallerySlide>
+        <img src="<?=htmlspecialchars(FALLBACK_IMAGE)?>">
+        </div>
+    <?php endif ?>
+    
+    <script src="assets/javascript/imageGallery.js"></script>
+    <form method="POST">
+            <button class="iconButton" type="submit" name="addToCart" value="<?=$product->id?>"><img src="assets\images\icons\shopping_cart.svg"/></button>
+    </form>
 </div>
-<p><?=htmlspecialchars($product->catchPhrase) ?></p>
-<p><?=htmlspecialchars($product->productDescription) ?></p>
-<p><b>Preis:</b> <?=htmlspecialchars($product->standardPrice)?></p>
-<p><b>Marke: </b><?=htmlspecialchars($product->vendor->vendorName) ?></p>
-<p><b>Typ: </b><?=htmlspecialchars($product->category->categoryName) ?></p>
-<a href="?c=products&a=edit&pid=<?= htmlspecialchars($product->id)?>">Produkt bearbeiten</a>
-<form method="POST">
-    <button class="iconButton" type="submit" name="addToCart" value="<?=$product->id?>"><img src="assets\images\icons\shopping_cart.svg"/></button>
-</form>
-<!-- <a href="?c=products&a=view&pid=<?= htmlspecialchars($product->id)?>&IDForCart=<?= htmlspecialchars($product->id) ?>">
-    <img src="assets\images\icons\addToCartButton.png" alt="Zum Warenkorb hinzufügen" /></a> -->
+
+<!-- product text -->
+<div class="productInformation">
+    <p><?=htmlspecialchars($product->catchPhrase) ?></p>
+    <p class="description"><?=htmlspecialchars($product->productDescription) ?></p>
+    <p><b>Preis:</b> <?=htmlspecialchars($product->standardPrice)?></p>
+    <p><b>Marke: </b><?=htmlspecialchars($product->vendor->vendorName) ?></p>
+    <p><b>Typ: </b><?=htmlspecialchars($product->category->categoryName) ?></p>
+    <a href="?c=products&a=edit&pid=<?= htmlspecialchars($product->id)?>">Produkt bearbeiten</a>
+    
+</div>

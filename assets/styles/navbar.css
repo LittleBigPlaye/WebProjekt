@@ -152,7 +152,7 @@ nav li img {
 @media screen and (min-width: 900px) {
     nav .mainNav {
         display: block;
-        height: 3.55em;
+        height: 3.56em;
         background-color: #191919;
     }
     #navToggleLabel,

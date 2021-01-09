@@ -42,9 +42,14 @@ p {
     margin: 20px;
     display: inline-block;
     height: 350px;
-    width: 500px;
+    max-width: 500px;
     background: #f9f9f9;
+    overflow: hidden;
     ;
+}
+
+.card img {
+    width: 90%;
 }
 
 .card:hover {
@@ -55,66 +60,6 @@ p {
     padding: 40px;
     text-align: center;
 }
-
-
-/*Login css*/
-
-
-/* .cardlogin {
-    box-shadow: 1px 4px 8px 1px lightgrey;
-    transition: 0.3s;
-    border-radius: 10px;
-    margin: 20px;
-    display: inline-block;
-    height: auto;
-    width: 400px;
-    background: #f9f9f9;
-    text-align: center;
-}
-
-.loginlabelinput {
-    text-align: left;
-    padding-left: 70px;
-}
-
-.cardlogin:hover {
-    box-shadow: 1px 8px 16px 1px #444444;
-}
-
-.containerlogin {
-    padding: 40px;
-    text-align: center;
-}
-
-.input_login {
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    font-size: 16px;
-    height: auto;
-    margin: 0;
-    outline: 0;
-    padding: 15px;
-    background-color: #e1e1e1;
-    color: #292c2e;
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
-    margin-bottom: 30px;
-    width: 250px;
-}
-
-.button_login {
-    padding: 19px 39px 18px 39px;
-    color: #FFF;
-    background-color: #eb7d00;
-    font-size: 18px;
-    text-align: center;
-    font-style: normal;
-    border-radius: 5px;
-    width: auto;
-    border: 1px solid #eb7d00;
-    border-width: 1px 1px 3px;
-    box-shadow: 0 -1px 0 rgba(255, 255, 255, 0) inset;
-    margin-bottom: 10px;
-} */
 
 .cardregister {
     box-shadow: 1px 4px 8px 1px lightgrey;
@@ -270,7 +215,7 @@ p {
     color: #e1e1e1;
     background-color: #3333338e;
     position: absolute;
-    bottom: 34px;
+    bottom: 14px;
     width: 100%;
     text-align: center;
 }
@@ -355,19 +300,21 @@ p {
 
 /* Fade Animation */
 
-.fade {
+
+/* .fade {
     animation-name: fade;
     animation-duration: .2s;
-}
+} */
 
-@keyframes fade {
+
+/* @keyframes fade {
     from {
-        opacity: 0.4;
+        opacity: 0.1;
     }
     to {
         opacity: 1;
     }
-}
+} */
 
 
 /* pages list */
@@ -769,6 +716,19 @@ input[type=number] {
     box-sizing: border-box;
     margin: 0 auto;
     width: 95%;
+}
+
+.imageGallery form {
+    text-align: right;
+}
+
+.productInformation {
+    margin: 0 auto;
+    width: 95%
+}
+
+.description {
+    text-align: justify;
 }
 
 .gallerySlide img {
