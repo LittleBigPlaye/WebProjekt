@@ -13,4 +13,5 @@ define('IMAGEPATH'      , 'assets' . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_
 
 define('PRODUCTS_PER_PAGE', 10);
 define('PRODUCT_LIST_RANGE', 5);
+define('SEARCH_LIMIT', 20);
 

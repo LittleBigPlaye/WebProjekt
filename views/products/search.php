@@ -6,20 +6,20 @@
 ?>
 
 <div class="formWrapper">
-    <form class="searchForm" action="index.php?c=products&a=search" method="Get">
+    <form class="searchForm" method="Get">
         <input type="hidden" name="c" value="products" />
         <input type="hidden" name="a" value="search" />
 
         <!-- hidden inputs to preserve get parameters of filter form -->
         <?php foreach($vendors as $vendor) : ?>
-            <?php if(isset($_GET['v'.$vendor->id])) : ?>
-                <input type="hidden" name="v<?=$vendor->id?>" value="<?=$vendor->id?>"/>
+            <?php if(isset($_GET['ven'.$vendor->id])) : ?>
+                <input type="hidden" name="ven<?=$vendor->id?>" value="<?=$vendor->id?>"/>
             <?php endif ?>
         <?php endforeach ?>
 
         <?php foreach($categories as $category) : ?>
-            <?php if(isset($_GET['c'.$category->id])) : ?>
-                <input type="hidden" name="c<?=$category->id?>" value="<?=$category->id?>"/>
+            <?php if(isset($_GET['cat'.$category->id])) : ?>
+                <input type="hidden" name="cat<?=$category->id?>" value="<?=$category->id?>"/>
             <?php endif ?>
         <?php endforeach ?>
 
@@ -44,7 +44,7 @@
     <label for="filterToggle" class="filterToggleLabel">Filter<span class="dropIcon">&#9776;</span></label>
     <input type="checkbox" id="filterToggle" class="filterToggle">
 
-    <form class="filterForm" action="index.php?c=products&a=search" method="Get">
+    <form class="filterForm" method="Get">
     <input type="hidden" name="c" value="products" />
             <input type="hidden" name="a" value="search" />
         
@@ -52,12 +52,11 @@
             <input type="hidden" name="s" value="<?= $_GET['s']?>">
         <?php endif ?>
 
-
         <fieldset>
             <legend>Nach Marke filtern</legend>
                 <?php foreach($vendors as $vendor) : ?>
                     <label for="vendor<?=$vendor->id?>"><?= $vendor->vendorName ?>
-                    <input type="checkbox" name="v<?=$vendor->id?>" id="vendor<?=$vendor->id?>" value="<?=$vendor->id?>" <?=isset($_GET['v' . $vendor->id]) ? 'checked' : ''?>/></label>
+                    <input type="checkbox" name="ven<?=$vendor->id?>" id="vendor<?=$vendor->id?>" value="<?=$vendor->id?>" <?=isset($_GET['ven' . $vendor->id]) ? 'checked' : ''?>/></label>
                 <?php endforeach ?>
         </fieldset>
 
@@ -65,11 +64,9 @@
             <legend>Nach Kategorie filtern</legend>
                 <?php foreach($categories as $category) : ?>
                     <label for="category<?=$category->id?>"><?= $category->categoryName ?>
-                    <input type="checkbox" name="c<?=$category->id?>" id="category<?=$category->id?>" value="<?=$category->id?>" <?=isset($_GET['c' . $category->id]) ? 'checked' : ''?>/></label>
+                    <input type="checkbox" name="cat<?=$category->id?>" id="category<?=$category->id?>" value="<?=$category->id?>" <?=isset($_GET['cat' . $category->id]) ? 'checked' : ''?>/></label>
                 <?php endforeach ?>
         </fieldset>
-
-        
 
         <fieldset>
             <legend>Preisspanne festlegen</legend>
@@ -79,8 +76,6 @@
             <label for="maxPrice">Max</label>
             <input type="number" min="1" step="any" id="maxPrice" name="maxPrice" value="<?= $_GET['maxPrice'] ?? '' ?>"/>
         </fieldset>
-
-
 
         <label for="sort"></label>
         <select id="sort" name=sort>
@@ -103,20 +98,19 @@
 </div>
 
 <?php if(empty($products)) :?>
-    Für Ihre Suche wurden leider keine Treffer erzielt!
+    <p>Für Ihre Suche wurden leider keine Treffer erzielt!</p>
 <?php endif ?>
 
 <section class="cards"> 
-<?php foreach ($products as $product) : ?>
-    <?php include(VIEWSPATH . DIRECTORY_SEPARATOR . 'viewAssets' . DIRECTORY_SEPARATOR . 'productCard.php') ?>
-<?php endforeach ?>
+    <?php foreach ($products as $product) : ?>
+        <?php include(VIEWSPATH . DIRECTORY_SEPARATOR . 'viewAssets' . DIRECTORY_SEPARATOR . 'productCard.php') ?>
+    <?php endforeach ?>
 </section>
 
 
 
 
 <br>
-<?=$numberOfPages?>
 <div class="pagesList">
     <!-- Button to return to first product list -->
     <a href="index.php?<?=$getString?>&page=<?=1?>">&laquo;</a>

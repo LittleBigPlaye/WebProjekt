@@ -5,17 +5,19 @@
 ?>
 
 
-<h1>Bestehendes Produkt bearbeiten</h1>
-<?php if(isset($errorMessage) && !empty($errorMessage)) : ?>
-    <div class="errorMessage">
-        <?= $errorMessage ?>
-    </div>
-<?php endif ?>
+
 
 <?php if(isset($product)) : ?>
 <div class="formWrapper">
     <form class="productForm" action="index.php?c=products&a=edit&pid=<?=$product->id?>" method="post" enctype="multipart/form-data">
-        
+    <h1>Bestehendes Produkt bearbeiten</h1>
+        <?php foreach($errorMessages as $message) : ?>
+            <div class="errorMessage">
+                <span class="messageClose" onclick="this.parentElement.style.display='none';">&times</span>
+                <?= $message ?>
+            </div>
+        <? endforeach; ?>
+
         <!-- delete or change current images -->
         <?php foreach($product->images as $productImage) : ?>
             <img src="
