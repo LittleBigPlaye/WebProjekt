@@ -19,11 +19,10 @@
         {
             $this->addToCart($_POST['addToCart']);
         }
-        
-        //TODO prepare spotlight products
+
+        //fetch products for product spotlight
         $spotlightProducts = \myf\models\Product::findRange(0,4,'isHidden = 0', 'createdAt DESC');
 
-        //TODO prepare first row of products
         //open file and read products from file
         $lines = null;
         //check if file is available
@@ -102,7 +101,9 @@
              $hashed_password = $login-> passwordHash;
              //check if password hash is valid
              if(password_verify($password, $hashed_password)){
-                 session_start();
+                 //TODO: Die Session wird bereits in der index.php gestartet, hier muss eine Session Variable gesetzt werden
+                 //session_start();
+                 //TODO: Bitte anschauen, was die Fungion loggedIn im Controller macht und korrigieren
                  $this->loggedIn();
              };
          }

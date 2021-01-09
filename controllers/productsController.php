@@ -11,6 +11,7 @@ namespace myf\controller;
      
     public function actionNew()
      {
+        $this->setParam('currentPosition', 'administration');
         $errorMessages = [];
         $isAdmin = true;
         if($isAdmin)
@@ -117,6 +118,7 @@ namespace myf\controller;
      
      public function actionEdit()
     {
+        $this->setParam('currentPosition', 'products');
         $errorMessages = [];
         $isAdmin = true;
         
@@ -316,6 +318,7 @@ namespace myf\controller;
 
     public function actionView()
     {
+        $this->setParam('currentPosition', 'products');
         //check if the given pid is valid formatted
         if(!isset($_GET['pid']) || !(is_numeric($_GET['pid']) || $_GET['pid'] == 'random'))
         {
@@ -369,6 +372,7 @@ namespace myf\controller;
   
     public function actionSearch()
     {
+        $this->setParam('currentPosition', 'products');
         //check if products should be added to cart
         if(isset($_POST['addToCart']) && is_numeric($_POST['addToCart']))
         {
