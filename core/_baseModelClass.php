@@ -304,6 +304,7 @@ abstract class BaseModel
                 }
                 $sql .= ';';
                 $resultSet = $db->query($sql)->fetch();
+                
                 $currentClass = get_called_class();
                 if(is_array($resultSet))
                 {

@@ -237,48 +237,60 @@ p {
 /* Slide Show */
 
 .productSpotlight {
-    width: 80%;
-    margin: 0 auto;
+    max-width: 95%;
     position: relative;
-    padding-bottom: 75px;
+    margin: auto;
 }
 
-.spotlightPreview {
-    margin-right: 15px;
-    float: left;
-    margin-left: 30px;
-    float: left;
-    width: 200px;
+.productSpotlight .productLink {
+    text-decoration: none;
+    color: #333;
 }
 
-.spotlightText * {
-    margin-left: 15px;
-    display: block;
-    margin: 2px 0 0 0;
-}
-
-.spotlightTitle {
-    font-size: large;
-}
-
-.spotlightDescription {
-    font-size: 1em;
-    text-align: justify;
+.productSpotlight img {
+    max-height: 100%;
+    max-width: 100%;
+    margin: 0 auto;
 }
 
 .spotlightElement {
     background-color: #f9f9f9;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding: 20px;
+    transition: .3s ease;
+    /* padding: 20px; */
     overflow: hidden;
+}
+
+.spotlightElement:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 12px 20px 0 rgba(0, 0, 0, 0.486);
+    transition: .3s ease;
+}
+
+.spotlightElement .text {
+    color: #e1e1e1;
+    background-color: #3333338e;
+    position: absolute;
+    bottom: 34px;
+    width: 100%;
+    text-align: center;
+}
+
+.spotlightElement .text .title {
+    font-size: 1.5em;
+    font-weight: bold;
+    padding-top: 10px;
+    padding: 0;
+}
+
+.spotlightElement .text .phrase {
+    font-size: 1.2em;
+    display: block;
+    font-weight: lighter;
+    padding: 5px 0px 10px 0px;
 }
 
 .productSpotlight>.spotlightElement:not(:first-child) {
     display: none;
-}
-
-.spotlightText {
-    width: 95%;
 }
 
 
@@ -288,12 +300,12 @@ p {
 .nextSlide {
     cursor: pointer;
     position: absolute;
-    top: 30%;
+    top: 50%;
     width: auto;
-    margin: 0 auto;
+    margin-top: -22px;
     padding: 16px;
-    background-color: rgba(0, 0, 0, 0.2);
     color: white;
+    background-color: rgba(85, 85, 85, 0.5);
     font-weight: bold;
     font-size: 18px;
     transition: 0.6s ease;
@@ -304,6 +316,7 @@ p {
 .nextSlide {
     right: 0;
     border-radius: 3px 0 0 3px;
+    border-radius: 3px 0 0 3px;
 }
 
 .previousSlide:hover,
@@ -313,6 +326,12 @@ p {
 
 
 /* Slide Dots */
+
+.slideDots {
+    display: block;
+    padding-top: 15px;
+    text-align: center;
+}
 
 .dot {
     cursor: pointer;
@@ -325,15 +344,8 @@ p {
     transition: 0.6s ease;
 }
 
-.slideDots {
-    display: block;
-    padding-top: 15px;
-    text-align: center;
-    position: absolute;
-}
-
 .slideDots .active {
-    background-color: #333;
+    background-color: #eb7d00;
 }
 
 .dot:hover {
@@ -345,7 +357,7 @@ p {
 
 .fade {
     animation-name: fade;
-    animation-duration: 1s;
+    animation-duration: .2s;
 }
 
 @keyframes fade {

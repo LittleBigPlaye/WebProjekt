@@ -31,7 +31,14 @@ class ProductImage extends BaseModel
             }
             if($key == 'path')
             {
-                return $this->image->imageURL;
+                if($this->image === null  || file_exists($this->image->imageURL))
+                {
+                    return $this->image->imageURL;
+                }
+                else
+                {
+                    return FALLBACK_IMAGE;
+                }
             }
             else if($key == 'name')
             {

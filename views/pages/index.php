@@ -5,7 +5,7 @@
         <h2>Unsere Dauerbrenner - Die halten alles auf!</h2>
     </div>
     <div>
-        <?php include VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'productSpotlight.php' ?>
+        <?php include(VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'productSpotlight.php') ?>
     </div>
 
 </section>
@@ -20,27 +20,14 @@
             </p>
             <br>
         </div>
-        <div class="card">
-            <div class="container">
-                <img src="./assets/images/masks/mask01.png" width="400">
-                <br>
-                <a href="">Maske 1</a>
-            </div>
-        </div>
-        <div class="card">
-            <div class="container">
-                <img src="./assets/images/masks/mask01.png" width="400">
-                <br>
-                <a href="">Maske 2</a>
-            </div>
-        </div>
-        <div class="card">
-            <div class="container">
-                <img src="./assets/images/masks/mask01.png" width="400">
-                <br>
-                <a href="">Maske 3</a>
-            </div>
-        </div>
+        <?php foreach($cardProductsFirstRow as $product)
+        {
+            if($product !== null)
+            {
+                include(VIEWSPATH . DIRECTORY_SEPARATOR . 'viewAssets' . DIRECTORY_SEPARATOR . 'productCard.php');
+            }
+        }
+        ?>
     </div>
 
 </section>
@@ -57,28 +44,15 @@
         Nutzen Sie diese Möglichkeit!!!!
     </p>
     <br>
-    </div>
-    <div class="card">
-        <div class="container">
-            <img src="./assets/images/masks/mask01.png" width="400">
-            <br>
-            <a href="">Maske 7</a>
-        </div>
-    </div>
-    <div class="card">
-        <div class="container">
-            <img src="./assets/images/masks/mask01.png" width="400">
-            <br>
-            <a href="">Maske 8</a>
-        </div>
-    </div>
-    <div class="card">
-        <div class="container">
-            <img src="./assets/images/masks/mask01.png" width="400">
-            <br>
-            <a href="">Maske 9</a>
-        </div>
-    </div>
+    <div>
+        <?php foreach($cardProductsSecondRow as $product)
+        {
+            if($product !== null)
+            {
+                include(VIEWSPATH . DIRECTORY_SEPARATOR . 'viewAssets' . DIRECTORY_SEPARATOR . 'productCard.php');
+            }
+        }
+        ?>
     </div>
 
 
