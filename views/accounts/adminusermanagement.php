@@ -6,11 +6,38 @@
     <br>
     <label for="user<?=$login->id?>">Nachname: <?= $login->__get('user')->lastName ?></label>
     <br>
-    <label for="user<?=$login->id?>">Rolle: <?= $login->__get('user')->role ?></label>
+    <label>Auswahlfeld Rolle</label>
+    <select name="validated">
+        <option value="admin"
+            <?= ($login->__get('user')->role === 'admin') ? 'selected' : '' ?>
+        >Admin</option>
+        <option value="user"
+            <?= ($login->__get('user')->role === 'user') ? 'selected' : '' ?>
+        >Nutzer</option>
+    </select>
     <br>
-    <label for="user<?=$login->id?>">validated: <?= $login->validated ?></label>
+    <label>Auswahlfeld validated</label>
+    <select name="validated">
+        <option value="1"
+            <?= ($login->validated) ? 'selected' : '' ?>
+        >enabled</option>
+        <option value="2"
+            <?= ($login->validated) ? '' : 'selected' ?>
+        >disabled</option>
+    </select>
     <br>
-    <label for="user<?=$login->id?>">enabled: <?= $login->enabled ?></label>
+    <label>Auswahlfeld enabled</label>
+    <select name="enabled">
+        <option value="1"
+            <?= ($login->enabled) ? 'selected' : '' ?>
+        >enabled</option>
+        <option value="2"
+            <?= ($login->enabled) ? '' : 'selected' ?>
+        >disabled</option>
+    </select>
     <br>
+    <button type="submit">Änderung Speichern</button>
+    <br>
+    <button type="submit">Passwort für den Nutzer zurücksetzen</button>
     <hr>
 <?php endforeach ?>
