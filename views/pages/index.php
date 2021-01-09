@@ -22,7 +22,10 @@
         </div>
         <?php foreach($cardProductsFirstRow as $product)
         {
-            include(VIEWSPATH . DIRECTORY_SEPARATOR . 'viewAssets' . DIRECTORY_SEPARATOR . 'productCard.php');
+            if($product !== null)
+            {
+                include(VIEWSPATH . DIRECTORY_SEPARATOR . 'viewAssets' . DIRECTORY_SEPARATOR . 'productCard.php');
+            }
         }
         ?>
     </div>
@@ -44,7 +47,10 @@
     <div>
         <?php foreach($cardProductsSecondRow as $product)
         {
-            include(VIEWSPATH . DIRECTORY_SEPARATOR . 'viewAssets' . DIRECTORY_SEPARATOR . 'productCard.php');
+            if($product !== null)
+            {
+                include(VIEWSPATH . DIRECTORY_SEPARATOR . 'viewAssets' . DIRECTORY_SEPARATOR . 'productCard.php');
+            }
         }
         ?>
     </div>

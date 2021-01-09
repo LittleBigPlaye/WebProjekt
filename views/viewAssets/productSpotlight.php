@@ -29,7 +29,7 @@
 
     <!-- Slide Dots -->
     <div class="slideDots">
-        <?php for($i = 1; $i <= $numberOfSlides; $i++) : ?>
+        <?php for($i = count($spotlightProducts)+1; $i <= $numberOfSlides; $i++) : ?>
         <span class="dot" onclick="currentSlide(<?=$i?>)"></span>
         <?php endfor ?>
     </div>
