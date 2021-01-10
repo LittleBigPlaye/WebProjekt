@@ -597,4 +597,23 @@ namespace myf\controller;
         $products = \myf\models\Product::findRange(($currentPage-1) * PRODUCTS_PER_PAGE, PRODUCTS_PER_PAGE, $where, $orderBy);
         return $products;
     }
+
+    public function actionVendors() 
+    {
+        $this->setParam('currentPosition', 'products');
+
+        //fetch all vendors from database
+        $vendors = \myf\models\Vendor::find('', 'vendorName ASC');
+
+        //fetch three random products for each vendor
+        $vendorProducts = [];
+        foreach($vendors as $key => $vendor)
+        {
+            $vendorProducts[$key] = \myf\models\Product::findRange(0,3,'vendorID = ' . $vendor->id, 'RAND()');
+            
+        }
+
+        $this->setParam('vendors', $vendors);
+        $this->setParam('vendorProducts', $vendorProducts);
+    }
 }

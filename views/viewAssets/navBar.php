@@ -27,7 +27,7 @@ else if ($cartCount > 99) {
             <input type="checkbox" id="dropToggle01">
             <ul class="subNav">
                 <li><a href="index.php?c=products&a=search">Alle Artikel</a></li>
-                <li><a href="#">Kategorien</a>
+                <li><a href="index.php?c=products&a=vendors">Unsere Marken</a>
                 <li><a href="index.php?c=products&a=view&pid=random">Zufälliger Artikel</a></li>
             </ul>
         </li>
@@ -44,6 +44,9 @@ else if ($cartCount > 99) {
         
         <li <?= ($currentPosition == 'login') ? 'class="right active"' : 'class="right"' ?>><a
                 href="?c=pages&a=login">Login</a></li>
+
+        <li <?= ($currentPosition == 'login') ? 'class="right active"' : 'class="right"' ?>><a
+        href="?c=pages&a=login">Logout</a></li>
 
         <!-- Administration -->
         <li class="<?= ($currentPosition == 'administration') ? 'active ' : '' ?>right"><label for="dropToggle02"><a>Administration
