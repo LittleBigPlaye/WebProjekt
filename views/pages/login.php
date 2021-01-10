@@ -1,3 +1,9 @@
+<?php if(!empty($errorMessage)) : ?>
+    <div class="errorMessage">
+        <span class="messageClose" onclick="this.parentElement.style.display='none';">&times</span>
+        <?= $errorMessage ?>
+    </div>
+<?php endif ?>
 <div class="formWrapper">
   <form class="loginForm" action="index.php?c=pages&a=login" method="post">
     <h1>Login</h1>

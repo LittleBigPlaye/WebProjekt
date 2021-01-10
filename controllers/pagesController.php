@@ -74,10 +74,9 @@
      public function actionLogin()
      {
         $this->setParam('currentPosition', 'login');
-        //TODO: store error message
-
+        //store error message
+         $errorMessage = '';
          $db= $GLOBALS['database'];
-        $errorMessage = null;
          //check if form is submitted
          if(isset($_POST['submit'])) {
              // Check if email is empty
@@ -91,7 +90,7 @@
              if (empty(trim($_POST["user_password"]))) {
                  $errorMessage = "Bitte gib ein Passwort ein.";
              } else {
-                 $password = trim($_POST["user_password"]);
+                 $password = $_POST["user_password"];
              }
              //check if user exists
              if (Login::findOne('email LIKE' . $db->quote($email)) == null) {
@@ -105,11 +104,15 @@
 
              //check if password hash is valid
              if(password_verify($password, $hashed_password)){
-                 //TODO: Die Session wird bereits in der index.php gestartet, hier muss eine Session Variable gesetzt werden
-                 //session_start();
+                 $_SESSION['currentLogin'] = serialize($login);
+                 $_SESSION['loggedIn'] = true;
+                 $this->isLoggedIn();
                  //TODO: Bitte anschauen, was die Funktion loggedIn im Controller macht und korrigieren
-                 $this->loggedIn();
-             };
+
+             }
+             else{
+                 $errorMessage="Deine Logindaten stimmen nicht überein";
+             }
          }
 
                 
@@ -118,7 +121,7 @@
                     //TODO: set values in current user
 
                     //TODO: store useful information (user and is logged in in session)
-                    //$_SESSION['login'] = serialize($currentLogin); 
+                   // $_SESSION['login'] = serialize($currentLogin);
                     //TODO: redirect to previous page
                     //header('Location: index.php?c=pages&a=index');
 
@@ -127,7 +130,9 @@
 
             //TODO: set param to prefill input fields
             //$this->setParam('ParamName', $parameter);
+         $this->setParam('errorMessage', $errorMessage);
      }
+
 
 
 
