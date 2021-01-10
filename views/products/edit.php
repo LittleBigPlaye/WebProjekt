@@ -41,7 +41,7 @@
 
         <!-- Add new images -->
         <label for="images">Bilder zu Produkt hinzufügen</label>
-        <input type="file" id="images" name="productImages[]" multiple/>
+        <input type="file" id="images" name="productImages[]" multiple accept=".png, .jpg, .jpeg"/>
 
         <label for="productName">Produktbezeichnung</label>
         <input type="text" name="productName" id="productName" placeholder="Bezeichnung eingeben..."

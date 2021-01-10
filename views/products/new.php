@@ -18,7 +18,7 @@
 
 
         <label for="images">Produktbilder</label>
-        <input type="file" id="images" name="productImages[]" multiple/>
+        <input type="file" id="images" name="productImages[]" multiple accept=".png, .jpg, .jpeg"/>
 
 
         <label for="productName">Produktbezeichnung</label>
