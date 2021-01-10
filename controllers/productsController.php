@@ -602,9 +602,11 @@ namespace myf\controller;
     {
         $this->setParam('currentPosition', 'products');
 
+        //fetch all vendors from database
         $vendors = \myf\models\Vendor::find('', 'vendorName ASC');
-        $vendorProducts = [];
 
+        //fetch three random products for each vendor
+        $vendorProducts = [];
         foreach($vendors as $key => $vendor)
         {
             $vendorProducts[$key] = \myf\models\Product::findRange(0,3,'vendorID = ' . $vendor->id, 'RAND()');
