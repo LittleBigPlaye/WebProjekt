@@ -30,7 +30,7 @@ abstract class Controller
 
     public function isAdmin()
     {
-        //TODO: remove next line when login is done und uncomment the other return
+        //TODO: remove next line when login is done and uncomment the other return
         return true;
         //return ($this->isLoggedIn() && $this->currentLogin->user->role === 'admin');
     }
