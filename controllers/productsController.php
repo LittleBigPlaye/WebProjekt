@@ -32,7 +32,7 @@ namespace myf\controller;
                 $price       = $_POST['productPrice'] ?? '';
                 $vendor      = $_POST['vendor'] ?? '';
                 $category    = $_POST['category'] ?? '';
-                $isHidden    = isset($_POST['isHidden']) ? true : false;
+                $isHidden    = isset($_POST['isHidden']);
 
                 $db = $GLOBALS['database'];
 
@@ -156,7 +156,7 @@ namespace myf\controller;
             $price       = $_POST['productPrice'] ?? '';
             $vendor      = $_POST['vendor'] ?? '';
             $category    = $_POST['category'] ?? '';
-            $isHidden    = isset($_POST['isHidden']) ? true : false;
+            $isHidden    = isset($_POST['isHidden']);
 
             //check if name is empty
             if(empty($name))
@@ -468,7 +468,7 @@ namespace myf\controller;
         
         //check how many products are available
         $numberOfPages = 0;
-        $currentPage = $_GET['page'] ?? 1; ;
+        $currentPage = $_GET['page'] ?? 1;
         $startIndex = 0;        
         
         $products = $this->prepareProductList($numberOfPages, $currentPage, $startIndex, $where, $order);
@@ -476,7 +476,6 @@ namespace myf\controller;
         $this->setParam('currentPage', $currentPage);
         $this->setParam('startIndex', $startIndex);
         $this->setParam('products', $products);
-
 
         //prepare getString for navigation
         $getString = 'c=products&a=search';
@@ -598,6 +597,4 @@ namespace myf\controller;
         $products = \myf\models\Product::findRange(($currentPage-1) * PRODUCTS_PER_PAGE, PRODUCTS_PER_PAGE, $where, $orderBy);
         return $products;
     }
-
-    
- }
+}
