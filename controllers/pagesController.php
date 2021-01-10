@@ -106,7 +106,6 @@
              if(password_verify($password, $hashed_password)){
                  $_SESSION['currentLogin'] = serialize($login);
                  $_SESSION['loggedIn'] = true;
-                 $this->isLoggedIn();
                  //TODO: Bitte anschauen, was die Funktion loggedIn im Controller macht und korrigieren
 
              }
