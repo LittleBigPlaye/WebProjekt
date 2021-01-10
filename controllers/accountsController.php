@@ -147,7 +147,7 @@ class accountsController extends Controller
 
             if($passwordReset === true)
             {
-                $loginUpdate->passwordResetHash = password_hash('P@ssw0rd01', DEFAULT_PASSWORD);
+                $loginUpdate->passwordResetHash = password_hash('P@ssw0rd01', PASSWORD_DEFAULT);
             }
 
             if($userRole === 'admin')
@@ -162,7 +162,6 @@ class accountsController extends Controller
             $loginUpdate->save();
             $loginUpdate->user->save();
 
-
         }
 
             $users = User::find();
@@ -170,7 +169,6 @@ class accountsController extends Controller
 
             $this->setParam('users',$users);
             $this->setParam('logins',$logins);
-
 
     }
 
