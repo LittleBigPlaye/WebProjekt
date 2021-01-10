@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @author John Klippstein
+ */
 
 namespace myf\controller;
 
@@ -169,8 +171,25 @@ class accountsController extends Controller
 
             $this->setParam('users',$users);
             $this->setParam('logins',$logins);
-
     }
 
+    public function actionMySpace ()
+    {
+        $errormsg = '';
+
+        $myOwnID = $_SESSION['userID'];
+
+        if($myOwnID != '')
+        {
+            $userData = User::findOne('id='.$myOwnID);
+            $addressData = Address::findOne('id='.$userData->addressID);
+            $this->setParam('user',$userData);
+            $this->setParam('address',$addressData);
+        }
+        else
+        {
+            header('location: index.php?c=pages&a=login');
+        }
+    }
 
 }

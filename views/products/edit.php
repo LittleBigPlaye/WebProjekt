@@ -4,9 +4,6 @@
  */
 ?>
 
-
-
-
 <?php if(isset($product)) : ?>
 <div class="formWrapper">
     <form class="productForm" action="index.php?c=products&a=edit&pid=<?=$product->id?>" method="post" enctype="multipart/form-data">
