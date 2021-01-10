@@ -13,7 +13,7 @@ namespace myf\controller;
      {
         $this->setParam('currentPosition', 'administration');
         $errorMessages = [];
-        $isAdmin = true;
+        $isAdmin = $this->isAdmin();
         if($isAdmin)
         {
             //obtain vendors from database
@@ -120,7 +120,7 @@ namespace myf\controller;
     {
         $this->setParam('currentPosition', 'products');
         $errorMessages = [];
-        $isAdmin = true;
+        $isAdmin = $this->isAdmin();
         
         if(!$isAdmin)
         {
@@ -337,7 +337,7 @@ namespace myf\controller;
         $productID = $_GET['pid'];
         
         //TODO replace isAdmin as soon as the login is done
-        $isAdmin = true;
+        $isAdmin = $this->isAdmin();
         $whereClause = $isAdmin ? '' : ' AND isHidden=0';
 
         $product = null;
@@ -388,7 +388,7 @@ namespace myf\controller;
         $this->setParam('categories', $categories);
 
         //TODO: replace $isAdmin as soon as login is done
-        $isAdmin = true;
+        $isAdmin = $this->isAdmin();
 
         //determine if users should see all products or just hidden products
         $where = $isAdmin ? '' : 'isHidden = 0'; 

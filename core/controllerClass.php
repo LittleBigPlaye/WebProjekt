@@ -6,7 +6,7 @@ abstract class Controller
 {
     protected $controllerName   = null;
     protected $actionName       = null;
-    protected $currentUser      = null;
+    protected $currentLogin      = null;
     
     protected $params = [];
 
@@ -15,7 +15,7 @@ abstract class Controller
         $this->controllerName = $controllerName;
         $this->actionName     = $actionName;
 
-        if($this->loggedIn())
+        if($this->isLoggedIn())
         {
             //TODO: stuff, when user is logged in
             //TODO: store current user in $currentUser
@@ -23,9 +23,16 @@ abstract class Controller
     }
 
 
-    public function loggedIn()
+    public function isLoggedIn()
     {
         return (isset($_SESSION['isLoggedIn']) && ($_SESSION['isLoggedIn'] === true));
+    }
+
+    public function isAdmin()
+    {
+        //TODO: remove next line when login is done und uncomment the other return
+        return true;
+        //return ($this->isLoggedIn() && $this->currentLogin->user->role === 'admin');
     }
 
     public function renderView()
