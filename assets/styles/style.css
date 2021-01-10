@@ -805,3 +805,68 @@ input[type=number] {
 .errorPage img {
     width: 80%;
 }
+
+
+/* vendors */
+
+.vendorToggle {
+    display: none;
+}
+
+.vendorContainer {
+    display: none;
+}
+
+.vendorContainer p {
+    display: none;
+}
+
+.vendorsWrapper {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.vendorsWrapper p {
+    padding: 0;
+    padding: 5px;
+    margin: 0;
+    width: 95%;
+}
+
+.vendorsWrapper label {
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    background-color: white;
+    padding: 10px 0px;
+    font-size: 1.5em;
+    font-weight: bold;
+    border-radius: 5px 5px 0px 0px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.vendorToggle:checked+.vendorContainer {
+    display: block;
+    width: 100%;
+    background-color: white;
+    text-align: center;
+    border-radius: 0px 0px 5px 5px;
+}
+
+.vendorContainer .customSubmit {
+    width: 90%;
+    color: #FFF;
+    background-color: #eb7d00;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 10px;
+    padding: 10px 0px;
+    cursor: pointer;
+    font-size: 1.3em;
+    transition: .2s ease-in-out;
+}
+
+.vendorContainer .customSubmit:hover {
+    background-color: #474747;
+}

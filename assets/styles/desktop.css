@@ -124,4 +124,39 @@
     .errorPage img {
         width: 40%;
     }
+    .vendorsWrapper {
+        padding: 15px;
+        background-color: white;
+        border-radius: 5px;
+        margin: 15px auto;
+        width: 80%;
+    }
+    .vendorsWrapper label {
+        padding: 0;
+        margin-left: 15px;
+        text-align: left;
+        cursor: default;
+    }
+    .vendorContainer {
+        display: block;
+        width: 100%;
+        background-color: white;
+        text-align: center;
+        border-radius: 0px 0px 5px 5px;
+    }
+    .vendorContainer .customSubmit {
+        margin-left: 15px;
+        display: block;
+        left: 0px;
+        width: 350px;
+        color: #FFF;
+        background-color: #eb7d00;
+        border-radius: 5px;
+        border: none;
+        margin-bottom: 10px;
+        padding: 10px 0px;
+        cursor: pointer;
+        font-size: 1.3em;
+        transition: .2s ease-in-out;
+    }
 }

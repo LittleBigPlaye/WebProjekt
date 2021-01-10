@@ -248,7 +248,7 @@ abstract class BaseModel
      * @param string $where
      * @return mixed
      */
-    public static function find($where = '')
+    public static function find($where = '', $order = '')
     {
         $db  = $GLOBALS['database'];
         $results = array();
@@ -261,6 +261,11 @@ abstract class BaseModel
             if(!empty($where))
             {
                 $sql .= ' WHERE ' . $where;
+            }
+
+            if(!empty($orderBy))
+            {
+                $sql .= ' ORDER BY ' . $orderBy;
             }
             $sql .= ';';
             $resultSets = $db->query($sql)->fetchAll();
