@@ -22,7 +22,7 @@
         <option value="1"
             <?= ($login->validated) ? 'selected' : '' ?>
         >validated</option>
-        <option value="2"
+        <option value="0"
             <?= ($login->validated) ? '' : 'selected' ?>
         >unvalidated</option>
     </select>
@@ -32,7 +32,7 @@
         <option value="1"
             <?= ($login->enabled) ? 'selected' : '' ?>
         >enabled</option>
-        <option value="2"
+        <option value="0"
             <?= ($login->enabled) ? '' : 'selected' ?>
         >disabled</option>
     </select>
@@ -40,7 +40,7 @@
     <label for="passwordReset">Passwort zurücksetzen?</label>
     <input type="checkbox" id="passwordReset" name="passwordReset" >
     <br>
-    <button type="submit">Änderung Speichern</button>
+    <button type="submit" name="saveChanges">Änderung Speichern</button>
     <br>
     <hr>
 </form>

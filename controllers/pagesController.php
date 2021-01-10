@@ -99,6 +99,10 @@
              }
              $login =\myf\models\Login::findOne('email='. $db->quote($email));
              $hashed_password = $login-> passwordHash;
+
+             //TODO prüfen ob der passwordResetHash leer ist. Wenn dieser gefüllt sein sollte muss der für die PW abfrage genutzt werden
+             // --> nach der Anmeldung über den Reset muss der wieder null werden und es muss ein neues Passwort gesetzt werden
+
              //check if password hash is valid
              if(password_verify($password, $hashed_password)){
                  //TODO: Die Session wird bereits in der index.php gestartet, hier muss eine Session Variable gesetzt werden

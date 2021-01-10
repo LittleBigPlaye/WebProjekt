@@ -117,7 +117,7 @@ class accountsController extends Controller
     public function actionAdminusermanagement()
     {
 
-        if(isset($_POST['submit']))
+        if(isset($_POST['saveChanges']))
         {
             $enabled =$_POST['enabled']; //select
             $validated = $_POST['validated']; //select
@@ -127,7 +127,7 @@ class accountsController extends Controller
 
             $loginUpdate = Login::findOne('userID='.$loginID);
 
-            if($enabled === 'enabled')
+            if($enabled === '1')
             {
                 $loginUpdate->enabled = 1;
             }
@@ -136,7 +136,7 @@ class accountsController extends Controller
                 $loginUpdate->enabled = 0;
             }
 
-            if($validated === 'validated')
+            if($validated === '1')
             {
                 $loginUpdate->validated = 1;
             }
@@ -147,32 +147,30 @@ class accountsController extends Controller
 
             if($passwordReset === true)
             {
-                //TODO PW setzen
+                $loginUpdate->passwordResetHash = password_hash('P@ssw0rd01', DEFAULT_PASSWORD);
             }
 
             if($userRole === 'admin')
             {
-                $loginUpdate->userID->role = 'admin';
+                $loginUpdate->user->role = 'admin';
             }
             else
             {
-                $loginUpdate->userID->role = 'user';
+                $loginUpdate->user->role = 'user';
             }
 
-            var_dump($loginUpdate);
-
-            $this->setParam('logins', $loginUpdate);
             $loginUpdate->save();
+            $loginUpdate->user->save();
+
 
         }
-        else
-        {
+
             $users = User::find();
             $logins = Login::find();
 
             $this->setParam('users',$users);
             $this->setParam('logins',$logins);
-        }
+
 
     }
 
