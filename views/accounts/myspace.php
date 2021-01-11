@@ -7,7 +7,7 @@
 
         <h2>Persönliche Daten</h2>
 
-        <section>
+        <section class="formWrapper">
             <label>Vorname: <?=htmlspecialchars($user->firstName)?>  </label>
             <label>zweiter Vorname: <?=htmlspecialchars($user->secondName)?></label>
             <label>Nachname: <?=htmlspecialchars($user->lastName)?></label>
@@ -20,11 +20,23 @@
             <label>Postleitzahl: <?=htmlspecialchars($address->zipCode)?></label>
             <label>Stadt: <?=htmlspecialchars($address->city)?></label>
         </section>
+        <br>
+        <hr>
 
 
+        <h2>Änderungen stehen bevor</h2>
+        <section class="formWrapper">
 
-    </form>
-    <form class="productForm">
+            <a href="index.php?c=accounts&a=changesecrets">Passwort ändern</a>
+            <a href="index.php?c=accounts&a=changepersonaldata">Personas ändern</a>
+            <a href="index.php?c=accounts&a=changeaddress">Adresse ändern</a>
+
+        </section>
+
+
+        <hr>
+        <br>
+
         <h2>Meine Bestellungen</h2>
         <section>
             <?php foreach($orders as $order) :?>
@@ -41,6 +53,6 @@
 
             <?php endforeach?>
         </section>
-
+        </div>
     </form>
 </div>

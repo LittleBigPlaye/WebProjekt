@@ -203,15 +203,39 @@ class accountsController extends Controller
 
             $this->setParam('orders',$orderData);
 
-
-
-
-
         }
         else
         {
             header('location: index.php?c=pages&a=login');
         }
+    }
+
+    public function actionChangeSecrets()
+    {
+        $errorMessage = "";
+
+
+        if(isset($_POST['changePaddword']))
+        {
+            $newPassword1 = password_hash($_POST['newPassword1'] ?? "",PASSWORD_DEFAULT);
+            $newPassword2 = $_POST['newPassword2'] ?? "";
+        }
+
+
+        $succesMessage = "Das war super!";
+
+        $this->setParam('errorMessage', $errorMessage);
+        $this->setParam('succesMessage', $succesMessage);
+    }
+
+    public function actionChangePersonalData()
+    {
+
+    }
+
+    public function actionChangeAddress()
+    {
+
     }
 
 }
