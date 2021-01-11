@@ -13,9 +13,11 @@
                 }
             ?>">
             <br>
-            <form method="POST">
-                <button class="iconButton" type="submit" name="addToCart" value="<?=$product->id?>"><img src="assets\images\icons\shopping_cart.svg"/></button>
-            </form>
+            <?php if(!$product->isHidden) : ?>
+                <form method="POST">
+                    <button class="iconButton" type="submit" name="addToCart" value="<?=$product->id?>"><img src="assets\images\icons\shopping_cart.svg"/></button>
+                </form>
+            <?php endif ?>
         </div>
             <i><?= $product->isHidden ? '[unsichtbar]' : ''?></i><br>
             <b><?= htmlspecialchars($product->productName) ?></b><br>

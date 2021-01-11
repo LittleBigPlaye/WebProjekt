@@ -1,6 +1,7 @@
 <?php
 $currentPosition = $currentPosition ?? '';
-$cartCount = isset($_SESSION['cartInfos']) ? count($_SESSION['cartInfos']) : '';
+$cartCount = isset($_SESSION['shoppingCart']) ? array_sum($_SESSION['shoppingCart']) : '';
+
 //make sure to hide card count, if there is no item inside the cart
 if ($cartCount < 1) {
     $cartCount = '';
@@ -39,10 +40,6 @@ else if ($cartCount > 99) {
             <li <?= ($currentPosition == 'login') ? 'class="right active"' : 'class="right"' ?>><a
                 href="index.php?c=pages&a=login">Login</a></li>
         <?php endif; ?>
-
-
-        
-        
 
         <!-- Administration -->
         <?php if(isset($_SESSION['isLoggedIn']) && ($_SESSION['isLoggedIn'] === true)) : ?>

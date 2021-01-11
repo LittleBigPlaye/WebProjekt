@@ -268,6 +268,7 @@ abstract class BaseModel
                 $sql .= ' ORDER BY ' . $orderBy;
             }
             $sql .= ';';
+
             $resultSets = $db->query($sql)->fetchAll();
             $currentClass = get_called_class();
             foreach($resultSets as $resultSet)
@@ -309,7 +310,7 @@ abstract class BaseModel
                 }
                 $sql .= ';';
                 $resultSet = $db->query($sql)->fetch();
-                
+
                 $currentClass = get_called_class();
                 if(is_array($resultSet))
                 {
