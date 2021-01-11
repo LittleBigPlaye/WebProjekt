@@ -109,10 +109,10 @@
         text-align: center
     }
     .productForm {
-        width: 60%;
+        width: 60% !important;
     }
     .loginForm {
-        width: 450px;
+        width: 450px !important;
     }
     .productViewWrapper {
         background-color: white;
