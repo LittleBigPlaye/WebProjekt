@@ -7,6 +7,8 @@ namespace myf\controller;
 
 
 use myf\models\Address;
+use myf\models\Order;
+use myf\models\OrderItem;
 use myf\models\User;
 use myf\core\Controller;
 use myf\models\Login;
@@ -194,6 +196,17 @@ class accountsController extends Controller
             $addressData = Address::findOne('id='.$userData->addressID);
             $this->setParam('user',$userData);
             $this->setParam('address',$addressData);
+
+            $loginData = Login::findOne('userID='.$myOwnID);
+            $orderData = Order::find('loginID='.$loginData->id);
+
+
+            $this->setParam('orders',$orderData);
+
+
+
+
+
         }
         else
         {

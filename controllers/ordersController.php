@@ -98,6 +98,7 @@ class ordersController extends Controller
             //TODO: Redirect to order listing in mySpace
             //header('Location: index.php?c=pages&a=login');
             $_SESSION['orderSuccess'] = 'Ihre Bestellung mit der Bestellnummer ' . $order->id . 'Ist erfolgreich bei uns eingegangen!';
+            header('Location: index.php?c=accounts&a=myspace');
         }
 
         $this->setParam('user', $this->currentLogin->user);
