@@ -83,45 +83,50 @@
         //store error message
          $errorMessage = '';
          $db= $GLOBALS['database'];
+
          //check if form is submitted
          if(isset($_POST['submit'])) {
              // Check if email is empty
              if (empty(trim($_POST["user_email"]))) {
                  $errorMessage = "Bitte gib eine Email an.";
              } else {
-                 $email = trim($_POST["user_email"]);
-             }
-
+                 $email = trim($_POST["user_email"]);}
+             $login = \myf\models\Login::findOne('email=' . $db->quote($email));
              // Check if password is empty
              if (empty(trim($_POST["user_password"]))) {
                  $errorMessage = "Bitte gib ein Passwort ein.";
              } else {
+                 if($login->passwordResetHash =="")
+                 {
+                     $hashed_password= $login->passwordHash;
+             }
+                 else
+                 {
+                     $hashed_password = $login->passwordResetHash;
+             }
                  $password = $_POST["user_password"];
              }
              //check if user exists
              if (Login::findOne('email LIKE' . $db->quote($email)) == null) {
                  $errorMessage = "Es existiert kein Benutzer mit dieser Email";
              }
-             $login =\myf\models\Login::findOne('email='. $db->quote($email));
-             $hashed_password = $login-> passwordHash;
 
-             //TODO prüfen ob der passwordResetHash leer ist. Wenn dieser gefüllt sein sollte muss der für die PW abfrage genutzt werden
-             // --> nach der Anmeldung über den Reset muss der wieder null werden und es muss ein neues Passwort gesetzt werden
 
-             //check if password hash is valid
-             if(password_verify($password, $hashed_password)){
-                 $_SESSION['currentLogin'] = serialize($login);
-                 $_SESSION['isLoggedIn'] = true;
-                 $_SESSION['userID'] = $login->userID;
-                 header('Location: index.php?c=pages&a=index');
-                 //TODO: Bitte anschauen, was die Funktion loggedIn im Controller macht und korrigieren
+                 //check if password hash is valid
+                 if(password_verify($password, $hashed_password)) {
+                     $_SESSION['currentLogin'] = serialize($login);
+                     $_SESSION['isLoggedIn'] = true;
+                     $_SESSION['userID'] = $login->userID;
+                     header('Location: index.php?c=pages&a=index');
+                     $login->passwordResetHash= "";
+                     $login->save();
+                 }
+                 else{
+                     $errorMessage = "Deine Logindaten stimmen nicht überein";
+                 }
              }
-             else{
-                 $errorMessage="Deine Logindaten stimmen nicht überein";
-             }
-         }
 
-                
+
                     //TODO: get current user from Database
             
                     //TODO: set values in current user
