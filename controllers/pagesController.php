@@ -143,6 +143,7 @@
      {
          if($this->isLoggedIn())
          {
+             $_SESSION['isLoggedIn'] = false;
              session_destroy();
          }
          else

@@ -18,6 +18,7 @@ abstract class Controller
         if($this->isLoggedIn() && isset($_SESSION['currentLogin']))
         {
             $this->currentLogin = unserialize($_SESSION['currentLogin']);
+            $this->setParam('userRole', $this->currentLogin->user->role);
         }
     }
 

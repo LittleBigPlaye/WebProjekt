@@ -32,34 +32,49 @@ else if ($cartCount > 99) {
             </ul>
         </li>
 
-        <li <?= ($currentPosition == 'impressum') ? 'class="right active"' : 'class="right"' ?>><a
-                href="?c=pages&a=impressum">Impressum</a></li>
+        <!-- Login / Logout -->
+        <?php if(isset($_SESSION['isLoggedIn']) && ($_SESSION['isLoggedIn'] === true)) : ?>
+            <li class="right"><a href="index.php?c=pages&a=logout">Logout</a></li>
+        <?php else : ?>
+            <li <?= ($currentPosition == 'login') ? 'class="right active"' : 'class="right"' ?>><a
+                href="index.php?c=pages&a=login">Login</a></li>
+        <?php endif; ?>
 
-        <li <?= ($currentPosition == 'shoppingcart') ? 'class="right active"' : 'class="right"' ?>><a
-                href="?c=orders&a=shoppingcart">Warenkorb <img src="assets\images\icons\shopping_cart.svg" alt="">
-                <?php if(!empty($cartCount)) : ?>
-                <span
-                class="cartBadge"><p><?= $cartCount ?></p></span>
-                <?php endif ?></a></li>
+
         
-        <li <?= ($currentPosition == 'login') ? 'class="right active"' : 'class="right"' ?>><a
-                href="?c=pages&a=login">Login</a></li>
-
-        <li <?= ($currentPosition == 'login') ? 'class="right active"' : 'class="right"' ?>><a
-        href="?c=pages&a=logout">Logout</a></li>
+        
 
         <!-- Administration -->
-        <li class="<?= ($currentPosition == 'administration') ? 'active ' : '' ?>right"><label for="dropToggle02"><a>Administration
-                    <span class="dropIcon">▾</span>
-                    <label title="toggle dropDown" class="dropIcon" for="dropToggle02">▾</label>
-                </a>
-            </label>
-            <input type="checkbox" id="dropToggle02">
-            <ul class="subNav">
-                <li><a href="?c=accounts&a=myspace">Mein Konto</a></li>
-                <li><a href="?c=products&a=new">Neues Produkt anlegen</a>
-                <li><a href="?c=accounts&a=adminusermanagement">Benutzer verwalten</a></li>
-            </ul>
-        </li>
+        <?php if(isset($_SESSION['isLoggedIn']) && ($_SESSION['isLoggedIn'] === true)) : ?>
+            <?php if($userRole === 'admin') : ?>
+            <li class="<?= ($currentPosition == 'administration') ? 'active ' : '' ?>right"><label for="dropToggle02"><a>Administration
+                        <span class="dropIcon">▾</span>
+                        <label title="toggle dropDown" class="dropIcon" for="dropToggle02">▾</label>
+                    </a>
+                </label>
+                <input type="checkbox" id="dropToggle02">
+                <ul class="subNav">
+                    <li><a href="index.php?c=accounts&a=myspace">Mein Konto</a></li>
+                    <li><a href="index.php?c=products&a=new">Neues Produkt anlegen</a>
+                    <li><a href="index.php?c=accounts&a=adminusermanagement">Benutzer verwalten</a></li>
+                </ul>
+            </li>
+            <?php else : ?>
+            <li class="right">
+                <a href="index.php?c=accounts&a=myspace">Mein Konto</a>
+            </li>
+            <?php endif ?>
+        <?php endif ?>
+
+        
+
+        <li <?= ($currentPosition == 'shoppingcart') ? 'class="right active"' : 'class="right"' ?>><a
+                href="index.php?c=orders&a=shoppingcart">Warenkorb <img src="assets\images\icons\shopping_cart.svg" alt="">
+        <?php if(!empty($cartCount)) : ?>
+            <span class="cartBadge"><p><?= $cartCount ?></p></span>
+        <?php endif ?></a></li>
+        
+        <li <?= ($currentPosition == 'impressum') ? 'class="right active"' : 'class="right"' ?>><a
+        href="index.php?c=pages&a=impressum">Impressum</a></li>
     </ul>
 </nav>
