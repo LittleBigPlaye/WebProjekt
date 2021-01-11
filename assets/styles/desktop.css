@@ -114,12 +114,11 @@
     .loginForm {
         width: 450px;
     }
-    .imageGallery {
-        width: 40%;
-    }
-    .productInformation {
+    .productViewWrapper {
+        background-color: white;
+        width: 50%;
         margin: 0 auto;
-        width: 40%
+        border-radius: 5px;
     }
     .errorPage img {
         width: 40%;

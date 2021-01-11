@@ -722,6 +722,18 @@ input[type=number] {
 
 /* Image Gallery */
 
+.productViewWrapper {
+    background-color: white;
+    width: 95%;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+.productViewWrapper h1 {
+    padding-top: 5px;
+    text-align: center;
+}
+
 .imageGallery {
     display: block;
     box-sizing: border-box;

@@ -105,11 +105,10 @@
              //check if password hash is valid
              if(password_verify($password, $hashed_password)){
                  $_SESSION['currentLogin'] = serialize($login);
-                 $_SESSION['loggedIn'] = true;
+                 $_SESSION['isLoggedIn'] = true;
                  $_SESSION['userID'] = $login->userID;
                  header('Location: index.php?c=pages&a=index');
                  //TODO: Bitte anschauen, was die Funktion loggedIn im Controller macht und korrigieren
-
              }
              else{
                  $errorMessage="Deine Logindaten stimmen nicht überein";

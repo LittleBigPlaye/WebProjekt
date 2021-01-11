@@ -14,12 +14,10 @@ abstract class Controller
     {
         $this->controllerName = $controllerName;
         $this->actionName     = $actionName;
-
-        if($this->isLoggedIn())
+        
+        if($this->isLoggedIn() && isset($_SESSION['currentLogin']))
         {
-            //TODO: stuff, when user is logged in
-            //TODO: store current user in $currentUser
-            
+            $this->currentLogin = unserialize($_SESSION['currentLogin']);
         }
     }
 
@@ -31,9 +29,7 @@ abstract class Controller
 
     public function isAdmin()
     {
-        //TODO: remove next line when login is done and uncomment the other return
-        return true;
-        //return ($this->isLoggedIn() && $this->currentLogin->user->role === 'admin');
+        return ($this->isLoggedIn() && $this->currentLogin->user->role === 'admin');
     }
 
     public function renderView()
