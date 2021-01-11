@@ -66,15 +66,23 @@ abstract class Controller
 
     protected function addToCart($productID)
      {
-            if(\myf\models\Product::findOne('id=' . $productID) !== null)
+        //check if the given Product ID is an valid id
+        if(\myf\models\Product::findOne('id=' . $productID . ' AND isHidden=false') !== null)
+        {
+            if(!isset($_SESSION['shoppingCart']))
             {
-                if(!isset($_SESSION['cartInfos']))
-                {
-                    $_SESSION['cartInfos']= array(); //erzeugt ein leeres Array
-                }
-
-                array_push($_SESSION['cartInfos'], $productID);
+                $_SESSION['shoppingCart'] = array(); 
             }
-
+            //check if the current Product has already been added to the shopping cart
+            if(isset($_SESSION['shoppingCart'][$productID]))
+            {
+                //increase quantity
+                $_SESSION['shoppingCart'][$productID]++;
+            }
+            else
+            {
+                $_SESSION['shoppingCart'][$productID] = 1;
+            }
+        }
      }
 }

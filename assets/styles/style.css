@@ -421,12 +421,12 @@ form input[type=submit]:hover {
 
 /* remove arrows from number input */
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+.formWrapper input::-webkit-outer-spin-button,
+.formWrapper input::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
 
-form input[type=number] {
+.formWrapper form input[type=number] {
     -moz-appearance: textfield;
 }
 
@@ -758,8 +758,10 @@ form label {
     background-color: #474747;
 }
 
+
 /*Src for all buttons*/
-.buttonForAll{
+
+.buttonForAll {
     width: 90%;
     color: #FFF;
     background-color: #eb7d00;
@@ -776,16 +778,20 @@ form label {
 
 
 /*Table for adminUserManagement*/
-.table-row:nth-child(1) {background: #eb7d00}
 
-.table{
+.table-row:nth-child(1) {
+    background: #eb7d00
+}
+
+.table {
     display: table;
     border: #191919;
     background: white;
-    margin:auto ;
+    margin: auto;
     border-radius: 5px 5px 0px 0px;
     padding: 0.5em;
 }
+
 .table-row {
     display: table-row;
     padding: 1em;
@@ -796,10 +802,38 @@ form label {
     border: #191919;
     border-spacing: 0.5em;
     vertical-align: middle;
-
 }
 
-.table-header{
+.table-header {
     display: table-header-group;
 }
 
+.cartListing {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.cartListing .cartEntry {
+    background-color: white;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+.cartEntry img {
+    display: inline-block;
+    padding: 10px;
+    max-height: 300px;
+    width: 30%;
+}
+
+.cartTotal {
+    position: sticky;
+    bottom: 0;
+    z-index: +100;
+    bottom: 0;
+    width: 95%;
+    margin: 0 auto;
+    padding: 5px;
+    background-color: white;
+    border-radius: 5px 5px 0px 0px;
+}
