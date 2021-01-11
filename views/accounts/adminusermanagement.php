@@ -1,47 +1,88 @@
-<?php foreach($logins as $login) : ?>
-<form method="post" action="?c=accounts&a=adminusermanagement">
-    <label for="user<?=$login->id?>">LoginID: <?= $login->__get('user')->id ?></label>
-    <input id="user" name="user" value="<?= $login->__get('user')->id ?>" hidden>
-    <br>
-    <label for="user<?=$login->id?>">Vorname: <?= $login->__get('user')->firstName ?></label>
-    <br>
-    <label for="user<?=$login->id?>">Nachname: <?= $login->__get('user')->lastName ?></label>
-    <br>
-    <label>Auswahlfeld Rolle</label>
-    <select name="role">
-        <option value="admin"
-            <?= ($login->__get('user')->role === 'admin') ? 'selected' : '' ?>
-        >Admin</option>
-        <option value="user"
-            <?= ($login->__get('user')->role === 'user') ? 'selected' : '' ?>
-        >Nutzer</option>
-    </select>
-    <br>
-    <label>Auswahlfeld validated</label>
-    <select name="validated">
-        <option value="1"
-            <?= ($login->validated) ? 'selected' : '' ?>
-        >validated</option>
-        <option value="0"
-            <?= ($login->validated) ? '' : 'selected' ?>
-        >unvalidated</option>
-    </select>
-    <br>
-    <label>Auswahlfeld enabled</label>
-    <select name="enabled">
-        <option value="1"
-            <?= ($login->enabled) ? 'selected' : '' ?>
-        >enabled</option>
-        <option value="0"
-            <?= ($login->enabled) ? '' : 'selected' ?>
-        >disabled</option>
-    </select>
-    <br>
-    <label for="passwordReset">Passwort zurücksetzen?</label>
-    <input type="checkbox" id="passwordReset" name="passwordReset" >
-    <br>
-    <button type="submit" name="saveChanges">Änderung Speichern</button>
-    <br>
-    <hr>
-</form>
-<?php endforeach ?>
+
+
+
+        <?php foreach($logins as $login) : ?>
+        <form class="formWrapper"  method="post" action="?c=accounts&a=adminusermanagement">
+            <div class="table">
+                <div class="table-row">
+                    <div class="table-cell">
+                        <div class="table-header"> LoginID </div>
+                    </div>
+                    <div class="table-cell">
+                        <div class="table-header"> Vorname </div>
+                    </div>
+                    <div class="table-cell">
+                        <div class="table-header"> Nachname </div>
+                    </div>
+                    <div class="table-cell">
+                        <div class="table-header"> Rolle </div>
+                    </div>
+                    <div class="table-cell">
+                        <div class="table-header"> Validated </div>
+                    </div>
+                    <div class="table-cell">
+                        <div class="table-header"> Enabled </div>
+                    </div>
+                    <div class="table-cell">
+                        <div class="table-header"> Passwort zurücksetzen </div>
+                    </div>
+
+                </div>
+
+                <div class="table-row">
+            <div class="table-cell">
+                <div> <?= $login->__get('user')->id ?> </div>
+                <input type="hidden" id="user" name="user" value="<?= $login->__get('user')->id ?>" >
+            </div>
+            <div class="table-cell">
+                <div> <?= $login->__get('user')->firstName ?>  </div>
+            </div>
+            <div class="table-cell">
+                <div> <?= $login->__get('user')->lastName ?>  </div>
+            </div>
+            <div class="table-cell">
+                <div>
+                    <select name="role">
+                        <option value="admin"
+                            <?= ($login->__get('user')->role === 'admin') ? 'selected' : '' ?>
+                        >Admin</option>
+                        <option value="user"
+                            <?= ($login->__get('user')->role === 'user') ? 'selected' : '' ?>
+                        >Nutzer</option>
+                    </select>
+                </div>
+            </div>
+            <div class="table-cell">
+                <select name="validated">
+                        <option value="1"
+                            <?= ($login->validated) ? 'selected' : '' ?>
+                        >validated</option>
+                        <option value="0"
+                            <?= ($login->validated) ? '' : 'selected' ?>
+                        >unvalidated</option>
+                </select>
+
+            </div>
+            <div class="table-cell">
+                <select name="enabled">
+                    <option value="1"
+                        <?= ($login->enabled) ? 'selected' : '' ?>
+                    >enabled</option>
+                    <option value="0"
+                        <?= ($login->enabled) ? '' : 'selected' ?>
+                    >disabled</option>
+                </select>
+            </div>
+            <div class="table-cell">
+                <div> <input type="checkbox" id="passwordReset" name="passwordReset" > </div>
+            </div>
+            <div class="table-cell">
+                <button class="buttonForAll" type="submit" name="saveChanges">Änderung Speichern</button>
+            </div>
+        </div>
+            </div>
+        </form>
+        <?php endforeach ?>
+
+
+

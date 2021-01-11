@@ -118,59 +118,68 @@ class accountsController extends Controller
 
     public function actionAdminusermanagement()
     {
-
-        if(isset($_POST['saveChanges']))
+        if($this->isAdmin())
         {
-            $enabled =$_POST['enabled']; //select
-            $validated = $_POST['validated']; //select
-            $passwordReset = isset($_POST['validated']); //checkbox
-            $loginID = $_POST['user'];
-            $userRole = $_POST['role'];
-
-            $loginUpdate = Login::findOne('userID='.$loginID);
-
-            if($enabled === '1')
+            if(isset($_POST['saveChanges']))
             {
-                $loginUpdate->enabled = 1;
-            }
-            else
-            {
-                $loginUpdate->enabled = 0;
-            }
+                $enabled =$_POST['enabled']; //select
+                $validated = $_POST['validated']; //select
+                $passwordReset = isset($_POST['passwordReset']); //checkbox
+                $loginID = $_POST['user'];
+                $userRole = $_POST['role'];
 
-            if($validated === '1')
-            {
-                $loginUpdate->validated = 1;
-            }
-            else
-            {
-                $loginUpdate->validated = 0;
-            }
+                $loginUpdate = Login::findOne('userID='.$loginID);
 
-            if($passwordReset === true)
-            {
-                $loginUpdate->passwordResetHash = password_hash('P@ssw0rd01', PASSWORD_DEFAULT);
-            }
+                if($enabled === '1')
+                {
+                    $loginUpdate->enabled = 1;
+                }
+                else
+                {
+                    $loginUpdate->enabled = 0;
+                }
 
-            if($userRole === 'admin')
-            {
-                $loginUpdate->user->role = 'admin';
-            }
-            else
-            {
-                $loginUpdate->user->role = 'user';
-            }
+                if($validated === '1')
+                {
+                    $loginUpdate->validated = 1;
+                }
+                else
+                {
+                    $loginUpdate->validated = 0;
+                }
 
-            $loginUpdate->save();
-            $loginUpdate->user->save();
+                if($passwordReset === true)
+                {
+                    $loginUpdate->passwordResetHash = password_hash('P@ssw0rd01', PASSWORD_DEFAULT);
+                }
 
-        }
+                if($userRole === 'admin')
+                {
+                    $loginUpdate->user->role = 'admin';
+                }
+                else
+                {
+                    $loginUpdate->user->role = 'user';
+                }
+
+                $loginUpdate->save();
+                $loginUpdate->user->save();
+
+            }
 
             $users = User::find();
             $logins = Login::find();
 
             $this->setParam('users',$users);
             $this->setParam('logins',$logins);
+        }
+        else
+        {
+            header('location: index.php?c=pages&a=login');
+        }
+
+
+
     }
 
     public function actionMySpace ()

@@ -19,6 +19,5 @@
         Fantasieweg 1337
         <br>
         121212 Knechtschaftsburg
-
     </div>
 </footer>
