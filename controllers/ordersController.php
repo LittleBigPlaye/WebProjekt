@@ -75,6 +75,11 @@ class ordersController extends Controller
         if(isset($_SESSION['currentOrder']))
         {
             $order = unserialize($_SESSION['currentOrder']);
+            $this->setParam('totalPrice', $order->calculateTotalPrice());
+        }
+        else
+        {
+            header('Location: index.php?c=orders&a=shoppingcart');
         }
 
         if(isset($_POST['submitOrder']) && $order !== null)
@@ -95,7 +100,9 @@ class ordersController extends Controller
             $_SESSION['orderSuccess'] = 'Ihre Bestellung mit der Bestellnummer ' . $order->id . 'Ist erfolgreich bei uns eingegangen!';
         }
 
-        $this->setParam('totalPrice', $order->calculateTotalPrice());
+        $this->setParam('user', $this->currentLogin->user);
+        $this->setParam('address', $this->currentLogin->user->addresses);
+        
         $this->setParam('order', $order);
     }
 }

@@ -36,9 +36,21 @@ class User extends BaseModel
         {
             if($this->addresses == null)
             {
-                $this->addresses = Address::findOne('id=' .$this->adressID);
+                $this->addresses = Address::findOne('id=' .$this->addressID);
             }
             return $this->addresses;
+        }
+        else if ($key == 'salutation')
+        {
+            switch($this->gender)
+            {
+                case 'm':
+                    return 'Herr';
+                case 'f':
+                    return 'Frau';
+                default:
+                    return '';
+            }
         }
         else
         {
