@@ -46,7 +46,7 @@ else if ($cartCount > 99) {
                 href="?c=pages&a=login">Login</a></li>
 
         <li <?= ($currentPosition == 'login') ? 'class="right active"' : 'class="right"' ?>><a
-        href="?c=pages&a=login">Logout</a></li>
+        href="?c=pages&a=logout">Logout</a></li>
 
         <!-- Administration -->
         <li class="<?= ($currentPosition == 'administration') ? 'active ' : '' ?>right"><label for="dropToggle02"><a>Administration

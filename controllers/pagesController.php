@@ -73,6 +73,12 @@
 
      public function actionLogin()
      {
+
+         if($this->isLoggedIn())
+         {
+             header('Location: index.php?c=pages&a=index');
+         }
+
         $this->setParam('currentPosition', 'login');
         //store error message
          $errorMessage = '';
@@ -133,8 +139,16 @@
          $this->setParam('errorMessage', $errorMessage);
      }
 
+     public function actionLogout()
+     {
+         if($this->isLoggedIn())
+         {
+             session_destroy();
+         }
+         else
+         {
+             header('Location: index.php?c=pages&a=index');
+         }
+     }
 
-
-
-     //TODO: logout action
  }
