@@ -111,7 +111,6 @@
                  $errorMessage = "Es existiert kein Benutzer mit dieser Email";
              }
 
-
                  //check if password hash is valid
                  if(password_verify($password, $hashed_password)) {
                      $_SESSION['currentLogin'] = serialize($login);
@@ -119,10 +118,16 @@
                      $_SESSION['userID'] = $login->userID;
                      header('Location: index.php?c=pages&a=index');
                      $login->passwordResetHash= "";
+                     $login->failedLoginCount=0;
+                     $login->lastLogin=date('Y-m-d H:i:s');
                      $login->save();
                  }
                  else{
+                     $login->failedLoginCount++;
+                     $login->save();
                      $errorMessage = "Deine Logindaten stimmen nicht überein";
+
+                     //$login->failedLoginCount+1;
                  }
              }
 
