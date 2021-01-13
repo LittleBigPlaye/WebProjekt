@@ -125,3 +125,4 @@
     </form>
 </div>
 <?php endif ?>
+<? include (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'upButton.php') ?>

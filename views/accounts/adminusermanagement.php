@@ -84,5 +84,5 @@
         </form>
         <?php endforeach ?>
 
-
+        <? include (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'upButton.php') ?>
 

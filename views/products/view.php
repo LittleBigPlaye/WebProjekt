@@ -60,3 +60,4 @@
         <a href="?c=products&a=edit&pid=<?= htmlspecialchars($product->id)?>">Produkt bearbeiten</a>
     </div>
 </div>
+<? include (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'upButton.php') ?>

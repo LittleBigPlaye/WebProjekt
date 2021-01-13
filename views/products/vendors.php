@@ -24,3 +24,4 @@
             </div>
         </div>
     <?php endforeach ?>
+<? include (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'upButton.php') ?>

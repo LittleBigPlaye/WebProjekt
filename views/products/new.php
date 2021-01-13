@@ -78,3 +78,4 @@
         <input type="submit" name="submit" value="Produkt anlegen"/>
     </form>
 </div>
+<? include (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'upButton.php') ?>

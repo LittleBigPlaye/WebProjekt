@@ -125,3 +125,4 @@
     <!-- Button to go to last product List -->
     <a href="index.php?<?=$getString?>&page=<?=$numberOfPages?>">&raquo;</a>
 </div>
+<? include (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'upButton.php') ?>
