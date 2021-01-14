@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" id="prod<?=$product->id?>">
         <div class="container">
         <div class="productPreview">
         <img src="
@@ -14,7 +14,7 @@
             ?>">
             <br>
             <?php if(!$product->isHidden) : ?>
-                <form method="POST">
+                <form method="POST" action="#prod<?=$product->id?>">
                     <button class="iconButton" type="submit" name="addToCart" value="<?=$product->id?>"><img src="assets\images\icons\shopping_cart.svg"/></button>
                 </form>
             <?php endif ?>
@@ -23,7 +23,6 @@
             <b><?= htmlspecialchars($product->productName) ?></b><br>
             <i><?= htmlspecialchars($product->catchPhrase) ?><br></i>
             <b><?= htmlspecialchars($product->standardPrice . ' €')?></b><br>
-            <a href="?c=products&a=view&pid=<?= htmlspecialchars($product->id) ?>">Anzeigen</a>
-            
+            <a href="index.php?c=products&a=view&pid=<?= htmlspecialchars($product->id) ?>">Anzeigen</a>
         </div>
     </div>

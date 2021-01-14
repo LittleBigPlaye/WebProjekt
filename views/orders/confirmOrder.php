@@ -1,24 +1,41 @@
-<h1>Bestellung absenden</h1>
+<div class="formWrapper">
+    <form action method="POST">      
+        <h1>Bestellung absenden</h1>
 
-<p>Bitte prüfen Sie vor dem Absenden der Bestellung, ob die nachfolgenden Angaben korrekt sind!</p>
+        <p>Bitte prüfen Sie vor dem Absenden der Bestellung, ob die nachfolgenden Angaben korrekt sind!</p>
 
-<h2>Empfänger</h2>
-<?= htmlspecialchars($user->salutation . ' ' . $user->firstName . ' ' . $user->secondName . ' ' . $user->lastName)?><br>
-<?= htmlspecialchars($address->street . ' ' . $address->streetNumber)?><br>
-<?= htmlspecialchars($address->zipCode . ' ' . $address->city)?><br>
-<!-- Hier Adresse anzeigen -->
+        <h2>Empfänger</h2>
+        <?= htmlspecialchars($user->salutation . ' ' . $user->firstName . ' ' . $user->secondName . ' ' . $user->lastName)?><br>
+        <?= htmlspecialchars($address->street . ' ' . $address->streetNumber)?><br>
+        <?= htmlspecialchars($address->zipCode . ' ' . $address->city)?><br>
+        <!-- Hier Adresse anzeigen -->
 
-<h2>Positionen</h2>
-<?php foreach ($order->orderItems as $orderItem):?>
-    Bezeichnung: <?=$orderItem->product->productName?><br>
-    Artikelnummer: <?=$orderItem->product->id?><br>
-    Anzahl: <?=$orderItem->quantity?> Stück<br>
-    Preis: <?=$orderItem->actualPrice?> €<br>
-    <hr>
-<?php endforeach; ?>
+        <h2>Positionen</h2>
+        <div class="confirmTable">
+            <div class="tableRow head">
+                <div class="tableCell">Bezeichnung</div>
+                <div class="tableCell right">Artikelnummer</div>
+                <div class="tableCell right">Anzahl</div>
+                <div class="tableCell right">Preis</div>
+            </div>
 
-Gesamtpreis: <?=$totalPrice ?>
 
-<form action method="POST">
-    <input type="submit" name="submitOrder" value="Zahlungspflichtig bestellen">
-</form>
+            <?php foreach ($order->orderItems as $orderItem):?>
+                <div class="tableRow">
+                    <div class="tableCell"><?=htmlspecialchars($orderItem->product->productName)?></div>
+                    <div class="tableCell right"><?=htmlspecialchars(str_pad($orderItem->product->id, 12, '0', STR_PAD_LEFT))?></div>
+                    <div class="tableCell right"><?=htmlspecialchars($orderItem->quantity)?> Stück</div>
+                    <div class="tableCell right"><?=htmlspecialchars($orderItem->actualPrice)?> €</div>
+                </div>
+            <?php endforeach; ?>
+        
+            <div class="tableRow head">
+                    <div class="tableCell"></div>
+                    <div class="tableCell"></div>
+                    <div class="tableCell right">Gesamtpreis</div>
+                    <div class="tableCell right"><?=htmlspecialchars($totalPrice) ?> €</div>
+            </div>
+        </div>
+        <input type="submit" name="submitOrder" value="Zahlungspflichtig bestellen">
+    </form>
+</div>

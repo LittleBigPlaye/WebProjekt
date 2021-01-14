@@ -761,7 +761,8 @@ form label {
 
 /*Src for all buttons*/
 
-.buttonForAll {
+
+/* .buttonForAll {
     width: 90%;
     color: #FFF;
     background-color: #eb7d00;
@@ -774,7 +775,7 @@ form label {
     transition: .2s ease-in-out;
     margin-right: auto;
     margin-left: auto;
-}
+} */
 
 
 /*Table for adminUserManagement*/
@@ -836,4 +837,39 @@ form label {
     padding: 5px;
     background-color: white;
     border-radius: 5px 5px 0px 0px;
+}
+
+
+/* orderListing */
+
+.confirmTable {
+    display: table;
+    /* border-spacing: 0.5em; */
+    text-align: center;
+    width: 100%;
+}
+
+.confirmTable .tableRow {
+    display: table-row;
+}
+
+.confirmTable .tableRow:nth-child(even) {
+    background-color: #b9b9b9;
+}
+
+.confirmTable .head {
+    font-weight: bold;
+    color: white;
+    background-color: #363636
+}
+
+.confirmTable .tableCell {
+    padding: 5px;
+    display: table-cell;
+    text-align: left;
+    width: 25%;
+}
+
+.confirmTable .right {
+    text-align: right;
 }
