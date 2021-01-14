@@ -1,4 +1,5 @@
 <h1>Impressum</h1>
-<p>Wahnsinn, hier ist das Impressum - steht nur nix drinnen...</p>
+<p>Hier geht es zur Dokumentation
+</p>
 
 <? include (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'upButton.php') ?>
