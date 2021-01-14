@@ -27,7 +27,7 @@ class accountsController extends Controller
             $secondName     = $_POST['secondName']  ?? "";
             $lastName       = $_POST['lastName']  ?? "";
             $email          = $_POST['email'];
-            $password       = password_hash($_POST['password'],PASSWORD_DEFAULT)  ?? "";
+            $password       = $_POST['password']  ?? "";
             $password2      = $_POST['password2']  ?? "";
             $gender         = $_POST['gender']  ?? "";
             $birthdate      = $_POST['birthdate']  ?? "";
@@ -46,69 +46,78 @@ class accountsController extends Controller
             }
             else
             {
-                if(!password_verify($password2,$password)){
-                    $errorMessage = "Schau mal Passwort";
-                }
-                else{
-                    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                        $errorMessage = "Ungültige Eingabe";
+                if(preg_match('/[A-Za-z\d$!^(){}?\[\]<>~%@#&*+=_-]{8,40}$/', $password))
+                {
+                    $savePassword=password_hash($password,PASSWORD_DEFAULT);
+                    if(!password_verify($password2,$savePassword)){
+                        $errorMessage = "Schau mal Passwort";
                     }
                     else{
-                        if(Login::findOne('email LIKE'.$db->quote($email)) !== null)
-                        {
-                            $errorMessage = "Der Benutzer existiert bereits.";
+                        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                            $errorMessage = "Ungültige Eingabe";
                         }
-                        else
-                        {
-                            $address = Address::findOne("street=".$db->quote($street)." AND streetnumber=".$db->quote($streetNumber).
-                                " AND city=".$db->quote($city)." AND zipCode=".$db->quote($zipCode));
-
-                            if($address !== null)
+                        else{
+                            if(Login::findOne('email LIKE'.$db->quote($email)) !== null)
                             {
-                                $adressID = $address->id;
+                                $errorMessage = "Der Benutzer existiert bereits.";
                             }
                             else
                             {
-                                $adressData=array(
-                                    'street'=> $street,
-                                    'streetNumber' => $streetNumber,
-                                    'city' => $city,
-                                    'zipCode' => $zipCode);
-                                $adress = new Address($adressData);
-                                $adress->save();
-                                $adressID = $adress->id;
+                                $address = Address::findOne("street=".$db->quote($street)." AND streetnumber=".$db->quote($streetNumber).
+                                    " AND city=".$db->quote($city)." AND zipCode=".$db->quote($zipCode));
+
+                                if($address !== null)
+                                {
+                                    $adressID = $address->id;
+                                }
+                                else
+                                {
+                                    $adressData=array(
+                                        'street'=> $street,
+                                        'streetNumber' => $streetNumber,
+                                        'city' => $city,
+                                        'zipCode' => $zipCode);
+                                    $adress = new Address($adressData);
+                                    $adress->save();
+                                    $adressID = $adress->id;
+                                }
+
+
+                                $userData = array(
+                                    'firstName' => $firstName,
+                                    'secondName' => $secondName,
+                                    'lastName' => $lastName,
+                                    'gender' => $gender,
+                                    'birthDate' => $birthdate,
+                                    'addressID' => $adressID);
+                                $user = new User($userData);
+                                $user->save();
+                                $user->id;
+
+                                $validated = true;
+                                $enabled   = true;
+                                $failedLoginCount = 0;
+
+                                $loginData = array(
+                                    'validated' => $validated,
+                                    'enabled' => $enabled,
+                                    'email' => $email,
+                                    'failedLoginCount' => $failedLoginCount,
+                                    'passwordHash' => $password,
+                                    'userID' => $user->id);
+                                $login = new Login($loginData);
+                                $login->save();
                             }
-
-
-                            $userData = array(
-                                                'firstName' => $firstName,
-                                                'secondName' => $secondName,
-                                                'lastName' => $lastName,
-                                                'gender' => $gender,
-                                                'birthDate' => $birthdate,
-                                                'addressID' => $adressID);
-                            $user = new User($userData);
-                            $user->save();
-                            $user->id;
-
-                            $validated = true;
-                            $enabled   = true;
-                            $failedLoginCount = 0;
-
-                            $loginData = array(
-                                                'validated' => $validated,
-                                                'enabled' => $enabled,
-                                                'email' => $email,
-                                                'failedLoginCount' => $failedLoginCount,
-                                                'passwordHash' => $password,
-                                                'userID' => $user->id);
-                            $login = new Login($loginData);
-                            $login->save();
                         }
+
+
                     }
-
-
                 }
+                else
+                {
+                    $errorMessage = 'Das Passwort entspricht nicht den Anforderungen. Mindestens 8 Zeichen, Groß-, Kleinbuchstaben, Ziffern und Sonderzeichen';
+                }
+
             }
 
 
@@ -214,15 +223,41 @@ class accountsController extends Controller
     {
         $errorMessage = "";
 
+        $userID = $_SESSION['userID'];
 
-        if(isset($_POST['changePaddword']))
+        if(isset($_POST['changePassword']))
         {
-            $newPassword1 = password_hash($_POST['newPassword1'] ?? "",PASSWORD_DEFAULT);
+            $newPassword1 = $_POST['newPassword1'] ?? "";
             $newPassword2 = $_POST['newPassword2'] ?? "";
+
+            if (preg_match('/[A-Za-z\d$!^(){}?\[\]<>~%@#&*+=_-]{8,40}$/', $newPassword1))
+            {
+                $savePassword=password_hash($newPassword1,PASSWORD_DEFAULT);
+                if(password_verify($newPassword2,$savePassword))
+                {
+                    $updateLogin=Login::findOne('userID='.$userID);
+
+                    $updateLogin->passwordHash = $savePassword;
+
+                    /*echo '<pre>';
+                    var_dump($newPassword1);
+                    echo '</pre>';*/
+                   $updateLogin->save();
+                    $succesMessage = "Das war super!";
+                }
+                else
+                {
+                    $errorMessage = 'Die Passwörter stimmen nicht überein';
+                }
+            }
+            else
+            {
+                $errorMessage = 'Das Passwort entspricht nicht den Anforderungen. Mindestens 8 Zeichen, Groß-, Kleinbuchstaben, Ziffern und Sonderzeichen';
+            }
         }
 
 
-        $succesMessage = "Das war super!";
+
 
         $this->setParam('errorMessage', $errorMessage);
         $this->setParam('succesMessage', $succesMessage);
@@ -230,12 +265,109 @@ class accountsController extends Controller
 
     public function actionChangePersonalData()
     {
+        $errorMessage = '';
+        $succesMessage = '';
+
+        $userID = $_SESSION['userID'];
+
+        $firstName = $_POST['firstName'] ?? '';
+        $secondName = $_POST['secondName'] ?? '';
+        $lastName = $_POST['lastName'] ?? '';
+        $birthDate = $_POST['birthDate'] ?? '';
+        $gender = $_POST['gender'] ?? '';
+        $phone = $_POST['phone'] ?? '';
+
+        $userData = User::findOne('id='.$userID);
+
+        $this->setParam('user',$userData);
+
+        if(isset($_POST['changePersona']))
+        {
+            if(empty($firstName) || empty($lastName) || empty($birthDate) )
+            {
+
+                $errorMessage = 'Nicht alle nötigen Felder sind ausgefüllt';
+
+            }
+            else
+            {
+
+                $userData->firstName = $firstName;
+                $userData->secondName = $secondName;
+                $userData->lastName = $lastName;
+                $userData->birthDate = $birthDate;
+                $userData->gender = $gender;
+                $userData->phone = $phone;
+
+                $userData->save();
+                $succesMessage = "Änderungen sind gespeichert!";
+            }
+        }
+
+        $this->setParam('errorMessage', $errorMessage);
+        $this->setParam('succesMessage', $succesMessage);
 
     }
 
     public function actionChangeAddress()
     {
+        $errorMessage = '';
+        $succesMessage = '';
 
+        $db = $GLOBALS['database'];
+
+        $userID = $_SESSION['userID'];
+
+        $street = $_POST['street'] ?? '';
+        $streetNumber = $_POST['streetNumber'] ?? '';
+        $city = $_POST['city'] ?? '';
+        $zipCode = $_POST['zipCode'] ?? '';
+
+        $userData=User::findOne('id='.$userID);
+        $addressAtStart=Address::findOne('id='.$userData->addressID);
+        $this->setParam('address',$addressAtStart);
+        
+        if(isset($_POST['changeAddress'])){
+
+            if(empty($street) || empty($streetNumber) || empty($city) || empty($zipCode) ) {
+                $errorMessage = 'Nicht alle nötigen Felder sind ausgefüllt';
+            }
+            else{
+                
+                $address = Address::findOne("street=".$db->quote($street)." AND streetnumber=".$db->quote($streetNumber).
+                    " AND city=".$db->quote($city)." AND zipCode=".$db->quote($zipCode));
+
+                if($address !== null)
+                {
+                    $adressID = $address->id;
+                    $succesMessage = 'Keine Änderungen nötig';
+                    
+                }
+                else
+                {
+                    $adressData=array(
+                        'street'=> $street,
+                        'streetNumber' => $streetNumber,
+                        'city' => $city,
+                        'zipCode' => $zipCode);
+                    $adress = new Address($adressData);
+                    $adress->save();
+                    $adressID = $adress->id;
+                    
+                    
+                    $userData->addressID = $adressID;
+                    $userData->save();
+                    $this->setParam('address',$adress);
+                    $succesMessage = 'Änderungen erfolgreich gespeichert';
+                }
+            }
+            
+            
+        }
+        
+
+        $this->setParam('errorMessage', $errorMessage);
+        $this->setParam('succesMessage', $succesMessage);
     }
 
 }
