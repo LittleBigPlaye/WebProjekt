@@ -27,9 +27,17 @@
         <input id="birthDate" name="birthDate" type="date" value="<?=$user->birthDate?>">
         <br>
         <label for="gender">Geschlecht</label>
-        <input type="radio" id="female" value="f" name="gender"><label for="female" class="light">Frau</label><br>
-        <input type="radio" id="male" value="m" name="gender"><label for="male" class="light">Mann</label><br>
-        <input type="radio" id="divers" value="u" name="gender"><label for="divers" class="light">Irgendwas anderes</label>
+        <select name="gender">
+            <option value="m"
+                <?= ($user->gender === "m") ? 'selected' : '' ?>
+            >männlich</option>
+            <option value="f"
+                <?= ($user->gender === "f") ? 'selected' : '' ?>
+            >weiblich</option>
+            <option value="u"
+                <?= ($user->gender === "u") ? 'selected' : '' ?>
+            >divers</option>
+        </select>
         <br>
         <br>
         <label for="phone">Telefonnummer</label>
