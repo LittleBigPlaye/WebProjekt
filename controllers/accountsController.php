@@ -324,7 +324,7 @@ class accountsController extends Controller
         $zipCode = $_POST['zipCode'] ?? '';
 
         $userData=User::findOne('id='.$userID);
-        $addressAtStart=Address::findOne('id='.$userData->addressID);
+        $addressAtStart=$userData->addresses;
         $this->setParam('address',$addressAtStart);
         
         if(isset($_POST['changeAddress'])){
