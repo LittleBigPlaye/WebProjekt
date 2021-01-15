@@ -44,12 +44,12 @@ abstract class Controller
         extract($this->params);
 
         
-        include (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'header.php');
-        include (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'navBar.php');
+        require_once (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'header.php');
+        require_once (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'navBar.php');
         
-        include ($viewPath);
+        require_once ($viewPath);
 
-        include (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'footer.php');
+        require_once (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'footer.php');
     }
 
     protected function setParam($key, $value = null)

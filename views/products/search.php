@@ -35,8 +35,8 @@
             <input type="hidden" name="sort" value="<?= $_GET['sort']?>">
         <?php endif ?>
 
-        <input id="s" name="s" type="search" placeholder="Suchbegriff eingeben..." value="<?= htmlspecialchars($_GET['s'] ?? '')?>"/>
-        <input type="submit" value="S">
+        <input id="search" name="s" type="search" placeholder="Suchbegriff eingeben..." value="<?= htmlspecialchars($_GET['s'] ?? '')?>"/>
+        <input id="searchSubmit" type="submit" value="S">
     </form>
 </div>
 
@@ -125,4 +125,6 @@
     <!-- Button to go to last product List -->
     <a href="index.php?<?=$getString?>&page=<?=$numberOfPages?>">&raquo;</a>
 </div>
+<script src="<?=JAVASCRIPTPATH . 'products' . DIRECTORY_SEPARATOR . 'shortenSearch.js'?>"></script>
+
 <? include (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'upButton.php') ?>

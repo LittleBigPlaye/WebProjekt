@@ -45,9 +45,11 @@
         <?php endif ?>
         
         <script src="assets/javascript/imageGallery.js"></script>
-        <form method="POST" action="index.php?c=products&a=view&pid=<?=$product->id?>">
-                <button class="iconButton" type="submit" name="addToCart" value="<?=$product->id?>"><img src="assets\images\icons\shopping_cart.svg"/></button>
-        </form>
+        <?php if(!$product->isHidden) : ?>
+            <form method="POST" action="index.php?c=products&a=view&pid=<?=$product->id?>">
+                    <button class="iconButton" type="submit" name="addToCart" value="<?=$product->id?>"><img src="assets\images\icons\shopping_cart.svg"/></button>
+            </form>
+        <?php endif; ?>
     </div>
 
     <!-- product text -->

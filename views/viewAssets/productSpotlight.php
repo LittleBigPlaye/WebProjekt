@@ -33,5 +33,5 @@
         <span class="dot" onclick="currentSlide(<?=$i?>)"></span>
         <?php endfor ?>
     </div>
-    <script src="./assets/javascript/slideshow.js"></script>
+    <script src="<?=JAVASCRIPTPATH . 'pages' . DIRECTORY_SEPARATOR . 'index.js'?>"></script>
 </div>
