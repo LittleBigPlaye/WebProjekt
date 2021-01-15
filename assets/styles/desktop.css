@@ -158,45 +158,6 @@
         font-size: 1.3em;
         transition: .2s ease-in-out;
     }
-    /*Src for all buttons*/
-    .buttonForAll {
-        width: 200px;
-        color: #FFF;
-        background-color: #eb7d00;
-        border-radius: 5px;
-        border: none;
-        margin-bottom: 10px;
-        padding: 10px 0px;
-        cursor: pointer;
-        font-size: 1em;
-        transition: .2s ease-in-out;
-    }
-    /*Table for adminUserManagement*/
-    .table-row:nth-child(1) {
-        background: #eb7d00
-    }
-    .table {
-        display: table;
-        border: #191919;
-        background: white;
-        margin: auto;
-        border-radius: 5px 5px 0px 0px;
-        padding: 0.5em;
-    }
-    .table-row {
-        display: table-row;
-        padding: 1em;
-    }
-    .table-cell {
-        display: table-cell;
-        border: #191919;
-        border-spacing: 0.5em;
-        vertical-align: middle;
-        font-size: 1.3em;
-    }
-    .table-header {
-        display: table-header-group;
-    }
     .input .errorInfo {
         min-width: 10%;
         max-width: 50%;

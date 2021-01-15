@@ -11,7 +11,7 @@
         <!-- Hier Adresse anzeigen -->
 
         <h2>Positionen</h2>
-        <div class="confirmTable">
+        <div class="table orderConfirmation">
             <div class="tableRow head">
                 <div class="tableCell">Bezeichnung</div>
                 <div class="tableCell right">Artikelnummer</div>

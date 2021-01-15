@@ -5,6 +5,13 @@
             Das ist dein Konto <?=htmlspecialchars($user->firstName)?>
         </h1>
 
+        <?php if(isset($successMessage)) :?>
+            <div class="successMessage">
+                <span class="messageClose" onclick="this.parentElement.style.display='none';">&times</span>
+                <p><?=$successMessage?></p>
+            </div>
+        <?php endif ?>
+
         <h2>Persönliche Daten</h2>
 
         <section class="formWrapper">

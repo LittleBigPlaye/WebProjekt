@@ -10,7 +10,7 @@ namespace myf\core;
  */
 function validateNumberInput($number, $numberOfDecimals)
 {
-    if(is_numeric($number) && preg_match('/(^[1-9]+[0-9]*)| (^[0-9]+\.[0-9]{'.$numberOfDecimals.'}$)/', $number))
+    if(is_numeric($number) && preg_match('/^\d+(\.\d{1,'. $numberOfDecimals . '})?$/', $number))
     {
         return true;
     }

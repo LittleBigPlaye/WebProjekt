@@ -195,6 +195,14 @@ class accountsController extends Controller
 
     public function actionMySpace ()
     {
+        //check if there are any success messages in the session
+        if(isset($_SESSION['success']))
+        {
+            $successMessage = $_SESSION['success'];
+            unset($_SESSION['success']);
+            $this->setParam('successMessage', $successMessage);
+        }
+        
         $errormsg = '';
 
         $myOwnID = $_SESSION['userID'];

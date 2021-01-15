@@ -111,6 +111,8 @@ class ProductManagementController extends \myf\core\controller
                 $product->save();
                 //save success message to session to display in on product view
                 $_SESSION['productSuccess'] = 'Das Produkt "' . $name . '" wurde ergolgreich angelegt!';
+
+                $this->updateLastActiveTime();
                 //redirect to product page
                 header('Location: ?c=products&a=view&pid=' . $product->id);
             }
@@ -250,6 +252,9 @@ class ProductManagementController extends \myf\core\controller
                //save product to database
                $product->save();
                $_SESSION['productSuccess'] = 'Das Produkt "' . $name . '" wurde ergolgreich geändert!';
+               
+               $this->updateLastActiveTime();
+               
                //redirect to product page
                header('Location: ?c=products&a=view&pid=' . $product->id);
            }

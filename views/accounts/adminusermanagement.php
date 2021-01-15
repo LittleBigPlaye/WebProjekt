@@ -1,6 +1,6 @@
 <div class="formWrapper">
     <div>
-        <div class="confirmTable">
+        <div class="table usermanagent">
             <div class="tableRow head">
                 <div class="tableCell">LoginID</div>
                 <div class="tableCell center">Vorname</div>
@@ -13,12 +13,14 @@
             </div>
 
             <?php foreach($logins as $login) : ?>
-                <form method="post" action="?c=accounts&a=adminusermanagement">
-                    <div class="tableRow">
-                        <input id="user" name="user" class="tableCell" value="<?=htmlspecialchars($login->user->id)?>" </input>
+                <form class="tableRow" method="post">
+
+                        <div class="tableCell"><input id="user" name="user" value="<?=htmlspecialchars($login->user->id)?>"></div>
 
                         <div class="tableCell center"><?=htmlspecialchars($login->user->firstName)?></div>
+                        
                         <div class="tableCell center"><?=htmlspecialchars($login->user->lastName)?></div>
+                        
                         <div class="tableCell center">
                             <select name="role">
                                 <option value="admin"
@@ -29,6 +31,7 @@
                                 >Nutzer</option>
                             </select>
                         </div>
+
                         <div class="tableCell center">
                             <select name="validated">
                                 <option value="1"
@@ -39,23 +42,26 @@
                                 >unvalidated</option>
                             </select>
                         </div>
+
                         <div class="tableCell center">
                             <select name="enabled">
                                 <option value="1"
                                     <?= ($login->enabled) ? 'selected' : '' ?>
-                                >enabled</option>
+                                >aktiv</option>
                                 <option value="0"
                                     <?= ($login->enabled) ? '' : 'selected' ?>
-                                >disabled</option>
+                                >gesperrt</option>
                             </select>
                         </div>
+
                         <div class="tableCell center">
                             <div> <input type="checkbox" id="passwordReset" name="passwordReset" > </div>
                         </div>
+
                         <div class="tableCell center">
-                            <button class="buttonForAll" type="submit" name="saveChanges">Änderung Speichern</button>
+                            <input type="submit" class="buttonForAll" name="saveChanges" value="Änderungen speichern">
                         </div>
-                    </div>
+                    <!-- </div> -->
                 <!--<input type="hidden" id="user" name="user" value="<?/*= $login->user->id */?>">-->
                 </form>
             <?php endforeach ?>

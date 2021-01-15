@@ -342,7 +342,6 @@ p {
     padding: 15px;
     background-color: #ffffff;
     border-radius: 5px;
-    width: 90%;
     font-size: 1.3em;
 }
 
@@ -855,38 +854,47 @@ form label {
 
 /* orderListing */
 
-.confirmTable {
+.table {
     display: table;
     /* border-spacing: 0.5em; */
+    margin: 0 auto;
     text-align: center;
-    width: 100%;
+    width: 99%;
 }
 
-.confirmTable .tableRow {
+.table .tableRow {
     display: table-row;
 }
 
-.confirmTable .tableRow:nth-child(even) {
+.table .tableRow:nth-child(even):not(.head) {
     background-color: #b9b9b9;
 }
 
-.confirmTable .head {
+.table .head {
     font-weight: bold;
+    display: table-header-group;
     color: white;
     background-color: #363636
 }
 
-.confirmTable .tableCell {
+.table .tableCell {
     padding: 5px;
     display: table-cell;
     text-align: left;
+}
+
+.table.userManagement .tableCell {
+    max-width: 12%;
+}
+
+.table.orderCOnfirmation .tableCell {
     width: 25%;
 }
 
-.confirmTable .right {
+.table .right {
     text-align: right;
 }
 
-.confirmTable .center {
+.table .center {
     text-align: center;
 }

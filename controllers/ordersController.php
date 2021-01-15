@@ -95,9 +95,9 @@ class ordersController extends Controller
             //clear cart
             unset($_SESSION['shoppingCart']);
 
-            //TODO: Redirect to order listing in mySpace
             //header('Location: index.php?c=pages&a=login');
-            $_SESSION['orderSuccess'] = 'Ihre Bestellung mit der Bestellnummer ' . $order->id . 'Ist erfolgreich bei uns eingegangen!';
+            $_SESSION['success'] = 'Ihre Bestellung mit der Bestellnummer ' . str_pad($order->id,12,'0',STR_PAD_LEFT) . ' ist erfolgreich bei uns eingegangen!';
+            $this->updateLastActiveTime();
             header('Location: index.php?c=accounts&a=myspace');
         }
 

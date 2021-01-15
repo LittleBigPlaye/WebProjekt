@@ -33,6 +33,16 @@ abstract class Controller
         return ($this->isLoggedIn() && $this->currentLogin->user->role === 'admin');
     }
 
+    public function updateLastActiveTime()
+    {
+        if($this->currentLogin != null)
+        {
+            $this->currentLogin->lastActive = date('Y-m-d H:i:s');
+            echo date('Y-m-d H:i:s');
+            $this->currentLogin->save();
+        }
+    }
+
     public function renderView()
     {
         $viewPath = VIEWSPATH . $this->controllerName . DIRECTORY_SEPARATOR .  $this->actionName . '.php';
@@ -51,6 +61,8 @@ abstract class Controller
 
         require_once (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'footer.php');
     }
+
+
 
     protected function setParam($key, $value = null)
     {
