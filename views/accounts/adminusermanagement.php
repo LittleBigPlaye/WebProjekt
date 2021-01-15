@@ -1,6 +1,6 @@
 <div class="formWrapper">
     <div>
-        <div class="table usermanagent">
+        <div class="table userManagement">
             <div class="tableRow head">
                 <div class="tableCell">LoginID</div>
                 <div class="tableCell center">Vorname</div>
