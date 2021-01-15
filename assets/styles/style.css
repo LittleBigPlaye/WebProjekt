@@ -773,6 +773,8 @@ form label {
     margin: auto;
     border-radius: 5px 5px 0px 0px;
     padding: 0.5em;
+    table-layout: fixed;
+    width: 100%;
 }
 
 .table-row {
@@ -856,4 +858,8 @@ form label {
 
 .confirmTable .right {
     text-align: right;
+}
+
+.confirmTable .center {
+    text-align: center;
 }

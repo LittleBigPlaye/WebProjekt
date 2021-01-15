@@ -46,7 +46,7 @@ class accountsController extends Controller
             }
             else
             {
-                if(preg_match('/[A-Za-z\d$!^(){}?\[\]<>~%@#&*+=_-]{8,40}$/', $password))
+                if(preg_match('/^(?=.*?[A-Z])(?=.*?[a-z].*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/m', $password))
                 {
                     $savePassword=password_hash($password,PASSWORD_DEFAULT);
                     if(!password_verify($password2,$savePassword)){
@@ -230,7 +230,7 @@ class accountsController extends Controller
             $newPassword1 = $_POST['newPassword1'] ?? "";
             $newPassword2 = $_POST['newPassword2'] ?? "";
 
-            if (preg_match('/[A-Za-z\d$!^(){}?\[\]<>~%@#&*+=_-]{8,40}$/', $newPassword1))
+            if (preg_match('/^(?=.*?[A-Z])(?=.*?[a-z].*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/m', $newPassword1))
             {
                 $savePassword=password_hash($newPassword1,PASSWORD_DEFAULT);
                 if(password_verify($newPassword2,$savePassword))
@@ -252,7 +252,7 @@ class accountsController extends Controller
             }
             else
             {
-                $errorMessage = 'Das Passwort entspricht nicht den Anforderungen. Mindestens 8 Zeichen, Groß-, Kleinbuchstaben, Ziffern und Sonderzeichen';
+                $errorMessage = 'Das Passwort entspricht nicht den Anforderungen. Mindestens 8 Zeichen, Groß-, Kleinbuchstaben, 2 Ziffern und 2 Sonderzeichen';
             }
         }
 
