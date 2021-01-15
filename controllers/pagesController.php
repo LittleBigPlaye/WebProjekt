@@ -85,64 +85,66 @@
          $db= $GLOBALS['database'];
 
          //check if form is submitted
-         if(isset($_POST['submit']))
-         {
-             // Check if email is empty
-             if (empty(trim($_POST["user_email"])))
-             {
-                 $errorMessage = "Bitte gib eine Email an.";
-             } else {
-                 $email = trim($_POST["user_email"]);
-             }
+        if(isset($_POST['submit']))
+        {
+            // Check if email is empty
+            if (empty(trim($_POST["user_email"])))
+            {
+                $errorMessage = "Bitte gib eine Email an.";
+            } 
+            else
+            {
+                $email = trim($_POST["user_email"]);
+            }
 
-             $login = \myf\models\Login::findOne('email=' . $db->quote($email));
+            $login = \myf\models\Login::findOne('email=' . $db->quote($email));
 
-             // Check if password is empty
-             if (empty(trim($_POST["user_password"])))
-             {
-                 $errorMessage = "Bitte gib ein Passwort ein.";
-             }
-             else
-                 {
-                 if($login->passwordResetHash =="")
-                 {
-                     $hashed_password= $login->passwordHash;
-                 }
-                 else
-                     {
-                     $hashed_password = $login->passwordResetHash;
-                     }
-                 $password = $_POST["user_password"];
-             }
-             //check if user exists
-             if (Login::findOne('email LIKE' . $db->quote($email)) == null)
-             {
-                 $errorMessage = "Es existiert kein Benutzer mit dieser Email";
-             }
+            // Check if password is empty
+            if (empty(trim($_POST["user_password"])))
+            {
+                $errorMessage = "Bitte gib ein Passwort ein.";
+            }
+            else
+            {
+                if($login->passwordResetHash =="")
+                {
+                    $hashed_password= $login->passwordHash;
+                }
+                else
+                {
+                   $hashed_password = $login->passwordResetHash;
+                }
+                $password = $_POST["user_password"];
+            }
+            //check if user exists
+            if (Login::findOne('email LIKE' . $db->quote($email)) == null)
+            {
+                $errorMessage = "Es existiert kein Benutzer mit dieser Email";
+            }
 
-                 //check if password hash is valid
-                 if(password_verify($password, $hashed_password))
-                 {
-                     $_SESSION['currentLogin'] = serialize($login);
-                     $_SESSION['isLoggedIn'] = true;
-                     $_SESSION['userID'] = $login->userID;
-                     header('Location: index.php?c=pages&a=index');
-                     $login->passwordResetHash= "";
-                     $login->failedLoginCount=0;
-                     $login->lastLogin=date('Y-m-d H:i:s');
-                     $login->save();
-                 }
-                 else
-                     {
-                     $login->failedLoginCount++;
-                     $login->save();
-                     $errorMessage = "Deine Logindaten stimmen nicht überein";
-                 }
-             }
+                //check if password hash is valid
+                if(password_verify($password, $hashed_password))
+                {
+                    $_SESSION['currentLogin'] = serialize($login);
+                    $_SESSION['isLoggedIn'] = true;
+                    $_SESSION['userID'] = $login->userID;
+                    header('Location: index.php?c=pages&a=index');
+                    $login->passwordResetHash= "";
+                    $login->failedLoginCount=0;
+                    $login->lastLogin=date('Y-m-d H:i:s');
+                    $login->save();
+                }
+                else
+                {
+                    $login->failedLoginCount++;
+                    $login->save();
+                    $errorMessage = "Deine Logindaten stimmen nicht überein";
+                }
+        }
          $this->setParam('errorMessage', $errorMessage);
          //TODO: set param to prefill input fields
          //$this->setParam('ParamName', $parameter);
-     }
+    }
 
      public function actionLogout()
      {
