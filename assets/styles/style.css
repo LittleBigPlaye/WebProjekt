@@ -298,7 +298,6 @@ p {
 }
 
 
-
 /* pages list */
 
 .pagesList {
@@ -502,7 +501,34 @@ form label {
 
 .errorHighlight {
     border: 3px solid #db0000;
+    color: #db0000;
     background-color: #ff8b8b5b;
+}
+
+.errorHighlight:hover {
+    background-color: #fddedefd;
+}
+
+.input {
+    width: 100%;
+}
+
+.input .errorInfo {
+    min-width: 90%;
+    visibility: hidden;
+    background-color: #db0000;
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 15px;
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.errorHighlight:hover+.errorInfo {
+    visibility: visible;
 }
 
 
@@ -516,7 +542,7 @@ form label {
     border-left: 5px solid #e40000;
     color: #520000;
     margin-bottom: 20px;
-    font-size: 1.3em;
+    font-size: 1em;
 }
 
 .errorMessage p {
@@ -533,7 +559,7 @@ form label {
     border-left: 5px solid #eba100;
     color: #522c00;
     margin-bottom: 20px;
-    font-size: 1.3em;
+    font-size: 1em;
 }
 
 .warningMessage p {
@@ -550,7 +576,7 @@ form label {
     border-left: 5px solid #00c70a;
     color: #175200;
     margin-bottom: 20px;
-    font-size: 1.3em;
+    font-size: 1em;
 }
 
 .messageClose {
@@ -795,6 +821,7 @@ form label {
 
 
 /*ShoppingCart*/
+
 .cartListing {
     width: 95%;
     margin: 0 auto;
