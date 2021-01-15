@@ -345,6 +345,10 @@ p {
     font-size: 1.3em;
 }
 
+.formWrapper .productForm {
+    width: 85%;
+}
+
 
 /* Generic Form Stuff */
 
