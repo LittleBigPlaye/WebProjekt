@@ -326,7 +326,7 @@ p {
 
 /* To hide all element except the first one, if javascript does not work */
 
-.productSpotlight>.productElement:not(:first-child) {
+.productSpotlight>.spotlightElement:not(:first-child) {
     display: none;
 }
 
@@ -432,7 +432,6 @@ form h1 {
 }
 
 form input[type=text],
-form input[type=search],
 form input[type=number],
 form input[type=file],
 form input[type=submit],
