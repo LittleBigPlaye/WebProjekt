@@ -1,6 +1,7 @@
 html {
     /* scroll-behavior: smooth; */
     margin: 0;
+    padding: 0;
 }
 
 body {
@@ -50,6 +51,11 @@ p {
 
 .card img {
     width: 90%;
+}
+
+.productPreview img.hidden {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
 }
 
 .card:hover {
@@ -672,6 +678,28 @@ form label {
     position: relative;
     bottom: 40px;
     right: -45%;
+}
+
+.hiddenIcon {
+    position: relative;
+    display: block;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    background-color: grey;
+    bottom: 40px;
+    right: -85%;
+}
+
+.hiddenIcon img {
+    display: block;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    width: 70%;
+    margin: 0;
+    border: none;
+    transform: translate(-50%, -50%);
 }
 
 

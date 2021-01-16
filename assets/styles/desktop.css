@@ -27,23 +27,6 @@
     .productSpotlight {
         max-width: 1000px;
     }
-    /*Standard Cards*/
-    .cards {
-        text-align: center;
-    }
-    .card {
-        box-shadow: 1px 4px 8px 1px lightgrey;
-        transition: 0.3s;
-        border-radius: 10px;
-        margin: 20px;
-        display: inline-block;
-        height: auto;
-        width: auto;
-        background: #f9f9f9;
-    }
-    .card:hover {
-        box-shadow: 1px 8px 16px 1px #444444;
-    }
     .container {
         padding: 40px;
         text-align: center;
