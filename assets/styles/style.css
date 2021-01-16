@@ -1,5 +1,6 @@
+/* #region general */
+
 html {
-    /* scroll-behavior: smooth; */
     margin: 0;
     padding: 0;
 }
@@ -10,6 +11,17 @@ body {
     background: #e1e1e1;
     color: #384047;
 }
+
+h2,
+p {
+    text-align: center;
+}
+
+
+/* #endregion */
+
+
+/* #region header */
 
 .logo1 {
     display: none;
@@ -27,10 +39,11 @@ body {
     text-align: center;
 }
 
-h2,
-p {
-    text-align: center;
-}
+
+/* #endregion */
+
+
+/* #region productCards */
 
 .cards {
     text-align: center;
@@ -61,6 +74,12 @@ p {
 .card:hover {
     box-shadow: 1px 8px 16px 1px #444444;
 }
+
+
+/* #endregion */
+
+
+/* #region registration */
 
 .container {
     padding: 40px;
@@ -126,20 +145,11 @@ p {
     width: 100px;
 }
 
-.formWrapper {
-    text-align: center
-}
 
-.productForm {
-    width: 60%;
-}
-
-.loginForm {
-    width: 450px;
-}
+/* #endregion */
 
 
-/*footer css*/
+/*#region footer*/
 
 .footer {
     padding-top: 30px;
@@ -157,6 +167,12 @@ p {
     bottom: 0px;
 }
 
+
+/* #endregion */
+
+
+/* #region upButton */
+
 .upButton {
     display: block;
     visibility: hidden;
@@ -172,8 +188,6 @@ p {
     background-color: rgba(131, 131, 131, 0.815);
     cursor: pointer;
     border-radius: 50%;
-    /* padding: 5px; */
-    /* font-size: 1.5em; */
     transition: visibility 0.2s, opacity 0.1s linear;
 }
 
@@ -190,7 +204,10 @@ p {
 }
 
 
-/* Slide Show */
+/* #endregion */
+
+
+/*#region ProductSpotlight */
 
 .productSpotlight {
     max-width: 95%;
@@ -244,7 +261,7 @@ p {
 
 /* To hide all element except the first one, if javascript does not work */
 
-.productSpotlight>.productLink:not(:first-child) {
+.productSpotlight>.productElement:not(:first-child) {
     display: none;
 }
 
@@ -281,7 +298,10 @@ p {
 }
 
 
-/* pages list */
+/* #endregion */
+
+
+/* #region pagesList */
 
 .pagesList {
     text-align: center;
@@ -312,7 +332,13 @@ p {
 }
 
 
-/* forms */
+/* #endregion */
+
+
+/*#region Forms */
+
+
+/* #################################################################################################################### */
 
 .formWrapper {
     text-align: center;
@@ -329,6 +355,10 @@ p {
 }
 
 .formWrapper .productForm {
+    width: 85%;
+}
+
+.formWrapper .loginForm {
     width: 85%;
 }
 
@@ -447,7 +477,10 @@ form label {
 }
 
 
-/* Show filters */
+/* #endregion */
+
+
+/* #region filter form */
 
 .filterForm {
     display: none !important;
@@ -483,7 +516,10 @@ form label {
 }
 
 
-/* error info outline */
+/* #endregion */
+
+
+/* #region error highlights */
 
 .errorHighlight {
     border: 3px solid #db0000;
@@ -518,7 +554,10 @@ form label {
 }
 
 
-/* error dialog */
+/* #endregion */
+
+
+/* #region dialog boxes */
 
 .errorMessage {
     width: 100%;
@@ -586,7 +625,10 @@ form label {
 }
 
 
-/* Image Gallery */
+/* #endregion */
+
+
+/* #region image gallery */
 
 .productViewWrapper {
     background-color: white;
@@ -652,7 +694,10 @@ form label {
 }
 
 
-/* icon Buttons */
+/* #endregion */
+
+
+/* #region iconButtons */
 
 .iconButton {
     background-color: #eb7d00;
@@ -703,7 +748,10 @@ form label {
 }
 
 
-/* error page */
+/* #endregion */
+
+
+/* #region error page */
 
 .errorPage {
     text-align: center;
@@ -717,7 +765,10 @@ form label {
 }
 
 
-/* vendors */
+/* #endregion */
+
+
+/* #region vendors listing*/
 
 .vendorToggle {
     display: none;
@@ -781,7 +832,10 @@ form label {
 }
 
 
-/*ShoppingCart*/
+/* #endregion */
+
+
+/*#region ShoppingCart*/
 
 .cartListing {
     width: 95%;
@@ -814,7 +868,10 @@ form label {
 }
 
 
-/* orderListing */
+/* #endregion */
+
+
+/* #region pseudoTable */
 
 .table {
     display: table;
@@ -876,3 +933,6 @@ form label {
 .table .center {
     text-align: center;
 }
+
+
+/* #endregion */

@@ -142,4 +142,7 @@
         min-width: 10%;
         max-width: 50%;
     }
+    .loginForm {
+        width: 450px;
+    }
 }
