@@ -101,7 +101,7 @@
     <p>Für Ihre Suche wurden leider keine Treffer erzielt!</p>
 <?php endif ?>
 
-<section class="cards"> 
+<section class="products"> 
     <?php foreach ($products as $product) : ?>
         <?php include(VIEWSPATH . DIRECTORY_SEPARATOR . 'viewAssets' . DIRECTORY_SEPARATOR . 'productCard.php') ?>
     <?php endforeach ?>

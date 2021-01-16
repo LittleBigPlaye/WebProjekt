@@ -1,7 +1,8 @@
 <div class="productCard" id="prod<?=$product->id?>">
-    <p><?= htmlspecialchars($product->productName) ?></p>
-    <div class="productPreview">
-        <img class="productImage<?= $product->isHidden ? ' hidden' : '' ?>" src="
+    <a href="index.php?c=products&a=view&pid=<?= htmlspecialchars($product->id) ?>">    
+        <p class="title"><?= htmlspecialchars($product->productName) ?></p>
+        <div class="productPreview<?= $product->isHidden ? ' hidden' : '' ?>">
+            <img class="productImage" src="
             <?php
                 if($product->images != NULL)
                 {
@@ -25,8 +26,9 @@
                     <div class="hiddenIcon"><img src="assets\images\icons\hidden_icon.svg" alt="Unsichtbar" title="Unsichtbar"></div>
                 </div>
             <?php endif ?>
-    </div>
-    
-    <p class="price"><?= htmlspecialchars($product->standardPrice . ' €')?></p>
-    <p class="catchPhrase"><?= htmlspecialchars($product->catchPhrase) ?></p>
+        </div>
+
+        <p class="price"><?= htmlspecialchars($product->standardPrice . ' €')?></p>
+        <p class="catchPhrase"><?= htmlspecialchars($product->catchPhrase) ?></p>
+    </a>
 </div>

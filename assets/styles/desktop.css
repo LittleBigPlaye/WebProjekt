@@ -148,4 +148,7 @@
     .productCard {
         max-width: 300px;
     }
+    .products {
+        max-width: 60%;
+    }
 }

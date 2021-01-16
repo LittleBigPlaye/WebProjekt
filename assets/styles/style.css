@@ -45,17 +45,44 @@ p {
 
 /* #region productCards */
 
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+}
+
 .productCard {
     margin: auto;
-    padding: 10px;
+    padding: 20px;
     margin: 10px;
     box-shadow: 0 4px 8px 0 #00000033;
     background-color: white;
     max-width: 95%;
     text-align: center;
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     border-radius: 5px;
     overflow: hidden;
+}
+
+.productCard a {
+    text-decoration: none;
+    color: black;
+}
+
+.productCard:hover {
+    box-shadow: 0 12px 16px 0 #00000033;
+}
+
+.productCard .title {
+    font-size: 1em;
+    font-weight: bold;
+    background: #2f2f2f;
+    color: white;
+    padding: 5px 5px;
+    margin: 0px;
 }
 
 .productCard .price {
@@ -67,7 +94,13 @@ p {
     width: 100%;
 }
 
-.productCard .productPreview {
+.productCard .productPreview:not(.hidden) {
+    background: #eb7d00;
+    position: relative;
+}
+
+.productCard .productPreview.hidden {
+    background: #333333;
     position: relative;
 }
 
@@ -739,6 +772,7 @@ form label {
     padding: 5px;
     transition: .1s ease-in-out;
     outline: none;
+    cursor: pointer;
 }
 
 .iconButton:hover {
@@ -750,12 +784,12 @@ form label {
     width: 70%;
 }
 
-.productPreview .badge {
+.badge {
     position: absolute;
     width: 60px;
     height: 60px;
-    right: 15px;
-    bottom: 5px;
+    right: -15px;
+    bottom: -15px;
     overflow: hidden;
     border-radius: 50%;
 }
@@ -769,9 +803,12 @@ form label {
 }
 
 .hiddenIcon img {
-    vertical-align: center;
+    position: absolute;
     max-height: 100%;
     max-width: 70%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     border: none;
 }
 
