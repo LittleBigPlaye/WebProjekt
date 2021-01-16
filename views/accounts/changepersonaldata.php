@@ -46,4 +46,3 @@
         <button class="buttonForAll" type="submit" name="changePersona">Speichern</button>
     </form>
 </div>
-<? include (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'upButton.php') ?>

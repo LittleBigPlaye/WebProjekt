@@ -126,5 +126,3 @@
     <a href="index.php?<?=$getString?>&page=<?=$numberOfPages?>">&raquo;</a>
 </div>
 <script src="<?=JAVASCRIPTPATH . 'products' . DIRECTORY_SEPARATOR . 'shortenSearch.js'?>"></script>
-
-<? include (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'upButton.php') ?>

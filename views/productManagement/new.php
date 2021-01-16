@@ -94,5 +94,4 @@
         <input id="submit" type="submit" name="submit" value="Produkt anlegen"/>
     </form>
 </div>
-<? include (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'upButton.php') ?>
 <script src="<?=JAVASCRIPTPATH . 'productManagement' . DIRECTORY_SEPARATOR . 'validateProduct.js'?>"></script>
