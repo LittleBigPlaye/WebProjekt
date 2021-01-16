@@ -17,6 +17,10 @@ p {
     text-align: center;
 }
 
+.content {
+    min-height: 867px;
+}
+
 
 /* #endregion */
 
@@ -432,6 +436,8 @@ form input[type=search],
 form input[type=number],
 form input[type=file],
 form input[type=submit],
+form input[type=email],
+form input[type=password],
 form select,
 form textarea {
     width: 100%;

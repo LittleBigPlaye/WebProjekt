@@ -56,9 +56,9 @@ abstract class Controller
         
         require_once (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'header.php');
         require_once (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'navBar.php');
-        
+        echo '<div class="content">';
         require_once ($viewPath);
-
+        echo '</div>';
         require_once (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'footer.php');
         require_once (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'upButton.php');
     }
