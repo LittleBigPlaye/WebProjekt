@@ -1,28 +1,44 @@
-    var slideIndex = 1;
-    showSlides(slideIndex);
+    document.addEventListener('DOMContentLoaded', function() {
+        var slideIndex = 1;
+        showSlides(slideIndex);
 
-    // Next/previous controls
-    function plusSlides(n) {
-        showSlides(slideIndex += n);
-    }
+        var btnPrevious = document.getElementById('previousSlide');
+        var btnNext = document.getElementById('nextSlide');
 
-    // Thumbnail image controls
-    function currentSlide(n) {
-        showSlides(slideIndex = n);
-    }
 
-    function showSlides(n) {
-        var i;
-        var slides = document.getElementsByClassName("spotlightElement");
-        var dots = document.getElementsByClassName("dot");
-        if (n > slides.length) { slideIndex = 1 }
-        if (n < 1) { slideIndex = slides.length }
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
+        if (btnNext) {
+            btnNext.addEventListener('click', function() {
+                plusSlides(1)
+            });
         }
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
+
+        if (btnPrevious) {
+            btnPrevious.addEventListener('click', function() {
+                plusSlides(-1);
+                alert();
+            });
         }
-        slides[slideIndex - 1].style.display = "block";
-        dots[slideIndex - 1].className += " active";
-    }
+
+        /**
+         * Used to add or subtract a number of the current slideIndex and jump to the new index
+         * @param {*} slideDifference value to determine whether slideIndex should be increased or decreased
+         */
+        function plusSlides(slideDifference) {
+            showSlides(slideIndex += slideDifference);
+        }
+
+        // used to show the target slide
+        function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("spotlightElement");
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+
+            if (slides) {
+                for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                }
+                slides[slideIndex - 1].style.display = "block";
+            }
+        }
+    });

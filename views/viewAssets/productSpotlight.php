@@ -7,6 +7,7 @@
         <div class="spotlightElement">
             <img class="spotlightPreview fade" src="
             <?php
+                // To make sure that there is at least the fallback image
                 if($product->images != null)
                 {
                     echo htmlspecialchars($product->images[0]->path);
@@ -24,14 +25,8 @@
     <?php endforeach ?>
 
     <!-- Next and previous Buttons -->
-    <a class="previousSlide" title="zurück" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="nextSlide" title="weiter" onclick="plusSlides(1)">&#10095;</a>
+    <a id="previousSlide" class="previousSlide" title="zurück">&#10094;</a>
+    <a id="nextSlide" class="nextSlide" title="weiter">&#10095;</a>
 
-    <!-- Slide Dots -->
-    <div class="slideDots">
-        <?php for($i = count($spotlightProducts)+1; $i <= $numberOfSlides; $i++) : ?>
-        <span class="dot" onclick="currentSlide(<?=$i?>)"></span>
-        <?php endfor ?>
-    </div>
     <script src="<?=JAVASCRIPTPATH . 'pages' . DIRECTORY_SEPARATOR . 'index.js'?>"></script>
 </div>
