@@ -69,8 +69,3 @@
 </div>
 
 
-
-
-
-        <? include (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'upButton.php') ?>
-

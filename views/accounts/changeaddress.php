@@ -29,4 +29,3 @@
         <button class="buttonForAll" type="submit" name="changeAddress">Speichern</button>
     </form>
 </div>
-<? include (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'upButton.php') ?>

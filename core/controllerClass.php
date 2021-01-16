@@ -60,6 +60,7 @@ abstract class Controller
         require_once ($viewPath);
 
         require_once (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'footer.php');
+        require_once (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'upButton.php');
     }
 
 
