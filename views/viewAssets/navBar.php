@@ -25,7 +25,7 @@ else if ($cartCount > 99) {
                     <label title="toggle dropDown" class="dropIcon" for="dropToggle01">▾</label>
                 </a>
             </label>
-            <input type="checkbox" id="dropToggle01">
+            <input type="checkbox" id="dropToggle01" class="subNavToggle">
             <ul class="subNav">
                 <li><a href="index.php?c=products&a=search">Alle Artikel</a></li>
                 <li><a href="index.php?c=products&a=vendors">Unsere Marken</a>
@@ -49,7 +49,7 @@ else if ($cartCount > 99) {
                         <label title="toggle dropDown" class="dropIcon" for="dropToggle02">▾</label>
                     </a>
                 </label>
-                <input type="checkbox" id="dropToggle02">
+                <input type="checkbox" id="dropToggle02" class="subNavToggle">
                 <ul class="subNav">
                     <li><a href="index.php?c=accounts&a=myspace">Mein Konto</a></li>
                     <li><a href="index.php?c=productManagement&a=new">Neues Produkt anlegen</a>
@@ -75,3 +75,4 @@ else if ($cartCount > 99) {
         href="index.php?c=pages&a=impressum">Impressum</a></li>
     </ul>
 </nav>
+<script src="<?=JAVASCRIPTPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'navbar.js'?>"></script>

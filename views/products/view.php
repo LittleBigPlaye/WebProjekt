@@ -48,7 +48,7 @@
         <script src="<?=JAVASCRIPTPATH . 'products' . DIRECTORY_SEPARATOR . 'imageGallery.js'?>"></script>
         
         <?php if(!$product->isHidden) : ?>
-            <form method="POST" action="index.php?c=products&a=view&pid=<?=$product->id?>">
+            <form class="badge" method="POST">
                     <button class="iconButton" type="submit" name="addToCart" value="<?=$product->id?>"><img src="assets\images\icons\shopping_cart.svg"/></button>
             </form>
         <?php endif; ?>

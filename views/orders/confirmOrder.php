@@ -33,7 +33,7 @@
                     <div class="tableCell"></div>
                     <div class="tableCell"></div>
                     <div class="tableCell right">Gesamtpreis</div>
-                    <div class="tableCell right"><?=htmlspecialchars($totalPrice) ?> €</div>
+                    <div class="tableCell right"><?=htmlspecialchars($totalPrice)?> €</div>
             </div>
         </div>
         <input type="submit" name="submitOrder" value="Zahlungspflichtig bestellen">

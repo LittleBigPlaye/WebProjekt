@@ -41,27 +41,29 @@
 </div>
 
 <div class="formWrapper">
+    
     <label for="filterToggle" class="filterToggleLabel">Filter<span class="dropIcon">&#9776;</span></label>
     <input type="checkbox" id="filterToggle" class="filterToggle">
 
     <form class="filterForm" method="Get">
-    <input type="hidden" name="c" value="products" />
-            <input type="hidden" name="a" value="search" />
+        <label class="desktopTitle">Filter</label>
+        <input type="hidden" name="c" value="products" />
+        <input type="hidden" name="a" value="search" />
         
         <?php if(isset($_GET['s'])) : ?>
             <input type="hidden" name="s" value="<?= $_GET['s']?>">
         <?php endif ?>
 
         <fieldset>
-            <legend>Nach Marke filtern</legend>
+            <legend>Marken</legend>
                 <?php foreach($vendors as $vendor) : ?>
-                    <label for="vendor<?=$vendor->id?>"><?= $vendor->vendorName ?>
+                    <label class="checkBoxLabel" for="vendor<?=$vendor->id?>"><?= $vendor->vendorName ?>
                     <input type="checkbox" name="ven<?=$vendor->id?>" id="vendor<?=$vendor->id?>" value="<?=$vendor->id?>" <?=isset($_GET['ven' . $vendor->id]) ? 'checked' : ''?>/></label>
                 <?php endforeach ?>
         </fieldset>
 
         <fieldset id="categorySort">
-            <legend>Nach Kategorie filtern</legend>
+            <legend>Kategorien</legend>
                 <?php foreach($categories as $category) : ?>
                     <label for="category<?=$category->id?>"><?= $category->categoryName ?>
                     <input type="checkbox" name="cat<?=$category->id?>" id="category<?=$category->id?>" value="<?=$category->id?>" <?=isset($_GET['cat' . $category->id]) ? 'checked' : ''?>/></label>
@@ -69,7 +71,7 @@
         </fieldset>
 
         <fieldset>
-            <legend>Preisspanne festlegen</legend>
+            <legend>Preisspanne</legend>
             <label for="minPrice">Min</label>
             <input type="number" min="1" step="any" id="minPrice" name="minPrice" value="<?= $_GET['minPrice'] ?? '' ?>"/>
             
@@ -101,7 +103,7 @@
     <p>Für Ihre Suche wurden leider keine Treffer erzielt!</p>
 <?php endif ?>
 
-<section class="cards"> 
+<section class="products"> 
     <?php foreach ($products as $product) : ?>
         <?php include(VIEWSPATH . DIRECTORY_SEPARATOR . 'viewAssets' . DIRECTORY_SEPARATOR . 'productCard.php') ?>
     <?php endforeach ?>

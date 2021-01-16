@@ -1,6 +1,8 @@
+/* #region general */
+
 html {
-    /* scroll-behavior: smooth; */
     margin: 0;
+    padding: 0;
 }
 
 body {
@@ -9,6 +11,17 @@ body {
     background: #e1e1e1;
     color: #384047;
 }
+
+h2,
+p {
+    text-align: center;
+}
+
+
+/* #endregion */
+
+
+/* #region header */
 
 .logo1 {
     display: none;
@@ -26,35 +39,108 @@ body {
     text-align: center;
 }
 
-h2,
-p {
-    text-align: center;
+
+/* #endregion */
+
+
+/* #region productCards */
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
 }
 
-.cards {
+.productCard {
+    margin: auto;
+    padding: 20px;
+    margin: 10px;
+    box-shadow: 0 4px 8px 0 #00000033;
+    background-color: white;
+    max-width: 95%;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
-.card {
+.productCard a {
+    text-decoration: none;
+    color: black;
+}
+
+.productCard:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 12px 20px 0 rgba(0, 0, 0, 0.486);
+    transition: .2s ease-in-out;
+}
+
+.productCard .title {
+    font-size: 1em;
+    font-weight: bold;
+    background: #2f2f2f;
+    color: white;
+    padding: 5px 5px;
+    margin: 0px;
+}
+
+.productCard .price {
+    color: grey;
+    font-size: 1.2em;
+}
+
+.productCard .productPreview .productImage {
+    width: 100%;
+}
+
+.productCard .productPreview:not(.hidden) {
+    background: #eb7d00;
+    position: relative;
+}
+
+.productCard .productPreview.hidden {
+    background: #333333;
+    position: relative;
+}
+
+.productPreview.hidden {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
+
+/* .cards {
+    text-align: center;
+}
+.productCard {
     box-shadow: 1px 4px 8px 1px lightgrey;
     transition: 0.3s;
     border-radius: 10px;
     margin: 20px;
     display: inline-block;
-    height: 350px;
     max-width: 500px;
     background: #f9f9f9;
     overflow: hidden;
     ;
 }
-
-.card img {
+.productCard img {
     width: 90%;
 }
-
-.card:hover {
-    box-shadow: 1px 8px 16px 1px #444444;
+.productPreview img.hidden {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
 }
+.productrCard:hover {
+    box-shadow: 1px 8px 16px 1px #444444;
+} */
+
+
+/* #endregion */
+
+
+/* #region registration */
 
 .container {
     padding: 40px;
@@ -120,20 +206,11 @@ p {
     width: 100px;
 }
 
-.formWrapper {
-    text-align: center
-}
 
-.productForm {
-    width: 60%;
-}
-
-.loginForm {
-    width: 450px;
-}
+/* #endregion */
 
 
-/*footer css*/
+/*#region footer*/
 
 .footer {
     padding-top: 30px;
@@ -151,6 +228,12 @@ p {
     bottom: 0px;
 }
 
+
+/* #endregion */
+
+
+/* #region upButton */
+
 .upButton {
     display: block;
     visibility: hidden;
@@ -166,8 +249,6 @@ p {
     background-color: rgba(131, 131, 131, 0.815);
     cursor: pointer;
     border-radius: 50%;
-    /* padding: 5px; */
-    /* font-size: 1.5em; */
     transition: visibility 0.2s, opacity 0.1s linear;
 }
 
@@ -184,7 +265,10 @@ p {
 }
 
 
-/* Slide Show */
+/* #endregion */
+
+
+/*#region ProductSpotlight */
 
 .productSpotlight {
     max-width: 95%;
@@ -238,7 +322,7 @@ p {
 
 /* To hide all element except the first one, if javascript does not work */
 
-.productSpotlight>.productLink:not(:first-child) {
+.productSpotlight>.productElement:not(:first-child) {
     display: none;
 }
 
@@ -275,7 +359,10 @@ p {
 }
 
 
-/* pages list */
+/* #endregion */
+
+
+/* #region pagesList */
 
 .pagesList {
     text-align: center;
@@ -306,7 +393,10 @@ p {
 }
 
 
-/* forms */
+/* #endregion */
+
+
+/*#region Forms */
 
 .formWrapper {
     text-align: center;
@@ -326,6 +416,10 @@ p {
     width: 85%;
 }
 
+.formWrapper .loginForm {
+    width: 85%;
+}
+
 
 /* Generic Form Stuff */
 
@@ -333,7 +427,11 @@ form h1 {
     text-align: center;
 }
 
-form input,
+form input[type=text],
+form input[type=search],
+form input[type=number],
+form input[type=file],
+form input[type=submit],
 form select,
 form textarea {
     width: 100%;
@@ -392,7 +490,7 @@ form input[type=submit]:hover {
 }
 
 form input[type=checkbox] {
-    display: inline !important;
+    display: inline;
     float: right;
 }
 
@@ -403,17 +501,29 @@ form label {
 
 /* Search Bar */
 
+.searchForm {
+    width: 98%;
+    padding: 5px 2px !important;
+    /* flex-wrap: wrap; */
+    overflow: hidden;
+    position: relative;
+}
+
 .searchForm input[type=search] {
-    width: 85%;
+    /* max-width: 96%; */
+    display: inline-block;
     border-radius: 5px 0px 0px 5px;
-    float: left;
+    margin: 0px 0px 0px 3px;
+    max-width: 97%;
 }
 
 .searchForm input[type=submit] {
-    width: 10%;
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    width: 60px;
     border-radius: 0px 5px 5px 0px;
-    float: left;
-    margin-top: 10px !important;
+    margin: 0px;
 }
 
 .searchForm::after {
@@ -423,9 +533,13 @@ form label {
 }
 
 
-/* filter form */
+/* #endregion */
+
+
+/* #region filter form */
 
 .filterForm {
+    display: none !important;
     border-radius: 0px 0px 5px 5px !important;
 }
 
@@ -440,13 +554,6 @@ form label {
     box-sizing: border-box;
 }
 
-
-/* Show filters */
-
-.filterForm {
-    display: none !important;
-}
-
 .filterToggle {
     display: none;
     cursor: pointer;
@@ -454,6 +561,7 @@ form label {
 
 .filterToggle:checked+.filterForm {
     display: block !important;
+    width: 95%;
     margin-top: 0px;
     transition: 0.2s;
 }
@@ -463,7 +571,7 @@ form label {
     text-align: left;
     margin: 25px auto;
     margin-bottom: 0px;
-    width: 90%;
+    width: 95%;
     padding: 15px;
     background-color: #ffffff;
     border-radius: 5px 5px 0px 0px;
@@ -472,12 +580,19 @@ form label {
     cursor: pointer;
 }
 
+.filterForm .desktopTitle {
+    display: none;
+}
+
 .filterToggleLabel .dropIcon {
     float: right;
 }
 
 
-/* error info outline */
+/* #endregion */
+
+
+/* #region error highlights */
 
 .errorHighlight {
     border: 3px solid #db0000;
@@ -512,7 +627,10 @@ form label {
 }
 
 
-/* error dialog */
+/* #endregion */
+
+
+/* #region dialog boxes */
 
 .errorMessage {
     width: 100%;
@@ -580,7 +698,10 @@ form label {
 }
 
 
-/* Image Gallery */
+/* #endregion */
+
+
+/* #region image gallery */
 
 .productViewWrapper {
     background-color: white;
@@ -646,17 +767,20 @@ form label {
 }
 
 
-/* icon Buttons */
+/* #endregion */
+
+
+/* #region iconButtons */
 
 .iconButton {
     background-color: #eb7d00;
-    border-radius: 50px;
     border: none;
-    height: 60px;
-    width: 60px;
+    height: 100%;
+    width: 100%;
     padding: 5px;
-    transition: .1s;
+    transition: .1s ease-in-out;
     outline: none;
+    cursor: pointer;
 }
 
 .iconButton:hover {
@@ -668,14 +792,39 @@ form label {
     width: 70%;
 }
 
-.productPreview form {
-    position: relative;
-    bottom: 40px;
-    right: -45%;
+.badge {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    right: -15px;
+    bottom: -15px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.hiddenIcon {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    background-color: grey;
+}
+
+.hiddenIcon img {
+    position: absolute;
+    max-height: 100%;
+    max-width: 70%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
 }
 
 
-/* error page */
+/* #endregion */
+
+
+/* #region error page */
 
 .errorPage {
     text-align: center;
@@ -689,7 +838,10 @@ form label {
 }
 
 
-/* vendors */
+/* #endregion */
+
+
+/* #region vendors listing*/
 
 .vendorToggle {
     display: none;
@@ -753,7 +905,10 @@ form label {
 }
 
 
-/*ShoppingCart*/
+/* #endregion */
+
+
+/*#region ShoppingCart*/
 
 .cartListing {
     width: 95%;
@@ -773,6 +928,10 @@ form label {
     max-width: 30%;
 }
 
+.tableCell .productPreview {
+    max-width: 250px;
+}
+
 .cartTotal {
     position: sticky;
     bottom: 0;
@@ -786,7 +945,10 @@ form label {
 }
 
 
-/* orderListing */
+/* #endregion */
+
+
+/* #region pseudoTable */
 
 .table {
     display: table;
@@ -809,6 +971,10 @@ form label {
 
 .table .tableRow:nth-child(even):not(.head) {
     background-color: #b9b9b9;
+}
+
+.table .tableRow:nth-child(odd):not(.head) {
+    background-color: #fafafa;
 }
 
 .table .head {
@@ -841,6 +1007,10 @@ form label {
     width: 25%;
 }
 
+.table.orderConfirmation {
+    width: 60%;
+}
+
 .table .right {
     text-align: right;
 }
@@ -848,3 +1018,6 @@ form label {
 .table .center {
     text-align: center;
 }
+
+
+/* #endregion */

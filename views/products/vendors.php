@@ -7,14 +7,16 @@
             <input type="checkbox" id="vendorToggle<?=htmlspecialchars($vendors[$key]->vendorName)?>" class="vendorToggle">
             <div class=vendorContainer>
                 <p><?=htmlspecialchars($vendors[$key]->vendorName)?></p>
-                <?php foreach($currentVendorProducts as $product) 
-                {
-                    if($product !== null)
+                <section class="products">
+                    <?php foreach($currentVendorProducts as $product) 
                     {
-                        include(VIEWSPATH . DIRECTORY_SEPARATOR . 'viewAssets' . DIRECTORY_SEPARATOR . 'productCard.php');
+                        if($product !== null)
+                        {
+                            include(VIEWSPATH . DIRECTORY_SEPARATOR . 'viewAssets' . DIRECTORY_SEPARATOR . 'productCard.php');
+                        }
                     }
-                }
-                ?>
+                    ?>
+                </section>
                 <form action="index.php" method="Get">
                     <input type="hidden" name="c" value="products">
                     <input type="hidden" name="a" value="search">

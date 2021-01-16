@@ -10,7 +10,7 @@
 
 </section>
 
-<section class="cards">
+
     <div>
         <div>
             <h2>Masken, Masken, Masken</h2>
@@ -20,6 +20,7 @@
             </p>
             <br>
         </div>
+        <section class="products">
         <?php foreach($cardProductsFirstRow as $product)
         {
             if($product !== null)
@@ -28,11 +29,11 @@
             }
         }
         ?>
+        </section>
     </div>
 
-</section>
 <br>
-<section class="cards">
+
 
     <div>
         <h2>Schöner können Sie ihr Gesicht nicht verstecken. Die Götter wissen, dass sie es brauchen</h2>
@@ -45,16 +46,15 @@
     </p>
     <br>
     <div>
-        <?php foreach($cardProductsSecondRow as $product)
-        {
-            if($product !== null)
+        <section class="products">
+            <?php foreach($cardProductsSecondRow as $product)
             {
-                include(VIEWSPATH . DIRECTORY_SEPARATOR . 'viewAssets' . DIRECTORY_SEPARATOR . 'productCard.php');
+                if($product !== null)
+                {
+                    include(VIEWSPATH . DIRECTORY_SEPARATOR . 'viewAssets' . DIRECTORY_SEPARATOR . 'productCard.php');
+                }
             }
-        }
-        ?>
+            ?>
+        </section>
     </div>
-
-
-</section>
 
