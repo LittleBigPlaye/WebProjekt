@@ -22,6 +22,7 @@
 
     <div class="imageGallery">
         <?php if($product->images != null) : ?>
+            
             <!-- images -->
             <?php foreach($product->images as $key => $image) :?>
                 <div class=gallerySlide>
@@ -33,7 +34,7 @@
             <div class="row">
                 <?php foreach($product->images as $key => $image) :?>
                     <div class=galleryThumbnail>
-                        <img src="<?=htmlspecialchars($image->path)?>" alt="<?=htmlspecialchars($image->name)?>" onclick="setGalleryPosition(<?=$key?>)">
+                        <img src="<?=htmlspecialchars($image->path)?>" alt="<?=htmlspecialchars($image->name)?>" >
                     </div>
                 <?php endforeach ?>
             </div>
@@ -44,7 +45,8 @@
             </div>
         <?php endif ?>
         
-        <script src="assets/javascript/imageGallery.js"></script>
+        <script src="<?=JAVASCRIPTPATH . 'products' . DIRECTORY_SEPARATOR . 'imageGallery.js'?>"></script>
+        
         <?php if(!$product->isHidden) : ?>
             <form method="POST" action="index.php?c=products&a=view&pid=<?=$product->id?>">
                     <button class="iconButton" type="submit" name="addToCart" value="<?=$product->id?>"><img src="assets\images\icons\shopping_cart.svg"/></button>
@@ -62,4 +64,3 @@
         <a href="?c=productManagement&a=edit&pid=<?= htmlspecialchars($product->id)?>">Produkt bearbeiten</a>
     </div>
 </div>
-<? include (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'upButton.php') ?>

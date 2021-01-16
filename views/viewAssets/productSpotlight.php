@@ -5,18 +5,18 @@
     <?php foreach($spotlightProducts as $product) : ?>
         <a class="productLink" href="index.php?c=products&a=view&pid=<?=$product->id?>" title="Zur Produktansicht">
         <div class="spotlightElement">
-            <img class="spotlightPreview fade" src="
-            <?php
-                // To make sure that there is at least the fallback image
-                if($product->images != null)
-                {
-                    echo htmlspecialchars($product->images[0]->path);
-                }
-                else
-                {
-                    echo htmlspecialchars(FALLBACK_IMAGE);
-                }
-            ?>">
+            <img src="
+                <?php
+                    // To make sure that there is at least the fallback image
+                    if($product->images != null)
+                    {
+                        echo htmlspecialchars($product->images[0]->path);
+                    }
+                    else
+                    {
+                        echo htmlspecialchars(FALLBACK_IMAGE);
+                    }
+                ?>">
             <div class="text">
                 <span class="title"><?= htmlspecialchars($product->productName)?></span>
                 <span class="phrase"><i><?= htmlspecialchars($product->catchPhrase)?></i></span>
