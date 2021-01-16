@@ -27,10 +27,10 @@
     .productSpotlight {
         max-width: 1000px;
     }
-    .container {
+    /* .container {
         padding: 40px;
         text-align: center;
-    }
+    } */
     /*Register css*/
     .cardregister {
         box-shadow: 1px 4px 8px 1px lightgrey;
@@ -144,5 +144,8 @@
     }
     .loginForm {
         width: 450px;
+    }
+    .productCard {
+        max-width: 300px;
     }
 }
