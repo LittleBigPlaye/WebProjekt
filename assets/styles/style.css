@@ -73,7 +73,8 @@ p {
 }
 
 .productCard:hover {
-    box-shadow: 0 12px 16px 0 #00000033;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 12px 20px 0 rgba(0, 0, 0, 0.486);
+    transition: .2s ease-in-out;
 }
 
 .productCard .title {
@@ -113,7 +114,6 @@ p {
 /* .cards {
     text-align: center;
 }
-
 .productCard {
     box-shadow: 1px 4px 8px 1px lightgrey;
     transition: 0.3s;
@@ -125,16 +125,13 @@ p {
     overflow: hidden;
     ;
 }
-
 .productCard img {
     width: 90%;
 }
-
 .productPreview img.hidden {
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
 }
-
 .productrCard:hover {
     box-shadow: 1px 8px 16px 1px #444444;
 } */
@@ -401,9 +398,6 @@ p {
 
 /*#region Forms */
 
-
-/* #################################################################################################################### */
-
 .formWrapper {
     text-align: center;
 }
@@ -433,7 +427,11 @@ form h1 {
     text-align: center;
 }
 
-form input,
+form input[type=text],
+form input[type=search],
+form input[type=number],
+form input[type=file],
+form input[type=submit],
 form select,
 form textarea {
     width: 100%;
@@ -492,7 +490,7 @@ form input[type=submit]:hover {
 }
 
 form input[type=checkbox] {
-    display: inline !important;
+    display: inline;
     float: right;
 }
 
@@ -503,17 +501,29 @@ form label {
 
 /* Search Bar */
 
+.searchForm {
+    width: 98%;
+    padding: 5px 2px !important;
+    /* flex-wrap: wrap; */
+    overflow: hidden;
+    position: relative;
+}
+
 .searchForm input[type=search] {
-    width: 85%;
+    /* max-width: 96%; */
+    display: inline-block;
     border-radius: 5px 0px 0px 5px;
-    float: left;
+    margin: 0px 0px 0px 3px;
+    max-width: 97%;
 }
 
 .searchForm input[type=submit] {
-    width: 10%;
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    width: 60px;
     border-radius: 0px 5px 5px 0px;
-    float: left;
-    margin-top: 10px !important;
+    margin: 0px;
 }
 
 .searchForm::after {
@@ -523,9 +533,13 @@ form label {
 }
 
 
-/* filter form */
+/* #endregion */
+
+
+/* #region filter form */
 
 .filterForm {
+    display: none !important;
     border-radius: 0px 0px 5px 5px !important;
 }
 
@@ -540,16 +554,6 @@ form label {
     box-sizing: border-box;
 }
 
-
-/* #endregion */
-
-
-/* #region filter form */
-
-.filterForm {
-    display: none !important;
-}
-
 .filterToggle {
     display: none;
     cursor: pointer;
@@ -557,7 +561,7 @@ form label {
 
 .filterToggle:checked+.filterForm {
     display: block !important;
-    width: 90%;
+    width: 95%;
     margin-top: 0px;
     transition: 0.2s;
 }
@@ -567,13 +571,17 @@ form label {
     text-align: left;
     margin: 25px auto;
     margin-bottom: 0px;
-    width: 90%;
+    width: 95%;
     padding: 15px;
     background-color: #ffffff;
     border-radius: 5px 5px 0px 0px;
     position: relative;
     font-size: 1.3em;
     cursor: pointer;
+}
+
+.filterForm .desktopTitle {
+    display: none;
 }
 
 .filterToggleLabel .dropIcon {
@@ -920,6 +928,10 @@ form label {
     max-width: 30%;
 }
 
+.tableCell .productPreview {
+    max-width: 250px;
+}
+
 .cartTotal {
     position: sticky;
     bottom: 0;
@@ -961,6 +973,10 @@ form label {
     background-color: #b9b9b9;
 }
 
+.table .tableRow:nth-child(odd):not(.head) {
+    background-color: #fafafa;
+}
+
 .table .head {
     font-weight: bold;
     display: table-header-group;
@@ -989,6 +1005,10 @@ form label {
 
 .table.orderConfirmation .tableCell {
     width: 25%;
+}
+
+.table.orderConfirmation {
+    width: 60%;
 }
 
 .table .right {

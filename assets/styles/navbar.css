@@ -74,10 +74,6 @@ nav a:hover {
     color: #191919;
 }
 
-.mainNav li:not(.active) a {
-    border-bottom: solid #191919 0.38em;
-}
-
 .mainNav li a:hover {
     border-bottom: solid #e4e4e4 0.38em;
 }

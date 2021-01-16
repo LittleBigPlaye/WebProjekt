@@ -149,6 +149,69 @@
         max-width: 300px;
     }
     .products {
+        max-width: 90%;
+    }
+    .cartListing {
+        width: 60%;
+        margin-left: 150px;
+        margin-right: 25%;
+    }
+    .cartTotal {
+        position: absolute;
+        right: 10px;
+        bottom: 200px;
+        width: 250px;
+        z-index: +100;
+        margin-left: 0;
+        margin-right: 10px;
+        padding: 5px;
+        background-color: white;
+        border-radius: 5px
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    /* #region filter form */
+    .filterForm {
+        /* display: block !important; */
+        position: absolute;
+        display: block !important;
+        width: 250px !important;
+        left: 25px !important;
+        border-radius: 5px 5px 5px 5px !important;
+    }
+    .filterForm select {
+        cursor: pointer;
+    }
+    .filterForm fieldset {
+        padding: 12px 20px;
+        margin-top: 10px;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+    }
+    .filterToggle {
+        display: none;
+        cursor: pointer;
+    }
+    .filterForm .desktopTitle {
+        display: block;
+        font-size: 1.3em;
+    }
+    .filterToggleLabel {
+        display: none;
+    }
+    .filterToggleLabel .dropIcon {
+        float: right;
+    }
+    /* #endregion */
+    .products {
         max-width: 60%;
+    }
+}
+
+@media screen and(min-width: 1700px) {
+    /* #endregion */
+    .products {
+        max-width: 1500px !important;
     }
 }
