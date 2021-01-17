@@ -19,9 +19,9 @@
         <?php foreach($product->images as $productImage) : ?>
             <img src="
             <?php
-                if(file_exists($productImage->path))
+                if(file_exists($productImage->thumbnailPath))
                 {
-                    echo $productImage->path;
+                    echo $productImage->thumbnailPath;
                 }
                 else
                 {

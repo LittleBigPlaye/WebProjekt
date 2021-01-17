@@ -58,8 +58,8 @@ class ProductImage extends BaseModel
                 case 'name':
                     return $this->image->imageName;
                 break;
-                    return $this->image;
                 default:
+                    return $this->image;
             }
         }
 
