@@ -82,18 +82,16 @@ class Product extends BaseModel
         $productImages = [];
     }
 
-    public function addImage($imagePath) 
+    public function addImage($imagePath, $thumbnailPath) 
     {
         if(Image::findOne('imageURL="' . $imagePath . '"') !== null)
         {
-            echo 'geht net';
-            exit(1);
             return false;
         }
         else
         {
             $currentProductImage = new ProductImage(array());
-            $currentProductImage->setImage($imagePath);
+            $currentProductImage->setImage($imagePath, $thumbnailPath);
             array_push($this->productImages, $currentProductImage);
         }
     }

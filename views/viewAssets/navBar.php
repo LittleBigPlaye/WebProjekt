@@ -43,7 +43,7 @@ else if ($cartCount > 99) {
 
         <!-- Administration -->
         <?php if(isset($_SESSION['isLoggedIn']) && ($_SESSION['isLoggedIn'] === true)) : ?>
-            <?php if($userRole === 'admin') : ?>
+            <?php if($this->isAdmin()) : ?>
             <li class="<?= ($currentPosition == 'administration') ? 'active ' : '' ?>right"><label for="dropToggle02"><a>Administration
                         <span class="dropIcon">▾</span>
                         <label title="toggle dropDown" class="dropIcon" for="dropToggle02">▾</label>

@@ -104,11 +104,15 @@ class ProductManagementController extends \myf\core\controller
                 $product->standardPrice      = $price;
                 $product->isHidden           = $isHidden;
 
+                //insert product into database (before adding images, to make sure that the product has a valid id)
+                $product->save();
+
                 //add images
                 $this->addImagesToProduct($product, 'productImages');
 
-                //insert product into database
-                $product->save();
+                //save product and images to database
+                $product->save();  
+
                 //save success message to session to display in on product view
                 $_SESSION['productSuccess'] = 'Das Produkt "' . $name . '" wurde ergolgreich angelegt!';
 
@@ -302,9 +306,9 @@ class ProductManagementController extends \myf\core\controller
     */
    private function addImagesToProduct(&$product, $imagesKey)
    {
-        //generate a unique directory name by using the md5 hash of the product name
-        $directoryName = PRODUCT_IMAGE_PATH . DIRECTORY_SEPARATOR . md5($product->productName);   
-       
+        //generate a unique directory name by using the id from the db
+        $subfolderName = 'mask' . $product->id;   
+       $directoryName = PRODUCT_IMAGE_PATH . DIRECTORY_SEPARATOR . $subfolderName;
        //create directory, if it does not exist
        if(!file_exists($directoryName))
        {
@@ -314,21 +318,81 @@ class ProductManagementController extends \myf\core\controller
        //upload images
        foreach($_FILES['productImages']['name'] as $key => $value)
        {
-           //extract base name of file without file extension
-           $fileName = explode('.', $_FILES['productImages']['name'][$key])[0];
-       
-           //create (almost) unique filename
-           $currentFileName = str_replace(' ', '_', $fileName);
-           $imageName       = substr(explode('_', $currentFileName)[0], 0, 10) . date('Ydmhis', time()) . uniqid('', true);
+           //create unique filename by checking how many files are in the targetDir and always add 1 to the number of files
+           $fileCount = 0;
+           $files = glob($directoryName . DIRECTORY_SEPARATOR . '*');
+           if($files)
+           {
+               $fileCount = count($files);
+           }
+
+           $imageName       = $fileCount + 1;
            $fileType        = pathinfo($_FILES['productImages']['name'][$key], PATHINFO_EXTENSION); 
-           $targetPath      = $directoryName . DIRECTORY_SEPARATOR . $imageName . '.' . $fileType;
+           $fileName        = 'img' . $imageName . '.' . $fileType;
+           $targetPath      = $directoryName . DIRECTORY_SEPARATOR . $fileName;
 
            //try to upload the file
            $uploadWasSuccessful = \move_uploaded_file($_FILES['productImages']['tmp_name'][$key], $targetPath);
            if($uploadWasSuccessful)
            {
-               $product->addImage($targetPath);
+               $thumbnailPath = $this->createThumbnail($targetPath, $subfolderName . DIRECTORY_SEPARATOR ,  'thumb' . $imageName);
+               $product->addImage($subfolderName . DIRECTORY_SEPARATOR . $fileName, $thumbnailPath);
            }
        }
+   }
+
+   /**
+    * Creates a thumbnail for a given image
+    *
+    * @param string $sourcePath
+    * @param string $targetDirectory
+    * @param string $targetImageName
+    * @return void empty string if thumbnail creation did not work, target subpath if creation was successful
+    */
+   private function createThumbnail($sourcePath, $targetDirectory, $targetImageName) {
+        $sourceImage  = null;
+
+        //determine which imagecreate function shouldn be used;
+        $imageType = exif_imagetype($sourcePath);
+        switch($imageType)
+        {
+            case IMAGETYPE_JPEG:
+                $sourceImage = imagecreatefromjpeg($sourcePath);
+            break;
+            case IMAGETYPE_PNG:
+                $sourceImage = imagecreatefrompng($sourcePath);
+            break;
+            default:
+                $sourceImage = null;
+        }
+        
+        if($sourceImage !== null)
+        {
+            $sourceWidth  = imagesx($sourceImage);
+            $sourceHeight = imagesy($sourceImage);
+
+            
+            // calculate targetHeight to preserve aspect ratio
+            $targetHeight = floor($sourceHeight * (THUMBNAIL_WIDTH / $sourceWidth));
+            
+            // create new virtual image
+            $virtualImage = imagecreateTrueColor(THUMBNAIL_WIDTH, $targetHeight);
+
+
+            //resample source image
+            imagecopyresampled($virtualImage, $sourceImage, 0, 0, 0, 0, THUMBNAIL_WIDTH, $targetHeight, $sourceWidth, $sourceHeight);
+
+            //check if target folder exists, create directory if not
+            if(!file_exists(PRODUCT_THUMBNAIL_PATH . DIRECTORY_SEPARATOR . $targetDirectory))
+            {
+                mkdir(PRODUCT_THUMBNAIL_PATH . DIRECTORY_SEPARATOR . $targetDirectory, 0755, true);
+            }
+
+            //save thumbnail
+            imagejpeg($virtualImage, PRODUCT_THUMBNAIL_PATH . DIRECTORY_SEPARATOR . $targetDirectory . $targetImageName .  '.jpg', THUMBNAIL_QUALITY);
+
+            return $targetDirectory . $targetImageName .  '.jpg';
+        }
+        return '';
    }
 }

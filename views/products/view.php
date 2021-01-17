@@ -34,7 +34,7 @@
             <div class="row">
                 <?php foreach($product->images as $key => $image) :?>
                     <div class=galleryThumbnail>
-                        <img src="<?=htmlspecialchars($image->path)?>" alt="<?=htmlspecialchars($image->name)?>" >
+                        <img src="<?=htmlspecialchars($image->thumbnailPath)?>" alt="<?=htmlspecialchars($image->name)?>" >
                     </div>
                 <?php endforeach ?>
             </div>

@@ -23,31 +23,43 @@ class ProductImage extends BaseModel
 
     public function __get($key)
     {
-        if($key == 'path' || $key == 'name' || $key == 'image')
+        if($key == 'path' || $key == 'thumbnailPath' || $key == 'name' || $key == 'image')
         {
             if($this->image == null)
             {
                 $this->image = Image::findOne('id=' . $this->imagesID);
             }
-            if($key == 'path')
+            switch($key)
             {
-                if($this->image === null  || file_exists($this->image->imageURL))
-                {
-                    return $this->image->imageURL;
-                }
-                else
-                {
-                    return FALLBACK_IMAGE;
-                }
-            }
-            else if($key == 'name')
-            {
-                return $this->image->imageName;
-            }
-            else
-            {
-                echo 'NochnTest';
-                return $this->image;
+                case 'path':
+                    if($this->image !== null  && file_exists(PRODUCT_IMAGE_PATH . DIRECTORY_SEPARATOR . $this->image->imageURL))
+                    {
+                        return PRODUCT_IMAGE_PATH . DIRECTORY_SEPARATOR . $this->image->imageURL;
+                    }
+                    else
+                    {
+                        return FALLBACK_IMAGE;
+                    }
+                break;
+                
+                case 'thumbnailPath':
+                    // echo PRODUCT_THUMBNAIL_PATH . DIRECTORY_SEPARATOR . $this->image->thumbnailURL;
+                    
+                    if($this->image !== null  && file_exists(PRODUCT_THUMBNAIL_PATH . DIRECTORY_SEPARATOR . $this->image->thumbnailURL))
+                    {
+                        return PRODUCT_THUMBNAIL_PATH . DIRECTORY_SEPARATOR . $this->image->thumbnailURL;
+                    }
+                    else
+                    {
+                        return FALLBACK_IMAGE;
+                    }
+                break;
+
+                case 'name':
+                    return $this->image->imageName;
+                break;
+                    return $this->image;
+                default:
             }
         }
 
@@ -73,15 +85,15 @@ class ProductImage extends BaseModel
         parent::save();
     }
 
-    public function setImage($imageURL, $imageName='')
+    public function setImage($imageURL, $thumbnailURL, $imageName='')
     {
         if($this->image == null)
         {   
             $this->image = new Image(array());
-            echo 'moin';
         }
-        $this->image->imageURL  = $imageURL;
-        $this->image->imageName = $imageName;
+        $this->image->imageURL      = $imageURL;
+        $this->image->thumbnailURL  = $thumbnailURL;
+        $this->image->imageName     = $imageName;
     }
 
     public function delete(&$errors = null)

@@ -103,7 +103,7 @@ class accountsController extends Controller
                                     'enabled' => $enabled,
                                     'email' => $email,
                                     'failedLoginCount' => $failedLoginCount,
-                                    'passwordHash' => $password,
+                                    'passwordHash' => $savePassword,
                                     'userID' => $user->id);
                                 $login = new Login($loginData);
                                 $login->save();
