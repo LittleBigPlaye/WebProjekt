@@ -1,12 +1,13 @@
 <div class="productCard" id="prod<?=$product->id?>">
     <a href="index.php?c=products&a=view&pid=<?= htmlspecialchars($product->id) ?>">    
         <p class="title"><?= htmlspecialchars($product->productName) ?></p>
+        
         <div class="productPreview<?= $product->isHidden ? ' hidden' : '' ?>">
             <img class="productImage" src="
             <?php
                 if($product->images != NULL)
                 {
-                    echo htmlspecialchars($product->images[0]->path);
+                    echo htmlspecialchars($product->images[0]->thumbnailPath);
                 }
                 else
                 {
