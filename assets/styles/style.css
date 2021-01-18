@@ -980,7 +980,16 @@ form label {
 
 /* #region pseudoTable */
 
-.table {
+.table .tableRow:nth-child(even):not(.head) {
+    background-color: #b9b9b9;
+}
+
+.table .tableRow:nth-child(odd):not(.head) {
+    background-color: #fafafa;
+}
+
+
+/* .table {
     display: table;
     margin: 0 auto;
     text-align: center;
@@ -999,13 +1008,7 @@ form label {
     clear: both;
 }
 
-.table .tableRow:nth-child(even):not(.head) {
-    background-color: #b9b9b9;
-}
 
-.table .tableRow:nth-child(odd):not(.head) {
-    background-color: #fafafa;
-}
 
 .table .head {
     font-weight: bold;
@@ -1048,25 +1051,25 @@ form label {
 
 .table .center {
     text-align: center;
-}
+} */
 
-.table.shoppingCart .tableRow.head {
+.table .tableRow.head {
     display: none;
 }
 
-.table.shoppingCart {
+.table {
     display: block;
     margin: 5px 0;
 }
 
-.table.shoppingCart .tableRow {
+.table .tableRow {
     display: block;
     width: 100%;
     text-align: center;
     padding: 5px 0;
 }
 
-.table.shoppingCart label {
+.table label {
     margin-top: 8px;
     margin-bottom: 5px;
     display: block;
@@ -1075,14 +1078,21 @@ form label {
     font-weight: bold;
 }
 
-.table.shoppingCart .tableCell {
+.table .tableCell {
     display: block;
+    text-align: left;
     width: 90%;
     margin: 0 auto;
 }
 
-.table.shoppingCart .tableCell img {
+.table .tableCell img {
     width: 90%;
+}
+
+.table .tableRow.bottom {
+    font-weight: bold;
+    color: white;
+    background-color: #363636 !important;
 }
 
 

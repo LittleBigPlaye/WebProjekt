@@ -8,7 +8,6 @@
     .logo2 {
         display: none;
     }
-    /* Hide the link that should open and close the topnav on small screens */
     .header .icon {
         display: none;
     }
@@ -176,33 +175,36 @@
     .table.userManagement {
         padding: 5px;
     }
-    .table.shoppingCart .tableRow {
+    .table .tableRow {
         display: table-row;
     }
-    .table.shoppingCart .tableRow::after {
+    .table .tableRow::after {
         clear: both;
     }
-    .table.shoppingCart .tableRow:nth-child(even):not(.head) {
-        background-color: #b9b9b9;
-    }
-    .table.shoppingCart .tableRow:nth-child(odd):not(.head) {
-        background-color: #fafafa;
-    }
-    .table.shoppingCart .head {
+    .table .tableRow.head {
         font-weight: bold;
         display: table-header-group;
         color: white;
         background-color: #363636
     }
-    .table.shoppingCart .tableCell {
+    .table .tableCell {
         padding: 5px;
         display: table-cell;
         text-align: left;
         vertical-align: top;
         width: 25%;
     }
-    .table.shoppingCart .tableRow.head {
+    .table .tableRow.bottom {
         display: table-row;
+    }
+    label.mobileLabel {
+        display: none;
+    }
+    .mobileLabel.input[type=checkbox] {
+        display: block;
+    }
+    .table.userManagement .tableCell {
+        width: 14%;
     }
 }
 
