@@ -36,7 +36,6 @@ var gameOver = false;
 var counter = 0;
 var speedCounter = 0;
 
-var foodBad = [];
 
 //Festlegung Random Nummer
 
@@ -63,24 +62,6 @@ function placeFood() {
     }
 }
 
-function placeBadFood(foodX, foodY) {
-    while(true) {
-        badFoodX = foodX;
-        badFoodY = foodY;
-
-        var isOnSnake = false;
-
-        for(var i = 0; i < segments.length; i++) {
-            if(foodX === segments[i].x && foodY === segments[i].y){
-                isOnSnake = true;
-            }
-        }
-
-        if(!isOnSnake){
-            break;
-        }
-    }
-}
 
 function GAMEOVER(){
     gc.fillStyle = "#ffffff";

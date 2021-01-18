@@ -48,7 +48,7 @@
                       <label>Geburtstag:</label>
                       <input class="input_register1" type="date" id="birthdate" name="birthdate" placeholder="Geburtstag" value="<?=htmlspecialchars($_POST['birthdate'] ?? '')?>">
                       <br>
-
+                     <hr>
 
 
 
