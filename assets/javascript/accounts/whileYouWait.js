@@ -38,6 +38,7 @@ var speedCounter = 0;
 
 var foodBad = [];
 
+//Festlegung Random Nummer
 
 function randomNumber(range) {
     return Math.floor(Math.random() * range);
