@@ -18,7 +18,8 @@ p {
 }
 
 .content {
-    min-height: 867px;
+    min-height: 50em;
+    width: 100%
 }
 
 
@@ -568,7 +569,7 @@ form label {
 
 .filterToggle:checked+.filterForm {
     display: block !important;
-    width: 95%;
+    width: 85%;
     margin-top: 0px;
     transition: 0.2s;
 }
@@ -578,7 +579,7 @@ form label {
     text-align: left;
     margin: 25px auto;
     margin-bottom: 0px;
-    width: 95%;
+    width: 85% !important;
     padding: 15px;
     background-color: #ffffff;
     border-radius: 5px 5px 0px 0px;
@@ -593,6 +594,14 @@ form label {
 
 .filterToggleLabel .dropIcon {
     float: right;
+}
+
+.filterForm input[type=submit] {
+    margin-top: 0;
+}
+
+.filterForm input[type=select] {
+    margin-bottom: 0;
 }
 
 
@@ -937,6 +946,8 @@ form label {
 .cartListing {
     width: 95%;
     margin: 0 auto;
+    height: 100%;
+    :
 }
 
 .cartListing .cartEntry {
@@ -948,7 +959,7 @@ form label {
 .cartEntry img {
     display: inline-block;
     padding: 10px;
-    max-height: 300px;
+    /* max-height: 300px; */
     max-width: 30%;
 }
 
@@ -956,17 +967,17 @@ form label {
     max-width: 250px;
 }
 
-.cartTotal {
+
+/* .cartTotal {
     position: sticky;
     bottom: 0;
     z-index: +100;
-    bottom: 0;
     width: 95%;
     margin: 0 auto;
     padding: 5px;
     background-color: white;
     border-radius: 5px 5px 0px 0px;
-}
+} */
 
 
 /* #endregion */
@@ -1012,6 +1023,7 @@ form label {
     padding: 5px;
     display: table-cell;
     text-align: left;
+    vertical-align: top;
 }
 
 .table.userManagement {

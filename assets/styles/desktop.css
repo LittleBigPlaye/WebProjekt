@@ -152,18 +152,18 @@
         max-width: 90%;
     }
     .cartListing {
-        width: 60%;
-        margin-left: 150px;
-        margin-right: 25%;
+        width: 70%;
+        margin-left: 25px;
     }
     .cartTotal {
-        position: absolute;
+        position: sticky;
+        margin: 0;
+        top: -50%;
         right: 10px;
-        bottom: 200px;
+        left: 75%;
+        /* bottom: 200px; */
         width: 250px;
         z-index: +100;
-        margin-left: 0;
-        margin-right: 10px;
         padding: 5px;
         background-color: white;
         border-radius: 5px
