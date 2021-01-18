@@ -20,6 +20,8 @@ class accountsController extends Controller
     public function actionRegister()
     {
 
+        $errorMessage = '';
+
         if(isset($_POST['submit']))
         {
 
@@ -39,7 +41,7 @@ class accountsController extends Controller
 
             $db = $GLOBALS['database'];
 
-            $errorMessage = ' ';
+
 
             if(empty($firstName) || empty($lastName) || empty($email) || empty($password) || empty($password2) || empty($birthdate) )
             {

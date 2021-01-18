@@ -88,6 +88,9 @@
     .formWrapper {
         text-align: center
     }
+    .formWrapperRegister {
+        width: 80% !important;
+    }
     .productForm {
         width: 60% !important;
     }
