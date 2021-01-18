@@ -5,14 +5,19 @@
 
               <h1>Registrierung</h1>
 
-                    <?php if(isset($errorMessage) && !empty($errorMessage)) : ?>
-                        <div class="errorMessage">
-                            <span class="messageClose" onclick="this.parentElement.style.display='none';">&times</span>
-                            <p><?= $errorMessage ?></p>
-                        </div>
-                    <?php endif ?>
+        <?php foreach($errorMessages as $message) : ?>
+            <div class="errorMessage">
+                <span class="messageClose" onclick="this.parentElement.style.display='none';">&times</span>
+                <?= $message ?>
+            </div>
+        <? endforeach; ?>
 
-
+        <?php if(isset($succesMessage) && !empty($succesMessage)) : ?>
+            <div class="successMessage">
+                <span class="messageClose" onclick="this.parentElement.style.display='none';">&times</span>
+                <p><?= $succesMessage ?></p>
+            </div>
+        <?php endif ?>
 
 
                       <h2>Persönliche Daten</h2>
