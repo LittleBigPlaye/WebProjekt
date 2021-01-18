@@ -69,6 +69,10 @@ nav a {
     -webkit-transition: all 0.125s ease-in-out;
 }
 
+nav li:not(.active) a {
+    border-bottom: solid #191919 0.38em;
+}
+
 nav a:hover {
     background-color: #e4e4e4;
     color: #191919;
@@ -76,6 +80,14 @@ nav a:hover {
 
 .mainNav li a:hover {
     border-bottom: solid #e4e4e4 0.38em;
+}
+
+.mainNav .subNav li a:hover {
+    border-bottom: none;
+}
+
+.mainNav .subNav li a {
+    border-bottom: none;
 }
 
 nav .subNav {

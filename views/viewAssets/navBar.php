@@ -52,7 +52,7 @@ else if ($cartCount > 99) {
                     <input type="checkbox" id="dropToggle02" class="subNavToggle">
                     <ul class="subNav">
                         <li><a href="index.php?c=accounts&a=myspace">Mein Konto</a></li>
-                        <li><a href="index.php?c=productManagement&a=new">Neues Produkt anlegen</a>
+                        <li><a href="index.php?c=productManagement&a=new">Produkt anlegen</a>
                         <li><a href="index.php?c=accounts&a=adminusermanagement">Benutzer verwalten</a></li>
                     </ul>
                 </li>
