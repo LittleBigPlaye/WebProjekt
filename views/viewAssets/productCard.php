@@ -18,13 +18,13 @@
             <?php if(!$product->isHidden) : ?>
                 <!-- add to cart button -->
                 <form class="badge" method="POST" action="#prod<?=$product->id?>">
-                    <button class="iconButton" type="submit" name="addToCart" value="<?=$product->id?>"><img src="assets\images\icons\shopping_cart.svg"/></button>
+                    <button class="iconButton" type="submit" name="addToCart" value="<?=$product->id?>"><img src="assets/images/icons/shopping_cart.svg"/></button>
                 </form>
 
             <?php else : ?>
                 <!-- hidden notification icon -->
                 <div class="badge">
-                    <div class="hiddenIcon"><img src="assets\images\icons\hidden_icon.svg" alt="Unsichtbar" title="Unsichtbar"></div>
+                    <div class="hiddenIcon"><img src="assets/images/icons/hidden_icon.svg" alt="Unsichtbar" title="Unsichtbar"></div>
                 </div>
             <?php endif ?>
         </div>

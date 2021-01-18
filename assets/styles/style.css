@@ -947,7 +947,6 @@ form label {
     width: 95%;
     margin: 0 auto;
     height: 100%;
-    :
 }
 
 .cartListing .cartEntry {
@@ -956,19 +955,15 @@ form label {
     margin: 10px 0;
 }
 
-.cartEntry img {
-    display: inline-block;
-    padding: 10px;
-    /* max-height: 300px; */
-    max-width: 30%;
-}
-
 .tableCell .productPreview {
-    max-width: 250px;
+    /* padding: 10px; */
+    display: block;
+    border-bottom: solid 5px #eb7d00;
+    margin: 5px auto;
+    max-width: 100%;
 }
 
-
-/* .cartTotal {
+.cartTotal {
     position: sticky;
     bottom: 0;
     z-index: +100;
@@ -977,7 +972,7 @@ form label {
     padding: 5px;
     background-color: white;
     border-radius: 5px 5px 0px 0px;
-} */
+}
 
 
 /* #endregion */
@@ -1053,6 +1048,41 @@ form label {
 
 .table .center {
     text-align: center;
+}
+
+.table.shoppingCart .tableRow.head {
+    display: none;
+}
+
+.table.shoppingCart {
+    display: block;
+    margin: 5px 0;
+}
+
+.table.shoppingCart .tableRow {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 5px 0;
+}
+
+.table.shoppingCart label {
+    margin-top: 8px;
+    margin-bottom: 5px;
+    display: block;
+    width: 100%;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.table.shoppingCart .tableCell {
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.table.shoppingCart .tableCell img {
+    width: 90%;
 }
 
 
