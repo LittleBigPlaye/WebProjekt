@@ -448,6 +448,7 @@ form textarea {
     border-radius: 5px;
     border: 0px;
     background-color: #e4e4e4;
+    font-family: inherit;
 }
 
 form input:hover,
