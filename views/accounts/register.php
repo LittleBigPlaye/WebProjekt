@@ -1,5 +1,5 @@
-    <div class="cardregister">
-        <div class="containerregister">
+    <div class="formWrapper">
+
 
 
             <form clas="loginForm"  action="?c=accounts&a=register" method="post">
@@ -13,8 +13,8 @@
                     </div>
                 <?php endif ?>
 
-          <div class="cardregister">
-              <div class="containerregister">
+          <div class="formWrapper">
+
 
 
 
@@ -45,20 +45,20 @@
                   <br>
 
                   <label>Geschlecht:</label>
-                  <input type="radio" id="female" value="f" name="gender"><label for="female" class="light">Female</label><br>
-                  <input type="radio" id="male" value="m" name="gender"><label for="male" class="light">Male</label><br>
-                  <input type="radio" id="divers" value="u" name="gender"><label for="divers" class="light">Divers</label><br><br>
+                  <input type="radio" id="female" value="f" name="gender"><label for="female" class="light">Frau</label><br>
+                  <input type="radio" id="male" value="m" name="gender"><label for="male" class="light">Mann</label><br>
+                  <input type="radio" id="divers" value="u" name="gender"><label for="divers" class="light">Das was ich sein möchte</label><br><br>
                   <br>
                   <label>Geburtstag:</label>
                   <input class="input_register1" type="date" id="birthdate" name="birthdate" placeholder="Geburtstag" value="<?=htmlspecialchars($_POST['birthdate'] ?? '')?>">
                   <br>
 
 
-              </div>
+
           </div>
 
-          <div class="cardregister">
-              <div class="containerregister">
+          <div class="formWrapper">
+
                   <h2>Adresse</h2>
                   <br>
 
@@ -76,10 +76,10 @@
                   <br>
 
 
-              </div>
+
           </div>
           <br>
           <input type="submit" value="Registrieren" name="submit" >
       </form>
-        </div>
+
     </div>

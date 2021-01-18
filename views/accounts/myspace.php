@@ -45,7 +45,13 @@
         <br>
 
         <h2>Meine Bestellungen</h2>
-        <section>
+        <section class="formWrapper">
+            Machen Sie etwas sinnvolles während Sie auf Ihre Bestellung/en warten (JavaScript muss aktiviert sein!)<br>
+            <a href="index.php?c=accounts&a=waitingarea">Etwas sinnvolles</a>
+        </section>
+        <br>
+
+        <section class="formWrapper">
             <?php foreach($orders as $order) :?>
 
                 <h3>Bestellung <?=htmlspecialchars($order->id)?></h3>

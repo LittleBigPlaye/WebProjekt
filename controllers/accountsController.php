@@ -39,6 +39,7 @@ class accountsController extends Controller
 
             $db = $GLOBALS['database'];
 
+            $errorMessage = ' ';
 
             if(empty($firstName) || empty($lastName) || empty($email) || empty($password) || empty($password2) || empty($birthdate) )
             {
@@ -122,7 +123,6 @@ class accountsController extends Controller
 
 
         }
-
 
         $this->setParam('errorMessage', $errorMessage);
     }
@@ -376,6 +376,10 @@ class accountsController extends Controller
 
         $this->setParam('errorMessage', $errorMessage);
         $this->setParam('succesMessage', $succesMessage);
+    }
+
+    public function actionWaitingArea(){
+
     }
 
 }
