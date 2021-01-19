@@ -46,35 +46,7 @@ class ProductManagementController extends \myf\core\controller
 
             $db = $GLOBALS['database'];
 
-            //check if name exists
-            if(empty($name))
-            {
-                $errorMessages['productName'] = 'Es muss ein Produktname angegeben werden.';
-            }
-
-            //check if description exists
-            if(empty($description))
-            {
-                $errorMessages['description'] = 'Geben Sie eine Produktbezeichnung an.';
-            }
-
-            //check if price is valid
-            if(!\myf\core\validateNumberInput($price, 2))
-            {
-                $errorMessages['price'] = 'Geben Sie einen Preis größer 0 € und mit maximal zwei Nachkommastellen an.';
-            }
-
-            //check if vendor exists
-            if(empty($vendor) || \myf\models\Vendor::findOne('id=' . $db->quote($vendor)) == null)
-            {
-                $errorMessages['vendor'] = 'Wählen Sie eine gültige Marke aus.';
-            }
-
-            //check if category exists
-            if(empty($category) || \myf\models\Category::findOne('id=' . $db->quote($category)) == null)
-            {
-                $errorMessages['category'] = 'Wählen Sie eine gültige Kategorie aus.';
-            }
+            $this->validateInputs($name, $catchPhrase, $description, $price, $vendor, $category, $errorMessages);
 
             //check if productname is not new
             if(!empty($name) && \myf\models\Product::findOne('productName LIKE ' . $db->quote($name)) !== null)
@@ -167,48 +139,19 @@ class ProductManagementController extends \myf\core\controller
        if(isset($_POST['submit']))
        {
             //retrieve inputs from form
-            $name        = $_POST['productName'] ?? '';
-            $catchPhrase = $_POST['catchPhrase'] ?? '';
-            $description = $_POST['productDescription'] ?? '';
-            $price       = $_POST['productPrice'] ?? '';
+            $name        = trim($_POST['productName'] ?? '');
+            $catchPhrase = trim($_POST['catchPhrase'] ?? '');
+            $description = trim($_POST['productDescription'] ?? '');
+            $price       = trim($_POST['productPrice'] ?? '');
             $vendor      = $_POST['vendor'] ?? '';
             $category    = $_POST['category'] ?? '';
             $isHidden    = $_POST['visibility'] ?? '';
 
             $isHidden = ($isHidden == 'hidden') ? true : false;
 
-            //check if name is empty
-            if(empty($name))
-            {
-                $errorMessages['productName'] = 'Bitte geben Sie einen Produktnamen an!';
-            }
-
-            //check if description is empty
-            if(empty($description))
-            {
-                $errorMessages['description'] = 'Bitte geben Sie eine Produktbeschreibung an!';
-            }
-
-            //check if price is valid
-            if(!\myf\core\validateNumberInput($price, 2))
-            {
-                $errorMessages['price'] = 'Geben Sie einen Preis größer 0 € und mit maximal zwei Nachkommastellen an.';
-            }
+            $this->validateInputs($name, $catchPhrase, $description, $price, $vendor, $category, $errorMessages);
 
             $db = $GLOBALS['database'];
-
-            //check if vendor exists
-            if(empty($vendor) || \myf\models\Vendor::findOne('id=' . $db->quote($vendor)) == null)
-            {
-                $errorMessages['vendor'] = 'Wählen Sie eine gültige Marke aus.';
-            }
-
-            //check if category exists
-            if(empty($category) || \myf\models\Category::findOne('id=' . $db->quote($category)) == null)
-            {
-                $errorMessages['category'] = 'Wählen Sie eine gültige Kategorie aus.';
-            }
-
             //check if productname is not new
             if(!empty($name) && ($name != $product->productName) && \myf\models\Product::findOne('productName LIKE ' . $db->quote($name)) !== null)
             {
@@ -269,6 +212,64 @@ class ProductManagementController extends \myf\core\controller
         }
         $this->setParam('errorMessages', $errorMessages);
            
+    }
+
+    /**
+     * This function is used to control if the inputs which are equal (between actionEdit and actionNew) are valid
+     *
+     * @param [type] $name
+     * @param [type] $catchPhrase
+     * @param [type] $description
+     * @param [type] $price
+     * @param [type] $errorMessages
+     * @return void
+     */
+    private function validateInputs($name, $catchPhrase, $description, $price, $vendor, $category, &$errorMessages)
+    {
+        //check if name is valid
+        if(empty($name))
+        {
+            $errorMessages['productName'] = 'Bitte geben Sie einen Produktnamen an!';
+        }
+        else if(strlen($name) > 120)
+        {
+            $errorMessages['productName'] = 'Die Produktbezeichnung darf maximal 120 Zeichen lang sein.';
+        }
+
+        //check if catchphrase is valid
+        if(strlen($catchPhrase) > 150)
+        {
+            $errorMessages['catchPhrase'] = 'Die Catch Phrase darf maximal 150 Zeichen lang sein.';
+        }
+
+        //check if description is valid
+        if(empty($description))
+        {
+            $errorMessages['description'] = 'Geben Sie eine Produktbeschreibung an.';
+        }
+        else if (strlen($description) > 5000)
+        {
+            $errorMessages['description'] = 'Die Produktbeschreibung darf maximal 5000 Zeichen lang sein.';
+        }
+
+        //check if price is valid
+        if(!\myf\core\validateNumberInput($price, 2))
+        {
+            $errorMessages['price'] = 'Geben Sie einen Preis größer 0 € und mit maximal zwei Nachkommastellen an.';
+        }
+
+        $db = $GLOBALS['database'];
+        //check if vendor exists
+        if(empty($vendor) || \myf\models\Vendor::findOne('id=' . $db->quote($vendor)) == null)
+        {
+            $errorMessages['vendor'] = 'Wählen Sie eine gültige Marke aus.';
+        }
+
+        //check if category exists
+        if(empty($category) || \myf\models\Category::findOne('id=' . $db->quote($category)) == null)
+        {
+            $errorMessages['category'] = 'Wählen Sie eine gültige Kategorie aus.';
+        }
     }
 
    /**

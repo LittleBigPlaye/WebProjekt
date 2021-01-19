@@ -421,6 +421,24 @@ p {
     width: 85%;
 }
 
+.formWrapper .productForm .imageContainer {
+    max-height: 350px;
+    overflow: auto;
+    border: 1px solid black;
+    margin-bottom: 25px;
+    padding: 5px;
+}
+
+.productForm .imageContainer input[type=checkbox] {
+    margin-bottom: 15px;
+}
+
+.productForm .imageContainer img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
 .formWrapper .loginForm {
     width: 85%;
 }

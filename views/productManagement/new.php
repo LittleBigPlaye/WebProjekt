@@ -27,20 +27,21 @@
             <label for="productName">Produktbezeichnung</label>
             <input type="text" name="productName" id="productName" maxlength="120" placeholder="Hier Bezeichnung eingeben..."
                 value="<?= $_POST['productName'] ?? '' ?>" required/>
-            <span class="errorInfo">Bitte geben Sie einen Produktnamen an!</span>
+            <span class="errorInfo">Bitte geben Sie einen Produktnamen an! (max. 120 Zeichen)</span>
         </div>
 
         <div class="input">
-        <label for="catchPhrase">Catchphrase</label>
-        <input type="text" name="catchPhrase" id="catchPhrase" maxlength="150" placeholder="Hier Catchphrase eingeben..."
-            value ="<?= $_POST['catchPhrase'] ?? '' ?>"/>
+            <label for="catchPhrase">Catchphrase</label>
+            <input type="text" name="catchPhrase" id="catchPhrase" maxlength="150" placeholder="Hier Catchphrase eingeben..."
+                value ="<?= $_POST['catchPhrase'] ?? '' ?>"/>
+            <span class="errorInfo">Bitte geben Sie maximal 150 Zeichen an!</span>
         </div>
     
 
         <div class="input">
             <label for="productDescription">Produktbeschreibung</label>
             <textarea id="productDescription" name="productDescription" rows="10" maxlength="5000"><?= $_POST['productDescription'] ?? '' ?></textarea>
-            <span class="errorInfo">Bitte geben Sie eine Beschreibung an!</span>
+            <span class="errorInfo">Bitte geben Sie eine Beschreibung an! (max. 5000 Zeichen)</span>
         </div>
 
         <div class="input">

@@ -5,9 +5,11 @@
         <p>Bitte prüfen Sie vor dem Absenden der Bestellung, ob die nachfolgenden Angaben korrekt sind!</p>
 
         <h2>Zieladresse</h2>
-        <?= htmlspecialchars($user->salutation . ' ' . $user->firstName . ' ' . $user->secondName . ' ' . $user->lastName)?><br>
-        <?= htmlspecialchars($address->street . ' ' . $address->streetNumber)?><br>
-        <?= htmlspecialchars($address->zipCode . ' ' . $address->city)?><br>
+        <p>
+            <?= htmlspecialchars($user->salutation . ' ' . $user->firstName . ' ' . $user->secondName . ' ' . $user->lastName)?><br>
+            <?= htmlspecialchars($address->street . ' ' . $address->streetNumber)?><br>
+            <?= htmlspecialchars($address->zipCode . ' ' . $address->city)?><br>
+        </p>
         <!-- Hier Adresse anzeigen -->
 
         <h2>Kauf-Übersicht</h2>

@@ -7,7 +7,8 @@
 <?php if(isset($product)) : ?>
 <div class="formWrapper">
     <form id="productForm" class="productForm"  method="post" enctype="multipart/form-data">
-    <h1>Bestehendes Produkt bearbeiten</h1>
+        <h1>Bestehendes Produkt bearbeiten</h1>
+        
         <?php foreach($errorMessages as $message) : ?>
             <div class="errorMessage">
                 <span class="messageClose" onclick="this.parentElement.style.display='none';">&times</span>
@@ -16,25 +17,30 @@
         <? endforeach; ?>
 
         <!-- delete or change current images -->
-        <?php foreach($product->images as $productImage) : ?>
-            <img src="
-            <?php
-                if(file_exists($productImage->thumbnailPath))
-                {
-                    echo $productImage->thumbnailPath;
-                }
-                else
-                {
-                    echo FALLBACK_IMAGE;
-                }
-            ?>
-            " width="400px"/><br>
-            <label for="imageName<?=$productImage->id?>">Bildtitel</label>
-            <input type="input" placeHolder="Bildtitel" name="imageName<?=$productImage->id?>" id="imageName<?=$productImage->id?>" value="<?=$productImage->name?>">
+        <?php if($product->images !== null) : ?>
+            <label>Bilder bearbeiten</label>
+            <div class="imageContainer">
+                <?php foreach($product->images as $productImage) : ?>
+                    <img src="
+                    <?php
+                        if(file_exists($productImage->thumbnailPath))
+                        {
+                            echo $productImage->thumbnailPath;
+                        }
+                        else
+                        {
+                            echo FALLBACK_IMAGE;
+                        }
+                    ?>
+                    "/>
+                    <label for="imageName<?=$productImage->id?>">Bildtitel</label>
+                    <input type="text" placeHolder="Bildtitel" name="imageName<?=$productImage->id?>" id="imageName<?=htmlspecialchars($productImage->id)?>" value="<?=htmlspecialchars($productImage->name)?>">
 
-            <label for="deleteImage<?=$productImage->id?>">Bild "<?= $productImage->name?>" löschen?
-            <input type="checkbox" id="deleteImage<?=$productImage->id?>" name="deleteImage<?=$productImage->id?>"></label>
-        <?php endforeach ?>
+                    <label for="deleteImage<?=$productImage->id?>">Bild "<?= htmlspecialchars($productImage->name)?>" löschen?
+                    <input type="checkbox" id="deleteImage<?=$productImage->id?>" name="deleteImage<?=$productImage->id?>"></label>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
 
         <!-- Add new images -->
         <div class="input">
@@ -55,7 +61,7 @@
                     {
                         echo htmlspecialchars($_POST['productName']);
                     }?>">
-            <span class="errorInfo">Bitte geben Sie einen Produktnamen an!</span>
+            <span class="errorInfo">Bitte geben Sie einen Produktnamen an! (max. 120 Zeichen)</span>
         </div>
 
         <div class="input">
@@ -70,6 +76,7 @@
                     {
                         echo htmlspecialchars($_POST['catchPhrase']);
                     }?>">  
+                <span class="errorInfo">Bitte geben Sie maximal 150 Zeichen an!</span>
         </div>
 
         <div class="input">
@@ -83,7 +90,7 @@
                     {
                         echo htmlspecialchars($_POST['productDescription']);
                     }?></textarea>
-            <span class="errorInfo">Bitte geben Sie eine Beschreibung an!</span>
+            <span class="errorInfo">Bitte geben Sie eine Beschreibung an! (max. 5000 Zeichen)</span>
         </div>
 
         <div class="input">
