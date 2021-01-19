@@ -63,7 +63,8 @@ class Product extends BaseModel
     }
 
     public function save(&$errors = null) {
-        
+        //surrounding by transaction to make sure all inserts worked
+        $this->startTransaction();
         parent::save();
         foreach($this->productImages as $productImage)
         {
@@ -73,6 +74,7 @@ class Product extends BaseModel
                 $productImage->save();
             }
         }
+        $this->stopTransaction();
     }
 
     public function __destruct()

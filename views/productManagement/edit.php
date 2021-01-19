@@ -49,11 +49,11 @@
                 value="<?php
                     if(!isset($_POST['productName']) || empty($_POST['productName']))
                     {
-                        echo $product->productName;
+                        echo htmlspecialchars($product->productName);
                     }
                     else
                     {
-                        echo $_POST['productName'];
+                        echo htmlspecialchars($_POST['productName']);
                     }?>">
             <span class="errorInfo">Bitte geben Sie einen Produktnamen an!</span>
         </div>
@@ -64,11 +64,11 @@
                 value ="<?php
                     if(!isset($_POST['catchPhrase']) || empty($_POST['catchPhrase']))
                     {
-                        echo $product->catchPhrase;
+                        echo htmlspecialchars($product->catchPhrase);
                     }
                     else
                     {
-                        echo $_POST['catchPhrase'];
+                        echo htmlspecialchars($_POST['catchPhrase']);
                     }?>">  
         </div>
 
@@ -77,11 +77,11 @@
             <textarea id="productDescription" name="productDescription"><?php
                     if(!isset($_POST['productDescription']) || empty($_POST['productDescription']))
                     {
-                        echo $product->productDescription;
+                        echo htmlspecialchars($product->productDescription);
                     }
                     else
                     {
-                        echo $_POST['productDescription'];
+                        echo htmlspecialchars($_POST['productDescription']);
                     }?></textarea>
             <span class="errorInfo">Bitte geben Sie eine Beschreibung an!</span>
         </div>
@@ -92,11 +92,11 @@
                 value="<?php
                     if(!isset($_POST['productPrice']) || empty($_POST['productPrice']))
                     {
-                        echo $product->standardPrice;
+                        echo htmlspecialchars($product->standardPrice);
                     }
                     else
                     {
-                        echo $_POST['productPrice'];
+                        echo htmlspecialchars($_POST['productPrice']);
                     }?>">
             <span class="errorInfo">Bitte geben Sie einen Preis mit maximal zwei Nachkommastellen an!</span>
         </div>
@@ -137,8 +137,11 @@
         </div>
 
         <div class="input">
-            <label for="isHidden">Produkt "verstecken"?</label>
-            <input type="checkbox" id="isHidden" name="isHidden" <?= ($product->isHidden) ? 'checked' : '' ?>/>
+                <label for="visibility">Sichtbarkeit</label>
+                <select name="visibility" id="visibility">
+                    <option value="visible">Sichtbar</option>
+                    <option value="hidden">Versteckt</option>
+                </select>
         </div>
 
         <input type="submit" id="submit" name="submit" value="Änderung speichern"/>

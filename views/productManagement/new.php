@@ -19,40 +19,40 @@
 
         <div class="input">
             <label for="images">Produktbilder</label>
-            <input type="file" id="images" name="productImages[]" multiple accept=".png, .jpg, .jpeg"/>
+            <input type="file" id="images" name="productImages[]" multiple accept=".png, .jpg, .jpeg" required/>
             <span class="errorInfo">Bitte mindestens 1 Bild auswählen.<br>Unterstützte Dateitypen: .jpg, .jpeg, .png<br>Maximale Dateigröße: 3 MB</span>
         </div>
 
         <div class="input">
             <label for="productName">Produktbezeichnung</label>
-            <input type="text" name="productName" id="productName" placeholder="Hier Bezeichnung eingeben..."
-                value="<?= $_POST['productName'] ?? '' ?>"/>
+            <input type="text" name="productName" id="productName" maxlength="120" placeholder="Hier Bezeichnung eingeben..."
+                value="<?= $_POST['productName'] ?? '' ?>" required/>
             <span class="errorInfo">Bitte geben Sie einen Produktnamen an!</span>
         </div>
 
         <div class="input">
         <label for="catchPhrase">Catchphrase</label>
-        <input type="text" name="catchPhrase" id="catchPhrase" placeholder="Hier Catchphrase eingeben..."
+        <input type="text" name="catchPhrase" id="catchPhrase" maxlength="150" placeholder="Hier Catchphrase eingeben..."
             value ="<?= $_POST['catchPhrase'] ?? '' ?>"/>
         </div>
     
 
         <div class="input">
             <label for="productDescription">Produktbeschreibung</label>
-            <textarea id="productDescription" name="productDescription" rows="10"><?= $_POST['productDescription'] ?? '' ?></textarea>
+            <textarea id="productDescription" name="productDescription" rows="10" maxlength="5000"><?= $_POST['productDescription'] ?? '' ?></textarea>
             <span class="errorInfo">Bitte geben Sie eine Beschreibung an!</span>
         </div>
 
         <div class="input">
             <label for="productPrice">Produktpreis</label>
-            <input type="number" min="0" step="0.01" id="productPrice" name="productPrice"
+            <input type="number" max="99999.99" min="0" step="0.01" id="productPrice" name="productPrice" required
                 value="<?= $_POST['productPrice'] ?? '' ?>"/>
             <span class="errorInfo">Bitte geben Sie einen Preis mit maximal zwei Nachkommastellen an!</span>
         </div>
 
         <div class="input">
             <label for="vendors">Marke</label>
-            <select id="vendor" name="vendor">
+            <select id="vendor" name="vendor" required>
                 <option value="-1" <?= !isset($_POST['vendor']) ? 'selected' : ''?>  hidden="hidden" >Marke auswählen</option>
                 <?php foreach ($vendors as $vendor) : ?>
                     <option value="<?= $vendor->id ?>" 
@@ -70,7 +70,7 @@
 
         <div class="input">
             <label for="category">Kategorie</label>
-            <select id="category" name="category">
+            <select id="category" name="category" required>
                 <option value="-1" <?= !isset($_POST['category']) ? 'selected' : ''?>  hidden="hidden" >Kategorie auswählen</option>
                 <?php foreach ($categories as $category) : ?>
                     <option value="<?= $category->id ?>" 
@@ -87,9 +87,12 @@
         </div>
 
         <div class="input">
-            <label for="isHidden">Produkt "versteckt" anlegen?
-            <input type="checkbox" id="isHidden" name="isHidden"/></label>  
-        </div>      
+                <label for="visibility">Sichtbarkeit</label>
+                <select name="visibility" id="visibility">
+                    <option value="visible">Sichtbar</option>
+                    <option value="hidden">Versteckt</option>
+                </select>
+        </div>
 
         <input id="submit" type="submit" name="submit" value="Produkt anlegen"/>
     </form>
