@@ -20,7 +20,7 @@ else if ($cartCount > 99) {
         <li <?= ($currentPosition == 'index') ? 'class="active"' : '' ?>><a href="?c=pages&a=index">Startseite</a></li>
 
         <!-- Products -->
-        <li <?= ($currentPosition == 'products') ? 'class="active"' : '' ?>><label for="dropToggle01"><a>Produkte
+        <li <?= ($currentPosition == 'products') ? 'class="active"' : '' ?>><label class="subNavTitle" for="dropToggle01"><a>Produkte
                     <span class="dropIcon">▾</span>
                     <label title="toggle dropDown" class="dropIcon" for="dropToggle01">▾</label>
                 </a>
@@ -44,7 +44,7 @@ else if ($cartCount > 99) {
         <!-- Administration -->
         <?php if($this->isLoggedIn()) : ?>
             <?php if($this->isAdmin()) : ?>
-                <li class="<?= ($currentPosition == 'administration') ? 'active ' : '' ?>right"><label for="dropToggle02"><a>Administration
+                <li class="<?= ($currentPosition == 'administration') ? 'active ' : '' ?>right"><label class="subNavTitle" for="dropToggle02"><a>Administration
                             <span class="dropIcon">▾</span>
                             <label title="toggle dropDown" class="dropIcon" for="dropToggle02">▾</label>
                         </a>
