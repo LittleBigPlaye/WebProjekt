@@ -524,6 +524,17 @@ form label {
     font-weight: bold;
 }
 
+.required::after {
+    content: " *";
+    color: #eb7d00;
+}
+
+.optional::after {
+    content: " (optional)";
+    font-size: .7em;
+    color: #646464;
+}
+
 
 /* Search Bar */
 

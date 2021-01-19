@@ -33,7 +33,7 @@
                         }
                     ?>
                     "/>
-                    <label for="imageName<?=$productImage->id?>">Bildtitel</label>
+                    <label for="imageName<?=$productImage->id?>" class="optional">Bildtitel</label>
                     <input type="text" placeHolder="Bildtitel" name="imageName<?=$productImage->id?>" id="imageName<?=htmlspecialchars($productImage->id)?>" value="<?=htmlspecialchars($productImage->name)?>">
 
                     <label for="deleteImage<?=$productImage->id?>">Bild "<?= htmlspecialchars($productImage->name)?>" löschen?
@@ -44,13 +44,13 @@
 
         <!-- Add new images -->
         <div class="input">
-            <label for="images">Bilder zu Produkt hinzufügen</label>
+            <label for="images" class="optional">Bilder zu Produkt hinzufügen</label>
             <input type="file" id="images" name="productImages[]" multiple accept=".png, .jpg, .jpeg"/>
             <span class="errorInfo">Unterstützte Dateitypen: .jpg, .jpeg, .png<br>Maximale Dateigröße: 3 MB</span>
         </div>
 
         <div class="input">
-            <label for="productName">Produktbezeichnung</label>
+            <label for="productName" class="required">Produktbezeichnung</label>
             <input type="text" name="productName" id="productName" placeholder="Bezeichnung eingeben..."
                 value="<?php
                     if(!isset($_POST['productName']) || empty($_POST['productName']))
@@ -65,7 +65,7 @@
         </div>
 
         <div class="input">
-            <label for="catchPhrase">Catchphrase</label>
+            <label for="catchPhrase" class="optional">Catchphrase</label>
             <input type="text" name="catchPhrase" id="catchPhrase"
                 value ="<?php
                     if(!isset($_POST['catchPhrase']) || empty($_POST['catchPhrase']))
@@ -80,7 +80,7 @@
         </div>
 
         <div class="input">
-            <label for="productDescription">Produktbeschreibung</label>
+            <label for="productDescription" class="required">Produktbeschreibung</label>
             <textarea id="productDescription" name="productDescription"><?php
                     if(!isset($_POST['productDescription']) || empty($_POST['productDescription']))
                     {
@@ -94,7 +94,7 @@
         </div>
 
         <div class="input">
-            <label for="productPrice">Produktpreis</label>
+            <label for="productPrice" class="required">Produktpreis</label>
             <input type="number" min="1" step="any" id="productPrice" name="productPrice"
                 value="<?php
                     if(!isset($_POST['productPrice']) || empty($_POST['productPrice']))
@@ -109,7 +109,7 @@
         </div>
 
         <div class="input">
-            <label for="vendor">Marke</label>
+            <label for="vendor" class="required">Marke</label>
             <select id="vendor" name="vendor">
                 <?php foreach ($vendors as $vendor) : ?>
                     <option value="<?= $vendor->id ?>" 
@@ -127,7 +127,7 @@
         </div>
 
         <div class="input">
-            <label for="category">Kategorie</label>
+            <label for="category" class="required">Kategorie</label>
             <select id="category" name="category">
                 <?php foreach ($categories as $category) : ?>
                     <option value="<?= $category->id ?>" 
@@ -144,13 +144,15 @@
         </div>
 
         <div class="input">
-                <label for="visibility">Sichtbarkeit</label>
+                <label for="visibility" class="required">Sichtbarkeit</label>
                 <select name="visibility" id="visibility">
                     <option value="visible">Sichtbar</option>
                     <option value="hidden">Versteckt</option>
                 </select>
         </div>
-
+        <sup>
+            <p>Mit<span class="required"></span> markierte Felder sind Pflichtfelder.</p>
+        </sup>
         <input type="submit" id="submit" name="submit" value="Änderung speichern"/>
     </form>
 </div>
