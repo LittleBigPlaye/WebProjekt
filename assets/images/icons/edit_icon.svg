@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="53.535744mm"
+   height="53.784393mm"
+   viewBox="0 0 53.535744 53.784393"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   sodipodi:docname="edit_icon.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="120.54848"
+     inkscape:cy="168.94356"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1212"
+     inkscape:window-height="864"
+     inkscape:window-x="2566"
+     inkscape:window-y="198"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-57.772319,-70.323814)">
+    <path
+       style="fill:#ffffff;stroke-width:0.471447"
+       d="m 66.265731,115.51681 c 0.216015,-0.68769 0.957244,-3.05362 1.647177,-5.25763 0.689934,-2.20401 1.401854,-4.16359 1.58205,-4.35461 0.18019,-0.19102 1.986069,1.32093 4.01306,3.35987 2.026992,2.03895 3.504261,3.81689 3.282828,3.95097 -0.345762,0.20939 -2.043051,0.764 -9.667534,3.15898 -1.188773,0.37342 -1.230997,0.33119 -0.857581,-0.85758 z m 10.001335,-9.14978 -3.880817,-3.90107 9.191039,-9.181983 9.191039,-9.181976 3.886421,3.886421 3.886417,3.886426 -9.196633,9.196632 -9.196642,9.19664 z m 20.877487,-21.081781 -3.736794,-3.758841 1.119214,-1.19135 c 0.615573,-0.655243 1.418824,-1.19135 1.785009,-1.19135 0.865886,0 6.602058,5.508044 6.981628,6.703967 0.2651,0.835231 -1.30819,3.196415 -2.1298,3.196415 -0.15535,0 -1.964024,-1.691483 -4.019257,-3.758841 z"
+       id="path24" />
+  </g>
+</svg>

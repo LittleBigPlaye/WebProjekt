@@ -91,7 +91,7 @@ p {
     margin: 0px;
 }
 
-.productCard .price {
+.price {
     color: grey;
     font-size: 1.2em;
 }
@@ -441,6 +441,10 @@ p {
 
 .formWrapper .loginForm {
     width: 85%;
+}
+
+.imageGallery .imageContainer {
+    position: relative;
 }
 
 
@@ -839,7 +843,9 @@ form label {
     border: none;
     height: 100%;
     width: 100%;
-    padding: 5px;
+    width: 60px;
+    height: 60px;
+    /* padding: 5px; */
     transition: .1s ease-in-out;
     outline: none;
     cursor: pointer;
@@ -851,7 +857,24 @@ form label {
 }
 
 .iconButton img {
-    width: 70%;
+    position: absolute;
+    max-height: 100%;
+    max-width: 70%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+}
+
+.editButton {
+    background-color: #eb7d00;
+    border: none;
+    height: 100%;
+    width: 100%;
+    padding: 5px;
+    transition: .1s ease-in-out;
+    outline: none;
+    cursor: pointer;
 }
 
 .badge {
@@ -862,6 +885,14 @@ form label {
     bottom: -15px;
     overflow: hidden;
     border-radius: 50%;
+}
+
+.badge.edit {
+    right: 60px;
+}
+
+.badge.edit a {
+    display: block;
 }
 
 .hiddenIcon {

@@ -105,7 +105,7 @@
 
 <section class="products"> 
     <?php foreach ($products as $product) : ?>
-        <?php include(VIEWSPATH . DIRECTORY_SEPARATOR . 'viewAssets' . DIRECTORY_SEPARATOR . 'productCard.php') ?>
+        <?php require(VIEWSPATH . DIRECTORY_SEPARATOR . 'viewAssets' . DIRECTORY_SEPARATOR . 'productCard.php') ?>
     <?php endforeach ?>
 </section>
 

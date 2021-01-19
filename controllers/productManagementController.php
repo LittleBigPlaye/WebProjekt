@@ -100,8 +100,8 @@ class ProductManagementController extends \myf\core\controller
 
     
     public function actionEdit()
-   {
-       $this->setParam('currentPosition', 'products');
+    {
+        $this->setParam('currentPosition', 'products');
        $errorMessages = [];
        
        //check if the user is logged in
@@ -211,7 +211,6 @@ class ProductManagementController extends \myf\core\controller
             }
         }
         $this->setParam('errorMessages', $errorMessages);
-           
     }
 
     /**
