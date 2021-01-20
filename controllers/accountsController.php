@@ -334,8 +334,8 @@ class accountsController extends Controller
         // the following "if" check if the the submit was send
         if(isset($_POST['changePassword']))
         {
-            $newPassword1 = $_POST['newPassword1'] ?? "";
-            $newPassword2 = $_POST['newPassword2'] ?? "";
+            $newPassword1 = $_POST['password'] ?? "";
+            $newPassword2 = $_POST['password2'] ?? "";
 
             //check if the password match the regex
             if (preg_match('/^(?=.*?[A-Z])(?=.*?[a-z].*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/m', $newPassword1))

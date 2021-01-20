@@ -33,36 +33,36 @@
         </div>
 
 
-            <label  for="secondName">Zweitname:</label>
+            <label class="optional" for="secondName">Zweitname:</label>
             <input class="input_register1" type="text" id="secondName" name="secondName" placeholder="zweiter Vorname" value="<?=htmlspecialchars($_POST['secondName'] ?? '')?>">
 
 
         <div class="input">
-            <label class="required" for="lastName">* Nachname:</label>
+            <label class="required" for="lastName">Nachname:</label>
             <input class="input_register1" type="text" id="lastName" name="lastName" placeholder="Nachname" value="<?=htmlspecialchars($_POST['lastName'] ?? '')?>">
             <span class="errorInfo">Bitte geben Sie ihren Nachnamen an!</span>
         </div>
 
         <div class="input">
-            <label class="required" for="email">* Email:</label>
+            <label class="required" for="email">Email:</label>
             <input class="input_register1" type="email" id="email" name="email" placeholder="E-Mail" value="<?=htmlspecialchars($_POST['email'] ?? '')?>">
             <span class="errorInfo">Bitte geben Sie ihre E-Mail an!</span>
         </div>
 
         <div class="input">
-            <label class="required" for="password">* Passwort:</label>
+            <label class="required" for="password">Passwort:</label>
             <input class="input_register1" type="password" id="password" name="password" placeholder="Passwort">
-            <span class="errorInfo">Bitte geben Sie ein Passwort ein.</span>
+            <span class="errorInfo">Bitte geben Sie ein Passwort ein, mit mindestens 8 Zeichen, davon ein Großbuchstabe, eine Zahl und ein Sonderzeichen.</span>
         </div>
 
         <div class="input">
-            <label class="required" for="password2">* Passwort wiederholen:</label>
+            <label class="required" for="password2">Passwort wiederholen:</label>
             <input class="input_register1" type="password" id="password2" name="password2" placeholder="Passwort wiederholen">
             <span class="errorInfo">Bitte wiederholen Sie ihr Passwort</span>
         </div>
 
 
-        <label>Geschlecht:</label>
+        <label class="optional">Geschlecht:</label>
         <input type="radio" id="female" value="f" name="gender"><label for="female" class="light">Frau</label><br>
         <input type="radio" id="male" value="m" name="gender"><label for="male" class="light">Mann</label><br>
         <input type="radio" id="divers" value="u" name="gender"><label for="divers" class="light">Das was ich sein möchte</label><br><br>
@@ -80,25 +80,25 @@
         <h2>Adresse</h2>
 
         <div class="input">
-            <label for="street">* Strasse</label>
+            <label class="required" for="street">Strasse</label>
             <input class="input_register1" type="text" id="street" name="street" placeholder="Strasse" value="<?=htmlspecialchars($_POST['street'] ?? '')?>">
             <span class="errorInfo">Wir benötigen die Straße in der Sie leben.</span>
         </div>
 
         <div class="input">
-            <label for="streetNumber">* Hausnummer</label>
+            <label class="required" for="streetNumber">Hausnummer</label>
             <input class="input_register1" type="text" id="streetNumber" name="streetNumber" placeholder="Hausnummer" value="<?=htmlspecialchars($_POST['streetNumber'] ?? '')?>">
             <span class="errorInfo">Ohne Hausnummer kommt die Lieferung nicht an.</span>
         </div>
 
         <div class="input">
-            <label for="zipCode">* Postleitzahl</label>
+            <label class="required" for="zipCode">Postleitzahl</label>
             <input class="input_register1" type="text" id="zipCode" name="zipCode" placeholder="Postleitzahl" value="<?=htmlspecialchars($_POST['zipCode'] ?? '')?>">
             <span class="errorInfo">Es sind nur 5 Zahlen, dennoch sind sie wichtig.</span>
         </div>
 
         <div class="input">
-            <label for="city">* Stadt</label>
+            <label class="required" for="city">Stadt</label>
             <input class="input_register1" type="text" id="city" name="city" placeholder="Stadt" value="<?=htmlspecialchars($_POST['city'] ?? '')?>">
             <span class="errorInfo">Aus welchen schönen Ort kommen Sie denn?</span>
         </div>
@@ -108,3 +108,5 @@
     </form>
 </div>
 <script src="<?=JAVASCRIPTPATH . 'accounts' . DIRECTORY_SEPARATOR . 'validateRegister.js'?>"></script>
+<script src="<?=JAVASCRIPTPATH . 'accounts' . DIRECTORY_SEPARATOR . 'validateAddress.js'?>"></script>
+<script src="<?=JAVASCRIPTPATH . 'accounts' . DIRECTORY_SEPARATOR . 'validatePassword.js'?>"></script>

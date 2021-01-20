@@ -9,11 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
     var password2 = document.getElementById('password2');
     var birthDate = document.getElementById('birthdate');
 
-    var street = document.getElementById('street');
-    var streetNumber = document.getElementById('streetNumber');
-    var zipCode = document.getElementById('zipCode');
-    var city = document.getElementById('city');
-
 
     //check if submit button has been found
     if (btnSubmit) {
@@ -52,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 email.classList.remove('errorHighlight');
             }
 
-            //check if email is set
+            //check if birthDate is set
             if (!birthDate || birthDate.value.length <= 0)
             {
                 birthDate.classList.add("errorHighlight");
@@ -70,5 +65,4 @@ document.addEventListener('DOMContentLoaded', function() {
             return formIsValid;
         });
     }
-
 });
