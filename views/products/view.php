@@ -20,7 +20,8 @@
         </div>
     <?php endif ?>
 
-    <div class="imageGallery">
+    <!-- image gallery -->
+    <div class="imageGallery <?= ($product->isHidden) ? 'isHidden' : ''?>">
         <?php if($product->images != null) : ?>
             
             <!-- images -->
@@ -62,22 +63,26 @@
 
         <?php else :?>
             <div class=gallerySlide>
-            <img src="<?=htmlspecialchars(FALLBACK_IMAGE)?>">
+                <img src="<?=htmlspecialchars(FALLBACK_IMAGE)?>">
             </div>
         <?php endif ?>
         
         <script src="<?=JAVASCRIPTPATH . 'products' . DIRECTORY_SEPARATOR . 'imageGallery.js'?>"></script>
-        
-        
     </div>
 
     <!-- product text -->
     <div class="productInformation">
         <p><?=htmlspecialchars($product->catchPhrase) ?></p>
-        <p class="description"><?=nl2br(htmlspecialchars($product->productDescription)) ?></p>
-        <p class="price"><b>Preis:</b> <?=htmlspecialchars($product->standardPrice)?></p>
+        <p class="price"><b>Preis:</b> <?=htmlspecialchars($product->standardPrice)?> €</p>
         <p><b>Marke: </b><?=htmlspecialchars($product->vendor->vendorName) ?></p>
         <p><b>Typ: </b><?=htmlspecialchars($product->category->categoryName) ?></p>
+        <hr>
+        <label>Produktbeschreibung</label>
         
+        <div id="collapsible" class="collapsibleContainer">
+            <p  class="description"><?=nl2br(htmlspecialchars($product->productDescription)) ?></p>
+            <label for="collapsibleToggle" class="collapsibleToggleLabel"><input class="collapsibleToggle" id="collapsibleToggle" type="checkbox"></label>
+        </div>
+        <script src="<?=JAVASCRIPTPATH . 'products' . DIRECTORY_SEPARATOR . 'viewCollapsible.js'?>"></script>
     </div>
 </div>
