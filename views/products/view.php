@@ -20,15 +20,37 @@
         </div>
     <?php endif ?>
 
-    <div class="imageGallery">
+    <!-- image gallery -->
+    <div class="imageGallery <?= ($product->isHidden) ? 'isHidden' : ''?>">
         <?php if($product->images != null) : ?>
             
             <!-- images -->
-            <?php foreach($product->images as $key => $image) :?>
-                <div class=gallerySlide>
-                    <img src="<?=htmlspecialchars($image->path)?>" alt="<?=htmlspecialchars($image->name)?>">
-                </div>
-            <?php endforeach ?>
+            <div class="imageContainer">
+                <?php foreach($product->images as $key => $image) :?>
+                    <div class=gallerySlide>
+                        <img src="<?=htmlspecialchars($image->path)?>" alt="<?=htmlspecialchars($image->name)?>">
+                    </div>
+                <?php endforeach ?>
+                
+                <!-- edit button -->
+                <?php if($this->isAdmin()) : ?>
+                    <div class="badge edit">
+                        <a class="iconButton" title="Artikel bearbeiten" href="?c=productManagement&a=edit&pid=<?= htmlspecialchars($product->id)?>"><img src="assets/images/icons/edit_icon.svg"/></a>
+                    </div>
+                <?php endif; ?>
+
+                <?php if(!$product->isHidden) : ?>
+                    <!-- add to cart button -->
+                    <form class="badge" method="POST" action="#prod<?=$product->id?>">
+                        <button class="iconButton" type="submit" name="addToCart" title="Dem Warenkorb hinzufügen" value="<?=$product->id?>"><img src="assets/images/icons/shopping_cart.svg"/></button>
+                    </form>
+                <?php else : ?>
+                    <!-- hidden notification icon -->
+                    <div class="badge">
+                        <div class="hiddenIcon"><img src="assets/images/icons/hidden_icon.svg" alt="Unsichtbar" title="Unsichtbar"></div>
+                    </div>
+                <?php endif ?>
+            </div>
 
             <!-- thumbnails -->
             <div class="row">
@@ -41,26 +63,26 @@
 
         <?php else :?>
             <div class=gallerySlide>
-            <img src="<?=htmlspecialchars(FALLBACK_IMAGE)?>">
+                <img src="<?=htmlspecialchars(FALLBACK_IMAGE)?>">
             </div>
         <?php endif ?>
         
         <script src="<?=JAVASCRIPTPATH . 'products' . DIRECTORY_SEPARATOR . 'imageGallery.js'?>"></script>
-        
-        <?php if(!$product->isHidden) : ?>
-            <form class="badge" method="POST">
-                    <button class="iconButton" type="submit" name="addToCart" value="<?=$product->id?>"><img src="assets\images\icons\shopping_cart.svg"/></button>
-            </form>
-        <?php endif; ?>
     </div>
 
     <!-- product text -->
     <div class="productInformation">
         <p><?=htmlspecialchars($product->catchPhrase) ?></p>
-        <p class="description"><?=nl2br(htmlspecialchars($product->productDescription)) ?></p>
-        <p><b>Preis:</b> <?=htmlspecialchars($product->standardPrice)?></p>
+        <p class="price"><b>Preis:</b> <?=htmlspecialchars($product->standardPrice)?> €</p>
         <p><b>Marke: </b><?=htmlspecialchars($product->vendor->vendorName) ?></p>
         <p><b>Typ: </b><?=htmlspecialchars($product->category->categoryName) ?></p>
-        <a href="?c=productManagement&a=edit&pid=<?= htmlspecialchars($product->id)?>">Produkt bearbeiten</a>
+        <hr>
+        <label>Produktbeschreibung</label>
+        
+        <div id="collapsible" class="collapsibleContainer">
+            <p  class="description"><?=nl2br(htmlspecialchars($product->productDescription)) ?></p>
+            <label for="collapsibleToggle" class="collapsibleToggleLabel"><input class="collapsibleToggle" id="collapsibleToggle" type="checkbox"></label>
+        </div>
+        <script src="<?=JAVASCRIPTPATH . 'products' . DIRECTORY_SEPARATOR . 'viewCollapsible.js'?>"></script>
     </div>
 </div>

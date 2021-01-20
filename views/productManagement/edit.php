@@ -5,144 +5,164 @@
 ?>
 
 <?php if(isset($product)) : ?>
-<div class="formWrapper">
-    <form id="productForm" class="productForm"  method="post" enctype="multipart/form-data">
-    <h1>Bestehendes Produkt bearbeiten</h1>
-        <?php foreach($errorMessages as $message) : ?>
-            <div class="errorMessage">
-                <span class="messageClose" onclick="this.parentElement.style.display='none';">&times</span>
-                <?= $message ?>
+    <div class="formWrapper">
+        <form id="productForm" class="productForm"  method="post" enctype="multipart/form-data">
+            <h1>Bestehendes Produkt bearbeiten</h1>
+            
+            <?php foreach($errorMessages as $message) : ?>
+                <div class="errorMessage">
+                    <span class="messageClose" onclick="this.parentElement.style.display='none';">&times</span>
+                    <?= $message ?>
+                </div>
+            <? endforeach; ?>
+
+            <!-- delete or change current images -->
+            <?php if($product->images !== null) : ?>
+                <label>Bilder bearbeiten</label>
+                <div class="imageContainer">
+                    <?php foreach($product->images as $productImage) : ?>
+                        <img src="
+                        <?php
+                            if(file_exists($productImage->thumbnailPath))
+                            {
+                                echo $productImage->thumbnailPath;
+                            }
+                            else
+                            {
+                                echo FALLBACK_IMAGE;
+                            }
+                        ?>
+                        "/>
+                        <label for="imageName<?=$productImage->id?>" class="optional">Bildtitel</label>
+                        <input type="text" placeHolder="Bildtitel" name="imageName<?=$productImage->id?>" id="imageName<?=htmlspecialchars($productImage->id)?>" value="<?=htmlspecialchars($productImage->name)?>">
+
+                        <label for="deleteImage<?=$productImage->id?>">Bild "<?= htmlspecialchars($productImage->name)?>" löschen?
+                        <input type="checkbox" id="deleteImage<?=$productImage->id?>" name="deleteImage<?=$productImage->id?>"></label>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+
+            <!-- Add new images -->
+            <div class="input">
+                <label for="images" class="optional">Bilder zu Produkt hinzufügen</label>
+                <input type="file" id="images" name="productImages[]" multiple accept=".png, .jpg, .jpeg"/>
+                <span class="errorInfo">Unterstützte Dateitypen: .jpg, .jpeg, .png<br>Maximale Dateigröße: 3 MB</span>
             </div>
-        <? endforeach; ?>
 
-        <!-- delete or change current images -->
-        <?php foreach($product->images as $productImage) : ?>
-            <img src="
-            <?php
-                if(file_exists($productImage->thumbnailPath))
-                {
-                    echo $productImage->thumbnailPath;
-                }
-                else
-                {
-                    echo FALLBACK_IMAGE;
-                }
-            ?>
-            " width="400px"/><br>
-            <label for="imageName<?=$productImage->id?>">Bildtitel</label>
-            <input type="input" placeHolder="Bildtitel" name="imageName<?=$productImage->id?>" id="imageName<?=$productImage->id?>" value="<?=$productImage->name?>">
-
-            <label for="deleteImage<?=$productImage->id?>">Bild "<?= $productImage->name?>" löschen?
-            <input type="checkbox" id="deleteImage<?=$productImage->id?>" name="deleteImage<?=$productImage->id?>"></label>
-        <?php endforeach ?>
-
-        <!-- Add new images -->
-        <div class="input">
-            <label for="images">Bilder zu Produkt hinzufügen</label>
-            <input type="file" id="images" name="productImages[]" multiple accept=".png, .jpg, .jpeg"/>
-            <span class="errorInfo">Unterstützte Dateitypen: .jpg, .jpeg, .png<br>Maximale Dateigröße: 3 MB</span>
-        </div>
-
-        <div class="input">
-            <label for="productName">Produktbezeichnung</label>
-            <input type="text" name="productName" id="productName" placeholder="Bezeichnung eingeben..."
-                value="<?php
-                    if(!isset($_POST['productName']) || empty($_POST['productName']))
-                    {
-                        echo $product->productName;
-                    }
-                    else
-                    {
-                        echo $_POST['productName'];
-                    }?>">
-            <span class="errorInfo">Bitte geben Sie einen Produktnamen an!</span>
-        </div>
-
-        <div class="input">
-            <label for="catchPhrase">Catchphrase</label>
-            <input type="text" name="catchPhrase" id="catchPhrase"
-                value ="<?php
-                    if(!isset($_POST['catchPhrase']) || empty($_POST['catchPhrase']))
-                    {
-                        echo $product->catchPhrase;
-                    }
-                    else
-                    {
-                        echo $_POST['catchPhrase'];
-                    }?>">  
-        </div>
-
-        <div class="input">
-            <label for="productDescription">Produktbeschreibung</label>
-            <textarea id="productDescription" name="productDescription"><?php
-                    if(!isset($_POST['productDescription']) || empty($_POST['productDescription']))
-                    {
-                        echo $product->productDescription;
-                    }
-                    else
-                    {
-                        echo $_POST['productDescription'];
-                    }?></textarea>
-            <span class="errorInfo">Bitte geben Sie eine Beschreibung an!</span>
-        </div>
-
-        <div class="input">
-            <label for="productPrice">Produktpreis</label>
-            <input type="number" min="1" step="any" id="productPrice" name="productPrice"
-                value="<?php
-                    if(!isset($_POST['productPrice']) || empty($_POST['productPrice']))
-                    {
-                        echo $product->standardPrice;
-                    }
-                    else
-                    {
-                        echo $_POST['productPrice'];
-                    }?>">
-            <span class="errorInfo">Bitte geben Sie einen Preis mit maximal zwei Nachkommastellen an!</span>
-        </div>
-
-        <div class="input">
-            <label for="vendor">Marke</label>
-            <select id="vendor" name="vendor">
-                <?php foreach ($vendors as $vendor) : ?>
-                    <option value="<?= $vendor->id ?>" 
-                    <?php 
-                        if((isset($_POST['vendor']) && $_POST['vendor'] == $vendor->id) || ($product->vendorID == $vendor->id))
+            <div class="input">
+                <label for="productName" class="required">Produktbezeichnung</label>
+                <input type="text" name="productName" id="productName" placeholder="Bezeichnung eingeben..."
+                    value="<?php
+                        if(!isset($_POST['productName']) || empty($_POST['productName']))
                         {
-                            echo ' selected';
+                            echo htmlspecialchars($product->productName);
                         }
-                        
-                    ?>
-                    ><?= $vendor->vendorName ?></option>
-                <?php endforeach ?>
-            </select>
-            <span class="errorInfo">Bitte wählen Sie eine Marke aus!</span>
-        </div>
+                        else
+                        {
+                            echo htmlspecialchars($_POST['productName']);
+                        }?>">
+                <span class="errorInfo">Bitte geben Sie einen Produktnamen an! (max. 120 Zeichen)</span>
+            </div>
 
-        <div class="input">
-            <label for="category">Kategorie</label>
-            <select id="category" name="category">
-                <?php foreach ($categories as $category) : ?>
-                    <option value="<?= $category->id ?>" 
+            <div class="input">
+                <label for="catchPhrase" class="optional">Catchphrase</label>
+                <input type="text" name="catchPhrase" id="catchPhrase"
+                    value ="<?php
+                        if(!isset($_POST['catchPhrase']) || empty($_POST['catchPhrase']))
+                        {
+                            echo htmlspecialchars($product->catchPhrase);
+                        }
+                        else
+                        {
+                            echo htmlspecialchars($_POST['catchPhrase']);
+                        }?>">  
+                    <span class="errorInfo">Bitte geben Sie maximal 150 Zeichen an!</span>
+            </div>
+
+            <div class="input">
+                <label for="productDescription" class="required">Produktbeschreibung</label>
+                <textarea id="productDescription" name="productDescription"><?php
+                        if(!isset($_POST['productDescription']) || empty($_POST['productDescription']))
+                        {
+                            echo htmlspecialchars($product->productDescription);
+                        }
+                        else
+                        {
+                            echo htmlspecialchars($_POST['productDescription']);
+                        }?></textarea>
+                <span class="errorInfo">Bitte geben Sie eine Beschreibung an! (max. 5000 Zeichen)</span>
+            </div>
+
+            <div class="input">
+                <label for="productPrice" class="required">Produktpreis</label>
+                <input type="number" min="1" step="any" id="productPrice" name="productPrice"
+                    value="<?php
+                        if(!isset($_POST['productPrice']) || empty($_POST['productPrice']))
+                        {
+                            echo htmlspecialchars($product->standardPrice);
+                        }
+                        else
+                        {
+                            echo htmlspecialchars($_POST['productPrice']);
+                        }?>">
+                <span class="errorInfo">Bitte geben Sie einen Preis mit maximal zwei Nachkommastellen an!</span>
+            </div>
+
+            <div class="input">
+                <label for="vendor" class="required">Marke</label>
+                <select id="vendor" name="vendor">
+                    <?php foreach ($vendors as $vendor) : ?>
+                        <option value="<?= $vendor->id ?>" 
                         <?php 
-                            if((isset($_POST['category']) && $_POST['category'] == $category->id) || ($product->categoryID == $category->id))
+                            if((isset($_POST['vendor']) && $_POST['vendor'] == $vendor->id) || ($product->vendorID == $vendor->id))
                             {
                                 echo ' selected';
                             }
+                            
                         ?>
-                    ><?= $category->categoryName ?></option>
-                <?php endforeach ?>
-            </select>
-            <span class="errorInfo">Bitte wählen Sie eine Kategorie aus!</span>
-        </div>
+                        ><?= $vendor->vendorName ?></option>
+                    <?php endforeach ?>
+                </select>
+                <span class="errorInfo">Bitte wählen Sie eine Marke aus!</span>
+            </div>
 
-        <div class="input">
-            <label for="isHidden">Produkt "verstecken"?</label>
-            <input type="checkbox" id="isHidden" name="isHidden" <?= ($product->isHidden) ? 'checked' : '' ?>/>
-        </div>
+            <div class="input">
+                <label for="category" class="required">Kategorie</label>
+                <select id="category" name="category">
+                    <?php foreach ($categories as $category) : ?>
+                        <option value="<?= $category->id ?>" 
+                            <?php 
+                                if((isset($_POST['category']) && $_POST['category'] == $category->id) || ($product->categoryID == $category->id))
+                                {
+                                    echo ' selected';
+                                }
+                            ?>
+                        ><?= $category->categoryName ?></option>
+                    <?php endforeach ?>
+                </select>
+                <span class="errorInfo">Bitte wählen Sie eine Kategorie aus!</span>
+            </div>
 
-        <input type="submit" id="submit" name="submit" value="Änderung speichern"/>
-    </form>
-</div>
+            <div class="input">
+                    <label for="visibility" class="required">Sichtbarkeit</label>
+                    <select name="visibility" id="visibility">
+                        <option value="visible">Sichtbar</option>
+                        <option value="hidden" 
+                                <?php
+                                    if((isset($_POST['visibility']) && $_POST['visibility'] == 'hidden' || $product->isHidden))
+                                    {
+                                        echo ' selected';
+                                    }
+                                ?>
+                        >Versteckt</option>
+                    </select>
+            </div>
+            <sup>
+                <p>Mit<span class="required"></span> markierte Felder sind Pflichtfelder.</p>
+            </sup>
+            <input type="submit" id="submit" name="submit" value="Änderung speichern"/>
+        </form>
+    </div>
 <?php endif; ?>
+
 <script src="<?=JAVASCRIPTPATH . 'productManagement' . DIRECTORY_SEPARATOR . 'validateProduct.js'?>"></script>

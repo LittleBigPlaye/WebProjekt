@@ -69,6 +69,10 @@ nav a {
     -webkit-transition: all 0.125s ease-in-out;
 }
 
+nav li:not(.active) a {
+    border-bottom: solid #191919 0.38em;
+}
+
 nav a:hover {
     background-color: #e4e4e4;
     color: #191919;
@@ -76,6 +80,14 @@ nav a:hover {
 
 .mainNav li a:hover {
     border-bottom: solid #e4e4e4 0.38em;
+}
+
+.mainNav .subNav li a:hover {
+    border-bottom: none;
+}
+
+.mainNav .subNav li a {
+    border-bottom: none;
 }
 
 nav .subNav {
@@ -176,7 +188,7 @@ nav li img {
         top: 100%;
         left: 0;
         width: 12em;
-        z-index: 3000;
+        z-index: +3000;
         box-shadow: 0px 8px 16px 0px #00000033;
     }
     nav .subNav,
@@ -188,6 +200,7 @@ nav li img {
     }
     nav li:hover>input[type="checkbox"]+.subNav {
         display: block;
+        z-index: 300;
     }
     .cartBadge {
         position: relative;
@@ -199,5 +212,8 @@ nav li img {
         height: .9em;
         padding: 0;
         margin: 0;
+    }
+    nav .subNavTitle a {
+        cursor: default !important;
     }
 }

@@ -332,7 +332,7 @@ abstract class BaseModel
 
         try
         {
-            $db->query('SET NAMES utf8')->execute();
+            $db->query('SET NAMES utf8;')->execute();
             $sql = 'SELECT * FROM ' . self::tablename();
 
             if(!empty($where))
@@ -397,5 +397,28 @@ abstract class BaseModel
         return false;
     }
 
+    public function startTransaction(&$errors = null) {
+        $db = $GLOBALS['database'];
+        try 
+        {
+            $db->query('START TRANSACTION;')->execute();
+        }
+        catch (\PDOException $e)
+        {
+            $errors[] = 'Error while starting a transaction';
+        }
+    }
+
+    public function stopTransaction() {
+        $db = $GLOBALS['database'];
+        try
+        {
+            $db->query('COMMIT;')->execute();
+        }
+        catch (\PDOException $e)
+        {
+            $errors[] = 'Error while stopping ending a';
+        }
+    }
 
 }

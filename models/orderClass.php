@@ -45,6 +45,7 @@ class Order extends BaseModel
     {
         if(!empty($this->orderItems))
         {
+            $this->startTransaction();
             parent::save();
             foreach($this->orderItems as $orderItem)
             {
@@ -53,6 +54,7 @@ class Order extends BaseModel
                 //save OrderItem to DB
                 $orderItem->save();
             }
+            $this->stopTransaction();
         }
     }
 

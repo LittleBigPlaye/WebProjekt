@@ -20,7 +20,7 @@ else if ($cartCount > 99) {
         <li <?= ($currentPosition == 'index') ? 'class="active"' : '' ?>><a href="?c=pages&a=index">Startseite</a></li>
 
         <!-- Products -->
-        <li <?= ($currentPosition == 'products') ? 'class="active"' : '' ?>><label for="dropToggle01"><a>Produkte
+        <li <?= ($currentPosition == 'products') ? 'class="active"' : '' ?>><label class="subNavTitle" for="dropToggle01"><a>Produkte
                     <span class="dropIcon">▾</span>
                     <label title="toggle dropDown" class="dropIcon" for="dropToggle01">▾</label>
                 </a>
@@ -44,7 +44,7 @@ else if ($cartCount > 99) {
         <!-- Administration -->
         <?php if($this->isLoggedIn()) : ?>
             <?php if($this->isAdmin()) : ?>
-                <li class="<?= ($currentPosition == 'administration') ? 'active ' : '' ?>right"><label for="dropToggle02"><a>Administration
+                <li class="<?= ($currentPosition == 'administration') ? 'active ' : '' ?>right"><label class="subNavTitle" for="dropToggle02"><a>Administration
                             <span class="dropIcon">▾</span>
                             <label title="toggle dropDown" class="dropIcon" for="dropToggle02">▾</label>
                         </a>
@@ -52,7 +52,7 @@ else if ($cartCount > 99) {
                     <input type="checkbox" id="dropToggle02" class="subNavToggle">
                     <ul class="subNav">
                         <li><a href="index.php?c=accounts&a=myspace">Mein Konto</a></li>
-                        <li><a href="index.php?c=productManagement&a=new">Neues Produkt anlegen</a>
+                        <li><a href="index.php?c=productManagement&a=new">Produkt anlegen</a>
                         <li><a href="index.php?c=accounts&a=adminusermanagement">Benutzer verwalten</a></li>
                     </ul>
                 </li>
@@ -66,7 +66,7 @@ else if ($cartCount > 99) {
         
 
         <li <?= ($currentPosition == 'shoppingcart') ? 'class="right active"' : 'class="right"' ?>><a
-                href="index.php?c=orders&a=shoppingcart">Warenkorb <img src="assets\images\icons\shopping_cart.svg" alt="">
+                href="index.php?c=orders&a=shoppingcart">Warenkorb <img src="assets/images/icons/shopping_cart.svg" alt="">
             <?php if(!empty($cartCount)) : ?>
                 <span class="cartBadge"><p><?= $cartCount ?></p></span>
             <?php endif ?></a>

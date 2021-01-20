@@ -91,7 +91,7 @@ p {
     margin: 0px;
 }
 
-.productCard .price {
+.price {
     color: grey;
     font-size: 1.2em;
 }
@@ -421,8 +421,30 @@ p {
     width: 85%;
 }
 
+.formWrapper .productForm .imageContainer {
+    max-height: 350px;
+    overflow: auto;
+    border: 1px solid black;
+    margin-bottom: 25px;
+    padding: 5px;
+}
+
+.productForm .imageContainer input[type=checkbox] {
+    margin-bottom: 15px;
+}
+
+.productForm .imageContainer img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
 .formWrapper .loginForm {
     width: 85%;
+}
+
+.imageGallery .imageContainer {
+    position: relative;
 }
 
 
@@ -504,6 +526,17 @@ form input[type=checkbox] {
 
 form label {
     font-weight: bold;
+}
+
+.required::after {
+    content: " *";
+    color: #eb7d00;
+}
+
+.optional::after {
+    content: " (optional)";
+    font-size: .7em;
+    color: #646464;
 }
 
 
@@ -770,6 +803,11 @@ form label {
 
 .gallerySlide img {
     width: 100%;
+    border-bottom: 5px solid #eb7d00;
+}
+
+.imageGallery.isHidden.gallerySlide img {
+    border-bottom: 5px solid #333333;
 }
 
 
@@ -810,7 +848,9 @@ form label {
     border: none;
     height: 100%;
     width: 100%;
-    padding: 5px;
+    width: 60px;
+    height: 60px;
+    /* padding: 5px; */
     transition: .1s ease-in-out;
     outline: none;
     cursor: pointer;
@@ -822,7 +862,24 @@ form label {
 }
 
 .iconButton img {
-    width: 70%;
+    position: absolute;
+    max-height: 100%;
+    max-width: 70%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+}
+
+.editButton {
+    background-color: #eb7d00;
+    border: none;
+    height: 100%;
+    width: 100%;
+    padding: 5px;
+    transition: .1s ease-in-out;
+    outline: none;
+    cursor: pointer;
 }
 
 .badge {
@@ -833,6 +890,14 @@ form label {
     bottom: -15px;
     overflow: hidden;
     border-radius: 50%;
+}
+
+.badge.edit {
+    right: 60px;
+}
+
+.badge.edit a {
+    display: block;
 }
 
 .hiddenIcon {
@@ -947,7 +1012,6 @@ form label {
     width: 95%;
     margin: 0 auto;
     height: 100%;
-    :
 }
 
 .cartListing .cartEntry {
@@ -956,28 +1020,25 @@ form label {
     margin: 10px 0;
 }
 
-.cartEntry img {
-    display: inline-block;
-    padding: 10px;
-    /* max-height: 300px; */
-    max-width: 30%;
-}
-
 .tableCell .productPreview {
-    max-width: 250px;
+    /* padding: 10px; */
+    display: block;
+    border-bottom: solid 5px #eb7d00;
+    margin: 5px auto;
+    max-width: 100%;
 }
 
-
-/* .cartTotal {
+.cartTotal {
     position: sticky;
     bottom: 0;
-    z-index: +100;
+    /* z-index: 1; */
+    z-index: -1;
     width: 95%;
     margin: 0 auto;
     padding: 5px;
     background-color: white;
     border-radius: 5px 5px 0px 0px;
-} */
+}
 
 
 /* #endregion */
@@ -985,7 +1046,16 @@ form label {
 
 /* #region pseudoTable */
 
-.table {
+.table .tableRow:nth-child(even):not(.head) {
+    background-color: #b9b9b9;
+}
+
+.table .tableRow:nth-child(odd):not(.head) {
+    background-color: #fafafa;
+}
+
+
+/* .table {
     display: table;
     margin: 0 auto;
     text-align: center;
@@ -1004,13 +1074,7 @@ form label {
     clear: both;
 }
 
-.table .tableRow:nth-child(even):not(.head) {
-    background-color: #b9b9b9;
-}
 
-.table .tableRow:nth-child(odd):not(.head) {
-    background-color: #fafafa;
-}
 
 .table .head {
     font-weight: bold;
@@ -1053,7 +1117,79 @@ form label {
 
 .table .center {
     text-align: center;
+} */
+
+.table .tableRow.head {
+    display: none;
+}
+
+.table {
+    display: block;
+    margin: 5px 0;
+}
+
+.table .tableRow {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 5px 0;
+}
+
+.table label {
+    margin-top: 8px;
+    margin-bottom: 5px;
+    display: block;
+    width: 100%;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.table .tableCell {
+    display: block;
+    text-align: left;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.table .tableCell img {
+    width: 90%;
+}
+
+.table .tableRow.bottom {
+    font-weight: bold;
+    color: white;
+    background-color: #363636 !important;
 }
 
 
 /* #endregion */
+
+
+/*  collapsible */
+
+.collapsible {
+    padding: 0 20px;
+    background-color: white;
+    max-height: 100%;
+    height: auto;
+    overflow: hidden;
+    margin: 10px 0px;
+    padding-bottom: 15px;
+}
+
+.collapsibleContainer {
+    position: relative;
+    transition: max-height .2s ease-out;
+    overflow: hidden;
+}
+
+.collapsibleToggleLabel {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    margin: 0;
+    padding: 30px 0;
+    width: 100%;
+    background-image: linear-gradient(to bottom, transparent, white);
+}

@@ -81,16 +81,16 @@
 
         <label for="sort"></label>
         <select id="sort" name=sort>
-            <option value="none"      <?= (isset($_GET['sort']) && $_GET['sort'] == 'none') ? ' selected' : ''?>>Ohne Sortierung</option>
+            <option value="none"      <?= (isset($_GET['sort']) && $_GET['sort'] == 'none')      ? ' selected' : ''?>>Ohne Sortierung</option>
 
-            <option value="nameASC"   <?= (isset($_GET['sort']) && $_GET['sort'] == 'nameASC') ? ' selected' : ''?>>Name aufsteigend</option>
-            <option value="nameDESC"  <?= (isset($_GET['sort']) && $_GET['sort'] == 'nameDESC') ? ' selected' : ''?>>Name absteigend</option>
+            <option value="nameASC"   <?= (isset($_GET['sort']) && $_GET['sort'] == 'nameASC')   ? ' selected' : ''?>>Name aufsteigend</option>
+            <option value="nameDESC"  <?= (isset($_GET['sort']) && $_GET['sort'] == 'nameDESC')  ? ' selected' : ''?>>Name absteigend</option>
 
-            <option value="priceASC"  <?= (isset($_GET['sort']) && $_GET['sort'] == 'priceASC') ? ' selected' : ''?>>Preis aufsteigend</option>
+            <option value="priceASC"  <?= (isset($_GET['sort']) && $_GET['sort'] == 'priceASC')  ? ' selected' : ''?>>Preis aufsteigend</option>
             <option value="priceDESC" <?= (isset($_GET['sort']) && $_GET['sort'] == 'priceDESC') ? ' selected' : ''?>>Preis absteigend</option>
 
-            <option value="dateDESC" <?= (isset($_GET['sort']) && $_GET['sort'] == 'dateDESC') ? ' selected' : ''?>>Neueste zuerst</option>
-            <option value="dateASC" <?= (isset($_GET['sort']) && $_GET['sort'] == 'dateASC') ? ' selected' : ''?>>Älteste zuerst</option>
+            <option value="dateDESC" <?= (isset($_GET['sort']) && $_GET['sort'] == 'dateDESC')   ? ' selected' : ''?>>Neueste zuerst</option>
+            <option value="dateASC"  <?= (isset($_GET['sort']) && $_GET['sort'] == 'dateASC')    ? ' selected' : ''?>>Älteste zuerst</option>
 
         </select>
         <br>
@@ -105,7 +105,7 @@
 
 <section class="products"> 
     <?php foreach ($products as $product) : ?>
-        <?php include(VIEWSPATH . DIRECTORY_SEPARATOR . 'viewAssets' . DIRECTORY_SEPARATOR . 'productCard.php') ?>
+        <?php require(VIEWSPATH . DIRECTORY_SEPARATOR . 'viewAssets' . DIRECTORY_SEPARATOR . 'productCard.php') ?>
     <?php endforeach ?>
 </section>
 

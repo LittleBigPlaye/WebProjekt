@@ -8,7 +8,6 @@
     .logo2 {
         display: none;
     }
-    /* Hide the link that should open and close the topnav on small screens */
     .header .icon {
         display: none;
     }
@@ -164,12 +163,50 @@
         top: -50%;
         right: 10px;
         left: 75%;
-        /* bottom: 200px; */
         width: 250px;
-        z-index: +100;
         padding: 5px;
         background-color: white;
         border-radius: 5px
+    }
+    .table {
+        display: table;
+        margin: 0 auto;
+        text-align: center;
+        width: 100%;
+    }
+    .table.userManagement {
+        padding: 5px;
+    }
+    .table .tableRow {
+        display: table-row;
+    }
+    .table .tableRow::after {
+        clear: both;
+    }
+    .table .tableRow.head {
+        font-weight: bold;
+        display: table-header-group;
+        color: white;
+        background-color: #363636
+    }
+    .table .tableCell {
+        padding: 5px;
+        display: table-cell;
+        text-align: left;
+        vertical-align: top;
+        width: 25%;
+    }
+    .table .tableRow.bottom {
+        display: table-row;
+    }
+    label.mobileLabel {
+        display: none;
+    }
+    .mobileLabel.input[type=checkbox] {
+        display: block;
+    }
+    .table.userManagement .tableCell {
+        width: 14%;
     }
 }
 

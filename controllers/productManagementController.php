@@ -34,45 +34,19 @@ class ProductManagementController extends \myf\core\controller
         if(isset($_POST['submit']))
         {
             //get inputs from form
-            $name        = $_POST['productName'] ?? '';
-            $catchPhrase = $_POST['catchPhrase'] ?? '';
-            $description = $_POST['productDescription'] ?? '';
-            $price       = $_POST['productPrice'] ?? '';
+            $name        = trim($_POST['productName'] ?? '');
+            $catchPhrase = trim($_POST['catchPhrase'] ?? '');
+            $description = trim($_POST['productDescription'] ?? '');
+            $price       = trim($_POST['productPrice'] ?? '');
             $vendor      = $_POST['vendor'] ?? '';
             $category    = $_POST['category'] ?? '';
-            $isHidden    = isset($_POST['isHidden']);
+            $isHidden    = $_POST['visibility'] ?? '';
+
+            $isHidden = ($isHidden == 'hidden') ? true : false;
 
             $db = $GLOBALS['database'];
 
-            //check if name exists
-            if(empty($name))
-            {
-                $errorMessages['productName'] = 'Es muss ein Produktname angegeben werden.';
-            }
-
-            //check if description exists
-            if(empty($description))
-            {
-                $errorMessages['description'] = 'Geben Sie eine Produktbezeichnung an.';
-            }
-
-            //check if price is valid
-            if(!\myf\core\validateNumberInput($price, 2))
-            {
-                $errorMessages['price'] = 'Geben Sie einen Preis größer 0 € und mit maximal zwei Nachkommastellen an.';
-            }
-
-            //check if vendor exists
-            if(empty($vendor) || \myf\models\Vendor::findOne('id=' . $db->quote($vendor)) == null)
-            {
-                $errorMessages['vendor'] = 'Wählen Sie eine gültige Marke aus.';
-            }
-
-            //check if category exists
-            if(empty($category) || \myf\models\Category::findOne('id=' . $db->quote($category)) == null)
-            {
-                $errorMessages['category'] = 'Wählen Sie eine gültige Kategorie aus.';
-            }
+            $this->validateInputs($name, $catchPhrase, $description, $price, $vendor, $category, $errorMessages);
 
             //check if productname is not new
             if(!empty($name) && \myf\models\Product::findOne('productName LIKE ' . $db->quote($name)) !== null)
@@ -126,8 +100,8 @@ class ProductManagementController extends \myf\core\controller
 
     
     public function actionEdit()
-   {
-       $this->setParam('currentPosition', 'products');
+    {
+        $this->setParam('currentPosition', 'products');
        $errorMessages = [];
        
        //check if the user is logged in
@@ -164,108 +138,138 @@ class ProductManagementController extends \myf\core\controller
        //get inputs from from
        if(isset($_POST['submit']))
        {
-           //retrieve inputs from form
-           $name        = $_POST['productName'] ?? '';
-           $catchPhrase = $_POST['catchPhrase'] ?? '';
-           $description = $_POST['productDescription'] ?? '';
-           $price       = $_POST['productPrice'] ?? '';
-           $vendor      = $_POST['vendor'] ?? '';
-           $category    = $_POST['category'] ?? '';
-           $isHidden    = isset($_POST['isHidden']);
+            //retrieve inputs from form
+            $name        = trim($_POST['productName'] ?? '');
+            $catchPhrase = trim($_POST['catchPhrase'] ?? '');
+            $description = trim($_POST['productDescription'] ?? '');
+            $price       = trim($_POST['productPrice'] ?? '');
+            $vendor      = $_POST['vendor'] ?? '';
+            $category    = $_POST['category'] ?? '';
+            $isHidden    = $_POST['visibility'] ?? '';
 
-           //check if name is empty
-           if(empty($name))
-           {
-               $errorMessages['productName'] = 'Bitte geben Sie einen Produktnamen an!';
-           }
+            $isHidden = ($isHidden == 'hidden') ? true : false;
 
-           //check if description is empty
-           if(empty($description))
-           {
-               $errorMessages['description'] = 'Bitte geben Sie eine Produktbeschreibung an!';
-           }
+            $this->validateInputs($name, $catchPhrase, $description, $price, $vendor, $category, $errorMessages);
 
-           //check if price is valid
-           if(!\myf\core\validateNumberInput($price, 2))
-           {
-               $errorMessages['price'] = 'Geben Sie einen Preis größer 0 € und mit maximal zwei Nachkommastellen an.';
-           }
+            $db = $GLOBALS['database'];
+            //check if productname is not new
+            if(!empty($name) && ($name != $product->productName) && \myf\models\Product::findOne('productName LIKE ' . $db->quote($name)) !== null)
+            {
+                $errorMessages['productFound'] = 'Es existiert bereits ein Produkt mit dem von Ihnen gewünschten Namen!';
+            }
 
-           $db = $GLOBALS['database'];
-
-           //check if vendor exists
-           if(empty($vendor) || \myf\models\Vendor::findOne('id=' . $db->quote($vendor)) == null)
-           {
-               $errorMessages['vendor'] = 'Wählen Sie eine gültige Marke aus.';
-           }
-
-           //check if category exists
-           if(empty($category) || \myf\models\Category::findOne('id=' . $db->quote($category)) == null)
-           {
-               $errorMessages['category'] = 'Wählen Sie eine gültige Kategorie aus.';
-           }
-
-           //check if productname is not new
-           if(!empty($name) && ($name != $product->productName) && \myf\models\Product::findOne('productName LIKE ' . $db->quote($name)) !== null)
-           {
-               $errorMessages['productFound'] = 'Es existiert bereits ein Produkt mit dem von Ihnen gewünschten Namen!';
-           }
-
-           //check if there are files to be uploaded
-           $fileNames = array_filter($_FILES['productImages']['name']);
-           if(!empty($fileNames))
-           {
-               //check if all images are okay
-               $this->validateImages('productImages', $errorMessages);
-           }
+            //check if there are files to be uploaded
+            $fileNames = array_filter($_FILES['productImages']['name']);
+            if(!empty($fileNames))
+            {
+                //check if all images are okay
+                $this->validateImages('productImages', $errorMessages);
+            }
            
-           if(count($errorMessages) === 0)    
-           {
-               //go through all images of the current product
-               foreach($product->images as $productImage)
-               {
-                   $deleteImage = isset($_POST['deleteImage' . $productImage->id]) ? true : false;
-                   if($deleteImage)
-                   {
-                       $productImage->delete();
-                   }
-                   else
-                   {
-                       //change image title
-                       $newTitle = $_POST['imageName' . $productImage->id] ?? $productImage->name;
-                       $productImage->image->imageName = $newTitle;
-                       $productImage->image->save();
-                   }
-               }
+            if(count($errorMessages) === 0)    
+            {
+                //go through all images of the current product
+                foreach($product->images as $productImage)
+                {
+                    $deleteImage = isset($_POST['deleteImage' . $productImage->id]) ? true : false;
+                    if($deleteImage)
+                    {
+                        $productImage->delete();
+                    }
+                    else
+                    {
+                        //change image title
+                        $newTitle = $_POST['imageName' . $productImage->id] ?? $productImage->name;
+                        $productImage->image->imageName = $newTitle;
+                        $productImage->image->save();
+                    }
+                }
 
-               //upload new images (if available)
-               if(count($errorMessages) === 0 && !empty($fileNames))
-               {
-                   $this->addImagesToProduct($product, 'productImages');
-               }
+                //upload new images (if available)
+                if(count($errorMessages) === 0 && !empty($fileNames))
+                {
+                    $this->addImagesToProduct($product, 'productImages');
+                }
 
-               //apply changes to product
-               $product->productName        = $name;
-               $product->catchPhrase        = $catchPhrase;
-               $product->productDescription = $description;
-               $product->vendorID           = $vendor;
-               $product->categoryID         = $category;
-               $product->standardPrice      = $price;
-               $product->isHidden           = $isHidden;
+                //apply changes to product
+                $product->productName        = $name;
+                $product->catchPhrase        = $catchPhrase;
+                $product->productDescription = $description;
+                $product->vendorID           = $vendor;
+                $product->categoryID         = $category;
+                $product->standardPrice      = $price;
+                $product->isHidden           = $isHidden;
 
-               //save product to database
-               $product->save();
-               $_SESSION['productSuccess'] = 'Das Produkt "' . $name . '" wurde ergolgreich geändert!';
-               
-               $this->updateLastActiveTime();
-               
-               //redirect to product page
-               header('Location: ?c=products&a=view&pid=' . $product->id);
-           }
-       }
-       $this->setParam('errorMessages', $errorMessages);
-           
-   }
+                //save product to database
+                $product->save();
+                $_SESSION['productSuccess'] = 'Das Produkt "' . $name . '" wurde ergolgreich geändert!';
+                
+                $this->updateLastActiveTime();
+                
+                //redirect to product page
+                header('Location: ?c=products&a=view&pid=' . $product->id);
+            }
+        }
+        $this->setParam('errorMessages', $errorMessages);
+    }
+
+    /**
+     * This function is used to control if the inputs which are equal (between actionEdit and actionNew) are valid
+     *
+     * @param [type] $name
+     * @param [type] $catchPhrase
+     * @param [type] $description
+     * @param [type] $price
+     * @param [type] $errorMessages
+     * @return void
+     */
+    private function validateInputs($name, $catchPhrase, $description, $price, $vendor, $category, &$errorMessages)
+    {
+        //check if name is valid
+        if(empty($name))
+        {
+            $errorMessages['productName'] = 'Bitte geben Sie einen Produktnamen an!';
+        }
+        else if(strlen($name) > 120)
+        {
+            $errorMessages['productName'] = 'Die Produktbezeichnung darf maximal 120 Zeichen lang sein.';
+        }
+
+        //check if catchphrase is valid
+        if(strlen($catchPhrase) > 150)
+        {
+            $errorMessages['catchPhrase'] = 'Die Catch Phrase darf maximal 150 Zeichen lang sein.';
+        }
+
+        //check if description is valid
+        if(empty($description))
+        {
+            $errorMessages['description'] = 'Geben Sie eine Produktbeschreibung an.';
+        }
+        else if (strlen($description) > 5000)
+        {
+            $errorMessages['description'] = 'Die Produktbeschreibung darf maximal 5000 Zeichen lang sein.';
+        }
+
+        //check if price is valid
+        if(!\myf\core\validateNumberInput($price, 2))
+        {
+            $errorMessages['price'] = 'Geben Sie einen Preis größer 0 € und mit maximal zwei Nachkommastellen an.';
+        }
+
+        $db = $GLOBALS['database'];
+        //check if vendor exists
+        if(empty($vendor) || \myf\models\Vendor::findOne('id=' . $db->quote($vendor)) == null)
+        {
+            $errorMessages['vendor'] = 'Wählen Sie eine gültige Marke aus.';
+        }
+
+        //check if category exists
+        if(empty($category) || \myf\models\Category::findOne('id=' . $db->quote($category)) == null)
+        {
+            $errorMessages['category'] = 'Wählen Sie eine gültige Kategorie aus.';
+        }
+    }
 
    /**
     * Checks if the given images have the correct file type and the correct file size

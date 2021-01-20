@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     //get input fields from form
     var productImages = document.getElementById('images');
     var productName = document.getElementById('productName');
+    var catchPhrase = document.getElementById('catchPhrase');
     var productDescription = document.getElementById('productDescription');
     var productPrice = document.getElementById('productPrice');
     var vendor = document.getElementById('vendor');
@@ -25,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     productImages.classList.remove('errorHighlight');
                 }
 
-                //check if each uploaded images hav correct type and file size
+                //check if each uploaded images has correct type and file size
                 for (var i = 0; i < productImages.files.length; i++) {
                     console.log(productImages.files[i]['size']);
                     if (!isValidImage(productImages.files[i])) {
@@ -36,16 +37,24 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             //check if product name is set
-            if (!productName || productName.value.length <= 0) {
-                productName.classList.add("errorHighlight");
+            if (!productName || productName.value.length <= 0 || productName.value.length > 120) {
+                productName.classList.add('errorHighlight');
                 formIsValid = false;
             } else {
                 productName.classList.remove('errorHighlight');
             }
 
+            //check if catchphrase length is okay
+            if (!catchPhrase || catchPhrase.value.length > 150) {
+                catchPhrase.classList.add('errorHighlight');
+                formIsValid = false;
+            } else {
+                catchPhrase.classList.remove('errorHighlight');
+            }
+
             //check if productDescription is set
-            if (!productDescription || productDescription.value.length <= 0) {
-                productDescription.classList.add("errorHighlight");
+            if (!productDescription || productDescription.value.length <= 0 || productDescription.value.length > 5000) {
+                productDescription.classList.add('errorHighlight');
                 formIsValid = false;
             } else {
                 productDescription.classList.remove('errorHighlight');

@@ -14,13 +14,13 @@ class Product extends BaseModel
         'id'                    =>  ['type' => BaseModel::TYPE_INT     , 'null' => 'not null' , 'autoincrement' => true],
         'createdAt'             =>  ['type' => BaseModel::TYPE_DATE    , 'null' => 'not null' ],
         'updatedAt'             =>  ['type' => BaseModel::TYPE_DATE    , 'null' => 'null'     ],
-        'productName'           =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'not null' ],
-        'catchPhrase'           =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'null'     ],
-        'productDescription'    =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'not null', 'min' => 10, 'max' => 5000],  
+        'productName'           =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'not null', 'max' => 120],
+        'catchPhrase'           =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'null'    , 'max' => 150] ,
+        'productDescription'    =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'not null', 'max' => 5000],  
         'standardPrice'         =>  ['type' => BaseModel::TYPE_DECIMAL , 'null' => 'not null'],
         'categoryID'            =>  ['type' => BaseModel::TYPE_INT     , 'null' => 'not null'],
         'vendorID'              =>  ['type' => BaseModel::TYPE_INT     , 'null' => 'not null'],
-        'isHidden'              => ['type'  => BaseMOdel::TYPE_INT     , 'null' => 'null']
+        'isHidden'              =>  ['type' => BaseMOdel::TYPE_INT     , 'null' => 'null']
     ];
 
     private $vendor        = null;
@@ -63,8 +63,12 @@ class Product extends BaseModel
     }
 
     public function save(&$errors = null) {
-        
+        //surrounding by transaction to make sure all inserts worked
+        $this->startTransaction();
+        //save this first to make sure it has a valid id
         parent::save();
+        
+        //save all images and the connection to the product
         foreach($this->productImages as $productImage)
         {
             if($productImage != null)
@@ -73,6 +77,7 @@ class Product extends BaseModel
                 $productImage->save();
             }
         }
+        $this->stopTransaction();
     }
 
     public function __destruct()
