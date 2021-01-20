@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (btnSubmit) {
         btnSubmit.addEventListener('click', function(event)
         {
-            var isValid = true;
+            var formIsValid = true;
 
             //check if firstName is set
             if (!firstName || firstName.value.length <= 0)
@@ -62,10 +62,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 birthDate.classList.remove('errorHighlight');
             }
 
+            if (!formIsValid) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+            return formIsValid;
         });
     }
-
-
-
 
 });

@@ -27,7 +27,7 @@
         <h2>Persönliche Daten</h2>
 
         <div class="input">
-            <label for="firstName">* Vorname:</label>
+            <label class="required" for="firstName"> Vorname:</label>
             <input class="input_register1" type="text" id="firstName" name="firstName" placeholder="Vorname" value="<?=htmlspecialchars($_POST['firstName'] ?? '')?>">
             <span class="errorInfo">Bitte geben Sie ihren Vornamen an!</span>
         </div>
@@ -38,25 +38,25 @@
 
 
         <div class="input">
-            <label for="lastName">* Nachname:</label>
+            <label class="required" for="lastName">* Nachname:</label>
             <input class="input_register1" type="text" id="lastName" name="lastName" placeholder="Nachname" value="<?=htmlspecialchars($_POST['lastName'] ?? '')?>">
             <span class="errorInfo">Bitte geben Sie ihren Nachnamen an!</span>
         </div>
 
         <div class="input">
-            <label for="email">* Email:</label>
+            <label class="required" for="email">* Email:</label>
             <input class="input_register1" type="email" id="email" name="email" placeholder="E-Mail" value="<?=htmlspecialchars($_POST['email'] ?? '')?>">
             <span class="errorInfo">Bitte geben Sie ihre E-Mail an!</span>
         </div>
 
         <div class="input">
-            <label for="password">* Passwort:</label>
+            <label class="required" for="password">* Passwort:</label>
             <input class="input_register1" type="password" id="password" name="password" placeholder="Passwort">
             <span class="errorInfo">Bitte geben Sie ein Passwort ein.</span>
         </div>
 
         <div class="input">
-            <label for="password2">* Passwort wiederholen:</label>
+            <label class="required" for="password2">* Passwort wiederholen:</label>
             <input class="input_register1" type="password" id="password2" name="password2" placeholder="Passwort wiederholen">
             <span class="errorInfo">Bitte wiederholen Sie ihr Passwort</span>
         </div>
@@ -68,7 +68,7 @@
         <input type="radio" id="divers" value="u" name="gender"><label for="divers" class="light">Das was ich sein möchte</label><br><br>
 
         <div class="input">
-            <label>* Geburtstag:</label>
+            <label class="required">Geburtstag:</label>
             <input class="input_register1" type="date" id="birthdate" name="birthdate" placeholder="Geburtstag" value="<?=htmlspecialchars($_POST['birthdate'] ?? '')?>">
             <span class="errorInfo">Nach dem Alter fragt man nicht, jedoch brauchen wir Trotzdem ihr Geburtsdatum von Ihnen.</span>
         </div>
