@@ -1,4 +1,8 @@
-
+<?php
+/**
+ * @author John Klippstein
+ */
+?>
 
 <div class="formWrapper">
     <form class="formWrapperRegister"  action="?c=accounts&a=register" method="post">
@@ -20,61 +24,87 @@
         <?php endif ?>
 
 
-                      <h2>Persönliche Daten</h2>
+        <h2>Persönliche Daten</h2>
 
-                      <label for="firstName">Vorname:</label>
-                      <input class="input_register1" type="text" id="firstName" name="firstName" placeholder="Vorname" value="<?=htmlspecialchars($_POST['firstName'] ?? '')?>">
-
-
-                        <label  for="secondName">Zweitname:</label>
-                        <input class="input_register1" type="text" id="secondName" name="secondName" placeholder="zweiter Vorname" value="<?=htmlspecialchars($_POST['secondName'] ?? '')?>">
-
-                      <label for="lastName">Nachname:</label>
-                      <input class="input_register1" type="text" id="lastName" name="lastName" placeholder="Nachname" value="<?=htmlspecialchars($_POST['lastName'] ?? '')?>">
+        <div class="input">
+            <label for="firstName">* Vorname:</label>
+            <input class="input_register1" type="text" id="firstName" name="firstName" placeholder="Vorname" value="<?=htmlspecialchars($_POST['firstName'] ?? '')?>">
+            <span class="errorInfo">Bitte geben Sie ihren Vornamen an!</span>
+        </div>
 
 
-                      <label for="email">Email:</label>
-                      <input class="input_register1" type="email" id="email" name="email" placeholder="E-Mail" value="<?=htmlspecialchars($_POST['email'] ?? '')?>">
+            <label  for="secondName">Zweitname:</label>
+            <input class="input_register1" type="text" id="secondName" name="secondName" placeholder="zweiter Vorname" value="<?=htmlspecialchars($_POST['secondName'] ?? '')?>">
 
 
-                      <label for="password">Passwort:</label>
-                      <input class="input_register1" type="password" id="password" name="password" placeholder="Passwort">
+        <div class="input">
+            <label for="lastName">* Nachname:</label>
+            <input class="input_register1" type="text" id="lastName" name="lastName" placeholder="Nachname" value="<?=htmlspecialchars($_POST['lastName'] ?? '')?>">
+            <span class="errorInfo">Bitte geben Sie ihren Nachnamen an!</span>
+        </div>
 
-                      <label for="password2">Passwort wiederholen:</label>
-                      <input class="input_register1" type="password" id="password2" name="password2" placeholder="Passwort wiederholen">
+        <div class="input">
+            <label for="email">* Email:</label>
+            <input class="input_register1" type="email" id="email" name="email" placeholder="E-Mail" value="<?=htmlspecialchars($_POST['email'] ?? '')?>">
+            <span class="errorInfo">Bitte geben Sie ihre E-Mail an!</span>
+        </div>
 
+        <div class="input">
+            <label for="password">* Passwort:</label>
+            <input class="input_register1" type="password" id="password" name="password" placeholder="Passwort">
+            <span class="errorInfo">Bitte geben Sie ein Passwort ein.</span>
+        </div>
 
-                      <label>Geschlecht:</label>
-                      <input type="radio" id="female" value="f" name="gender"><label for="female" class="light">Frau</label><br>
-                      <input type="radio" id="male" value="m" name="gender"><label for="male" class="light">Mann</label><br>
-                      <input type="radio" id="divers" value="u" name="gender"><label for="divers" class="light">Das was ich sein möchte</label><br><br>
-
-
-                      <label>Geburtstag:</label>
-                      <input class="input_register1" type="date" id="birthdate" name="birthdate" placeholder="Geburtstag" value="<?=htmlspecialchars($_POST['birthdate'] ?? '')?>">
-                      <br>
-                     <hr>
-
-
-
-
-                      <h2>Adresse</h2>
-
-
-                      <label for="street">Strasse</label>
-                      <input class="input_register1" type="text" id="street" name="street" placeholder="Strasse" value="<?=htmlspecialchars($_POST['street'] ?? '')?>">
-
-                      <label for="streetNumber">Hausnummer</label>
-                      <input class="input_register1" type="text" id="streetNumber" name="streetNumber" placeholder="Hausnummer" value="<?=htmlspecialchars($_POST['streetNumber'] ?? '')?>">
-
-                      <label for="zipCode">Postleitzahl</label>
-                      <input class="input_register1" type="text" id="zipCode" name="zipCode" placeholder="Postleitzahl" value="<?=htmlspecialchars($_POST['zipCode'] ?? '')?>">
-
-                      <label for="city">Stadt</label>
-                      <input class="input_register1" type="text" id="city" name="city" placeholder="Stadt" value="<?=htmlspecialchars($_POST['city'] ?? '')?>">
+        <div class="input">
+            <label for="password2">* Passwort wiederholen:</label>
+            <input class="input_register1" type="password" id="password2" name="password2" placeholder="Passwort wiederholen">
+            <span class="errorInfo">Bitte wiederholen Sie ihr Passwort</span>
+        </div>
 
 
-              <br>
-              <input type="submit" value="Registrieren" name="submit" >
+        <label>Geschlecht:</label>
+        <input type="radio" id="female" value="f" name="gender"><label for="female" class="light">Frau</label><br>
+        <input type="radio" id="male" value="m" name="gender"><label for="male" class="light">Mann</label><br>
+        <input type="radio" id="divers" value="u" name="gender"><label for="divers" class="light">Das was ich sein möchte</label><br><br>
+
+        <div class="input">
+            <label>* Geburtstag:</label>
+            <input class="input_register1" type="date" id="birthdate" name="birthdate" placeholder="Geburtstag" value="<?=htmlspecialchars($_POST['birthdate'] ?? '')?>">
+            <span class="errorInfo">Nach dem Alter fragt man nicht, jedoch brauchen wir Trotzdem ihr Geburtsdatum von Ihnen.</span>
+        </div>
+
+        <br>
+        <hr>
+
+
+        <h2>Adresse</h2>
+
+        <div class="input">
+            <label for="street">* Strasse</label>
+            <input class="input_register1" type="text" id="street" name="street" placeholder="Strasse" value="<?=htmlspecialchars($_POST['street'] ?? '')?>">
+            <span class="errorInfo">Wir benötigen die Straße in der Sie leben.</span>
+        </div>
+
+        <div class="input">
+            <label for="streetNumber">* Hausnummer</label>
+            <input class="input_register1" type="text" id="streetNumber" name="streetNumber" placeholder="Hausnummer" value="<?=htmlspecialchars($_POST['streetNumber'] ?? '')?>">
+            <span class="errorInfo">Ohne Hausnummer kommt die Lieferung nicht an.</span>
+        </div>
+
+        <div class="input">
+            <label for="zipCode">* Postleitzahl</label>
+            <input class="input_register1" type="text" id="zipCode" name="zipCode" placeholder="Postleitzahl" value="<?=htmlspecialchars($_POST['zipCode'] ?? '')?>">
+            <span class="errorInfo">Es sind nur 5 Zahlen, dennoch sind sie wichtig.</span>
+        </div>
+
+        <div class="input">
+            <label for="city">* Stadt</label>
+            <input class="input_register1" type="text" id="city" name="city" placeholder="Stadt" value="<?=htmlspecialchars($_POST['city'] ?? '')?>">
+            <span class="errorInfo">Aus welchen schönen Ort kommen Sie denn?</span>
+        </div>
+
+        <br>
+        <input type="submit" value="Registrieren" id="submit" name="submit" >
     </form>
 </div>
+<script src="<?=JAVASCRIPTPATH . 'accounts' . DIRECTORY_SEPARATOR . 'validateRegister.js'?>"></script>
