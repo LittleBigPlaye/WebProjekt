@@ -1,24 +1,120 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
+
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../assets/styles/documentation.css">
     <title>Dokumentation MaskYourFace</title>
 </head>
+
 <body>
+    <h1>Dokumentation MaskYourFace</h1>
+    <b>
+            Eine Gemeinschaftsarbeit von
+            <br>
+            Robin Beck
+            <br>
+            Hannes Lenz
+            <br>
+            John Klippstein
+        </h2>
+    </b>
+    <hr> Inhaltsverzeichnis: Einleitung Idee Inhalte ER Seiten Code Bilder Aufwand und Zeiten
+    <h2>Seiten</h2>
+    <h3>Seitenbestandteile</h3>
+    <h4>Navigation</h4>
+    <p>Die Navigation ist auf jeder erreichbaren Seite sichtbar. Für die Mobile Ansicht wird die Navigation verkleinert und bei einem Klick auf "Navigation" ausgeklappt</p>
+    <p>
+        Abhängig davon, wie der aktuelle Login-Zustand ist, wird die Navigationsleiste in drei verschiedenen Varianten angezeigt. Die Navigationsleiste enthält folgende Punkte:
+        <ul>
+            <li>Startseite</li>
+            <li>Produkte
+                <ul>
+                    <li>Alle Artikel</li>
+                    <li>Unsere Marken</li>
+                    <li>Zufälliger Artikel</li>
+                </ul>
+            </li>
+            <li>Login (Nur für ausgeloggte Nutzer sichtbar)</li>
+            <li>Logout (Nur für eingeloggte Nutzer sichtbar)</li>
+            <li>Warenkorb (Indikator zeigt an, wie viele Artikel sich im Warenkorb befinden. Ab 100 wird "+99" angezeigt</li>
+            <li>Administration (Nur für Admin sichtbar)
+                <ul>
+                    <li>Mein Konto</li>
+                    <li>Produkt anlegen</li>
+                    <li>Benutzer verwalten</li>
+                </ul>
+            </li>
+            <li>Mein Konto (Nur für normale Nutzer sichtbar)</li>
+        </ul>
 
-<h1>Dokumentation MaskYourFace</h1>
-<h2>Eine Gemeinschaftsarbeit von <br>Robin Beck <br> Hannes Lenz <br> John Klippstein</h2>
-<hr>
+    </p>
+    <b>Nutzung von Javascript</b>
+    <p>
+        Um einen gleichen Funktionsumfang für Nutzer ohne aktiviertes Javascript zu bieten, wird das Ausklappen der Navigationsleiste via CSS geregelt. Um bei einem Klick auf "Navigation" oder auf eines der Untermenüs die Untereinträge anzuzeigen, wurde eine
+        Checkbox verwendet, die durch anklicken des zugehörigen Labels aktiviert bzw. deaktiviert wird
+    </p>
+    <p>
+        Nutzer mit aktiviertem Javascript werden insofern unterstützt, dass es nicht möglich ist mehrere Unterkategorien zeitgleich auszuklappen. Sobald eine Unterkategorie ausgeklappt wird, werden alle anderen Unterkategorien automatisch eingeklappt. Das hat
+        den Vorteil, dass hierbei der Bildschirm nicht komplett von der Navigationsleiste bedeckt wird.
+    </p>
+    <h4>Footer</h4>
+    <h4>Nach oben Button</h4>
+    <p>Der Nach oben Button bringt den Benutzer bei aktivierung zum Seitenanfang zurück.</p>
+    <b>Nutzung von Javascript</b>
+    <p>Für Nutzer ohne aktives Javascript ist der Button permanent sichtbar und springt mittels Anker #top ohne fließenden Übergang zurück zum Seitenanfang. Wenn Nutzer Javascript aktiviert haben, wird der Button erst eingeblendet, sobald der Nutzer ein
+        Stück weit gescrollt hat. Zusätzlich erfolgt der Sprung zum Seitenanfang fließend und nicht sprungartig.</p>
+    <h4>Footer</h4>
+    <h3>Allgemeine Seiten</h3>
+    <h4>Startseite</h4>
+    <p>Auf der Startseite werden in einem Spotlight die vier zuletzt hinzugefügten Artikel angezeigt. Zusätzlich werden darunter 3 in der Datei "config\indexProductConfiguration.txt" angegebene Produkte gelistet. Sollte eines der Produkte nicht gefunden
+        werden, so wird ein zufälliges Produkt angezeigt. Darunter befindet sich eine weitere Reihe an Produkten. Für diese Reihe werden drei zufällige Produkte ausgewählt.</p>
+    <b>Nutzung von Javascript</b>
+    <p>Der Spotlight auf der Startseite wurde mit Javascript umgesetzt. Damit Nutzer ohne aktives Javascript nicht bemerken, dass der Spotlight normalerweise mehrere Produkte anzeigt, wird für ohne Javascript lediglich das erste Produkt angezeigt. Sowohl
+        der "Weiter"- als auch der "Zurück"-Pfeil werden hierfür ausgeblendet.</p>
+    <h4>Impressum</h4>
+    <h3>Produktseiten</h3>
+    <h4>Alle Produkte anzeigen</h4>
+    <p>"Alle produkte anzeigen" verbindet sowohl die Auflistung aller Produkte, als auch die Such / Sortier und Filterfunktion. In der Desktop Ansicht werden die Produkte in Reihen untereinander angezeigt, während in der Mobilen Ansicht alle Produkte untereinander
+        dargestellt werden. Die filterleiste wird in der Desktopansicht schmal am linken Bildschirmrand dargestellt. In der mobilen Ansicht wechselt die Filterleiste zu einer Horizontalen Filterleiste, die Standardmäßig eingeklappt ist und vom Nutzer
+        ausgeklappt werden kann. Ähnlich wie bei der Navigationsleiste kommt auch hier eine Checkbox zum Einsatz, sodass der User kein Javascript benötigt.</p>
+    <p>
+        Für normale Nutzer und nicht angemeldete Nutzer sind lediglich Produkte sichtbar, die nicht als "Versteckt" angelegt wurde. Wenn der Nutzer Administrator ist, werden auch versteckte Produkte angezeigt. Anstelle eines "Zum Warenkorb hinzufügen" Buttons
+        haben versteckte Produkte ein geschlossenes Auge als Symbol am unteren rechten Bildrand. Zusätzlich wird bei versteckten Symbolen das Vorschaubild in Graustufen dargestellt und der Untere - normalerweise orangefarbene - Rand ebenfalls grau abgebildet.
+    </p>
+    <p>Die Suchfunktion bietet dem Nutzer die Möglichkeit gezielt nach Artikeln zu suchen. Hierfür wird jeder mit Leerzeichen getrennte Suchbegriff in dem Namen, der Beschreibung und der Catchphrase der Produkte gesucht. Die Suchleiste kann maximal 200 Zeichen
+        beinhalten. Um - zumindest ein Stück weit - abzusichern, dass diese 200 Zeichen nicht überschritten werden, wird vor dem Absenden der Suche (für Nutzer mit aktivem Javascript) geprüft, ob die eingegebene Suche die Zeichenanzahl überschreibt und
+        ggf. auf 200 Zeichen gekürzt. Für die Suche selbst werden vor der Bildung der Abfrage alle doppelten Begriffe aus dem Suchstring entfernt.</p>
+    <p>Der Nutzer hat zusätzich die Möglichkeit Produkte zu filtern. Hierbei stehen die Möglichkeiten nach Marken, Produktkategorien, Mindestpreis sowie Höchstpreis zu filtern. Zusätzlich kann der Nutzer die Artikel noch Nach Produktbezeichnung, Preis und
+        Einstelldatum (Jeweils auf- und absteigend) sortieren.</p>
+    <p>Pro Produktseite werden nicht alle Artikel angezeigt. Mithilfe der Seitenleiste am unteren Bildschirmrand kann der Nutzer zwischen den produktseiten navigieren. Aktuell werden pro Produktseite 20 Produkte angezeigt. Die Anzahl der anzuzeigenden Produkte
+        kann in der Datei "config/init.php" angepasst werden</p>
+    <h4>Unsere Marken</h4>
+    <p>Unter "Unsere Marken" werden alle Hersteller mit jeweils drei zufälligen, dazugehörenden Produkten aufgelistet. Für die Desktopansicht sind die Produkte hierbei nebeneinander aufgelistet. Wenn der Nutzer die Seite in der mobilen Variante betrachtet,
+        werden lediglich die Herstellernamen untereinander angezeigt. Sobald der Nutzer auf den Namen eines Herstellers klickt, werden drei zufällige Produkte angezeigt.</p>
+    <p>Am Ende der jeweiligen Auflistung der Produkte befindet sich eine Schaltfläche "Mehr anzeigen". Sobald der Nutzer diese Betätigt, wird er zur Seite "Alle Produkte" weitergeleitet. Hierbei wird dann der Filter für die Hersteller auf den gewünschten
+        hersteller gesetzt, sodass nur die Produkte des ausgewählten Herstellers angezeigt werden.</p>
+    <h4>Produktansicht</h4>
+    <p>Die Seite "Produktansicht" wird durch den Klick auf eine Produktkachel, den Produktspotlight auf der Startseite oder die Miniaturvorschau im Warenkorb erreicht. Der Benutzer wird zur 404 Seite weitergeleitet wenn das aufgerufene Produkt nicht existiert,
+        oder wenn der Nutzer kein Administrator ist und das Produkt als versteckt markiert wurde. </p>
+    <p>Auf der Seite wird eine Bildgallerie angezeigt. Es ist immer das erste Bild groß dargestellt, während die weiteren Bilder unterhalb des Bildes als Vorschau angezeigt werden. Bei klick auf das jeweilige Vorschaubild wird das ausgewählte Bild größer
+        dargestellt.
+    </p>
+    <p>Ähnlich der Produktauflistung befindet sich auch auf dieser Seite ein "Zum Warenkorb hinzufügen" Button am unteren rechten Rand eines Bildes. Sollte das Produkt versteckt sein, wird stattdessen ebenfalls ein geschlossenes Auge angezeigt. Zusätzlich
+        haben Administratoren die Möglichkeit zur Seite "Produkt bearbeiten" zu gelangen, indem sie den Button links neben dem Auge / Warenkorb anklicken.</p>
+    <b>Nutzung von Javascript</b>
+    <p>Die Produktanzeige hat zwei Anwendungen für Javascript.</p>
+    <p>Die Bildergallerie wird mithilfe von Javascript gesteuert. Nutzer, die kein Javascript aktiviert haben bekommen dennoch ein größeres Bild sowie kleinere Vorschaubilder darunter angezeigt.</p>
+    <p>Um die Produktbeschreibung nur bei Bedarf aufzublenden, können Javascript Nutzer eine Schaltfläche am Unteren Rand des Textes bzw. der Textvorschau klicken, um den Text vollständig sichtbar zu machen. Für Nutzer ohne Javascript wird der Text stets
+        vollständig angezeigt.</p>
+    <h4>Zufälliges Produkt anzeigen</h4>
+    <p>Über "Zufälliges Produkt anzeigen" wird lediglich die "Produktansicht" Seite aufgerufen. Anstelle eines Zahlenwertes wird der GET-Parameter pid hierbei jedoch auf "random" gesetzt, was dazu führt, dass ein zufälliger Artikel aus der Datenbank geladen
+        wird.</p>
+    <h3>Administrative Seiten</h3>
+    <h4>Produkt anlegen</h4>
 
-Inhaltsverzeichnis:
-Einleitung
-Idee
-Inhalte
-    ER
-    Seiten
-    Code
-    Bilder
-Aufwand und Zeiten
-
+    <h4>Produkt bearbeiten</h4>
 </body>
+
 </html>

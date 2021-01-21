@@ -2,6 +2,13 @@ document.addEventListener('DOMContentLoaded', function() {
     var btnUp = document.getElementById('upButton');
 
     if (btnUp) {
+        //hide the button
+        btnUp.style.display = 'none';
+        btnUp.style.visibility = 'hidden';
+        btnUp.style.opacity = '0';
+        //change display back to normal
+        btnUp.style.display = 'block';
+
         window.addEventListener('scroll', function(event) {
             if (document.body.scrollTop > 150 || document.documentElement.scrollTop > 1) {
                 btnUp.style.visibility = 'visible';

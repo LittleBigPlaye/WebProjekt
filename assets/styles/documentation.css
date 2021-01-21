@@ -1,0 +1,31 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0 auto;
+    width: 90%;
+    background-color: white;
+    counter-reset: h2counter;
+}
+
+p {
+    text-align: justify;
+}
+
+h1 {
+    counter-reset: h2counter;
+}
+
+h2:before {
+    content: counter(h2counter) ".\0000a0\0000a0";
+    counter-increment: h2counter;
+    counter-reset: h3counter;
+}
+
+h3:before {
+    content: counter(h2counter) "." counter(h3counter) ".\0000a0\0000a0";
+    counter-increment: h3counter;
+}

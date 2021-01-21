@@ -241,8 +241,8 @@ p {
 
 .upButton {
     display: block;
-    visibility: hidden;
-    opacity: 0;
+    visibility: visible;
+    opacity: 100;
     position: fixed;
     bottom: 20px;
     right: 30px;
