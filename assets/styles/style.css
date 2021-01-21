@@ -251,7 +251,7 @@ p {
     z-index: 99;
     border: none;
     outline: none;
-    background-color: rgba(131, 131, 131, 0.815);
+    background-color: #838383d0;
     cursor: pointer;
     border-radius: 50%;
     transition: visibility 0.2s, opacity 0.1s linear;
@@ -1167,29 +1167,55 @@ form label {
 
 /*  collapsible */
 
-.collapsible {
-    padding: 0 20px;
-    background-color: white;
-    max-height: 100%;
-    height: auto;
-    overflow: hidden;
-    margin: 10px 0px;
-    padding-bottom: 15px;
+.collapsible p {
+    margin-bottom: 100px;
+    height: 120%;
 }
 
 .collapsibleContainer {
     position: relative;
     transition: max-height .2s ease-out;
+    padding-bottom: 30px;
     overflow: hidden;
 }
 
-.collapsibleToggleLabel {
-    display: block;
+.collapsibleFadeout {
+    display: none;
     position: absolute;
-    bottom: 0;
+    bottom: 0px;
     text-align: center;
     margin: 0;
     padding: 30px 0;
     width: 100%;
     background-image: linear-gradient(to bottom, transparent, white);
+}
+
+.collapsibleFadeout label {
+    display: block;
+    margin: 0 auto;
+    width: 60px;
+    height: 60px;
+    background-color: #838383d0;
+    border-radius: 50%;
+    transition: .2s ease-in-out;
+    transition: all .5s;
+}
+
+.collapsibleFadeout label:hover {
+    background-color: #292929;
+}
+
+.collapsibleFadeout label img {
+    display: block;
+    width: 40px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.collapsibleToggle {
+    display: none;
 }

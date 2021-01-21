@@ -81,7 +81,9 @@
         
         <div id="collapsible" class="collapsibleContainer">
             <p  class="description"><?=nl2br(htmlspecialchars($product->productDescription)) ?></p>
-            <label for="collapsibleToggle" class="collapsibleToggleLabel"><input class="collapsibleToggle" id="collapsibleToggle" type="checkbox"></label>
+            <div id="collapsibleFadeout" class="collapsibleFadeout">
+                <label for="collapsibleToggle"><input class="collapsibleToggle" id="collapsibleToggle" type="checkbox"><img src="assets/images/icons/more_arrow.svg" alt="More Arrow"></label>
+            </div>
         </div>
         <script src="<?=JAVASCRIPTPATH . 'products' . DIRECTORY_SEPARATOR . 'viewCollapsible.js'?>"></script>
     </div>
