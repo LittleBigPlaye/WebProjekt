@@ -4,6 +4,8 @@
         <br>
         Vertrieb von Mund-Nasenschutzmasken
         <br>
+        <a href="index.php?c=pages&a=impressum">Impressum</a>
+        <br>
         <hr>
         Inhaber:
         <br>

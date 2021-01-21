@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             //check if zipCode is set
-            if (!zipCode || zipCode.value.length <= 0)
+            if (!zipCode || zipCode.value.length != 5)
             {
                 zipCode.classList.add("errorHighlight");
                 formIsValid = false;

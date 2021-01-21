@@ -4,8 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 //get input fields from form
     var firstName = document.getElementById('firstName');
     var lastName = document.getElementById('lastName');
-    var email = document.getElementById('email');
-    var birthDate = document.getElementById('birthdate');
+    var birthDate = document.getElementById('birthDate');
 
 
     //check if submit button has been found
@@ -21,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 formIsValid = false;
             }
             else
-                {
+            {
                 firstName.classList.remove('errorHighlight');
             }
 
@@ -31,18 +30,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 lastName.classList.add("errorHighlight");
                 formIsValid = false;
             } else
-                {
-                lastName.classList.remove('errorHighlight');
-            }
-
-            //check if email is set
-            if (!email || email.value.length <= 0)
             {
-                email.classList.add("errorHighlight");
-                formIsValid = false;
-            } else
-                {
-                email.classList.remove('errorHighlight');
+                lastName.classList.remove('errorHighlight');
             }
 
             //check if birthDate is set
@@ -51,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 birthDate.classList.add("errorHighlight");
                 formIsValid = false;
             } else
-                {
+            {
                 birthDate.classList.remove('errorHighlight');
             }
 

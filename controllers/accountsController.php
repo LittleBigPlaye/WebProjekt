@@ -389,7 +389,7 @@ class accountsController extends Controller
         $this->setParam('user',$userData);
 
         //check if submit was send
-        if(isset($_POST['changePersona']))
+        if(isset($_POST['submit']))
         {
 
             //proof if all important fields are not empty
@@ -442,7 +442,7 @@ class accountsController extends Controller
         $this->setParam('address',$addressAtStart);
 
         //check if submit was send
-        if(isset($_POST['changeAddress']))
+        if(isset($_POST['submit']))
         {
 
             //proof if all important fields are not empty

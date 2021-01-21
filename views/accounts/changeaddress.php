@@ -17,28 +17,28 @@
 
         <div class="input">
             <label class="required" for="street">Strasse</label>
-            <input class="input_register1" id="street" name="street" value="<?=htmlspecialchars($address->street)?>">
+            <input type="text" class="input_register1" id="street" name="street" value="<?=htmlspecialchars($address->street)?>">
             <span class="errorInfo">Wir benötigen die Straße in der Sie leben.</span>
         </div>
         <br>
 
         <div class="input">
             <label class="required" for="streetNumber">Hausnummer</label>
-            <input class="input_register1" id="streetNumber" name="streetNumber" value="<?=htmlspecialchars($address->streetNumber)?>">
+            <input type="text" class="input_register1" id="streetNumber" name="streetNumber" value="<?=htmlspecialchars($address->streetNumber)?>">
             <span class="errorInfo">Ohne Hausnummer kommt die Lieferung nicht an.</span>
         </div>
         <br>
 
         <div class="input">
             <label class="required" for="city">Ort</label>
-            <input class="input_register1" id="city" name="city" value="<?=htmlspecialchars($address->city)?>">
+            <input type="text" class="input_register1" id="city" name="city" value="<?=htmlspecialchars($address->city)?>">
             <span class="errorInfo">Aus welchen schönen Ort kommen Sie denn?</span>
         </div>
         <br>
 
         <div class="input">
             <label class="required" for="zipCode">Postleitzahl</label>
-            <input class="input_register1" id="zipCode" name="zipCode" value="<?=htmlspecialchars($address->zipCode)?>">
+            <input type="text" class="input_register1" id="zipCode" name="zipCode" value="<?=htmlspecialchars($address->zipCode)?>">
             <span class="errorInfo">Es sind nur 5 Zahlen, dennoch sind sie wichtig.</span>
         </div>
 

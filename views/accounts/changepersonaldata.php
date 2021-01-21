@@ -14,19 +14,37 @@
 <div class="formWrapper">
     <form method="post" class="productForm" action="?c=accounts&a=changepersonaldata">
         <h1>Na? Hat sich das Geschlecht geändert?</h1>
-        <label for="firstName">Vorname</label>
-        <input id="firstName" name="firstName" value="<?=htmlspecialchars($user->firstName)?>" >
+
+        <div class="input">
+            <label class="required" for="firstName">Vorname</label>
+            <input type="text" id="firstName" name="firstName" value="<?=htmlspecialchars($user->firstName)?>" >
+            <span class="errorInfo">Bitte geben Sie ihren Vornamen an!</span>
+        </div>
         <br>
-        <label for="secondName">Zweitname</label>
-        <input id="secondName" name="secondName" value="<?=htmlspecialchars($user->secondName)?>">
+
+        <div class="input">
+            <label class="optional" for="secondName">Zweitname</label>
+            <input type="text" id="secondName" name="secondName" value="<?=htmlspecialchars($user->secondName)?>">
+
+        </div>
         <br>
-        <label for="lastName">Nachname</label>
-        <input id="lastName" name="lastName" value="<?=htmlspecialchars($user->lastName)?>">
+
+        <div class="input">
+            <label class="required" for="lastName">Nachname</label>
+            <input type="text" id="lastName" name="lastName" value="<?=htmlspecialchars($user->lastName)?>">
+            <span class="errorInfo">Bitte geben Sie ihren Nachnamen an!</span>
+        </div>
         <br>
-        <label for="birthDate">Geburtstag</label>
-        <input id="birthDate" name="birthDate" type="date" value="<?=$user->birthDate?>">
+
+        <div class="input">
+            <label class="required" for="birthDate">Geburtstag</label>
+            <input class="input_register1" id="birthDate" name="birthDate" type="date" value="<?=$user->birthDate?>">
+            <span class="errorInfo">Nach dem Alter fragt man nicht, jedoch brauchen wir Trotzdem ihr Geburtsdatum von Ihnen.</span>
+        </div>
         <br>
-        <label for="gender">Geschlecht</label>
+
+
+        <label class="optional" for="gender">Geschlecht</label>
         <select name="gender">
             <option value="m"
                 <?= ($user->gender === "m") ? 'selected' : '' ?>
@@ -40,9 +58,10 @@
         </select>
         <br>
         <br>
-        <label for="phone">Telefonnummer</label>
-        <input id="phone" name="phone" value="<?=htmlspecialchars($user->phone)?>">
+        <label class="optional" for="phone">Telefonnummer</label>
+        <input type="text" id="phone" name="phone" value="<?=htmlspecialchars($user->phone)?>">
         <br>
-        <button class="buttonForAll" type="submit" name="changePersona">Speichern</button>
+        <input id="submit" type="submit" name="submit" value="Speichern">
     </form>
 </div>
+<script src="<?=JAVASCRIPTPATH . 'accounts' . DIRECTORY_SEPARATOR . 'validatePersonas.js'?>"></script>
