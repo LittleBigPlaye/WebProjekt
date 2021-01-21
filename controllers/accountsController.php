@@ -327,8 +327,8 @@ class accountsController extends Controller
          * with this function we manage the passwordchange
          */
 
-        $errorMessage = "";
-
+        $errorMessage = '';
+        $successMessage = '';
         $userID = $_SESSION['userID'];
 
         // the following "if" check if the the submit was send
@@ -348,7 +348,7 @@ class accountsController extends Controller
                     $updateLogin=Login::findOne('userID='.$userID);
                     $updateLogin->passwordHash = $savePassword;
                     $updateLogin->save();
-                    $succesMessage = "Das war super!";
+                    $successMessage = "Das war super!";
                 }
                 else
                 {
@@ -362,7 +362,7 @@ class accountsController extends Controller
         }
 
         $this->setParam('errorMessage', $errorMessage);
-        $this->setParam('succesMessage', $succesMessage);
+        $this->setParam('successMessage', $successMessage);
     }
 
     public function actionChangePersonalData()
@@ -372,7 +372,7 @@ class accountsController extends Controller
          */
 
         $errorMessage = '';
-        $succesMessage = '';
+        $successMessage = '';
 
         //get necessary data´s
         $userID = $_SESSION['userID'];
@@ -409,12 +409,12 @@ class accountsController extends Controller
                 $userData->phone = $phone;
 
                 $userData->save();
-                $succesMessage = "Änderungen sind gespeichert!";
+                $successMessage = "Änderungen sind gespeichert!";
             }
         }
 
         $this->setParam('errorMessage', $errorMessage);
-        $this->setParam('succesMessage', $succesMessage);
+        $this->setParam('successMessage', $successMessage);
     }
 
     public function actionChangeAddress()
@@ -424,7 +424,7 @@ class accountsController extends Controller
          * with this function we manage the change of the address
          */
         $errorMessage = '';
-        $succesMessage = '';
+        $successMessage = '';
 
         $db = $GLOBALS['database'];
 
@@ -483,7 +483,7 @@ class accountsController extends Controller
         }
 
         $this->setParam('errorMessage', $errorMessage);
-        $this->setParam('succesMessage', $succesMessage);
+        $this->setParam('successMessage', $successMessage);
     }
 
     public function actionWaitingArea(){

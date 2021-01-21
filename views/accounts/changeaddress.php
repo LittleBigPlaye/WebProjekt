@@ -4,10 +4,10 @@
         <p><?= $errorMessage ?></p>
     </div>
 <?php endif ?>
-<?php if(isset($succesMessage) && !empty($succesMessage)) : ?>
+<?php if(isset($successMessage) && !empty($succesMessage)) : ?>
     <div class="successMessage">
         <span class="messageClose" onclick="this.parentElement.style.display='none';">&times</span>
-        <p><?= $succesMessage ?></p>
+        <p><?= $successMessage ?></p>
     </div>
 <?php endif ?>
 
