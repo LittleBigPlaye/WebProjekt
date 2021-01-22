@@ -26,3 +26,4 @@
             </div>
         </div>
     <?php endforeach ?>
+    <script src="<?=JAVASCRIPTPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'shopping_cart.js'?>"></script>

@@ -136,6 +136,8 @@ nav .active {
 
 .cartBadge {
     border-radius: 45%;
+    visibility: visible;
+    opacity: 100;
     float: right;
     display: block;
     width: 35px;
@@ -144,6 +146,13 @@ nav .active {
     font-size: .8em;
     background: #eb7d00;
     color: white;
+    transition: visibility 0.2s, opacity 0.1s linear;
+}
+
+.cartBadge.hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.2s, opacity 0.1s linear;
 }
 
 .cartBadge p {

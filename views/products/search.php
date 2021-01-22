@@ -128,3 +128,4 @@
     <a href="index.php?<?=$getString?>&page=<?=$numberOfPages?>">&raquo;</a>
 </div>
 <script src="<?=JAVASCRIPTPATH . 'products' . DIRECTORY_SEPARATOR . 'shortenSearch.js'?>"></script>
+<script src="<?=JAVASCRIPTPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'shopping_cart.js'?>"></script>
