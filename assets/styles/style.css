@@ -1165,7 +1165,7 @@ form label {
 /* #endregion */
 
 
-/*  collapsible */
+/*#region collapsible */
 
 .collapsible p {
     margin-bottom: 100px;
@@ -1219,3 +1219,6 @@ form label {
 .collapsibleToggle {
     display: none;
 }
+
+
+/*#endregion */
