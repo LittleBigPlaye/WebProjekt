@@ -42,7 +42,7 @@
                 <?php if(!$product->isHidden) : ?>
                     <!-- add to cart button -->
                     <form class="badge" method="POST" action="#prod<?=$product->id?>">
-                        <button class="iconButton" type="submit" name="addToCart" title="Dem Warenkorb hinzufügen" value="<?=$product->id?>"><img src="assets/images/icons/shopping_cart.svg"/></button>
+                        <button class="iconButton cartButton" type="submit" name="addToCart" title="Dem Warenkorb hinzufügen" value="<?=$product->id?>"><img src="assets/images/icons/shopping_cart.svg"/></button>
                     </form>
                 <?php else : ?>
                     <!-- hidden notification icon -->
@@ -88,3 +88,4 @@
         <script src="<?=JAVASCRIPTPATH . 'products' . DIRECTORY_SEPARATOR . 'viewCollapsible.js'?>"></script>
     </div>
 </div>
+<script src="<?=JAVASCRIPTPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'shopping_cart.js'?>"></script>

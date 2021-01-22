@@ -18,6 +18,7 @@
         if(isset($_POST['addToCart']) && is_numeric($_POST['addToCart']))
         {
             $this->addToCart($_POST['addToCart']);
+            
         }
 
         //fetch products for product spotlight

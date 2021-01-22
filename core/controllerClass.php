@@ -78,7 +78,7 @@ abstract class Controller
     }
 
     protected function addToCart($productID)
-     {
+    {
         //check if the given Product ID is an valid id
         if(\myf\models\Product::findOne('id=' . $productID . ' AND isHidden=false') !== null)
         {
@@ -97,5 +97,21 @@ abstract class Controller
                 $_SESSION['shoppingCart'][$productID] = 1;
             }
         }
-     }
+        if(isset($_GET['ajax'])) 
+        {
+            echo $this->getNumberOfCartItems();
+            exit(0);
+        }
+    }
+
+    public function getNumberOfCartItems() 
+    {
+        $numberOfCartItems = 0;
+        if(isset($_SESSION['shoppingCart']))
+        {
+            $numberOfCartItems = array_sum($_SESSION['shoppingCart']);
+        }
+        return $numberOfCartItems;
+    }
+
 }

@@ -294,14 +294,21 @@ namespace myf\controller;
     {
         $this->setParam('currentPosition', 'products');
 
+        //check if products should be added to cart
+        if(isset($_POST['addToCart']) && is_numeric($_POST['addToCart']))
+        {
+            $this->addToCart($_POST['addToCart']);
+        }
+
         //fetch all vendors from database
         $vendors = \myf\models\Vendor::find('', 'vendorName ASC');
 
         //fetch three random products for each vendor
         $vendorProducts = [];
+        $db = $GLOBALS['database'];
         foreach($vendors as $key => $vendor)
         {
-            $vendorProducts[$key] = \myf\models\Product::findRange(0,3,'vendorID = ' . $vendor->id, 'RAND()');
+            $vendorProducts[$key] = \myf\models\Product::findRange(0,3,'vendorID = ' . $db->quote($vendor->id) . ' AND isHidden=0', 'RAND()');
             
         }
 
