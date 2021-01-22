@@ -107,6 +107,10 @@
             {
                 $errorMessage = "Dieser Nutzer ist gesperrt.";
             }
+            elseif($login->validated != 1)
+            {
+                $errorMessage = "Dieser Nutzer ist nicht validiert";
+            }
             else
                 {
                 // Check if password is empty
