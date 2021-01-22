@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function() {
     var btnSubmit = document.getElementById('submit');
 
@@ -14,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             var emailregex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/m;
             //check if email is set and valid
-            if (!email || email.value.length <= 0 && (!email.value.match(emailregex)))
+            if (!email || email.value.length <= 0 || (!email.value.match(emailregex)))
             {
                 email.classList.add("errorHighlight");
                 formIsValid = false;
