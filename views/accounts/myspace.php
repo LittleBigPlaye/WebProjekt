@@ -18,7 +18,7 @@
             <label>Vorname: <?=htmlspecialchars($user->firstName)?>  </label>
             <label>zweiter Vorname: <?=htmlspecialchars($user->secondName)?></label>
             <label>Nachname: <?=htmlspecialchars($user->lastName)?></label>
-            <label>Geburtstag: <?=htmlspecialchars($user->birthDate)?></label>
+            <label>Geburtstag: <?=htmlspecialchars(date('d.m.Y' ,strtotime($user->birthDate)))?></label>
             <label>Telefonnummer: <?=htmlspecialchars($user->phone)?></label>
             <label>Geschlecht: <?=htmlspecialchars($user->gender)?></label>
             <h2>Adresse</h2>
