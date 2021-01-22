@@ -18,7 +18,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 email.classList.add("errorHighlight");
                 formIsValid = false;
             }
-            if (!formIsValid) {
+            if (!formIsValid)
+            {
                 event.preventDefault();
                 event.stopPropagation();
             }

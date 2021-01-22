@@ -4,7 +4,7 @@
         <?php foreach($errorMessages as $message) : ?>
             <div class="errorMessage">
                 <span class="messageClose" onclick="this.parentElement.style.display='none';">&times</span>
-                <?= $message ?>
+                    <?= $message ?>
             </div>
         <?php endforeach; ?>
         <div class="input"><label for="email">Email:</label>

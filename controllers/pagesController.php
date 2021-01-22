@@ -82,10 +82,12 @@
         $this->setParam('currentPosition', 'login');
          //store error message
          $errorMessages = [];
+         //database connection
          $db= $GLOBALS['database'];
 
          //check if form is submitted
-        if(isset($_POST['submit'])) {
+        if(isset($_POST['submit']))
+        {
             $email = trim($_POST["email"]);
             $password = $_POST["user_password"];
             // Check if email is empty
