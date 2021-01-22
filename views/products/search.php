@@ -121,8 +121,8 @@
     <?php for($i = $startIndex-2; $i <= $startIndex+PRODUCT_LIST_RANGE; $i++) : ?>
         <?php if($i > 0 && $i <= $numberOfPages) : ?>
             <a href="index.php?<?=$getString?>&page=<?=$i?>" <?= ($i == $currentPage) ? 'class="active"' : ''?>><?=$i?></a>
-        <? endif ?>
-    <? endfor ?>
+        <?php endif; ?>
+    <?php endfor; ?>
 
     <!-- Button to go to last product List -->
     <a href="index.php?<?=$getString?>&page=<?=$numberOfPages?>">&raquo;</a>

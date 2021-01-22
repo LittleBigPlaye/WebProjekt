@@ -7,21 +7,21 @@
 <div class="formWrapper">
     <form class="formWrapperRegister"  action="?c=accounts&a=register" method="post">
 
-              <h1>Registrierung</h1>
+        <h1>Registrierung</h1>
 
         <?php foreach($errorMessages as $message) : ?>
             <div class="errorMessage">
                 <span class="messageClose" onclick="this.parentElement.style.display='none';">&times</span>
                 <?= $message ?>
             </div>
-        <? endforeach; ?>
+        <?php endforeach; ?>
 
         <?php if(isset($succesMessage) && !empty($succesMessage)) : ?>
             <div class="successMessage">
                 <span class="messageClose" onclick="this.parentElement.style.display='none';">&times</span>
                 <p><?= $succesMessage ?></p>
             </div>
-        <?php endif ?>
+        <?php endif; ?>
 
 
         <h2>Persönliche Daten</h2>
