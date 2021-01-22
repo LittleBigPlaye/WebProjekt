@@ -21,12 +21,18 @@ h1 {
 }
 
 h2:before {
-    content: counter(h2counter) ".\0000a0\0000a0";
+    content: counter(h2counter) "\0000a0\0000a0";
     counter-increment: h2counter;
     counter-reset: h3counter;
 }
 
 h3:before {
-    content: counter(h2counter) "." counter(h3counter) ".\0000a0\0000a0";
+    content: counter(h2counter) "." counter(h3counter) "\0000a0\0000a0";
     counter-increment: h3counter;
+    counter-reset: h4counter;
+}
+
+h4:before {
+    content: counter(h2counter) "." counter(h3counter) "." counter(h4counter)"\0000a0\0000a0";
+    counter-increment: h4counter;
 }
