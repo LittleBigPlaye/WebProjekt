@@ -9,6 +9,7 @@ body {
     width: 90%;
     background-color: white;
     counter-reset: h2counter;
+    font-family: 'Nunito', sans-serif;
 }
 
 p {
