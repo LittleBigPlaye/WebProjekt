@@ -861,6 +861,10 @@ form label {
     transition: .2s;
 }
 
+.iconButton:active {
+    background-color: rgb(37, 37, 37);
+}
+
 .iconButton img {
     position: absolute;
     max-height: 100%;
