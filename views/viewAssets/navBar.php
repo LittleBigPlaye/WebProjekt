@@ -71,9 +71,6 @@ else if ($cartCount > 99) {
                 <span class="cartBadge"><p><?= $cartCount ?></p></span>
             <?php endif ?></a>
         </li>
-        
-        <li <?= ($currentPosition == 'impressum') ? 'class="right active"' : 'class="right"' ?>><a
-        href="index.php?c=pages&a=impressum">Impressum</a></li>
     </ul>
 </nav>
 <script src="<?=JAVASCRIPTPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'navbar.js'?>"></script>
