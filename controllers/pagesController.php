@@ -81,76 +81,69 @@
 
         $this->setParam('currentPosition', 'login');
          //store error message
-         $errorMessage = '';
+         $errorMessages = [];
          $db= $GLOBALS['database'];
 
          //check if form is submitted
-        if(isset($_POST['submit']))
-        {
+        if(isset($_POST['submit'])) {
+            $email = trim($_POST["email"]);
+            $password = $_POST["user_password"];
             // Check if email is empty
-            if (empty(trim($_POST["user_email"])))
-            {
-                $errorMessage = "Bitte gib eine Email an.";
-            } 
-            else
-            {
-                $email = trim($_POST["user_email"]);
+            if (empty(trim($_POST["email"]))) {
+                $errorMessages['email'] = "Bitte gib eine Email an.";
             }
+
             $login = \myf\models\Login::findOne('email=' . $db->quote($email));
             //check if user exists
-            if (Login::findOne('email LIKE' . $db->quote($email)) == null)
-            {
-                $errorMessage = "Es existiert kein Benutzer mit dieser Email";
+            if (Login::findOne('email LIKE' . $db->quote($email)) == null) {
+                $errorMessages['user'] = "Es existiert kein Benutzer mit dieser Email";
+            } //check if user is enabled
+            elseif ($login->enabled != 1) {
+                $errorMessages['user_disabled'] = "Dieser Nutzer ist gesperrt.";
+            } elseif ($login->validated != 1) {
+                $errorMessages['user_validated'] = "Dieser Nutzer ist nicht validiert";
             }
-            //check if user is enabled
-            elseif ($login->enabled != 1)
-            {
-                $errorMessage = "Dieser Nutzer ist gesperrt.";
+            // Check if password is empty
+            if (empty(trim($_POST["user_password"]))) {
+                $errorMessages['password'] = "Bitte gib ein Passwort ein.";
             }
-            elseif($login->validated != 1)
+
+            if(count($errorMessages) === 0)
             {
-                $errorMessage = "Dieser Nutzer ist nicht validiert";
-            }
-            else
+                if ($login->passwordResetHash == "")
                 {
-                // Check if password is empty
-                if (empty(trim($_POST["user_password"]))) {
-                    $errorMessage = "Bitte gib ein Passwort ein.";
-                } else {
-                    if ($login->passwordResetHash == "") {
-                        $hashed_password = $login->passwordHash;
-                    } else {
-                        $hashed_password = $login->passwordResetHash;
-                    }
-                    $password = $_POST["user_password"];
+                    $hashed_password = $login->passwordHash;
+                }else {
+                    $hashed_password = $login->passwordResetHash;
                 }
 
+
                 //check if password hash is valid
-                if(password_verify($password, $hashed_password))
+            if
+                (password_verify($password, $hashed_password))
                 {
-                    $_SESSION['currentLogin'] = serialize($login);
-                    $_SESSION['isLoggedIn'] = true;
-                    $_SESSION['userID'] = $login->userID;
-                    header('Location: index.php?c=pages&a=index');
-                    $login->passwordResetHash= "";
-                    $login->failedLoginCount=0;
-                    $login->lastLogin=date('Y-m-d H:i:s');
-                    $login->save();
-                }
-                else
+                $_SESSION['currentLogin'] = serialize($login);
+                $_SESSION['isLoggedIn'] = true;
+                $_SESSION['userID'] = $login->userID;
+                header('Location: index.php?c=pages&a=index');
+                $login->passwordResetHash = "";
+                $login->failedLoginCount = 0;
+                $login->lastLogin = date('Y-m-d H:i:s');
+                $login->save();
+            }
+            else
                 {
 
                     $login->failedLoginCount++;
-                    if($login->failedLoginCount==5)
-                    {
-                        $login->enabled=0;
+                    if ($login->failedLoginCount == 5) {
+                        $login->enabled = 0;
                     }
                     $login->save();
-                    $errorMessage = "Deine Logindaten stimmen nicht überein";
+                    $errorMessages['wrong_password'] = "Deine Logindaten stimmen nicht überein";
                 }
             }
         }
-         $this->setParam('errorMessage', $errorMessage);
+         $this->setParam('errorMessages', $errorMessages);
          //TODO: set param to prefill input fields
 
     }
