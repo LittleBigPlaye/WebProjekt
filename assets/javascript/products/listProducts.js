@@ -14,11 +14,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
         var btnLoadMore = null;
         //the list that contains all product cards
-        var productsList = document.getElementById('productsList');
+        var productList = document.getElementById('productsList');
         //an empty product card that can be used as prefab
         var productCardPrefab = document.getElementById('productCardPrefab');
         //reference to the current page number
-        var nextPage = document.getElementById('nextPage');
+        var nextPage = 2;
+
+        var filterForm = document.getElementById('filterForm');
+
+        productList.style.maxHeight = productList.scrollHeight + 'px';
 
         //hide the default paging
         if (paging) {
@@ -35,13 +39,64 @@ document.addEventListener('DOMContentLoaded', function() {
             btnLoadMore.addEventListener('click', function(event) {
                 event.preventDefault();
                 event.stopPropagation();
-                sendRequest(loadMoreForm);
+                sendRequest(filterForm);
             });
+        }
+
+
+        //clear all products cards and fetch new cards when filtering
+        var btnFilter = null;
+        if (filterForm) {
+            btnFilter = filterForm.querySelector('input[type=submit]');
+            if (btnFilter) {
+                btnFilter.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    clearProductList();
+                    sendRequest(filterForm);
+                    btnLoadMore.style.display = 'block';
+                });
+            }
+        }
+
+        //clear all products and fetch found cards when searching
+        var btnSearch = document.getElementById('searchSubmit');
+        var searchInput = document.getElementById('search');
+        if (btnSearch && searchInput) {
+            btnSearch.addEventListener('click', function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+                clearProductList();
+                //replace all characters that are not alphanumeric
+                var searchString = searchInput.value.replace(/[^A-Za-z0-9äöüß ]/, '');
+                console.log(searchString);
+                //shorten the search String to a maximum of 200 characters
+                if (searchString.length > 200) {
+                    searchString.value = searchString.value.substr(0, 200);
+                }
+
+                //apply searchString to hidden search in filterForm
+                var hiddenSearch = document.getElementById('hiddenSearch');
+                hiddenSearch.value = searchString;
+                sendRequest(filterForm);
+                btnLoadMore.style.display = 'block';
+            });
+        }
+
+        function clearProductList() {
+            while (productList.firstChild) {
+                productList.removeChild(productList.firstChild);
+            }
+            //reset nextPage variable
+            nextPage = 1;
         }
 
         //send request with current search parameters
         function sendRequest(form) {
-            var formData = new FormData(document.getElementById('loadMoreForm'));
+            var formData = new FormData(form);
+            formData.append('page', nextPage);
+            formData.append('ajax', '1');
+
             //cancel previous request, if user was too fast
             request.abort();
 
@@ -57,21 +112,26 @@ document.addEventListener('DOMContentLoaded', function() {
             for (var pair of formData.entries()) {
                 getString += pair[0] + '=' + pair[1] + '&';
             }
+            console.log(getString);
             return getString;
         }
 
+        //wait for responses from server
         request.onreadystatechange = function() {
             if (this.readyState == XMLHttpRequest.DONE) {
                 if (this.status == 200) {
                     if (this.responseText != '') {
                         //increase pointer to the next page
-                        nextPage.value = (parseInt(nextPage.value) + 1)
-                            //retrieve product infos from response
+                        nextPage++;
+                        //retrieve product infos from response
                         var productInfos = JSON.parse(this.responseText);
                         //build new cards for products
                         for (var i = 0; i < productInfos.length; i++) {
                             addProductCard(productInfos[i]);
                         }
+                        //make new cards visible
+                        // showAllNewCards();
+                        productList.style.maxHeight = productList.scrollHeight + 'px';
                     } else {
                         //hide button, if no other products where found
                         btnLoadMore.style.display = 'none';
@@ -106,8 +166,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             //add the current card to the products list
-            productsList.appendChild(newProductCard);
-            productsList.lastChild.classList.remove('hidden');
+            productList.appendChild(newProductCard);
+
+            newProductCard.classList.remove('hidden');
         }
     }
 

@@ -1,6 +1,6 @@
 <?php if(!(isset($_GET['ajax']) && $_GET['ajax'] == 1)) : ?>
     <div class="formWrapper">
-        <form class="searchForm" method="Get">
+        <form id="searchForm" class="searchForm" method="Get">
             <input type="hidden" name="c" value="products" />
             <input type="hidden" name="a" value="search" />
 
@@ -43,14 +43,12 @@
         <label for="filterToggle" class="filterToggleLabel">Filter<span class="dropIcon">&#9776;</span></label>
         <input type="checkbox" id="filterToggle" class="filterToggle">
 
-        <form class="filterForm" method="Get">
+        <form id="filterForm" class="filterForm" method="Get">
             <label class="desktopTitle">Filter</label>
             <input type="hidden" name="c" value="products" />
             <input type="hidden" name="a" value="search" />
             
-            <?php if(isset($_GET['s'])) : ?>
-                <input type="hidden" name="s" value="<?= $_GET['s']?>">
-            <?php endif ?>
+            <input id="hiddenSearch" type="hidden" name="s" value="<?= $_GET['s'] ?? ''?>">
 
             <fieldset>
                 <legend>Marken</legend>
@@ -137,49 +135,12 @@
 
 
     <form id="loadMoreForm" class="moreProducts">
-        <input type="hidden" name="c" value="products" />
-        <input type="hidden" name="a" value="search" />
-        <input type="hidden" id="nextPage" name="page" value="2" />
-        <input type="hidden" name="ajax" value="1"/>
-        <!-- hidden inputs to preserve get parameters of filter form -->
-        <?php foreach($vendors as $vendor) : ?>
-            <?php if(isset($_GET['ven'.$vendor->id])) : ?>
-                <input type="hidden" name="ven<?=$vendor->id?>" value="<?=$vendor->id?>"/>
-            <?php endif ?>
-        <?php endforeach ?>
-
-        <?php foreach($categories as $category) : ?>
-            <?php if(isset($_GET['cat'.$category->id])) : ?>
-                <input type="hidden" name="cat<?=$category->id?>" value="<?=$category->id?>"/>
-            <?php endif ?>
-        <?php endforeach ?>
-
-        <?php if(isset($_GET['minPrice'])) : ?>
-            <input type="hidden" name="minPrice" value="<?= $_GET['minPrice']?>">
-        <?php endif ?>
-
-        <?php if(isset($_GET['maxPrice'])) : ?>
-            <input type="hidden" name="maxPrice" value="<?= $_GET['maxPrice']?>">
-        <?php endif ?>
-
-        <?php if(isset($_GET['sort'])) : ?>
-            <input type="hidden" name="sort" value="<?= $_GET['sort']?>">
-        <?php endif ?>
-
-        <?php if(isset($_GET['hidden'])) : ?>
-            <input type="hidden" name="hidden" value="<?= $_GET['hidden']?>">
-        <?php endif ?>
-
-        <?php if(isset($_GET['s'])) : ?>
-                <input type="hidden" name="s" value="<?= $_GET['s']?>">
-        <?php endif ?>
-        
         <input type="submit" name="submit" value="Mehr anzeigen">
     </form>
 
 
 
-    <script src="<?=JAVASCRIPTPATH . 'products' . DIRECTORY_SEPARATOR . 'shortenSearch.js'?>"></script>
+    <!-- <script src="<?=JAVASCRIPTPATH . 'products' . DIRECTORY_SEPARATOR . 'shortenSearch.js'?>"></script> -->
     <script src="<?=JAVASCRIPTPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'shopping_cart.js'?>"></script>
     <script src="<?=JAVASCRIPTPATH . 'products' . DIRECTORY_SEPARATOR . 'listProducts.js'?>"></script>
 

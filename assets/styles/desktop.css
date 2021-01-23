@@ -208,6 +208,9 @@
     .table.userManagement .tableCell {
         width: 14%;
     }
+    form.moreProducts {
+        width: 400px;
+    }
 }
 
 @media screen and (min-width: 1400px) {
