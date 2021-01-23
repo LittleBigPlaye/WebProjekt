@@ -80,9 +80,13 @@ else
 </head>
 
 <body>
-    <?php
-        $controller->renderView();
-    ?>
+
+
+<?php
+    $controller->renderView();
+?>
+
+
 </body>
 
 </html>

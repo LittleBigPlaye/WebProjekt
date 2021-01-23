@@ -28,7 +28,6 @@ namespace myf\controller;
         // get product id from url
         $productID = $_GET['pid'];
         
-        //TODO replace isAdmin as soon as the login is done
         $isAdmin = $this->isAdmin();
         $whereClause = $isAdmin ? '' : ' AND isHidden=0';
 
@@ -70,7 +69,7 @@ namespace myf\controller;
         {
             $this->addToCart($_POST['addToCart']);
         }
-        
+
         //obtain vendors from database
         $vendors = \myf\models\Vendor::find();
         $this->setParam('vendors', $vendors);
@@ -79,7 +78,6 @@ namespace myf\controller;
         $categories = \myf\models\Category::find();
         $this->setParam('categories', $categories);
 
-        //TODO: replace $isAdmin as soon as login is done
         $isAdmin = $this->isAdmin();
 
         //determine if users should see all products or just hidden products
@@ -190,6 +188,19 @@ namespace myf\controller;
         $this->setParam('currentPage', $currentPage);
         $this->setParam('startIndex', $startIndex);
         $this->setParam('products', $products);
+
+        if(isset($_GET['ajax']) && $_GET['ajax'] == 1) 
+        {
+            if($_GET['page'] > $numberOfPages)
+            {
+                echo '';
+            }
+            else
+            {
+                echo $this->getProductsJson($products);
+            }
+            exit(0);
+        }
 
         //prepare getString for navigation
         $getString = 'c=products&a=search';
@@ -310,6 +321,30 @@ namespace myf\controller;
         //get products from database
         $products = \myf\models\Product::findRange(($currentPage-1) * PRODUCTS_PER_PAGE, PRODUCTS_PER_PAGE, $where, $orderBy);
         return $products;
+    }
+
+    public function getProductsJson(&$products)
+    {
+        $productInfos = array();
+        foreach($products as $product)
+        {
+            $thumbnailPath = FALLBACK_IMAGE;
+            if($product->images != NULL)
+            {
+                $thumbnailPath = $product->images[0]->thumbnailPath;
+            }
+            $currentProductInfo = array(
+                'id'            => $product->id,
+                'name'          => $product->productName,
+                'catchPhrase'   => $product->catchPhrase,
+                'image'         => $thumbnailPath,
+                'price'         => $product->standardPrice,
+                'isHidden'      => $product->isHidden
+            );
+            array_push($productInfos, $currentProductInfo);
+        }
+        $jsonString = json_encode($productInfos);
+        return $jsonString;
     }
 
     public function actionVendors() 
