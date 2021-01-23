@@ -226,11 +226,19 @@ p {
     left: 0;
     bottom: 0;
     background-color: #333;
-    color: white;
+    color: #e1e1e1;
     text-align: center;
     margin-top: 10px;
     height: 281px;
     bottom: 0px;
+}
+
+.footer a {
+    color: #e1e1e1;
+}
+
+.footer a:hover {
+    color: #eb7d00;
 }
 
 

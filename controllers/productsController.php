@@ -133,6 +133,28 @@ namespace myf\controller;
             $where .= 'standardPrice < ' . $maxPrice;
         }
 
+        //add visibility filter, if current user is admin
+        if($this->isAdmin() && isset($_GET['hidden'])) {
+            $hiddenClause = '';
+            if($_GET['hidden'] == 'hidden')
+            {
+                $hiddenClause = 'isHidden=1';
+            }
+            else if ($_GET['hidden'] == 'visible')
+            {
+                $hiddenClause = 'isHidden=0';
+            }
+
+            if(!empty($hiddenClause))
+            {
+                if(!empty($where))
+                {
+                    $where .= ' AND ';
+                }
+                $where .= $hiddenClause;
+            }
+        }
+
         //build order part of the sql statement
         $order = '';
         $sort = $_GET['sort'] ?? '';

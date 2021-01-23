@@ -35,6 +35,10 @@
             <input type="hidden" name="sort" value="<?= $_GET['sort']?>">
         <?php endif ?>
 
+        <?php if(isset($_GET['hidden'])) : ?>
+            <input type="hidden" name="hidden" value="<?= $_GET['hidden']?>">
+        <?php endif ?>
+
         <input id="search" name="s" type="search" placeholder="Suchbegriff eingeben..." value="<?= htmlspecialchars($_GET['s'] ?? '')?>"/>
         <input id="searchSubmit" type="submit" value="S">
     </form>
@@ -58,7 +62,8 @@
             <legend>Marken</legend>
                 <?php foreach($vendors as $vendor) : ?>
                     <label class="checkBoxLabel" for="vendor<?=$vendor->id?>"><?= $vendor->vendorName ?>
-                    <input type="checkbox" name="ven<?=$vendor->id?>" id="vendor<?=$vendor->id?>" value="<?=$vendor->id?>" <?=isset($_GET['ven' . $vendor->id]) ? 'checked' : ''?>/></label>
+                        <input type="checkbox" name="ven<?=$vendor->id?>" id="vendor<?=$vendor->id?>" value="<?=$vendor->id?>" <?=isset($_GET['ven' . $vendor->id]) ? 'checked' : ''?>/>
+                    </label>
                 <?php endforeach ?>
         </fieldset>
 
@@ -66,7 +71,8 @@
             <legend>Kategorien</legend>
                 <?php foreach($categories as $category) : ?>
                     <label for="category<?=$category->id?>"><?= $category->categoryName ?>
-                    <input type="checkbox" name="cat<?=$category->id?>" id="category<?=$category->id?>" value="<?=$category->id?>" <?=isset($_GET['cat' . $category->id]) ? 'checked' : ''?>/></label>
+                        <input type="checkbox" name="cat<?=$category->id?>" id="category<?=$category->id?>" value="<?=$category->id?>" <?=isset($_GET['cat' . $category->id]) ? 'checked' : ''?>/>
+                    </label>
                 <?php endforeach ?>
         </fieldset>
 
@@ -79,7 +85,17 @@
             <input type="number" min="1" step="any" id="maxPrice" name="maxPrice" value="<?= $_GET['maxPrice'] ?? '' ?>"/>
         </fieldset>
 
-        <label for="sort"></label>
+        <?php if($this->isAdmin()) : ?>
+            <label for="hiddenProducts">Sichtbarkeit</label>
+            <select name="hidden" id="hiddenProducts">
+                <option value="all"     <?=(isset($_GET['hidden']) && $_GET['hidden'] == 'all') ? 'selected' : ''?>>Alle Produkte</option>
+                <option value="hidden"  <?=(isset($_GET['hidden']) && $_GET['hidden'] == 'hidden') ? 'selected' : ''?>>Nur versteckte</option>
+                <option value="visible" <?=(isset($_GET['hidden']) && $_GET['hidden'] == 'visible') ? 'selected' : ''?>>Nur sichtbare</option>
+            </select>
+        <?php endif; ?>
+        
+
+        <label for="sort">Sortieren</label>
         <select id="sort" name=sort>
             <option value="none"      <?= (isset($_GET['sort']) && $_GET['sort'] == 'none')      ? ' selected' : ''?>>Ohne Sortierung</option>
 
@@ -93,7 +109,6 @@
             <option value="dateASC"  <?= (isset($_GET['sort']) && $_GET['sort'] == 'dateASC')    ? ' selected' : ''?>>Älteste zuerst</option>
 
         </select>
-        <br>
 
         <input type="submit" value="Filter anwenden">
     </form>
