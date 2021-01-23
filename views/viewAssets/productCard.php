@@ -1,3 +1,14 @@
+
+<?php
+    //create an empty product card for ajax purposes
+    if(isset($isPrefab))
+    {
+        $product = new \myf\models\Product(array(
+            'id' => -1
+        ));
+    }
+?>
+
 <div class="productCard" id="prod<?=$product->id?>">
     <a href="index.php?c=products&a=view&pid=<?= htmlspecialchars($product->id) ?>">    
         <p class="title"><?= htmlspecialchars($product->productName) ?></p>
@@ -15,18 +26,19 @@
                 }
             ?>">
 
-            <?php if(!$product->isHidden) : ?>
+            <?php if( isset($isPrefab) || !$product->isHidden) : ?>
                 <!-- add to cart button -->
                 <form class="badge" method="POST" action="#prod<?=$product->id?>">
                     <button class="iconButton cartButton" type="submit" name="addToCart" value="<?=$product->id?>"><img src="assets/images/icons/shopping_cart.svg"/></button>
                 </form>
+            <?php endif; ?>
 
-            <?php else : ?>
+            <?php if(isset($isPrefab) || $product->isHidden): ?>
                 <!-- hidden notification icon -->
                 <div class="badge">
                     <div class="hiddenIcon"><img src="assets/images/icons/hidden_icon.svg" alt="Unsichtbar" title="Unsichtbar"></div>
                 </div>
-            <?php endif ?>
+            <?php endif; ?>
         </div>
 
         <p class="price"><?= htmlspecialchars($product->standardPrice . ' €')?></p>
