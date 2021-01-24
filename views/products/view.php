@@ -88,4 +88,4 @@
         <script src="<?=JAVASCRIPTPATH . 'products' . DIRECTORY_SEPARATOR . 'viewCollapsible.js'?>"></script>
     </div>
 </div>
-<script src="<?=JAVASCRIPTPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'shopping_cart.js'?>"></script>
+<script src="<?=JAVASCRIPTPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'shoppingCart.js'?>"></script>

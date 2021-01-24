@@ -1,3 +1,9 @@
+@media screen and (min-width: 430px) {
+    .productCard {
+        width: 270px;
+    }
+}
+
 @media screen and (min-width: 900px) {
     /*
     Alles was das  Desktopherz begehrt
@@ -26,10 +32,6 @@
     .productSpotlight {
         max-width: 1000px;
     }
-    /* .container {
-        padding: 40px;
-        text-align: center;
-    } */
     /*Register css*/
     .cardregister {
         box-shadow: 1px 4px 8px 1px lightgrey;
@@ -216,11 +218,12 @@
 @media screen and (min-width: 1400px) {
     /* #region filter form */
     .filterForm {
-        /* display: block !important; */
         position: absolute;
         display: block !important;
         width: 250px !important;
-        left: 25px !important;
+        margin: 0;
+        left: 25px;
+        /* top: 25px; */
         border-radius: 5px 5px 5px 5px !important;
     }
     .filterForm select {
