@@ -18,7 +18,7 @@ p {
 }
 
 .content {
-    min-height: 50em;
+    min-height: 60em;
     width: 100%
 }
 
@@ -64,7 +64,7 @@ p {
     margin: 10px;
     box-shadow: 0 4px 8px 0 #00000033;
     background-color: white;
-    max-width: 95%;
+    width: 80%;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -444,6 +444,7 @@ p {
 form.moreProducts {
     display: none;
     margin: 0 auto;
+    margin-top: 10px;
     font-size: 1.3em;
     width: 95%;
 }
@@ -1036,8 +1037,6 @@ form label {
 .cartTotal {
     position: sticky;
     bottom: 0;
-    /* z-index: 1; */
-    z-index: -1;
     width: 95%;
     margin: 0 auto;
     padding: 5px;
@@ -1058,71 +1057,6 @@ form label {
 .table .tableRow:nth-child(odd):not(.head) {
     background-color: #fafafa;
 }
-
-
-/* .table {
-    display: table;
-    margin: 0 auto;
-    text-align: center;
-    width: 100%;
-}
-
-.table.userManagement {
-    padding: 5px;
-}
-
-.table .tableRow {
-    display: table-row;
-}
-
-.table .tableRow::after {
-    clear: both;
-}
-
-
-
-.table .head {
-    font-weight: bold;
-    display: table-header-group;
-    color: white;
-    background-color: #363636
-}
-
-.table .tableCell {
-    padding: 5px;
-    display: table-cell;
-    text-align: left;
-    vertical-align: top;
-}
-
-.table.userManagement {
-    width: 95%;
-}
-
-.table.userManagement .tableCell {
-    margin: 5px !important;
-    width: 12%;
-}
-
-.table.userManagement .tableRow {
-    border-spacing: 5px;
-}
-
-.table.orderConfirmation .tableCell {
-    width: 25%;
-}
-
-.table.orderConfirmation {
-    width: 60%;
-}
-
-.table .right {
-    text-align: right;
-}
-
-.table .center {
-    text-align: center;
-} */
 
 .table .tableRow.head {
     display: none;

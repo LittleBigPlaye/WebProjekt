@@ -94,6 +94,11 @@ document.addEventListener('DOMContentLoaded', function() {
         //send request with current search parameters
         function sendRequest(form) {
             var formData = new FormData(form);
+
+            //used to replace the browser url
+            //used before adding the ajax and the page values, to prevent the user from getting the plain json output
+            var targetURL = buildGetString(formData);
+
             formData.append('page', nextPage);
             formData.append('ajax', '1');
 
@@ -101,6 +106,11 @@ document.addEventListener('DOMContentLoaded', function() {
             request.abort();
 
             var getString = buildGetString(formData);
+
+            if (window.history.replaceState) {
+                window.history.replaceState(null, '', targetURL);
+            }
+
             request.open('get', getString, true);
             request.setRequestHeader('Accept', 'application/json');
             request.send();
@@ -110,9 +120,15 @@ document.addEventListener('DOMContentLoaded', function() {
         function buildGetString(formData) {
             var getString = 'index.php?';
             for (var pair of formData.entries()) {
-                getString += pair[0] + '=' + pair[1] + '&';
+                //prevent adding empty hidden parameters to get string
+                if (pair[1] != '') {
+                    getString += pair[0] + '=' + pair[1] + '&';
+                }
             }
-            console.log(getString);
+            //remove last & from the string
+            getString = getString.substring(0, getString.length - 1);
+            //encode string for url
+            getString = encodeURI(getString);
             return getString;
         }
 
@@ -147,7 +163,6 @@ document.addEventListener('DOMContentLoaded', function() {
         function addProductCard(cardInfos) {
             //clone the card
             var newProductCard = productCardPrefab.firstElementChild.cloneNode(true);
-            newProductCard.classList.add('hidden');
 
             //set information for the target product card
             newProductCard.querySelector('a').href = 'index.php?c=products&a=view&pid=' + cardInfos['id'];
@@ -165,10 +180,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 newProductCard.querySelectorAll('.badge')[1].style.display = 'none';
             }
 
+            //retrieve add to cart button
+            var addToCartButton = newProductCard.querySelector('.cartButton');
+            if (addToCartButton) {
+                addToCartButton.value = cardInfos['id'];
+                addToCartButton.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    var parentForm = addToCartButton.parentElement;
+                    //function is declared in shoppingCart.js
+                    sendCartRequest(parentForm, this.value);
+                })
+            }
+
             //add the current card to the products list
             productList.appendChild(newProductCard);
-
-            newProductCard.classList.remove('hidden');
         }
     }
 
