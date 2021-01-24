@@ -107,7 +107,7 @@
     </div>
 
     <?php if(empty($products)) :?>
-        <p>Für Ihre Suche wurden leider keine Treffer erzielt!</p>
+        <p class="emptySearch">Für Ihre Suche wurden leider keine Treffer erzielt!</p>
     <?php endif ?>
 <?php endif; ?>
 
@@ -132,7 +132,7 @@
         <!-- Button to go to last product List -->
         <a href="index.php?<?=$getString?>&page=<?=$numberOfPages?>">&raquo;</a>
     </div>
-
+<?php endif; ?>
 
     <form id="loadMoreForm" class="moreProducts">
         <input type="submit" name="submit" value="Mehr anzeigen">
@@ -147,4 +147,3 @@
         <?php $isPrefab = true ?>
         <?=require(VIEWSPATH . DIRECTORY_SEPARATOR . 'viewAssets' . DIRECTORY_SEPARATOR . 'productCard.php')?>
     </div>
-<?php endif; ?>

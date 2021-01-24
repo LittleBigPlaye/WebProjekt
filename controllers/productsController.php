@@ -193,7 +193,8 @@ namespace myf\controller;
         {
             if($_GET['page'] > $numberOfPages)
             {
-                echo '';
+                //send 404 to signalize that there is no product left
+                http_response_code(404);
             }
             else
             {

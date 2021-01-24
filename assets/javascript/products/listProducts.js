@@ -148,13 +148,20 @@ document.addEventListener('DOMContentLoaded', function() {
                         //make new cards visible
                         // showAllNewCards();
                         productList.style.maxHeight = productList.scrollHeight + 'px';
+                        document.querySelector('.content').style.maxHeight = document.querySelector('.content').scrollHeight + 'px';
                     } else {
                         //hide button, if no other products where found
                         btnLoadMore.style.display = 'none';
                     }
 
                 } else {
-                    alert(this.statusText);
+                    //hide button, of no products where found
+                    btnLoadMore.style.display = 'none';
+                    //add no products found text
+                    var emptySearchText = document.createElement('P');
+                    emptySearchText.innerHTML = 'Es wurden keine Artikel gefunden, die mit Ihrer Suche übereinstimmen';
+                    emptySearchText.classList.add('emptySearch');
+                    productList.parentElement.appendChild(emptySearchText);
                 }
             }
         }

@@ -54,8 +54,9 @@ p {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 0 auto;
-    transition: max-height .2s ease-out;
+    /* overflow: hidden; */
+    margin: 10px auto;
+    transition: max-height .5s ease-out;
 }
 
 .productCard {
@@ -208,13 +209,13 @@ p {
     padding-right: 30px;
     padding-bottom: 50px;
     padding-left: 30px;
-    position: relative;
+    display: block;
     left: 0;
     bottom: 0;
     background-color: #333;
     color: #e1e1e1;
     text-align: center;
-    margin-top: 10px;
+    margin-top: 25px;
     height: 281px;
     bottom: 0px;
 }
@@ -573,6 +574,17 @@ form label {
     content: "";
     clear: both;
     display: table;
+}
+
+.emptySearch {
+    background-color: #444444;
+    color: white;
+    padding: 15px 5px;
+    margin: 5px;
+    display: block;
+    border-radius: 5px;
+    max-width: 100%;
+    font-size: 1.2em;
 }
 
 
