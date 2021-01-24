@@ -12,7 +12,7 @@
                 </div>
 
             <?php foreach ($order->orderItems as $index => $orderItem):?>
-                <div class="tableRow">
+                <div class="tableRow" id="product<?=$orderItem->product->id?>">
                     <div class="tableCell">    
                         <a href="index.php?c=products&a=view&pid=<?=$orderItem->product->id?>">
                             <img class="productPreview" src="
@@ -43,16 +43,16 @@
                     <form class="tableCell" method="Post">
                         <label for="quantity<?=$index?>">Menge</label>
                         <input id="quantity<?=$index?>" class="quantitySelector" type="number" min="0", step="1" name="quantity" value="<?=$orderItem->quantity?>">
-                        <button class="cartQuantitySubmit" type="submit" name="updateCart">Änderungen übernehmen</button>
                         <input type="hidden" name="pid" value="<?=$orderItem->product->id?>">
+                        <button class="cartQuantitySubmit" type="submit" name="updateCart">Änderungen übernehmen</button>
                     </form>
                 </div>
             <?php endforeach; ?>
         </div>
     </div>
     <div class="cartTotal">
-        <b>Produkte:</b> <?=$cartCount?><br>
-        <b>Gesamtpreis:</b> <?= $totalPrice ?> €
+        <b>Produkte:</b> <span id="numberOfProducts"><?=$cartCount?></span><br>
+        <b >Gesamtpreis:</b> <span id="totalPrice"><?= $totalPrice ?> €</span>
         <form action="index.php?c=orders&a=confirmOrder" method="POST">
             <input type="submit" name="submit" value="Kaufen">
         </form>

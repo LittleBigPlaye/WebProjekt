@@ -17,6 +17,8 @@ class ordersController extends Controller
 
         if(isset($_SESSION['shoppingCart']) && count($_SESSION['shoppingCart'])  > 0)
         { 
+            $targetQuantity  = null;
+            $targetProductID = null;
             //check if the amount of an item should be changed
             if(isset($_POST['pid']) && isset($_POST['updateCart']) && isset($_POST['quantity']))
             {
@@ -24,6 +26,7 @@ class ordersController extends Controller
                 $targetProductID = $_POST['pid'];
                 if($targetQuantity <= 0)
                 {
+                    $targetQuantity = 0;
                     unset($_SESSION['shoppingCart'][$targetProductID]);
                 }
                 else
@@ -55,6 +58,17 @@ class ordersController extends Controller
 
             $totalPrice = $order->calculateTotalPrice();
             $_SESSION['currentOrder'] = serialize($order);
+
+            if(isset($_GET['ajax']) && $_GET['ajax'] == 1) {
+                $returnArray = array(
+                    'productID' => $targetProductID,
+                    'targetQuantity' => $targetQuantity,
+                    'numberOfProducts' => $this->getNumberOfCartItems(),
+                    'totalPrice' => strval($totalPrice)
+                );
+                echo json_encode($returnArray);
+                exit(0);
+            }
         }
         
         $this->setParam('orderItems', $orderItems);

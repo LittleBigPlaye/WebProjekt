@@ -140,7 +140,7 @@
 
 
 
-    <script src="<?=JAVASCRIPTPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'shoppingCart.js'?>"></script>
+    <script src="<?=JAVASCRIPTPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'addToCart.js'?>"></script>
     <script src="<?=JAVASCRIPTPATH . 'products' . DIRECTORY_SEPARATOR . 'listProducts.js'?>"></script>
 
     <div class="productCardPrefab" id="productCardPrefab">
