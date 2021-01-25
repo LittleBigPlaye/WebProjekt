@@ -59,7 +59,7 @@ class ordersController extends Controller
             $totalPrice = $order->calculateTotalPrice();
             $_SESSION['currentOrder'] = serialize($order);
 
-            if(isset($_GET['ajax']) && $_GET['ajax'] == 1) {
+            if(isset($_POST['ajax']) && $_POST['ajax'] == 1) {
                 $returnArray = array(
                     'productID' => $targetProductID,
                     'targetQuantity' => $targetQuantity,

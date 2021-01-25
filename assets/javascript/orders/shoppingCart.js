@@ -48,13 +48,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function sendRequest(form) {
         var formData = new FormData(form);
         formData.append('updateCart', '1');
+        formData.append('ajax', '1');
         var currentURL = window.location.href;
-
-        if (currentURL.indexOf('?') > -1) {
-            currentURL += '&ajax=1';
-        } else {
-            currentURL += '?ajax=1';
-        }
 
         //cancel previous requests
         request.abort();

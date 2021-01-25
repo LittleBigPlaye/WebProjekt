@@ -189,7 +189,7 @@ namespace myf\controller;
         $this->setParam('startIndex', $startIndex);
         $this->setParam('products', $products);
 
-        if(isset($_GET['ajax']) && $_GET['ajax'] == 1) 
+        if(isset($_POST['ajax']) && $_POST['ajax'] == 1) 
         {
             if($_GET['page'] > $numberOfPages)
             {

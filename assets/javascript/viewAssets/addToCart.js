@@ -68,19 +68,13 @@ function sendCartRequest(form, productID) {
         //get current url
         var currentURL = window.location.href;
 
-        //build target url for request
-        if (currentURL.indexOf('?') > -1) {
-            currentURL += '&ajax=1';
-        } else {
-            currentURL += '?ajax=1';
-        }
-
         //cancel previous request, if user was too fast
         cartRequest.abort();
 
         cartRequest.open('Post', currentURL, true);
         cartRequest.setRequestHeader('Accept', 'application/html');
         var formData = new FormData(form);
+        formData.append('ajax', '1');
         formData.append('addToCart', productID);
 
         cartRequest.send(formData);

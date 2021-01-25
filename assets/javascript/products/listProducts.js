@@ -22,8 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         var filterForm = document.getElementById('filterForm');
 
-        productList.style.maxHeight = productList.scrollHeight + 'px';
-
         //hide the default paging
         if (paging) {
             paging.style.display = 'none';
@@ -96,11 +94,10 @@ document.addEventListener('DOMContentLoaded', function() {
             var formData = new FormData(form);
 
             //used to replace the browser url
-            //used before adding the ajax and the page values, to prevent the user from getting the plain json output
+            //used before adding the page value, to prevent the user from getting the plain json output
             var targetURL = buildGetString(formData);
 
             formData.append('page', nextPage);
-            formData.append('ajax', '1');
 
             //cancel previous request, if user was too fast
             request.abort();
@@ -111,9 +108,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 window.history.replaceState(null, '', targetURL);
             }
 
-            request.open('get', getString, true);
+            request.open('Post', getString, true);
             request.setRequestHeader('Accept', 'application/json');
-            request.send();
+
+            //send ajax = 1 to prevent users from accessing the returned json via get
+            var formData = new FormData();
+            formData.append('ajax', '1');
+            request.send(formData);
         }
 
         //builds get string from form data
@@ -145,10 +146,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         for (var i = 0; i < productInfos.length; i++) {
                             addProductCard(productInfos[i]);
                         }
-                        //make new cards visible
-                        // showAllNewCards();
-                        productList.style.maxHeight = productList.scrollHeight + 'px';
-                        document.querySelector('.content').style.maxHeight = document.querySelector('.content').scrollHeight + 'px';
                     } else {
                         //hide button, if no other products where found
                         btnLoadMore.style.display = 'none';

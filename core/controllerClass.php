@@ -99,7 +99,7 @@ abstract class Controller
                 $_SESSION['shoppingCart'][$productID] = 1;
             }
         }
-        if(isset($_GET['ajax'])) 
+        if(isset($_POST['ajax']) && $_POST['ajax'] == 1) 
         {
             echo $this->getNumberOfCartItems();
             exit(0);
