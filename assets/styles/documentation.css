@@ -45,22 +45,27 @@ h1 {
     /* counter-reset: h3c; */
 }
 
+h2 {
+    counter-reset: h3counter;
+}
+
 h2:before {
-    content: counter(h2counter) "\0000a0\0000a0";
     counter-increment: h2counter;
-    counter-reset: h3c;
+    content: counter(h2counter) "\0000a0\0000a0";
+}
+
+h3 {
     counter-reset: h4counter;
 }
 
 h3:before {
-    content: counter(h2counter) "." counter(h3c) "\0000a0\0000a0";
-    counter-increment: h3c;
-    counter-reset: h4counter;
+    counter-increment: h3counter;
+    content: counter(h2counter) "." counter(h3counter) "\0000a0\0000a0";
 }
 
 h4:before {
-    content: counter(h2counter) "." counter(h3c) "." counter(h4counter)"\0000a0\0000a0";
     counter-increment: h4counter;
+    content: counter(h2counter) "." counter(h3counter) "." counter(h4counter)"\0000a0\0000a0";
 }
 
 h2,
