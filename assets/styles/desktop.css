@@ -213,6 +213,10 @@
     form.moreProducts {
         width: 400px;
     }
+    .emptySearch {
+        width: 500px;
+        margin: 0 auto;
+    }
 }
 
 @media screen and (min-width: 1400px) {
@@ -250,7 +254,7 @@
         float: right;
     }
     /* #endregion */
-    .products {
+    .products:not(.frontPage) {
         max-width: 60%;
     }
 }
@@ -258,6 +262,6 @@
 @media screen and(min-width: 1700px) {
     /* #endregion */
     .products {
-        max-width: 900px !important;
+        max-width: 1000px;
     }
 }

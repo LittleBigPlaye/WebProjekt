@@ -20,7 +20,7 @@
         <br>
     </div>
     
-    <section class="products">
+    <section class="products frontPage">
     <?php foreach($cardProductsFirstRow as $product)
     {
         if($product !== null)
@@ -46,7 +46,7 @@
 </p>
 <br>
 <div>
-    <section class="products">
+    <section class="products frontPage">
         <?php foreach($cardProductsSecondRow as $product)
         {
             if($product !== null)

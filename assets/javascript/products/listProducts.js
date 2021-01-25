@@ -87,6 +87,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             //reset nextPage variable
             nextPage = 1;
+            //remove "no products found" string, if available
+            var emptySearchText = document.getElementById(emptySearchText);
+            if (emptySearchText) {
+                emptySearchText.parentElement.remove(emptySearchText);
+            }
+
         }
 
         //send request with current search parameters
@@ -157,6 +163,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     //add no products found text
                     var emptySearchText = document.createElement('P');
                     emptySearchText.innerHTML = 'Es wurden keine Artikel gefunden, die mit Ihrer Suche übereinstimmen';
+                    emptySearchText.setAttribute('id', 'emptySearchText');
                     emptySearchText.classList.add('emptySearch');
                     productList.parentElement.appendChild(emptySearchText);
                 }

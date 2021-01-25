@@ -54,7 +54,6 @@ p {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    /* overflow: hidden; */
     margin: 10px auto;
     transition: max-height .5s ease-out;
 }
@@ -68,12 +67,9 @@ p {
     width: 80%;
     text-align: center;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     border-radius: 5px;
-    overflow: hidden;
-    visibility: visible;
-    transition: visibility 0.2s, opacity 0.1s linear;
 }
 
 .productCard.hidden {
@@ -1174,6 +1170,6 @@ form label {
 
 /*#endregion */
 
-.impressumLinkColor{
+.impressumLinkColor {
     color: #384047;
 }
