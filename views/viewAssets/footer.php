@@ -5,6 +5,7 @@
         Vertrieb von Mund-Nasenschutzmasken
         <br>
         <a href="index.php?c=pages&a=impressum">Impressum</a>
+        <a href="documentation/documentation.html">Dokumentation</a>
         <br>
         <hr>
         Inhaber:

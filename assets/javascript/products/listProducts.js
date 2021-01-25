@@ -88,9 +88,9 @@ document.addEventListener('DOMContentLoaded', function() {
             //reset nextPage variable
             nextPage = 1;
             //remove "no products found" string, if available
-            var emptySearchText = document.getElementById(emptySearchText);
+            var emptySearchText = document.getElementById('emptySearchText');
             if (emptySearchText) {
-                emptySearchText.parentElement.remove(emptySearchText);
+                emptySearchText.parentElement.removeChild(emptySearchText);
             }
 
         }
