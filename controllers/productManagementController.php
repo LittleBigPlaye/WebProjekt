@@ -30,8 +30,20 @@ class ProductManagementController extends \myf\core\controller
         //obtain categories from database
         $this->setParam('categories', \myf\models\Category::find());
 
+        //ajax database check
+        if(isset($_POST['ajax']) && $_POST['ajax'] == 1 && isset($_POST['submitForm']) && $_POST['productName']) 
+        {
+            $name = trim($_POST['productName'] ?? '');
+            $db = $GLOBALS['database'];
+            if(!empty($name) && \myf\models\Product::findOne('productName LIKE ' . $db->quote($name)) !== null)
+            {
+                echo 'Das Produkt existiert bereits';
+            }
+            exit(0);
+        }
+
         //check, if form has been submitted
-        if(isset($_POST['submit']))
+        if(isset($_POST['submitForm']))
         {
             //get inputs from form
             $name        = trim($_POST['productName'] ?? '');
@@ -101,19 +113,23 @@ class ProductManagementController extends \myf\core\controller
     
     public function actionEdit()
     {
+        
+        
         $this->setParam('currentPosition', 'products');
-       $errorMessages = [];
+        $errorMessages = [];
        
        //check if the user is logged in
        if(!$this->isLoggedIn())
        {
-        header('Location: index.php?c=pages&a=login');
+            header('Location: index.php?c=pages&a=login');
+            exit(0);
        }
        
        //check if the logged in user is admin
        if(!$this->isAdmin())
        {
            header('Location: index.php?c=errors&a=403');
+           exit(0);
        }
 
        //check if product exists
@@ -124,10 +140,24 @@ class ProductManagementController extends \myf\core\controller
        if($productID == null || !is_numeric($productID) || \myf\models\Product::findOne('id=' . $productID) == null)
        {
            header('Location: index.php?c=errors&a=404');
+           exit(0);
        }
 
        $product = \myf\models\Product::findOne('id=' . $productID);
 
+       //ajax database check
+       if(isset($_POST['ajax']) && $_POST['ajax'] == 1 && isset($_POST['submitForm']) && $_POST['productName']) 
+       {
+           $name = trim($_POST['productName'] ?? '');
+           $db = $GLOBALS['database'];
+           if(!empty($name) && ($name != $product->productName) && \myf\models\Product::findOne('productName LIKE ' . $db->quote($name)) !== null)
+           {
+               echo 'Das Produkt existiert bereits';
+           }
+           exit(0);
+       }
+
+       
        //obtain vendors from database
        $this->setParam('vendors', \myf\models\Vendor::find());
        
@@ -136,8 +166,9 @@ class ProductManagementController extends \myf\core\controller
        $this->setParam('product', $product);   
        
        //get inputs from from
-       if(isset($_POST['submit']))
+       if(isset($_POST['submitForm']))
        {
+            echo var_dump($_GET);
             //retrieve inputs from form
             $name        = trim($_POST['productName'] ?? '');
             $catchPhrase = trim($_POST['catchPhrase'] ?? '');
@@ -184,7 +215,7 @@ class ProductManagementController extends \myf\core\controller
                         $productImage->image->save();
                     }
                 }
-
+                
                 //upload new images (if available)
                 if(count($errorMessages) === 0 && !empty($fileNames))
                 {
@@ -208,6 +239,7 @@ class ProductManagementController extends \myf\core\controller
                 
                 //redirect to product page
                 header('Location: ?c=products&a=view&pid=' . $product->id);
+                // exit(0);
             }
         }
         $this->setParam('errorMessages', $errorMessages);

@@ -14,7 +14,7 @@
                     <span class="messageClose" onclick="this.parentElement.style.display='none';">&times</span>
                     <?= $message ?>
                 </div>
-            <? endforeach; ?>
+            <?php endforeach; ?>
 
             <!-- delete or change current images -->
             <?php if($product->images !== null) : ?>
@@ -160,7 +160,7 @@
             <sup>
                 <p>Mit<span class="required"></span> markierte Felder sind Pflichtfelder.</p>
             </sup>
-            <input type="submit" id="submit" name="submit" value="Änderung speichern"/>
+            <input type="submit" id="submitForm" name="submitForm" value="Änderung speichern"/>
         </form>
     </div>
 <?php endif; ?>

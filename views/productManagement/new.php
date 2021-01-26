@@ -98,7 +98,7 @@
         <sup>
             <p>Mit<span class="required"></span> markierte Felder sind Pflichtfelder.</p>
         </sup>
-        <input id="submit" type="submit" name="submit" value="Produkt anlegen"/>
+        <input id="submitForm" type="submit" name="submitForm" value="Produkt anlegen"/>
     </form>
 </div>
 <script src="<?=JAVASCRIPTPATH . 'productManagement' . DIRECTORY_SEPARATOR . 'validateProduct.js'?>"></script>
