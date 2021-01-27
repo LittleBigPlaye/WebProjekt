@@ -113,8 +113,7 @@ class ProductManagementController extends \myf\core\controller
     
     public function actionEdit()
     {
-        
-        
+
         $this->setParam('currentPosition', 'products');
         $errorMessages = [];
        

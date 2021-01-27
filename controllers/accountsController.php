@@ -25,10 +25,22 @@ class accountsController extends Controller
 
         $errorMessages = [];
         $successMessage = '';
+        
+
+        if (isset($_POST['ajax']) && $_POST['ajax'] == 1 && $_POST['submitForm'] && $_POST['email'])
+        {
+            $email = trim($_POST['email'] ?? '');
+            $db = $GLOBALS['database'];
+            if(!empty($email) && \myf\models\Login::findOne('email like'.$db->quote($email)) != null)
+            {
+                echo 'Die Email existiert bereits';
+            }
+            exit(0);
+        }
 
 
         // the following "if" check if the the submit was send
-        if(isset($_POST['submit']))
+        if(isset($_POST['submitForm']))
         {
             $firstName      = $_POST['firstName'] ?? "";
             $secondName     = $_POST['secondName']  ?? "";
@@ -111,7 +123,19 @@ class accountsController extends Controller
             if(Login::findOne('email LIKE'.$db->quote($email)) !== null)
             {
                 $errorMessages['User'] = "Der Benutzer existiert bereits.";
+                if(isset($_POST['ajax'])&& $_POST['ajax']===1)
+                {
+                    echo $errorMessages['User'];
+                    exit(0);
+                }
             }
+            else
+                {
+                    if(isset($_POST['ajax'])&& $_POST['ajax']===1)
+                    {
+                        exit(0);
+                    }
+                }
 
             //check street
             if(empty($street))

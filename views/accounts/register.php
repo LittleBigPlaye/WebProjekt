@@ -5,7 +5,7 @@
 ?>
 
 <div class="formWrapper">
-    <form class="formWrapperRegister"  action="?c=accounts&a=register" method="post">
+    <form class="formWrapperRegister"  id="registerForm" action="?c=accounts&a=register" method="post">
 
         <h1>Registrierung</h1>
 
@@ -104,7 +104,7 @@
         </div>
 
         <br>
-        <input type="submit" value="Registrieren" id="submit" name="submit" >
+        <input type="submit" value="Registrieren" id="submitForm" name="submitForm" >
     </form>
 </div>
 <script src="<?=JAVASCRIPTPATH . 'accounts' . DIRECTORY_SEPARATOR . 'validateRegister.js'?>"></script>
