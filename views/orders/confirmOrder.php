@@ -1,11 +1,11 @@
 <div class="formWrapper">
-    <form action method="POST">      
+    <form class="orderConfirmationForm" method="POST">      
         <h1>Bestellung absenden</h1>
 
         <p>Bitte prüfen Sie vor dem Absenden der Bestellung, ob die nachfolgenden Angaben korrekt sind!</p>
 
         <h2>Zieladresse</h2>
-        <p>
+        <p class="customerData">
             <?= htmlspecialchars($user->salutation . ' ' . $user->firstName . ' ' . $user->secondName . ' ' . $user->lastName)?><br>
             <?= htmlspecialchars($address->street . ' ' . $address->streetNumber)?><br>
             <?= htmlspecialchars($address->zipCode . ' ' . $address->city)?><br>
