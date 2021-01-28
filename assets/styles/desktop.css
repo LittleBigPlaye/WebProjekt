@@ -5,11 +5,10 @@
 }
 
 @media screen and (min-width: 900px) {
-    /*
-    Alles was das  Desktopherz begehrt
-*/
     .logo1 {
         display: inline-block;
+        position: relative;
+        height: 230px;
     }
     .logo2 {
         display: none;
