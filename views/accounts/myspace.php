@@ -56,14 +56,40 @@
 
                 <h3>Bestellung <?=htmlspecialchars($order->id)?></h3>
 
+            <div class="table">
+                <div class="tableRow head">
+                    <div class="tableCell center">
+                        Bezeichnung
+                    </div>
+                    <div class="tableCell center">
+                        Artikelnummer
+                    </div>
+                    <div class="tableCell center">
+                        Anzahl
+                    </div>
+                    <div class="tableCell center">
+                        Preis
+                    </div>
+                </div>
                 <?php foreach ($order->orderItems as $orderItem) : ?>
-                    Bezeichnung: <?=$orderItem->product->productName?><br>
-                    Artikelnummer: <?=$orderItem->product->id?><br>
-                    Anzahl: <?=$orderItem->quantity?> Stück<br>
-                    Preis: <?=$orderItem->actualPrice*$orderItem->quantity?> €<br>
-                <hr>
-                <?php endforeach ?>
 
+                <div class="tableRow">
+                    <div class="tableCell center">
+                        <?=$orderItem->product->productName?>
+                    </div>
+                    <div class="tableCell center">
+                        <?=htmlspecialchars(str_pad($orderItem->product->id, 12, '0', STR_PAD_LEFT))?>
+                    </div>
+                    <div class="tableCell center">
+                        <?=$orderItem->quantity?> Stück
+                    </div>
+                    <div class="tableCell center">
+                        <?=$orderItem->actualPrice*$orderItem->quantity?> €
+                    </div>
+                </div>
+                <?php endforeach ?>
+            </div>
+                <hr>
             <?php endforeach?>
         </section>
         </div>
