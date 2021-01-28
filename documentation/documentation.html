@@ -667,6 +667,47 @@
                 </p>
             </section>
         </section>
+        <h3>Administration</h3>
+            <h4>Mein Konto</h4>
+            <section>
+                <p>
+                    Die Seite Mein Konto ist eine Besonderheit, denn diese Seite ist Unter- und Hauptseite zugleich. Wenn die Rolle Admin angemeldet ist, wird sie zur Unterseite und für normale Nutzer ist es eine Hauptseite , die sie links von Login/Logoiut, in der Navbar finden.
+                </p>
+                <p>
+                    Auf der Seite werden die persönlichen Daten dargestellt, es findet sich hier auch eine Verlinkung zu den Unterseiten "Passwort ändern", "Personas ändern" und "Adresse ändern". Auch werden alle Bestellungen dargestellt, die durch den angemeldeten Benutzer getätigt wurden,
+                    egal ob Admin oder Nutzer.
+                </p>
+                <h5>Passwort ändern</h5>
+                <section>
+                    <p>
+                        Auf dieser Seite kann der Nutzer sein Passwort ändern
+                    </p>
+                </section>
+                <h5>Persona ändern</h5>
+                <section>
+                    <p>
+                        Hier kann jeder Nutzer seine persönlichen Daten ändern und auch vervollständigen.
+                    </p>
+                </section>
+                <h5>Adresse
+                    ändern</h5>
+                <section>
+                    <p>
+                        Diese Unterseite dient dazu seine eigene Adresse zu ändern.
+                    </p>
+                </section>
+            </section>
+            <h4>Benutzer verwalten</h4>
+            <section>
+                <p>
+                    Diese Unterseite ist nur durch die Rolle Admin einsehbar.
+                </p>
+                <p>
+                    Der Admin ist in der Lage Nutzer zu validieren, freizugeben, die Rolle zu ändern und das Passwort zurückzusetzen. Funktionen für die Validierung und die Freigabe sind noch nicht implementiert.
+                    Das Passwort kann auf den Standardwert "P@ssw0rd01" zurückgesetzt werden.
+                </p>
+            </section>
+
         <h2 id="database">Datenbank</h2>
         <h3>
             ER-Diagramm
@@ -1589,6 +1630,336 @@
                         <td>3 h</td>
                     </tr>
                 </table>
+        <h2 id="roles">Rollenmodell</h2>
+        <h2 id="projectManagement">Projektplanung</h2>
+        <h3>Meilensteinplan</h3>
+        <h3>Auflistung des Zeitbedarfs</h3>
+        <table class="timeTable">
+            <tr>
+                <th>Datum</th>
+                <th>Aktivität</th>
+                <th>Person(en)</th>
+                <th>Dauer</th>
+            </tr>
+            <tr>
+                <td>03.11</td>
+                <td> Produktideen sammeln, Produktidee festlegen</td>
+                <td> John Klippstein, Hannes Lenz, Robin Beck</td>
+                <td> 1 h</td>
+            </tr>
+            <tr>
+                <td>06.11</td>
+                <td> Ähnliche Angebote / Webseiten heraussuchen und Bewerten</td>
+                <td> John Klippstein,Hannes Lenz,Robin Beck</td>
+                <td> 4 h</td>
+            </tr>
+            <tr>
+                <td>06.11</td>
+                <td> GitHub repository anlegen, To-Do Listen pflegen</td>
+                <td> John Klippstein,Hannes Lenz,Robin Beck</td>
+                <td> 30 min</td>
+            </tr>
+            <tr>
+                <td>15.11</td>
+                <td> Grobe LayoutIdeen ausformulieren, Seitenhierarchie aufstellen, Namen überlegen</td>
+                <td> John Klippstein,Hannes Lenz,Robin Beck</td>
+                <td> 3 h</td>
+            </tr>
+            <tr>
+                <td>20.11</td>
+                <td> Layout Überlegen / Skizzieren</td>
+                <td> John Klippstein,Hannes Lenz,Robin Beck</td>
+                <td> 4 h</td>
+            </tr>
+            <tr>
+                <td>27.11</td>
+                <td> Startseite in html / css umsetzen</td>
+                <td> John Klippstein</td>
+                <td> 2 h</td>
+            </tr>
+            <tr>
+                <td>27.11</td>
+                <td> Startseite in html / css umsetzen</td>
+                <td> Hannes Lenz</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>27.11</td>
+                <td> Startseite in html / css umsetzen</td>
+                <td> Robin Beck</td>
+                <td> 5 h</td>
+            </tr>
+            <tr>
+                <td>28.11</td>
+                <td> ER-Diagramm erstellen</td>
+                <td> Robin Beck</td>
+                <td> 30 min</td>
+            </tr>
+            <tr>
+                <td>29.11</td>
+                <td> HTML / CSS der Startseite zusammenführen</td>
+                <td> John Klippstein</td>
+                <td> 2 h</td>
+            </tr>
+            <tr>
+                <td>03.12</td>
+                <td> Erste Zwischenpräsentation vorbereiten</td>
+                <td> John Klippstein,Hannes Lenz,Robin Beck</td>
+                <td> 4 h</td>
+            </tr>
+            <tr>
+                <td>03.12</td>
+                <td> CSS überarbeiten</td>
+                <td> John Klippstein</td>
+                <td> 1 h</td>
+            </tr>
+            <tr>
+                <td>11.12</td>
+                <td> Navigationsleiste überarbeiten (Umstellung auf Checkbox, ohne Javascript)</td>
+                <td> Robin Beck</td>
+                <td> 4,5 h</td>
+            </tr>
+            <tr>
+                <td>11.2</td>
+                <td> Anlage Use-Cases Produktverwaltung</td>
+                <td> Hannes Lenz</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>11.12</td>
+                <td> Anlage Use-Cases Kaufverwaltung</td>
+                <td> John Klippstein</td>
+                <td> 0,25 h</td>
+            </tr>
+            <tr>
+                <td>12.12</td>
+                <td> Anlage Use-Cases Nutzerverwaltung</td>
+                <td> Roin Beck</td>
+                <td> 0,75 h</td>
+            </tr>
+            <tr>
+                <td>13.12</td>
+                <td> Fiktive Anbieter und Beschreibungen überlegen</td>
+                <td> John Klippstein</td>
+                <td> 1 h</td>
+            </tr>
+            <tr>
+                <td>16.12</td>
+                <td> MVC Grundgerüst für Projekt implementieren</td>
+                <td> Robin Beck</td>
+                <td> 1,5 h</td>
+            </tr>
+            <tr>
+                <td>18.12</td>
+                <td> Use Cases abstimmen, weiteres Vorgehen besprechen</td>
+                <td> John Klippstein,Hannes Lenz,Robin Beck</td>
+                <td> 2 h</td>
+            </tr>
+            <tr>
+                <td>23.12</td>
+                <td> Base Model umsetzen</td>
+                <td> John Klippstein</td>
+                <td> 2 h</td>
+            </tr>
+            <tr>
+                <td>23.12</td>
+                <td> Models für Produktansicht anlegen</td>
+                <td> Robin Beck</td>
+                <td> 1 h</td>
+            </tr>
+            <tr>
+                <td>24.12</td>
+                <td> Funktionalität für Produktansicht, Produktbearbeitung, „Neues Produkt anlegen“ hinzugefügt</td>
+                <td> Robin Beck</td>
+                <td> 6 h</td>
+            </tr>
+            <tr>
+                <td>27.12</td>
+                <td> Dokumentation bearbeiten</td>
+                <td> Robin Beck</td>
+                <td> 2 h</td>
+            </tr>
+            <tr>
+                <td>27.12</td>
+                <td> Dokumentation bearbeiten</td>
+                <td> Hannes Lenz</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>27.12</td>
+                <td> Dokumentation bearbeiten</td>
+                <td> John Klippstein</td>
+                <td> 2 h</td>
+            </tr>
+            <tr>
+                <td>?</td>
+                <td> Login und Registrierung anlegen</td>
+                <td> Hannes Lenz</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>27.12</td>
+                <td> Warenkorb anlegen</td>
+                <td> John Klippstein</td>
+                <td> 2 h</td>
+            </tr>
+            <tr>
+                <td>27.12</td>
+                <td> Bildupload für Produktanlage</td>
+                <td> Robin Beck</td>
+                <td> 2 h</td>
+            </tr>
+            <tr>
+                <td>28.12</td>
+                <td> Überarbeitung Registrierung</td>
+                <td> John Klippstein</td>
+                <td> 3 h</td>
+            </tr>
+            <tr>
+                <td>29.12</td>
+                <td> Aktuellen Fortschritt vergleichen, Login besprechen</td>
+                <td> John Klippstein,Hannes Lenz,Robin Beck</td>
+                <td> 3 h</td>
+            </tr>
+            <tr>
+                <td>29.12</td>
+                <td> Blenderszene für Produktbilder erstellen</td>
+                <td> Robin Beck</td>
+                <td> 3 h</td>
+            </tr>
+            <tr>
+                <td>29.12</td>
+                <td> Produktbearbeitung überarbeiten</td>
+                <td> Robin Beck</td>
+                <td> 2 h</td>
+            </tr>
+            <tr>
+                <td>30.12</td>
+                <td> Produktbilder Rendern / Bearbeiten</td>
+                <td> Robin Beck</td>
+                <td> 2 h</td>
+            </tr>
+            <tr>
+                <td>30.12</td>
+                <td> Produktbearbeitung erweitern</td>
+                <td> Robin Beck</td>
+                <td> 2 h</td>
+            </tr>
+            <tr>
+                <td>31.12</td>
+                <td> Produktsuche / Filterung implementieren</td>
+                <td> Robin Beck</td>
+                <td> 2,5 h</td>
+            </tr>
+            <tr>
+                <td>01.01</td>
+                <td> CSS für Produktanlage anlegen</td>
+                <td> Robin Beck</td>
+                <td> 2 h</td>
+            </tr>
+            <tr>
+                <td>02.01</td>
+                <td> CSS für Produktfilter anlegen</td>
+                <td> Robin Beck</td>
+                <td> 2,5 h</td>
+            </tr>
+            <tr>
+                <td>02.01</td>
+                <td> Javascript für Produktgallery anlegen</td>
+                <td> Robin Beck</td>
+                <td> 2 h</td>
+            </tr>
+            <tr>
+                <td>07.01</td>
+                <td> Fehlerseiten einrichten</td>
+                <td> Robin Beck</td>
+                <td> 1,4 h</td>
+            </tr>
+            <tr>
+                <td>15.01</td>
+                <td> Absprache aktueller Fortschritt, weiteres Vorgehen, Vorbereitung der Zwischenpräsentation</td>
+                <td> Hannes Lenz,John Klippstein,Robin Beck</td>
+                <td> 1,5 h</td>
+            </tr>
+            <tr>
+                <td>15.01</td>
+                <td> Fehlervalidierung mit JS, CSS</td>
+                <td> Robin Beck</td>
+                <td> 4,5 h</td>
+            </tr>
+            <tr>
+                <td>16.01</td>
+                <td> CSS Überarbeitung – Produktkacheln</td>
+                <td> Robin Beck</td>
+                <td> 2,5 h</td>
+            </tr>
+            <tr>
+                <td>17.01</td>
+                <td> Links Überarbeitet</td>
+                <td> Robin Beck</td>
+                <td> 0,25 h</td>
+            </tr>
+            <tr>
+                <td>17.01</td>
+                <td> Fehlervalidierung mit JS, CSS, für die Registrierung</td>
+                <td> John Klippstein</td>
+                <td> 3,5 h</td>
+            </tr>
+            <tr>
+                <td>18.01</td>
+                <td> Layout für Formulare Überarbeitet</td>
+                <td> Robin Beck</td>
+                <td> 2 h</td>
+            </tr>
+            <tr>
+                <td>22.01</td>
+                <td> Besprechung weiteres Vorgehen für das Projekt</td>
+                <td> Hannes Lenz,John Klippstein,Robin Beck</td>
+                <td> 1,5 h</td>
+            </tr>
+            <tr>
+                <td>22.01</td>
+                <td> Hinzufügen der Ajax Funktionalität für „Zum Warenkorb hinzufügen“, CSS Anpassung</td>
+                <td> Robin Beck</td>
+                <td> 2,6h</td>
+            </tr>
+            <tr>
+                <td>23.01</td>
+                <td> Hinzufügen von Ajax für dynamisches Nachladen / Filtern / Suchen von Produkten</td>
+                <td> Robin Beck</td>
+                <td> 5h</td>
+            </tr>
+            <tr>
+                <td>24.01</td>
+                <td> Hinzufügen von Ajax für Warenkorb (Änderung der Produktanzahl), Überarbeitung der Produktanzeige</td>
+                <td> Robin Beck</td>
+                <td> 2,2h</td>
+            </tr>
+            <tr>
+                <td>25.01</td>
+                <td>Umstellung des Requests via Ajax auf POST, Bearbeitung der Dokumentation</td>
+                <td>Robin Beck</td>
+                <td> 4 h</td>
+            </tr>
+            <tr>
+                <td>27.01</td>
+                <td>Ajax Einarbeitung für Registrierung und Produktanlegen</td>
+                <td>Robin Beck, John Klippstein</td>
+                <td> 2 h</td>
+            </tr>
+            <tr>
+                <td>28.01</td>
+                <td>Bearbeitung der Dokumentation</td>
+                <td>John Klippstein</td>
+                <td> 2,5 h</td>
+            </tr>
+            <tr>
+                <td>28.01</td>
+                <td>Erstellen von Testdaten und zusammenführen SQL-Dumps</td>
+                <td>John Klippstein</td>
+                <td> 2 h</td>
+            </tr>
+        </table>
     </div>
 </body>
 
