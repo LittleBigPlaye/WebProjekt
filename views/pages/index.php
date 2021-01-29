@@ -19,16 +19,16 @@
         </p>
         <br>
     </div>
-    
+
     <section class="products frontPage">
-    <?php foreach($cardProductsFirstRow as $product)
-    {
-        if($product !== null)
+        <?php foreach ($cardProductsFirstRow as $product) 
         {
-            include(VIEWSPATH . DIRECTORY_SEPARATOR . 'viewAssets' . DIRECTORY_SEPARATOR . 'productCard.php');
+            if ($product !== null) 
+            {
+                include(VIEWSPATH . DIRECTORY_SEPARATOR . 'viewAssets' . DIRECTORY_SEPARATOR . 'productCard.php');
+            }
         }
-    }
-    ?>
+        ?>
     </section>
 </div>
 
@@ -45,11 +45,12 @@
     Nutzen Sie diese Möglichkeit!!!!
 </p>
 <br>
+
 <div>
     <section class="products frontPage">
-        <?php foreach($cardProductsSecondRow as $product)
+        <?php foreach ($cardProductsSecondRow as $product) 
         {
-            if($product !== null)
+            if ($product !== null) 
             {
                 include(VIEWSPATH . DIRECTORY_SEPARATOR . 'viewAssets' . DIRECTORY_SEPARATOR . 'productCard.php');
             }
@@ -58,4 +59,4 @@
     </section>
 </div>
 
-<script src="<?=JAVASCRIPTPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'addToCart.js'?>"></script>
+<script src="<?= JAVASCRIPTPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'addToCart.js' ?>"></script>

@@ -121,7 +121,7 @@
                             
                         ?>
                         ><?= $vendor->vendorName ?></option>
-                    <?php endforeach ?>
+                    <?php endforeach; ?>
                 </select>
                 <span class="errorInfo">Bitte wählen Sie eine Marke aus!</span>
             </div>
@@ -138,7 +138,7 @@
                                 }
                             ?>
                         ><?= $category->categoryName ?></option>
-                    <?php endforeach ?>
+                    <?php endforeach; ?>
                 </select>
                 <span class="errorInfo">Bitte wählen Sie eine Kategorie aus!</span>
             </div>

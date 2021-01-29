@@ -14,7 +14,7 @@
                 <span class="messageClose" onclick="this.parentElement.style.display='none';">&times</span>
                 <?= $message ?>
             </div>
-        <? endforeach; ?>
+        <?php endforeach; ?>
 
 
         <div class="input">
@@ -64,7 +64,7 @@
                         }
                     ?>
                     ><?= $vendor->vendorName ?></option>
-                <?php endforeach ?>
+                <?php endforeach; ?>
             </select>
             <span class="errorInfo">Bitte wählen Sie eine Marke aus!</span>
         </div>
@@ -82,7 +82,7 @@
                             }
                         ?>
                     ><?= $category->categoryName ?></option>
-                <?php endforeach ?>
+                <?php endforeach; ?>
             </select>
             <span class="errorInfo">Bitte wählen Sie eine Kategorie aus!</span>
         </div>

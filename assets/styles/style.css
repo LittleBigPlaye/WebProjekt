@@ -546,28 +546,50 @@ form label {
 /* Search Bar */
 
 .searchForm {
-    width: 98%;
-    padding: 5px 2px !important;
-    /* flex-wrap: wrap; */
+    width: 85% !important;
+    padding: 0;
     overflow: hidden;
     position: relative;
+    height: 25px;
 }
 
 .searchForm input[type=search] {
-    /* max-width: 96%; */
-    display: inline-block;
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    display: block;
+    height: 45px;
+    outline: none;
     border-radius: 5px 0px 0px 5px;
-    margin: 0px 0px 0px 3px;
+    margin: 0;
     max-width: 97%;
 }
 
-.searchForm input[type=submit] {
+.searchForm input[type=search]:active {
+    background-color: #e2e2e2;
+}
+
+.searchForm button {
     position: absolute;
+    border: none;
     right: 5px;
     bottom: 5px;
     width: 60px;
+    height: 45px;
     border-radius: 0px 5px 5px 0px;
-    margin: 0px;
+    margin: 0px 0px 0px 3px;
+    background-color: #eb7d00;
+    outline: none;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.searchForm button:hover {
+    background-color: #474747;
+}
+
+.searchForm button img {
+    height: 30px;
 }
 
 .searchForm::after {

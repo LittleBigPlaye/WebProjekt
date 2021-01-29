@@ -252,6 +252,9 @@
         /* top: 25px; */
         border-radius: 5px 5px 5px 5px !important;
     }
+    .searchForm {
+        max-width: 1000px;
+    }
     .filterForm select {
         cursor: pointer;
     }

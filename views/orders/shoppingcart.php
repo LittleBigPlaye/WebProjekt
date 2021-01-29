@@ -16,17 +16,11 @@
                     <div class="tableRow" id="product<?=$orderItem->product->id?>">
                         <div class="tableCell">    
                             <a href="index.php?c=products&a=view&pid=<?=$orderItem->product->id?>">
-                                <img class="productPreview" src="
-                                    <?php
-                                        if($orderItem->product->images != NULL)
-                                        {
-                                            echo htmlspecialchars($orderItem->product->images[0]->thumbnailPath);
-                                        }
-                                        else
-                                        {
-                                            echo FALLBACK_IMAGE;
-                                        }
-                                    ?>">
+                                <?php if($orderItem->product->images != NULL) :?>
+                                    <img src="<?=htmlspecialchars($orderItem->product->images[0]->thumbnailPath);?>" alt="<?=htmlspecialchars($orderItem->product->productName)?>">
+                                <?php else : ?>
+                                    <img src="<?=htmlspecialchars(FALLBACK_IMAGE);?>" alt="<?=htmlspecialchars($orderItem->product->productName)?>">
+                                <?php endif; ?>    
                             </a>
                         </div>
                         <div class="tableCell">
@@ -61,5 +55,5 @@
         <script src="<?=JAVASCRIPTPATH . 'orders' . DIRECTORY_SEPARATOR . 'shoppingCart.js'?>"></script>
     <?php else : ?>
         <p>Sie haben bisher leider noch keine Produkte ihrem Warenkorb hinzugefügt</p>
-    <?php endif ?>
+    <?php endif; ?>
 </div>
