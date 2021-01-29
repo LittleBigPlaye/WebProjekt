@@ -190,7 +190,8 @@
         right: 0px;
         width: 250px;
         padding: 10px;
-        border-radius: 5px
+        border-radius: 5px;
+        margin: 0;
     }
     .table {
         display: table;
@@ -238,6 +239,7 @@
     .emptySearch {
         width: 500px;
         margin: 0 auto;
+        margin-bottom: 15px;
     }
 }
 

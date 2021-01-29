@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     var buttons = document.getElementsByClassName('cartQuantitySubmit');
     var request = null;
+    var cartBadgeText = document.getElementById('cartBadgeText');
 
     if (window.XMLHttpRequest) {
         request = new XMLHttpRequest();
@@ -33,7 +34,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     //change display of total number of articles
                     var numberOfProducts = document.getElementById('numberOfProducts');
-                    numberOfProducts.innerHTML = targetArray['numberOfProducts'];
+                    if (parseInt(targetArray['numberOfProducts']) <= 0) {
+                        cartBadgeText.parentElement.classList.add('hidden');
+                        //remove table and "cart Total"
+                        var cartTotal = document.querySelector('.cartTotal');
+                        var productTable = document.querySelector('.table');
+                        cartTotal.parentElement.removeChild(cartTotal);
+                        productTable.parentElement.removeChild(productTable);
+                        //add no item message
+                        var noItemMessage = document.createElement('P');
+                        noItemMessage.innerHTML = 'Es befinden sich keine Artikel in ihrem Warenkorb';
+                        noItemMessage.setAttribute('id', 'emptySearchText');
+                        noItemMessage.classList.add('emptySearch');
+                        document.querySelector('.shoppingCart').append(noItemMessage);
+                    } else {
+                        cartBadgeText.parentElement.classList.remove('hidden');
+                        numberOfProducts.innerHTML = targetArray['numberOfProducts'];
+                        if (parseInt(targetArray['numberOfProducts']) <= 99) {
+                            cartBadgeText.innerHTML = targetArray['numberOfProducts'];
+                        } else {
+                            cartBadgeText.innerHTML = '+99';
+                        }
+                    }
+
 
                     //remove table entry, if quantity is zero
                     if (targetArray['targetQuantity'] <= 0) {

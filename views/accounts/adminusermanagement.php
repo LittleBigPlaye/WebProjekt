@@ -66,7 +66,7 @@
 
                     <div class="tableCell center">
                         <label class="mobileLabel" for="passwordReset<?=$index?>">Passwort zurücksetzen</label>
-                            <input id="passwordReset<?=$index?>" type="checkbox" id="passwordReset" name="passwordReset" >
+                        <input id="passwordReset<?=$index?>" type="checkbox" id="passwordReset" name="passwordReset" >
                         
                     </div>
 

@@ -54,6 +54,6 @@
         </div>
         <script src="<?=JAVASCRIPTPATH . 'orders' . DIRECTORY_SEPARATOR . 'shoppingCart.js'?>"></script>
     <?php else : ?>
-        <p>Sie haben bisher leider noch keine Produkte ihrem Warenkorb hinzugefügt</p>
+        <p class="emptySearch">Sie haben bisher leider noch keine Produkte ihrem Warenkorb hinzugefügt</p>
     <?php endif; ?>
 </div>

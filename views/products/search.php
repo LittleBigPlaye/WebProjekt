@@ -61,7 +61,10 @@
             <legend>Marken</legend>
             <?php foreach ($vendors as $vendor) : ?>
                 <label class="checkBoxLabel" for="vendor<?= $vendor->id ?>"><?= $vendor->vendorName ?>
-                    <input type="checkbox" name="ven<?= $vendor->id ?>" id="vendor<?= $vendor->id ?>" value="<?= $vendor->id ?>" <?= isset($_GET['ven' . $vendor->id]) ? 'checked' : '' ?> />
+                    <span class="customCheckbox">
+                        <input type="checkbox" name="ven<?= $vendor->id ?>" id="vendor<?= $vendor->id ?>" value="<?= $vendor->id ?>" <?= isset($_GET['ven' . $vendor->id]) ? 'checked' : '' ?> />
+                        <div><img src="assets/images/icons/tick.svg" alt=""></div>
+                    </span>
                 </label>
             <?php endforeach; ?>
         </fieldset>
@@ -70,7 +73,10 @@
             <legend>Kategorien</legend>
             <?php foreach ($categories as $category) : ?>
                 <label for="category<?= $category->id ?>"><?= $category->categoryName ?>
-                    <input type="checkbox" name="cat<?= $category->id ?>" id="category<?= $category->id ?>" value="<?= $category->id ?>" <?= isset($_GET['cat' . $category->id]) ? 'checked' : '' ?> />
+                    <span class="customCheckbox">    
+                        <input type="checkbox" name="cat<?= $category->id ?>" id="category<?= $category->id ?>" value="<?= $category->id ?>" <?= isset($_GET['cat' . $category->id]) ? 'checked' : '' ?> />
+                        <div><img src="assets/images/icons/tick.svg" alt=""></div>
+                    </span>    
                 </label>
             <?php endforeach; ?>
         </fieldset>

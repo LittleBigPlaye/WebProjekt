@@ -70,7 +70,7 @@ else if ($cartCount > 99) {
         <li <?= ($currentPosition == 'shoppingcart') ? 'class="right active"' : 'class="right"' ?>>
             <a href="index.php?c=orders&a=shoppingcart">Warenkorb <img src="assets/images/icons/shopping_cart.svg" alt="">
                 <span class="cartBadge <?= empty($cartCount) ? 'hidden' : '' ?>" id="cartBadge">
-                    <p><?= $cartCount ?></p>
+                    <p id="cartBadgeText"><?= $cartCount ?></p>
                 </span>
             </a>
         </li>

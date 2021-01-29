@@ -9,10 +9,8 @@ document.addEventListener('DOMContentLoaded', function() {
     //get all cart buttons of the current page
     btnCartAdders = document.getElementsByClassName('cartButton');
     cartBadge = document.getElementById('cartBadge');
+    cartBadgeText = document.getElementById('cartBadgeText');
 
-    if (cartBadge.childNodes.length >= 1) {
-        cartBadgeText = cartBadge.childNodes[0];
-    }
 
 
 
@@ -43,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         cartBadge.classList.remove('hidden');
 
                         //set badge text to cart count, otherwise to +99
-                        if (this.responseText <= 99) {
+                        if (parseInt(this.responseText) <= 99) {
                             cartBadgeText.innerHTML = this.responseText;
                         } else {
                             cartBadgeText.innerHTML = '+99';
