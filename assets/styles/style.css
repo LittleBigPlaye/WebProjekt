@@ -1263,3 +1263,24 @@ form label {
 .orderConfirmationForm .customerData {
     text-align: left;
 }
+
+.imprint {
+    background-color: white;
+    max-width: 80%;
+    margin: 20px auto;
+    padding: 15px 50px;
+}
+
+.imprint p {
+    text-align: justify;
+}
+
+.imprint .centered {
+    display: block;
+    margin: 0 auto;
+    max-width: 250px;
+}
+
+.imprint .centered p {
+    text-align: left;
+}
