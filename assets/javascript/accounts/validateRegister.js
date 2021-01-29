@@ -17,9 +17,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //check if submit button has been found
     if (btnSubmit) {
+        var formIsValid;
         btnSubmit.addEventListener('click', function(event)
         {
-            var formIsValid = true;
+            formIsValid = true;
 
             //check if firstName is set
             if (!firstName || firstName.value.length <= 0)
