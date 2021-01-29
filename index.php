@@ -76,6 +76,7 @@ else
     <link rel="stylesheet" href="assets/styles/style.css">
     <link rel="stylesheet" href="assets/styles/desktop.css">
     <link rel="stylesheet" href="assets/styles/navbar.css">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/icons/favicon.ico">
     <title>Mask Your Face</title>
 </head>
 
