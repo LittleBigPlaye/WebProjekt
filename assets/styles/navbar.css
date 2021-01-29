@@ -166,6 +166,10 @@ nav li img {
     height: 1em;
 }
 
+.homePage img {
+    display: none;
+}
+
 @media screen and (min-width: 900px) {
     nav .mainNav {
         display: block;
@@ -211,6 +215,11 @@ nav li img {
         display: block;
         z-index: 300;
     }
+    nav li:hover img {
+        -webkit-filter: grayscale(0%);
+        -moz-filter: grayscale(0%);
+        filter: invert(100%);
+    }
     .cartBadge {
         position: relative;
         left: 5px;
@@ -224,5 +233,19 @@ nav li img {
     }
     nav .subNavTitle a {
         cursor: default !important;
+    }
+    nav .smallLogo {
+        height: 1.6em;
+        padding: 0;
+        margin: 0;
+    }
+    .homePage img {
+        display: inline-block;
+    }
+    .homePage a {
+        padding: .7em 1.5em 0.2em 1.5em;
+    }
+    .homePage span {
+        display: none;
     }
 }
