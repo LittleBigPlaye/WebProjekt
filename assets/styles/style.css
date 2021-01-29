@@ -19,7 +19,7 @@ p {
 
 .content {
     min-height: 60em;
-    width: 100%
+    width: 100%;
 }
 
 
@@ -501,6 +501,7 @@ form input[type=submit] {
     border-radius: 5px;
     border: none;
     margin-top: 35px;
+    cursor: pointer;
     /* margin-bottom: 10px; */
 }
 
@@ -966,16 +967,17 @@ form label {
     display: none;
 }
 
-.vendorContainer p {
+
+/* .vendorContainer p {
     display: none;
-}
+} */
 
 .vendorsWrapper {
     width: 95%;
     margin: 0 auto;
 }
 
-.vendorsWrapper p {
+.vendorsWrapper p:not(.productCard p) {
     padding: 0;
     padding: 5px;
     margin: 0;
@@ -1019,11 +1021,27 @@ form label {
     background-color: #474747;
 }
 
+.vendorsWrapper .products {
+    margin-top: 0px;
+}
+
 
 /* #endregion */
 
 
 /*#region ShoppingCart*/
+
+.shoppingCart {
+    width: 95%;
+    margin: 15px auto;
+    background: white;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.shoppingCart h1 {
+    text-align: center;
+}
 
 .cartListing {
     width: 95%;
@@ -1051,8 +1069,16 @@ form label {
     width: 95%;
     margin: 0 auto;
     padding: 5px;
-    background-color: white;
+    background-color: #e0e0e0;
     border-radius: 5px 5px 0px 0px;
+}
+
+.cartTotal b {
+    float: left;
+}
+
+.cartTotal span {
+    float: right;
 }
 
 
@@ -1066,7 +1092,7 @@ form label {
 }
 
 .table .tableRow:nth-child(odd):not(.head) {
-    background-color: #fafafa;
+    background-color: #dadada;
 }
 
 .table .tableRow.head {
@@ -1173,6 +1199,6 @@ form label {
 
 /*#endregion */
 
-.impressumLinkColor {
-    color: #384047;
+.orderConfirmationForm .customerData {
+    text-align: left;
 }
