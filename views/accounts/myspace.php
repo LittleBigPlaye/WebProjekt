@@ -14,22 +14,21 @@
 
         <h2>Persönliche Daten</h2>
 
-        <section class="formWrapper">
-            <label>Vorname: <?=htmlspecialchars($user->firstName)?>  </label>
-            <label>zweiter Vorname: <?=htmlspecialchars($user->secondName)?></label>
-            <label>Nachname: <?=htmlspecialchars($user->lastName)?></label>
-            <label>Geburtstag: <?=htmlspecialchars(date('d.m.Y' ,strtotime($user->birthDate)))?></label>
-            <label>Telefonnummer: <?=htmlspecialchars($user->phone)?></label>
-            <label>Geschlecht: <?=htmlspecialchars($user->gender)?></label>
+        <section class="formWrapper mySpace">
+            <label>Vorname: <span><?=htmlspecialchars($user->firstName)?> </span> </label>
+            <label>zweiter Vorname: <span><?=htmlspecialchars($user->secondName)?></span></label>
+            <label>Nachname: <span> <?=htmlspecialchars($user->lastName)?></span></label>
+            <label>Geburtstag: <span><?=htmlspecialchars(date('d.m.Y' ,strtotime($user->birthDate)))?></span></label>
+            <label>Telefonnummer: <span><?=htmlspecialchars($user->phone)?></span></label>
+            <label>Geschlecht: <span><?=htmlspecialchars($user->gender)?></span></label>
             <h2>Adresse</h2>
-            <label>Strasse: <?=htmlspecialchars($address->street)?></label>
-            <label>Hausnummer: <?=htmlspecialchars($address->streetNumber)?></label>
-            <label>Postleitzahl: <?=htmlspecialchars($address->zipCode)?></label>
-            <label>Stadt: <?=htmlspecialchars($address->city)?></label>
+            <label>Strasse: <span><?=htmlspecialchars($address->street)?></span></label>
+            <label>Hausnummer: <span><?=htmlspecialchars($address->streetNumber)?></span></label>
+            <label>Postleitzahl: <span><?=htmlspecialchars($address->zipCode)?></span></label>
+            <label>Stadt: <span><?=htmlspecialchars($address->city)?></span></label>
         </section>
         <br>
         <hr>
-
 
         <h2>Änderungen stehen bevor</h2>
         <section class="formWrapper">
