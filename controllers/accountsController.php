@@ -196,7 +196,8 @@ class accountsController extends Controller
                     'lastName' => $lastName,
                     'gender' => $gender,
                     'birthDate' => $birthdate,
-                    'addressID' => $adressID);
+                    'addressID' => $adressID,
+                    'role' => 'user');
 
                 //create new user and save
                 $user = new User($userData);
