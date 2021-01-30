@@ -1,3 +1,9 @@
+:root {
+    --orange: #eb7d00;
+    --darkgrey: #333;
+}
+
+
 /* #region general */
 
 html {
@@ -40,7 +46,7 @@ p {
 }
 
 .header {
-    background-color: #333;
+    background-color: var(--darkgrey);
     overflow: hidden;
     height: 240px;
     text-align: center;
@@ -85,7 +91,7 @@ p {
 }
 
 .productCard:hover {
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 12px 20px 0 rgba(0, 0, 0, 0.486);
+    box-shadow: 0 8px 16px 0 #00000033, 0 12px 20px 0 #0000007c;
     transition: .2s ease-in-out;
 }
 
@@ -108,7 +114,7 @@ p {
 }
 
 .productCard .productPreview:not(.hidden) {
-    background: #eb7d00;
+    background: var(--orange);
     position: relative;
 }
 
@@ -124,76 +130,6 @@ p {
 
 .productCardPrefab {
     display: none;
-}
-
-
-/* #endregion */
-
-
-/* #region registration */
-
-.container {
-    padding: 40px;
-    text-align: center;
-}
-
-.cardregister {
-    box-shadow: 1px 4px 8px 1px lightgrey;
-    transition: 0.3s;
-    border-radius: 10px;
-    margin: 20px;
-    display: inline-block;
-    height: auto;
-    width: auto;
-    background: #f9f9f9;
-    text-align: center;
-    display: inline-block;
-}
-
-.registerlabel {
-    text-align: left;
-    padding-left: 70px;
-}
-
-.cardregister:hover {
-    box-shadow: 1px 8px 16px 1px #444444;
-}
-
-.containerregister {
-    padding: 40px;
-    text-align: center;
-    margin: 20px;
-    display: inline-block;
-}
-
-.input_register1 {
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    font-size: 16px;
-    height: auto;
-    margin: 0;
-    outline: 0;
-    padding: 15px;
-    background-color: #e1e1e1;
-    color: #292c2e;
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
-    margin-bottom: 30px;
-    width: 250px;
-}
-
-.input_register2 {
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    font-size: 16px;
-    height: auto;
-    margin: 0;
-    outline: 0;
-    padding: 15px;
-    background-color: #e1e1e1;
-    color: #292c2e;
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
-    margin-bottom: 30px;
-    width: 100px;
 }
 
 
@@ -223,7 +159,7 @@ p {
 }
 
 .footer a:hover {
-    color: #eb7d00;
+    color: var(--orange);
 }
 
 
@@ -285,12 +221,12 @@ p {
 }
 
 .spotlightElement {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 #00000033, 0 6px 20px 0 #00000030;
     overflow: hidden;
 }
 
 .spotlightElement:hover {
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 12px 20px 0 rgba(0, 0, 0, 0.486);
+    box-shadow: 0 8px 16px 0 #00000033, 0 12px 20px 0 #0000007c;
     transition: .3s ease;
 }
 
@@ -497,12 +433,11 @@ form textarea {
 
 form input[type=submit] {
     color: #FFF;
-    background-color: #eb7d00;
+    background-color: var(--orange);
     border-radius: 5px;
     border: none;
     margin-top: 35px;
     cursor: pointer;
-    /* margin-bottom: 10px; */
 }
 
 form input[type=submit]:hover {
@@ -571,7 +506,7 @@ form label {
 
 .required::after {
     content: " *";
-    color: #eb7d00;
+    color: var(--orange);
 }
 
 .optional::after {
@@ -616,7 +551,7 @@ form label {
     height: 45px;
     border-radius: 0px 5px 5px 0px;
     margin: 0px 0px 0px 3px;
-    background-color: #eb7d00;
+    background-color: var(--orange);
     outline: none;
     cursor: pointer;
     transition: .2s;
@@ -795,7 +730,7 @@ form label {
     padding: 15px 0;
     margin: 0 auto;
     background-color: #fafd21b0;
-    border-left: 5px solid #eba100;
+    border-left: 5px solid var(--orange);
     color: #522c00;
     margin-bottom: 20px;
     font-size: 1em;
@@ -835,7 +770,7 @@ form label {
 }
 
 .infoMessage .messageClose:hover {
-    color: rgb(0, 24, 88);
+    color: #001858;
 }
 
 
@@ -878,7 +813,7 @@ form label {
 
 .gallerySlide img {
     width: 100%;
-    border-bottom: 5px solid #eb7d00;
+    border-bottom: 5px solid var(--orange);
 }
 
 .imageGallery.isHidden.gallerySlide img {
@@ -919,7 +854,7 @@ form label {
 /* #region iconButtons */
 
 .iconButton {
-    background-color: #eb7d00;
+    background-color: var(--orange);
     border: none;
     height: 100%;
     width: 100%;
@@ -950,8 +885,44 @@ form label {
     border: none;
 }
 
+.cartButton {
+    position: relative;
+}
+
+
+/* button hover to show a better indication that something has been added to the cart */
+
+.cartButton:active span {
+    opacity: 1;
+    transition: opacity .02s ease-in;
+}
+
+.cartButton span {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 60px;
+    z-index: 1;
+    opacity: 0;
+    background-color: var(--orange);
+    transition: opacity 2s ease-out;
+}
+
+.cartButton span img {
+    filter: brightness(0) invert(1);
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    transform: translate(-50%, -50%);
+}
+
 .editButton {
-    background-color: #eb7d00;
+    background-color: var(--orange);
     border: none;
     height: 100%;
     width: 100%;
@@ -1028,11 +999,6 @@ form label {
     display: none;
 }
 
-
-/* .vendorContainer p {
-    display: none;
-} */
-
 .vendorsWrapper {
     width: 95%;
     margin: 0 auto;
@@ -1069,7 +1035,7 @@ form label {
 .vendorContainer .customSubmit {
     width: 90%;
     color: #FFF;
-    background-color: #eb7d00;
+    background-color: var(--orange);
     border-radius: 5px;
     border: none;
     margin-bottom: 10px;
@@ -1119,7 +1085,7 @@ form label {
 .tableCell .productPreview {
     /* padding: 10px; */
     display: block;
-    border-bottom: solid 5px #eb7d00;
+    border-bottom: solid 5px var(--orange);
     margin: 5px auto;
     max-width: 100%;
 }
