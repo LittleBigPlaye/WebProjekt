@@ -401,7 +401,7 @@ abstract class BaseModel
         $db = $GLOBALS['database'];
         try 
         {
-            $db->query('START TRANSACTION;')->execute();
+            $db->beginTransaction();
         }
         catch (\PDOException $e)
         {
@@ -413,11 +413,11 @@ abstract class BaseModel
         $db = $GLOBALS['database'];
         try
         {
-            $db->query('COMMIT;')->execute();
+            $db->commit();
         }
         catch (\PDOException $e)
         {
-            $errors[] = 'Error while stopping ending a';
+            $errors[] = 'Error while stopping a transaction';
         }
     }
 
