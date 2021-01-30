@@ -285,7 +285,7 @@ p {
 
 /* To hide all element except the first one, if javascript does not work */
 
-.imageContainer>.gallerySlide:not(:first-Child) {
+.productSpotlight>.spotlightElement:not(:first-Child) {
     display: none;
 }
 
@@ -861,7 +861,7 @@ form label {
 
 /* to show only one image, if javascript is disabled */
 
-.imageGallery>.gallerySlide:not(:first-child) {
+.imageContainer>.gallerySlide:not(:first-Child) {
     display: none;
 }
 
