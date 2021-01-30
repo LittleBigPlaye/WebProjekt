@@ -432,6 +432,40 @@
         <h2 id="design">Design</h2>
         <h3>Design der Webseite</h3>
         <h3>Design der Produktbilder</h3>
+        <section>
+            <p>Damit die Produktbilder allesamt gleichartig / in sich stimmig aussehen, wurden die Produktbilder mithilfe von Blender modelliert.</p>
+            <p>
+                Hierbei ist das Grundsetup stets gleich:
+                <ul>
+                    <li>hölzerne Büste mit Maske</li>
+                    <li>einfarbige Ziegelsteinwand im Hintergrund</li>
+                    <li></li>
+                </ul>
+            </p>
+            <p>
+                Um einen möglichst hohen Detailgrad zu erreichen wurde die Render-Engine "Cycles" genutzt. Damit das Produkt in den Vordergrund gerückt wird, wurde zum einen eine Drei-Punkt Beleuchtung gewählt:
+                <ul>
+                    <li>normale Lichtquelle von oben Links</li>
+                    <li>abgeschwächte Lichtquelle von unten Rechts (um Schatten auszuleuchten)</li>
+                    <li>sehr starke Lichtquelle hinter dem Object als Spotlight in Richtung Kamera gerichtet, um die Konturen hervorzuheben</li>
+                </ul>
+            </p>
+            <p>Zusätzlich wurde im Hintergrund - zumindest für die Hauptansicht - das Logo "Mask Your Face" als Wanddekor befestigt. Da das Bild somit rechts relativ voll und links relativ leer war, wurde zusätzlich noch eine Pflanze modelliert und im linken
+                Part des Bildes ausgerichtet.</p>
+            <p>Da das Bild durch Pflanze und Logo zwar ausgefüllter, aber auch unruhiger wirkte, wurde zusätzlich noch der Fokus der Kamera soi eingestellt, dass die Maske fokussiert wird und somit die Pflanze und der Hintergrund leicht unscharf werden.</p>
+            <p>Für die Produkte wurden drei generelle Ansichten ausgewählt:
+                <ul>
+                    <li>Ansicht von oben rechts</li>
+                    <li>Frontale</li>
+                    <li>Seitenansicht</li>
+                </ul>
+            </p>
+            <p>
+                Die Ansicht von oben rechts stellt hierbei jeweils die Vorschaubilder für die Produktkacheln dar. Bei der Frontalen wurde das Logo ausgeblendet, da dieses sonst zu aufdringlich wirkt. In der Seitenansicht sind weder die Pflanze, noch das Logo sichtbar.
+            </p>
+            <p>Um eine möglichst große Produktvielfalt mit möglichst "geringem" Aufwand zu ermöglichen, wurde bewusst darauf verzeichtet mehrere Farbvarianten eines Produktes in einer Auflistung zusammenzufassen. Für die verschiedenen Muster wurden Texturen
+                von <a href="https://3dtextures.me/">3D Textures</a> genutzt</p>
+        </section>
         <h2 id="pages">Seiten</h2>
         <h3>Seitenbestandteile</h3>
         <section>
@@ -1650,7 +1684,7 @@
                 <td>22.01</td>
                 <td> Fehlervalidierung mit JS für Login</td>
                 <td> Hannes Lenz</td>
-                <td> 3 h </td>
+                <td> 3 h</td>
             </tr>
             <tr>
                 <td>23.01</td>
