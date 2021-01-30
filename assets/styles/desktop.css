@@ -193,6 +193,12 @@
 }
 
 @media screen and (min-width: 1400px) {
+    .registerForm {
+        max-width: 1000px;
+    }
+    .productForm {
+        max-width: 1000px;
+    }
     /* #region filter form */
     .filterForm {
         position: absolute;
