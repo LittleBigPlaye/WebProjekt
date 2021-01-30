@@ -116,7 +116,7 @@ class ordersController extends Controller
         }
 
         $this->setParam('user', $this->currentLogin->user);
-        $this->setParam('address', $this->currentLogin->user->addresses);
+        $this->setParam('address', $this->currentLogin->user->address);
         
         $this->setParam('order', $order);
     }

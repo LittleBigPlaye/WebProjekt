@@ -27,18 +27,18 @@ class User extends BaseModel
         'role'                  =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'null', 'allowedValues' => array('u', 'a')]
         ];
 
-    private  $addresses = null;
+    private  $address = null;
 
     public function __get($key)
     {
         //relation to table "addresses"
-        if($key == 'addresses')
+        if($key == 'address')
         {
-            if($this->addresses == null)
+            if($this->address == null)
             {
-                $this->addresses = Address::findOne('id=' .$this->addressID);
+                $this->address = Address::findOne('id=' .$this->addressID);
             }
-            return $this->addresses;
+            return $this->address;
         }
         else if ($key == 'salutation')
         {

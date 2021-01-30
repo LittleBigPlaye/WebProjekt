@@ -463,7 +463,7 @@ class accountsController extends Controller
 
         //get the user
         $userData=User::findOne('id='.$userID);
-        $addressAtStart=$userData->addresses;
+        $addressAtStart=$userData->address;
         $this->setParam('address',$addressAtStart);
 
         //check if submit was send
