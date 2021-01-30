@@ -1256,6 +1256,9 @@ form label {
     text-align: left;
 }
 
+
+/* #region imprint */
+
 .imprint {
     background-color: white;
     max-width: 80%;
@@ -1276,3 +1279,6 @@ form label {
 .imprint .centered p {
     text-align: left;
 }
+
+
+/* #endregion */
