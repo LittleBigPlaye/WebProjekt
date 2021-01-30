@@ -75,7 +75,7 @@
 
          if($this->isLoggedIn())
          {
-             header('Location: index.php?c=pages&a=index');
+             $this->redirect('index.php?c=pages&a=index');
          }
 
         $this->setParam('currentPosition', 'login');
@@ -120,19 +120,18 @@
 
 
                 //check if password hash is valid
-            if
-                (password_verify($password, $hashed_password))
+                if (password_verify($password, $hashed_password))
                 {
-                $_SESSION['currentLogin'] = serialize($login);
-                $_SESSION['isLoggedIn'] = true;
-                $_SESSION['userID'] = $login->userID;
-                header('Location: index.php?c=pages&a=index');
-                $login->passwordResetHash = "";
-                $login->failedLoginCount = 0;
-                $login->lastLogin = date('Y-m-d H:i:s');
-                $login->save();
-            }
-            else
+                    $_SESSION['currentLogin'] = serialize($login);
+                    $_SESSION['isLoggedIn'] = true;
+                    $_SESSION['userID'] = $login->userID;
+                    $login->passwordResetHash = "";
+                    $login->failedLoginCount = 0;
+                    $login->lastLogin = date('Y-m-d H:i:s');
+                    $login->save();
+                    $this->redirect('index.php?c=pages&a=index');
+                }
+                else
                 {
 
                     $login->failedLoginCount++;
@@ -145,8 +144,6 @@
             }
         }
          $this->setParam('errorMessages', $errorMessages);
-         //TODO: set param to prefill input fields
-
     }
 
      public function actionLogout()
@@ -158,7 +155,7 @@
          }
          else
          {
-             header('Location: index.php?c=pages&a=index');
+            $this->redirect('index.php?c=pages&a=index'); 
          }
      }
 

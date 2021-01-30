@@ -15,12 +15,12 @@ class ProductManagementController extends \myf\core\controller
        $errorMessages = [];
        if(!$this->isLoggedIn())
        {
-            header('Location: index.php?c=pages&a=login');
+            $this->redirect('index.php?c=pages&a=login');
        }
 
        if(!$this->isAdmin())
        {
-            header('Location: index.php?c=errors&a=403');
+            $this->redirect('index.php?c=errors&a=403');
        }
        
        
@@ -104,7 +104,7 @@ class ProductManagementController extends \myf\core\controller
 
                 $this->updateLastActiveTime();
                 //redirect to product page
-                header('Location: ?c=products&a=view&pid=' . $product->id);
+                $this->redirect('index.php?c=products&a=view&pid=' . $product->id);
             }
         }
         $this->setParam('errorMessages', $errorMessages);
@@ -120,15 +120,13 @@ class ProductManagementController extends \myf\core\controller
        //check if the user is logged in
        if(!$this->isLoggedIn())
        {
-            header('Location: index.php?c=pages&a=login');
-            exit(0);
+            $this->redirect('index.php?c=pages&a=login');
        }
        
        //check if the logged in user is admin
        if(!$this->isAdmin())
        {
-           header('Location: index.php?c=errors&a=403');
-           exit(0);
+           $this->redirect('index.php?c=errors&a=403');
        }
 
        //check if product exists
@@ -138,8 +136,7 @@ class ProductManagementController extends \myf\core\controller
        //check if the product that has to be edited exists
        if($productID == null || !is_numeric($productID) || \myf\models\Product::findOne('id=' . $productID) == null)
        {
-           header('Location: index.php?c=errors&a=404');
-           exit(0);
+           $this->redirect('Location: index.php?c=errors&a=404');
        }
 
        $product = \myf\models\Product::findOne('id=' . $productID);
@@ -237,8 +234,7 @@ class ProductManagementController extends \myf\core\controller
                 $this->updateLastActiveTime();
                 
                 //redirect to product page
-                header('Location: ?c=products&a=view&pid=' . $product->id);
-                // exit(0);
+                $this->redirect('index.php?c=products&a=view&pid=' . $product->id);
             }
         }
         $this->setParam('errorMessages', $errorMessages);
@@ -283,7 +279,7 @@ class ProductManagementController extends \myf\core\controller
         }
 
         //check if price is valid
-        if(!\myf\core\validateNumberInput($price, 2))
+        if(!is_numeric($price) || !preg_match('/^\d+(\.\d{1,'. 2 . '})?$/', $price))
         {
             $errorMessages['price'] = 'Geben Sie einen Preis größer 0 € und mit maximal zwei Nachkommastellen an.';
         }

@@ -82,7 +82,7 @@ class ordersController extends Controller
         //redirect user to login if the user is not already logged in
         if(!$this->isLoggedIn())
         {
-            header('Location: index.php?c=pages&a=login');
+            $this->redirect('index.php?c=pages&a=login');
         }
 
         $order = null;
@@ -93,7 +93,7 @@ class ordersController extends Controller
         }
         else
         {
-            header('Location: index.php?c=orders&a=shoppingcart');
+            $this->redirect('index.php?c=orders&a=shoppingcart');
         }
 
         if(isset($_POST['submitOrder']) && $order !== null)
@@ -109,10 +109,10 @@ class ordersController extends Controller
             //clear cart
             unset($_SESSION['shoppingCart']);
 
-            //header('Location: index.php?c=pages&a=login');
+            //prepare success message for next action
             $_SESSION['success'] = 'Ihre Bestellung mit der Bestellnummer ' . str_pad($order->id,12,'0',STR_PAD_LEFT) . ' ist erfolgreich bei uns eingegangen!';
             $this->updateLastActiveTime();
-            header('Location: index.php?c=accounts&a=myspace');
+            $this->redirect('index.php?c=accounts&a=myspace');
         }
 
         $this->setParam('user', $this->currentLogin->user);

@@ -14,7 +14,7 @@ namespace myf\controller;
         //check if the given pid is valid formatted
         if(!isset($_GET['pid']) || !(is_numeric($_GET['pid']) || $_GET['pid'] == 'random'))
         {
-           header('Location: index.php?c=errors&a=404');
+           $this->redirect('index.php?c=errors&a=404');
         }
 
         //check if there are any success messages in the session
@@ -57,7 +57,7 @@ namespace myf\controller;
         }
         else
         {
-            header('Location: index.php?c=errors&a=404');
+            $this->redirect('index.php?c=errors&a=404');
         }
     }
   

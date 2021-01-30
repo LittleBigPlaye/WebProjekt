@@ -302,7 +302,7 @@ class accountsController extends Controller
         }
         else
         {
-            header('location: index.php?c=pages&a=login');
+            $this->redirect('index.php?c=pages&a=login');
         }
 
 
@@ -342,7 +342,7 @@ class accountsController extends Controller
         else
         {
             //if own userid is null, the user will redirect to the login
-            header('location: index.php?c=pages&a=login');
+            $this->redirect('index.php?c=pages&a=login');
         }
     }
 

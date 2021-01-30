@@ -65,7 +65,16 @@ abstract class Controller
 
     }
 
-
+    /**
+     * Used to unify the redirect process within the controllers
+     *
+     * @param [type] $targetURL the url that should be reached
+     * @return void
+     */
+    protected function redirect ($targetURL) {
+        header('Location: ' . $targetURL);
+        exit(0);
+    }
 
     protected function setParam($key, $value = null)
     {
@@ -79,6 +88,12 @@ abstract class Controller
         $this->params           = null;
     }
 
+    /**
+     * Adds items to the carts.
+     *
+     * @param [type] $productID must be id of existing product. The product must not be hidden
+     * @return void prints number of cart items, if ajax is set in post
+     */
     protected function addToCart($productID)
     {
         //check if the given Product ID is an valid id
@@ -106,6 +121,11 @@ abstract class Controller
         }
     }
 
+    /**
+     * calculates the total amount of products that are currently within the cart
+     *
+     * @return @int the number of cart items, minimum: 0 
+     */
     public function getNumberOfCartItems() 
     {
         $numberOfCartItems = 0;
