@@ -66,9 +66,8 @@
         return $products;
     }
 
-     public function actionImpressum()
+     public function actionImprint()
      {  
-        $this->setParam('currentPosition', 'impressum');
      }
 
      public function actionLogin()

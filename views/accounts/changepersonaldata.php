@@ -38,7 +38,7 @@
 
         <div class="input">
             <label class="required" for="birthDate">Geburtstag</label>
-            <input class="input_register1" id="birthDate" name="birthDate" type="date" value="<?=$user->birthDate?>">
+            <input id="birthDate" name="birthDate" type="date" value="<?=$user->birthDate?>">
             <span class="errorInfo">Nach dem Alter fragt man nicht, jedoch brauchen wir Trotzdem ihr Geburtsdatum von Ihnen.</span>
         </div>
         <br>
