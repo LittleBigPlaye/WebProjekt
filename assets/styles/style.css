@@ -1,6 +1,7 @@
 :root {
     --orange: #eb7d00;
     --darkgrey: #333;
+    --fontColor: #384047;
 }
 
 @font-face {
@@ -28,7 +29,7 @@ body {
     font-family: 'Oswald', sans-serif;
     margin: 0;
     background: #e1e1e1;
-    color: #384047;
+    color: var(--fontColor);
 }
 
 h2,
@@ -100,7 +101,7 @@ p {
 
 .productCard a {
     text-decoration: none;
-    color: black;
+    color: var(--fontColor);
 }
 
 .productCard:hover {
@@ -236,7 +237,7 @@ p {
 
 .productSpotlight .productLink {
     text-decoration: none;
-    color: #333;
+    color: var(--fontColor);
 }
 
 .productSpotlight img {
@@ -328,7 +329,7 @@ p {
 }
 
 .pagesList a {
-    color: black;
+    color: var(--fontColor);
     padding: 8px 16px;
     text-decoration: none;
     transition: background-color .2s;
@@ -896,7 +897,7 @@ form label {
 }
 
 .iconButton:active {
-    background-color: rgb(37, 37, 37);
+    background-color: #252525;
 }
 
 .iconButton img {
@@ -1065,6 +1066,7 @@ form label {
     margin-bottom: 10px;
     padding: 10px 0px;
     cursor: pointer;
+    font-size: 1.3em;
     transition: .2s ease-in-out;
 }
 
