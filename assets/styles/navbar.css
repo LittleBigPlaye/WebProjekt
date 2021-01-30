@@ -173,7 +173,7 @@ nav li img {
 @media screen and (min-width: 900px) {
     nav .mainNav {
         display: block;
-        height: 3.15em;
+        height: 3.4em;
         background-color: #191919;
     }
     #navToggleLabel,
@@ -235,7 +235,7 @@ nav li img {
         cursor: default !important;
     }
     nav .smallLogo {
-        height: 1.6em;
+        height: 1.9em;
         padding: 0;
         margin: 0;
     }

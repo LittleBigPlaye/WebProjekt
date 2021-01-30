@@ -1,6 +1,3 @@
-<?php $numberOfSlides = 4 ?>
-
-<h2>Neue Produkte</h2>
 <noscript>
         <div class="warningMessage">
             <span class="messageClose" onclick="this.parentElement.style.display='none';">&times</span>
