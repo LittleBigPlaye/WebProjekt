@@ -196,7 +196,7 @@ class accountsController extends Controller
                     'lastName' => $lastName,
                     'gender' => $gender,
                     'birthDate' => $birthdate,
-                    'addressID' => $adressID,
+                    'addressesID' => $adressID,
                     'role' => 'user');
 
                 //create new user and save
@@ -217,7 +217,7 @@ class accountsController extends Controller
                     'email' => $email,
                     'failedLoginCount' => $failedLoginCount,
                     'passwordHash' => $savePassword,
-                    'userID' => $user->id);
+                    'usersID' => $user->id);
 
                 //create new login and save
                 $login = new Login($loginData);
@@ -250,7 +250,7 @@ class accountsController extends Controller
                 $userRole = $_POST['role'];
 
                 //get the login from a special user
-                $loginUpdate = Login::findOne('userID='.$loginID);
+                $loginUpdate = Login::findOne('usersID='.$loginID);
 
                 //set enabled or disabled
                 if($enabled === '1')
@@ -331,12 +331,12 @@ class accountsController extends Controller
         {
             //get own data
             $userData = User::findOne('id='.$myOwnID);
-            $addressData = Address::findOne('id='.$userData->addressID);
+            $addressData = Address::findOne('id='.$userData->addressesID);
             $this->setParam('user',$userData);
             $this->setParam('address',$addressData);
 
-            $loginData = Login::findOne('userID='.$myOwnID);
-            $orderData = Order::find('loginID='.$loginData->id);
+            $loginData = Login::findOne('usersID='.$myOwnID);
+            $orderData = Order::find('loginsID='.$loginData->id);
             $this->setParam('orders',$orderData);
         }
         else
@@ -370,7 +370,7 @@ class accountsController extends Controller
                 if(password_verify($newPassword2,$savePassword))
                 {
                     //set new password and save
-                    $updateLogin=Login::findOne('userID='.$userID);
+                    $updateLogin=Login::findOne('usersID='.$userID);
                     $updateLogin->passwordHash = $savePassword;
                     $updateLogin->save();
                     $successMessage = "Das war super!";
@@ -499,7 +499,7 @@ class accountsController extends Controller
                     $adressID = $adress->id;
 
                     //set address and save
-                    $userData->addressID = $adressID;
+                    $userData->addressesID = $adressID;
                     $userData->save();
                     $this->setParam('address',$adress);
                     $succesMessage = 'Änderungen erfolgreich gespeichert';

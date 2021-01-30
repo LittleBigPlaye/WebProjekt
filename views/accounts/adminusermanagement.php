@@ -3,7 +3,6 @@
 
     <div class="table userManagement">
         <div class="tableRow head">
-            <!-- <div class="tableCell">LoginID</div> -->
             <div class="tableCell center">Vorname</div>
             <div class="tableCell center">Nachname</div>
             <div class="tableCell center">Rolle</div>

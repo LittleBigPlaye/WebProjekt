@@ -114,7 +114,7 @@
                     <?php foreach ($vendors as $vendor) : ?>
                         <option value="<?= $vendor->id ?>" 
                         <?php 
-                            if((isset($_POST['vendor']) && $_POST['vendor'] == $vendor->id) || ($product->vendorID == $vendor->id))
+                            if((isset($_POST['vendor']) && $_POST['vendor'] == $vendor->id) || ($product->vendorsID == $vendor->id))
                             {
                                 echo ' selected';
                             }
@@ -132,7 +132,7 @@
                     <?php foreach ($categories as $category) : ?>
                         <option value="<?= $category->id ?>" 
                             <?php 
-                                if((isset($_POST['category']) && $_POST['category'] == $category->id) || ($product->categoryID == $category->id))
+                                if((isset($_POST['category']) && $_POST['category'] == $category->id) || ($product->categoriesID == $category->id))
                                 {
                                     echo ' selected';
                                 }

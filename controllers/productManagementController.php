@@ -85,8 +85,8 @@ class ProductManagementController extends \myf\core\controller
                 $product->productName        = $name;
                 $product->catchPhrase        = $catchPhrase;
                 $product->productDescription = $description;
-                $product->vendorID           = $vendor;
-                $product->categoryID         = $category;
+                $product->vendorsID          = $vendor;
+                $product->categoriesID       = $category;
                 $product->standardPrice      = $price;
                 $product->isHidden           = $isHidden;
 
@@ -222,8 +222,8 @@ class ProductManagementController extends \myf\core\controller
                 $product->productName        = $name;
                 $product->catchPhrase        = $catchPhrase;
                 $product->productDescription = $description;
-                $product->vendorID           = $vendor;
-                $product->categoryID         = $category;
+                $product->vendorsID          = $vendor;
+                $product->categoriesID       = $category;
                 $product->standardPrice      = $price;
                 $product->isHidden           = $isHidden;
 

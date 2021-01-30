@@ -18,8 +18,8 @@ class Product extends BaseModel
         'catchPhrase'           =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'null'    , 'max' => 150] ,
         'productDescription'    =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'not null', 'max' => 5000],  
         'standardPrice'         =>  ['type' => BaseModel::TYPE_DECIMAL , 'null' => 'not null'],
-        'categoryID'            =>  ['type' => BaseModel::TYPE_INT     , 'null' => 'not null'],
-        'vendorID'              =>  ['type' => BaseModel::TYPE_INT     , 'null' => 'not null'],
+        'categoriesID'          =>  ['type' => BaseModel::TYPE_INT     , 'null' => 'not null'],
+        'vendorsID'             =>  ['type' => BaseModel::TYPE_INT     , 'null' => 'not null'],
         'isHidden'              =>  ['type' => BaseMOdel::TYPE_INT     , 'null' => 'null']
     ];
 
@@ -34,7 +34,7 @@ class Product extends BaseModel
         {
             if($this->vendor == null)
             {
-                $this->vendor = Vendor::findOne('id=' . $this->vendorID);
+                $this->vendor = Vendor::findOne('id=' . $this->vendorsID);
             }
             return $this->vendor;
         }
@@ -43,7 +43,7 @@ class Product extends BaseModel
         {
             if($this->category == null)
             {
-                $this->category = Category::findOne('id=' . $this->categoryID);
+                $this->category = Category::findOne('id=' . $this->categoriesID);
             }
             return $this->category;
         }

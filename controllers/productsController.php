@@ -109,8 +109,8 @@ namespace myf\controller;
 
         //build where
         $this->appendSearchQuery($searchString, $where, array('productName', 'catchPhrase', 'productDescription'));
-        $this->appendINQuery($vendorFilters,   $where, 'vendorID');
-        $this->appendINQuery($categoryFilters, $where, 'categoryID');
+        $this->appendINQuery($vendorFilters,   $where, 'vendorsID');
+        $this->appendINQuery($categoryFilters, $where, 'categoriesID');
         
        
         if(!empty($where) && !empty($minPrice))
@@ -366,7 +366,7 @@ namespace myf\controller;
         $db = $GLOBALS['database'];
         foreach($vendors as $key => $vendor)
         {
-            $vendorProducts[$key] = \myf\models\Product::findRange(0,3,'vendorID = ' . $db->quote($vendor->id) . ' AND isHidden=0', 'RAND()');
+            $vendorProducts[$key] = \myf\models\Product::findRange(0,3,'vendorsID = ' . $db->quote($vendor->id) . ' AND isHidden=0', 'RAND()');
             
         }
 

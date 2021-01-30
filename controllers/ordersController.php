@@ -99,7 +99,7 @@ class ordersController extends Controller
         if(isset($_POST['submitOrder']) && $order !== null)
         {
             //add login id of current user to order
-            $order->loginID = $this->currentLogin->id;
+            $order->loginsID = $this->currentLogin->id;
             //save order and all orderitems to database
             $order->save();
 

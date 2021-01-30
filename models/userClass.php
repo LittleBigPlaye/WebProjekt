@@ -21,10 +21,10 @@ class User extends BaseModel
         'lastName'              =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'not null'],
         'secondName'            =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'null'],
         'gender'                =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'null', 'allowedValues' => array('m', 'f', 'n')],
-        'phone'            =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'null'],
-        'addressID'             =>  ['type' => BaseModel::TYPE_INT     , 'null' => 'not null'],
+        'phone'                 =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'null'],
+        'addressesID'           =>  ['type' => BaseModel::TYPE_INT     , 'null' => 'not null'],
         'birthDate'             =>  ['type' => BaseModel::TYPE_DATE    , 'null' => 'not null' ],
-        'role'                  =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'null', 'allowedValues' => array('u', 'a')]
+        'role'                  =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'not null', 'allowedValues' => array('user', 'admin')]
         ];
 
     private  $address = null;
@@ -36,7 +36,7 @@ class User extends BaseModel
         {
             if($this->address == null)
             {
-                $this->address = Address::findOne('id=' .$this->addressID);
+                $this->address = Address::findOne('id=' .$this->addressesID);
             }
             return $this->address;
         }

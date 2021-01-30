@@ -18,7 +18,7 @@ class Order extends BaseModel
         'updatedAt'             =>  ['type' => BaseModel::TYPE_DATE    , 'null' => 'null'     ],
         'shippingDate'          =>  ['type' => BaseModel::TYPE_DATE    , 'null' => 'null'],
         'cancellationDate'      =>  ['type' => BaseModel::TYPE_DATE    , 'null' => 'null'],
-        'loginID'               =>  ['type' => BaseModel::TYPE_INT     , 'null' => 'not null']
+        'loginsID'              =>  ['type' => BaseModel::TYPE_INT     , 'null' => 'not null']
     ];
 
     private $orderItems = [];

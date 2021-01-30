@@ -124,7 +124,7 @@
                 {
                     $_SESSION['currentLogin'] = serialize($login);
                     $_SESSION['isLoggedIn'] = true;
-                    $_SESSION['userID'] = $login->userID;
+                    $_SESSION['userID'] = $login->usersID;
                     $login->passwordResetHash = "";
                     $login->failedLoginCount = 0;
                     $login->lastLogin = date('Y-m-d H:i:s');
