@@ -1,9 +1,11 @@
 <noscript>
-        <div class="warningMessage">
-            <span class="messageClose" onclick="this.parentElement.style.display='none';">&times</span>
-            <p>Bitte beachten Sie, dass sie Javascript aktivieren müssen, um von allen komfortfunktionen dieser Seite profitieren zu können!</p>
-        </div>
-    </noscript>
+    <input class="messageToggle" type="checkbox" id="infoToggle">
+    <div class="message warningMessage">
+        <label class="messageClose" for="infoToggle">&times</label>
+        <p>Bitte beachten Sie, dass sie Javascript aktivieren müssen, um von allen komfortfunktionen dieser Seite profitieren zu können!</p>
+    </div>
+</noscript>
+
 <div class="productSpotlight">
     <?php foreach ($spotlightProducts as $product) : ?>
         <div class="spotlightElement">

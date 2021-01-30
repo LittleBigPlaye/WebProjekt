@@ -1,10 +1,11 @@
 <div class="formWrapper">
     <form class="loginForm" action="index.php?c=pages&a=login" method="post">
         <h1>Login</h1>
-        <?php foreach($errorMessages as $message) : ?>
-            <div class="errorMessage">
-                <span class="messageClose" onclick="this.parentElement.style.display='none';">&times</span>
-                    <?= $message ?>
+        <?php foreach($errorMessages as $key => $message) : ?>
+            <input class="messageToggle" type="checkbox" id="errorToggle<?=$key?>">
+            <div class="message errorMessage">
+                <label class="messageClose" for="errorToggle<?=$key?>">&times</label>
+                <p><?= htmlspecialchars($message) ?></p>
             </div>
         <?php endforeach; ?>
         <div class="input"><label for="email">Email:</label>

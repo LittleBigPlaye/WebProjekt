@@ -1,13 +1,16 @@
 <?php if(isset($errorMessage) && !empty($errorMessage)) : ?>
-    <div class="errorMessage">
-        <span class="messageClose" onclick="this.parentElement.style.display='none';">&times</span>
-        <p><?= $errorMessage ?></p>
+    <input class="messageToggle" type="checkbox" id="errorToggle">
+    <div class="message errorMessage">
+        <label class="messageClose" for="errorToggle">&times</label>
+        <p><?= htmlspecialchars($message) ?></p>
     </div>
 <?php endif ?>
+
 <?php if(isset($succesMessage) && !empty($succesMessage)) : ?>
-    <div class="successMessage">
-        <span class="messageClose" onclick="this.parentElement.style.display='none';">&times</span>
-        <p><?= $succesMessage ?></p>
+    <input class="messageToggle" type="checkbox" id="successToggle">
+    <div class="message successMessage">
+        <label class="messageClose" for="successToggle">&times</label>
+        <p><?= $successMessage ?></p>
     </div>
 <?php endif ?>
 

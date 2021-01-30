@@ -9,17 +9,19 @@
 
         <h1>Registrierung</h1>
 
-        <?php foreach($errorMessages as $message) : ?>
-            <div class="errorMessage">
-                <span class="messageClose" onclick="this.parentElement.style.display='none';">&times</span>
-                <?= $message ?>
+        <?php foreach($errorMessages as $key => $message) : ?>
+            <input class="messageToggle" type="checkbox" id="errorToggle<?=$key?>">
+            <div class="message errorMessage">
+                <label class="messageClose" for="errorToggle<?=$key?>">&times</label>
+                <p><?= htmlspecialchars($message) ?></p>
             </div>
         <?php endforeach; ?>
 
         <?php if(isset($succesMessage) && !empty($succesMessage)) : ?>
-            <div class="successMessage">
-                <span class="messageClose" onclick="this.parentElement.style.display='none';">&times</span>
-                <p><?= $succesMessage ?></p>
+            <input class="messageToggle" type="checkbox" id="successToggle">
+            <div class="message successMessage">
+                <label class="messageClose" for="successToggle">&times</label>
+                <p><?= $successMessage ?></p>
             </div>
         <?php endif; ?>
 

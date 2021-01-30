@@ -285,7 +285,7 @@ p {
 
 /* To hide all element except the first one, if javascript does not work */
 
-.productSpotlight>.spotlightElement:not(:first-child) {
+.imageContainer>.gallerySlide:not(:first-Child) {
     display: none;
 }
 
@@ -737,69 +737,78 @@ form label {
 
 /* #region dialog boxes */
 
-.errorMessage {
-    width: 100%;
-    padding: 15px 0;
-    margin: 0 auto;
-    background-color: #f4433670;
-    border-left: 5px solid #e40000;
-    color: #520000;
-    margin-bottom: 20px;
-    font-size: 1em;
+.messageToggle {
+    display: none !important;
 }
 
-.errorMessage p {
-    padding: 0px;
+.messageToggle:checked+.message {
+    display: none;
+}
+
+.message {
+    width: 95%;
+    max-width: 1000px;
+    position: relative;
+    padding: 1px 0px;
     margin-left: 10px;
+    margin-right: 10px;
+    margin: 10px auto;
     text-align: left;
-}
-
-.warningMessage {
-    width: 90%;
-    padding: 15px 0;
-    margin: 0 auto;
-    background-color: #fafd21b0;
-    border-left: 5px solid var(--orange);
-    color: #522c00;
-    margin-bottom: 20px;
     font-size: 1em;
 }
 
-.warningMessage p {
-    padding: 0px;
+.message p {
+    text-align: left;
     margin-left: 10px;
-    text-align: left;
-}
-
-.successMessage {
-    width: 100%;
-    padding: 15px 0;
-    margin: 0 auto;
-    background-color: #5ff878b0;
-    border-left: 5px solid #00c70a;
-    color: #175200;
-    margin-bottom: 20px;
-    font-size: 1em;
+    margin-right: 20px;
 }
 
 .messageClose {
-    margin-left: 25px;
-    margin-right: 25px;
+    position: absolute;
+    display: block;
+    height: 3px;
+    width: 3px;
+    top: 10px;
+    right: 20px;
     color: white;
     font-weight: bold;
-    float: right;
     font-size: 1.5em;
-    line-height: 20px;
     cursor: pointer;
     transition: 0.2s;
 }
 
-.errorMessage .messageClose:hover {
+.errorMessage {
+    background-color: #f4433649;
+    border-left: 5px solid #e40000;
     color: #520000;
 }
 
-.infoMessage .messageClose:hover {
-    color: #001858;
+.warningMessage {
+    background-color: #f9fd2155;
+    border-left: 5px solid var(--orange);
+    color: #522c00;
+}
+
+.successMessage {
+    background-color: #5ff87978;
+    border-left: 5px solid #00c70a;
+    color: #175200;
+}
+
+.errorMessage .messageClose:hover {
+    color: #e40000;
+}
+
+.successMessage .messageClose:hover {
+    color: #00c70a;
+}
+
+.messageClose {
+    color: black;
+}
+
+.warningMessage .messageClose:hover {
+    color: var(--orange);
 }
 
 
