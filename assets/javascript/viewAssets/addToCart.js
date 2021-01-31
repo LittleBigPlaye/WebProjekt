@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             cartBadgeText.innerHTML = '+99';
                         }
 
+
                     } else {
                         cartBadge.classList.add('hidden');
                     }

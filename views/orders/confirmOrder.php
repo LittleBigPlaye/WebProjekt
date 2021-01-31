@@ -38,7 +38,7 @@
                     </div>
                     <div class="tableCell right">
                         <label class="mobileLabel">Preis</label>
-                        <?=htmlspecialchars($orderItem->actualPrice)?> €
+                        EUR <?=htmlspecialchars($orderItem->actualPrice)?>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -47,7 +47,7 @@
                     <div class="tableCell"></div>
                     <div class="tableCell"></div>
                     <div class="tableCell right">Gesamtpreis</div>
-                    <div class="tableCell right"><?=htmlspecialchars($totalPrice)?> €</div>
+                    <div class="tableCell right">EUR <?=htmlspecialchars($totalPrice)?></div>
             </div>
         </div>
         <input type="submit" name="submitOrder" value="Zahlungspflichtig bestellen">

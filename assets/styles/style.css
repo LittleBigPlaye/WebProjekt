@@ -191,7 +191,7 @@ p {
     color: var(--orange);
 }
 
-.footer > div{
+.footer>div {
     width: 100%;
     margin: 10px;
     text-align: center;
@@ -1147,12 +1147,35 @@ form label {
     border-radius: 5px 5px 0px 0px;
 }
 
-.cartTotal b {
-    float: left;
+.cartTotal .table {
+    display: table;
+    width: 100%;
 }
 
-.cartTotal span {
-    float: right;
+.cartTotal .table .row {
+    width: 100%;
+    display: table-row;
+}
+
+.cartTotal form {
+    margin: 0;
+}
+
+.cartTotal input[type=submit] {
+    margin-top: 5px;
+}
+
+.cartTotal .cell {
+    display: table-cell;
+    width: 50%;
+}
+
+.cartTotal .cell.left {
+    text-align: left;
+}
+
+.cartTotal .cell.right {
+    text-align: right;
 }
 
 

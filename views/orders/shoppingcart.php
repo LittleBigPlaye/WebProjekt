@@ -46,11 +46,29 @@
             </div>
         </div>
         <div class="cartTotal">
-            <b>Produkte:</b> <span id="numberOfProducts"><?=$cartCount?></span><br>
-            <b>Gesamtpreis:</b> <span id="totalPrice"><?= $totalPrice ?> €</span>
             <form action="index.php?c=orders&a=confirmOrder" method="POST">
                 <input type="submit" name="submit" value="Kaufen">
             </form>
+            <div class="table">
+                <div class="row">
+                    <div class="cell left">Artikel(<span id="numberOfProducts"><?=$cartCount?></span>)</div>
+                    <div class="cell right">EUR <span id="totalPrice"><?= $totalPrice ?></span></div>
+                </div>
+                
+                <div class="row">
+                    <!-- placeholder, might be replaced, if the shop starts to offer real products with real shipping costs -->
+                    <div class="cell left">Versand</div> 
+                    <div class="cell right">kostenlos</div>
+                </div>
+            </div>
+            
+            <hr>
+            <div class="table">
+                <div class="row">
+                    <div class="cell left"><b>Gesamt</b></div>
+                    <div class="cell right"><span id="totalPrice">EUR <?= $totalPrice ?></span></div>
+                </div>
+            </div>
         </div>
         <script src="<?=JAVASCRIPTPATH . 'orders' . DIRECTORY_SEPARATOR . 'shoppingCart.js'?>"></script>
     <?php else : ?>
