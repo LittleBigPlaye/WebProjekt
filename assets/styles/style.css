@@ -168,19 +168,19 @@ p {
 /*#region footer*/
 
 .footer {
-    padding-top: 30px;
+    padding-top: 0px;
     padding-right: 30px;
-    padding-bottom: 50px;
+    padding-bottom: 0px;
     padding-left: 30px;
-    display: block;
     left: 0;
-    bottom: 0;
     background-color: #333;
     color: #e1e1e1;
     text-align: center;
     margin-top: 25px;
-    height: 281px;
+    height: 200px;
     bottom: 0px;
+    display: flex;
+    flex-direction: row;
 }
 
 .footer a {
@@ -189,6 +189,14 @@ p {
 
 .footer a:hover {
     color: var(--orange);
+}
+
+.footer > div{
+    width: 100%;
+    margin: 10px;
+    text-align: center;
+    line-height: 25px;
+    font-size: 1.25em;
 }
 
 
