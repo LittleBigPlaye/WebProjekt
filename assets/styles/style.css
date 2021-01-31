@@ -177,10 +177,10 @@ p {
     color: #e1e1e1;
     text-align: center;
     margin-top: 25px;
-    height: 200px;
+    min-height: 200px;
     bottom: 0px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .footer a {

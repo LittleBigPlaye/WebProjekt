@@ -179,7 +179,12 @@
     .imprint {
         max-width: 60%;
     }
+
+    .footer{
+        flex-direction: row;
+    }
 }
+
 
 @media screen and (min-width: 1400px) {
     .registerForm {
