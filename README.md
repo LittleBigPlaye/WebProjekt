@@ -5,7 +5,7 @@ WebProjekt FH
 ## Webseite in Betrieb nehmen
 <section>
   <p>
-    Als erstes muss dieses Repository gecloned werden und in em Verzeichnis hinterlegt werden, auf dein installierter Apache-Dienst den PHP-Code interpretieren und dann funktionieren kann.
+    Als erstes muss dieses Repository gecloned werden und in em Verzeichnis hinterlegt werden, auf dem ein installierter Apache-Dienst den PHP-Code interpretieren und ausführen kann.
   </p>
 
   <p>
