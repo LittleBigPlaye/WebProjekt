@@ -505,6 +505,7 @@ form input[type=checkbox] {
     width: 10px;
     height: 10px;
     border: 2px solid grey;
+    margin-top: 8px;
     position: relative;
     cursor: pointer;
 }
