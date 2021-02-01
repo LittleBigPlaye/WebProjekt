@@ -2,7 +2,7 @@
 WebProjekt FH
 
 
-##Webseite in Betrieb nehmen
+## Webseite in Betrieb nehmen
 <section>
   <p>
     Als erstes muss dieses Repository gecloned werden und in em Verzeichnis hinterlegt werden, auf dein installierter Apache-Dienst den PHP-Code interpretieren und dann funktionieren kann.
@@ -21,7 +21,7 @@ Die zu importierende Datei finden Sie im Repository unter: <br>
   EMail: admin@admin.de <br>
   Passwort: Admin12345678! <br>
   <br>
-  Nutzer 2
+  Nutzer 2 <br>
   Test <br>
   Email: test@nutzer.de <br>
   Passwort: Test12345678!
