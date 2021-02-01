@@ -32,9 +32,9 @@ class ProductImage extends BaseModel
             switch($key)
             {
                 case 'path':
-                    if($this->image !== null  && file_exists(PRODUCT_IMAGE_PATH . DIRECTORY_SEPARATOR . $this->image->imageURL))
+                    if($this->image !== null  && file_exists(PRODUCT_IMAGE_PATH . DIRECTORY_SEPARATOR . $this->image->path))
                     {
-                        return PRODUCT_IMAGE_PATH . DIRECTORY_SEPARATOR . $this->image->imageURL;
+                        return PRODUCT_IMAGE_PATH . DIRECTORY_SEPARATOR . $this->image->path;
                     }
                     else
                     {
@@ -43,9 +43,9 @@ class ProductImage extends BaseModel
                 break;
                 
                 case 'thumbnailPath':
-                    if($this->image !== null  && file_exists(PRODUCT_THUMBNAIL_PATH . DIRECTORY_SEPARATOR . $this->image->thumbnailURL))
+                    if($this->image !== null  && file_exists(PRODUCT_THUMBNAIL_PATH . DIRECTORY_SEPARATOR . $this->image->thumbnailPath))
                     {
-                        return PRODUCT_THUMBNAIL_PATH . DIRECTORY_SEPARATOR . $this->image->thumbnailURL;
+                        return PRODUCT_THUMBNAIL_PATH . DIRECTORY_SEPARATOR . $this->image->thumbnailPath;
                     }
                     else
                     {

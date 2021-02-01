@@ -13,7 +13,6 @@
     public function actionIndex()
     {
         $this->setParam('currentPosition', 'index');
-
         //check if products should be added to cart
         if(isset($_POST['addToCart']) && is_numeric($_POST['addToCart']))
         {
