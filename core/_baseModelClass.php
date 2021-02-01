@@ -239,7 +239,7 @@ abstract class BaseModel
         $class = get_called_class();
         if(defined($class.'::TABLENAME'))
         {
-            return $class::TABLENAME;
+            return strtolower($class::TABLENAME);
         }
         return null;
     }

@@ -43,8 +43,6 @@ class ProductImage extends BaseModel
                 break;
                 
                 case 'thumbnailPath':
-                    // echo PRODUCT_THUMBNAIL_PATH . DIRECTORY_SEPARATOR . $this->image->thumbnailURL;
-                    
                     if($this->image !== null  && file_exists(PRODUCT_THUMBNAIL_PATH . DIRECTORY_SEPARATOR . $this->image->thumbnailURL))
                     {
                         return PRODUCT_THUMBNAIL_PATH . DIRECTORY_SEPARATOR . $this->image->thumbnailURL;
