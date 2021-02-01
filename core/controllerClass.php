@@ -46,6 +46,7 @@ abstract class Controller
     public function renderView()
     {
         $viewPath = VIEWSPATH . $this->controllerName . DIRECTORY_SEPARATOR .  $this->actionName . '.php';
+
         if(!file_exists($viewPath))
         {
             header('Location: index.php?c=errors&a=404');
