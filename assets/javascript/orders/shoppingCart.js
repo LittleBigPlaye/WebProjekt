@@ -29,8 +29,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     var targetArray = JSON.parse(jsonArray);
 
                     //change display of total price
+                    var priceSum = document.getElementById('priceSum');
                     var totalPrice = document.getElementById('totalPrice');
-                    totalPrice.innerHTML = targetArray['totalPrice'] + ' €';
+                    priceSum.innerHTML = targetArray['totalPrice'];
+                    totalPrice.innerHTML = targetArray['totalPrice'];
+
 
                     //change display of total number of articles
                     var numberOfProducts = document.getElementById('numberOfProducts');

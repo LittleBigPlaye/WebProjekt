@@ -52,7 +52,7 @@
             <div class="table">
                 <div class="row">
                     <div class="cell left">Artikel(<span id="numberOfProducts"><?=$cartCount?></span>)</div>
-                    <div class="cell right">EUR <span id="totalPrice"><?= $totalPrice ?></span></div>
+                    <div class="cell right">EUR <span id="priceSum"><?= $totalPrice ?></span></div>
                 </div>
                 
                 <div class="row">
@@ -66,7 +66,7 @@
             <div class="table">
                 <div class="row">
                     <div class="cell left"><b>Gesamt</b></div>
-                    <div class="cell right"><span id="totalPrice">EUR <?= $totalPrice ?></span></div>
+                    <div class="cell right">EUR <span id="totalPrice"><?= $totalPrice ?></span></div>
                 </div>
             </div>
         </div>
