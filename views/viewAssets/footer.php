@@ -11,7 +11,7 @@
         </div>
         <hr>
         <div>
-            <h2>Inhaber:</h2>
+            <h2>Inhaber</h2>
             Robin Beck
             </br>
             Hannes Lenz
@@ -21,7 +21,7 @@
         </div>
         <hr>
         <div>
-            <h2>Anschrift:</h2>
+            <h2>Anschrift</h2>
             Fantasieweg 1337
             <br>
             121212 Knechtschaftsburg
