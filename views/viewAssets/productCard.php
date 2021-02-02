@@ -14,23 +14,25 @@
         <p class="title"><?= htmlspecialchars($product->productName) ?></p>
         
         <div class="productPreview<?= $product->isHidden ? ' hidden' : '' ?>">
+        <div class="imageWrapper">
             <img class="productImage" src="
-            <?php
-                if($product->images != NULL)
-                {
-                    echo htmlspecialchars($product->images[0]->thumbnailPath);
-                }
-                else
-                {
-                    echo FALLBACK_IMAGE;
-                }
-            ?>">
+                <?php
+                    if($product->images != NULL)
+                    {
+                        echo htmlspecialchars($product->images[0]->thumbnailPath);
+                    }
+                    else
+                    {
+                        echo FALLBACK_IMAGE;
+                    }
+                ?>">
+            </div>
 
             <?php if( isset($isPrefab) || !$product->isHidden) : ?>
                 <!-- add to cart button -->
                 <form class="badge" method="POST" action="#prod<?=$product->id?>">
                     <button class="iconButton cartButton" type="submit" name="addToCart" value="<?=$product->id?>">
-                        <img src="assets/images/icons/shopping_cart.svg"/>
+                            <img src="assets/images/icons/shopping_cart.svg"/>
                         <span><img src="assets/images/icons/tick.svg" alt=""></span>
                     </button>
                 </form>

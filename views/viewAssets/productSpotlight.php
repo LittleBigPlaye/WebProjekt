@@ -12,12 +12,13 @@
             <a class="productLink" href="index.php?c=products&a=view&pid=<?= $product->id ?>" title="Zur Produktansicht">
 
                 <!-- To make sure that there is at least the fallback image -->
-                <?php if ($product->images != null) : ?>
-                    <img src="<?= htmlspecialchars($product->images[0]->path) ?>">
-                <?php else : ?>
-                    <img src="<?= htmlspecialchars(FALLBACK_IMAGE) ?>">
-                <?php endif; ?>
-
+                <div class="imageWrapper">
+                    <?php if ($product->images != null) : ?>
+                        <img src="<?= htmlspecialchars($product->images[0]->path) ?>">
+                    <?php else : ?>
+                        <img src="<?= htmlspecialchars(FALLBACK_IMAGE) ?>">
+                    <?php endif; ?>
+                </div>
                 <div class="text">
                     <span class="title"><?= htmlspecialchars($product->productName) ?></span>
                     <span class="phrase"><i><?= htmlspecialchars($product->catchPhrase) ?></i></span>

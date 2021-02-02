@@ -127,7 +127,7 @@ nav .dropIcon {
     line-height: 1;
 }
 
-nav .active {
+nav .active a {
     border-bottom: solid #eb7d00 0.38em;
 }
 

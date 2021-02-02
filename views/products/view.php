@@ -29,8 +29,10 @@
             <!-- images -->
             <div class="imageContainer">
                 <?php foreach ($product->images as $key => $image) : ?>
-                    <div class=gallerySlide>
-                        <img src="<?= htmlspecialchars($image->path) ?>" alt="<?= htmlspecialchars($image->name) ?>">
+                    <div class="gallerySlide">
+                        <div class="imageWrapper">
+                            <img src="<?= htmlspecialchars($image->path) ?>" alt="<?= htmlspecialchars($image->name) ?>">
+                        </div>
                     </div>
                 <?php endforeach; ?>
 
@@ -52,6 +54,7 @@
                 <?php else : ?>
                     <!-- hidden notification icon -->
                     <div class="badge">
+                        
                         <div class="hiddenIcon"><img src="assets/images/icons/hidden_icon.svg" alt="Unsichtbar" title="Unsichtbar"></div>
                     </div>
                 <?php endif; ?>
@@ -60,8 +63,10 @@
             <!-- thumbnails -->
             <div class="row">
                 <?php foreach ($product->images as $key => $image) : ?>
-                    <div class=galleryThumbnail>
-                        <img src="<?= htmlspecialchars($image->thumbnailPath) ?>" alt="<?= htmlspecialchars($image->name) ?>">
+                    <div class="galleryThumbnail">
+                        <div class="imageWrapper">
+                            <img src="<?= htmlspecialchars($image->thumbnailPath) ?>" alt="<?= htmlspecialchars($image->name) ?>">
+                        </div>
                     </div>
                 <?php endforeach; ?>
             </div>

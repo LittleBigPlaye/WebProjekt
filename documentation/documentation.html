@@ -1397,13 +1397,17 @@
             <p>Zudem wurde das System auch unter Linux mithilfe von Xampp getestet, um eventuell auftretende Probleme auf unixoiden Betriebssystemen zu finden und diesen entgegenzuwirken.</p>
         </section>
         <h3>Probleme</h3>
-        <p>Bei dem Test auf Linux sind zwei wesentliche Probleme aufgetreten, für die es galt einen Workaround zu finden. Einerseits ist hierbei aufgefallen, dass durch phpmyadmin standardmäßig Tabellen immer in Kleinbuchstaben gespeichert werden. Unter
-            Windows sind hierbei keine Probleme aufgetreten. Da Linux allerdings Case-Sensitiv ist, haben sämtliche Zugriffe auf mit camelCase geschriebene Tabellen nicht mehr Funktioniert. Das Problem wurd egelöst, indem im Base Model die Methode tablename()
-            grundsätzlich nur einen lower-case string zurückliefert.</p>
-        <p>Ein Weiteres Problem im Zusammenhang mit Linux ist bei den Bildern aufgetreten. Da die Pfade - zumindest - relativ in der Datenbank gespeichert wurden, wurde auch das Pfadtrennzeichen des aktuellen Betriebssystems in der Datenbank gespeichert.
-            Da die Bilder alle unter Windows hochgeladen wurden, handelte es sich hierbei um "\". Somit wurden sämtliche Bilder unter Linux nicht mehr angezeigt. Um das Problem zu beheben, ohne die Datenbank zu manipulieren oder die Bilder (ein weiteres
-            mal) erneut einlesen zu müssen, wurde die Image Klasse um einen Magic Getter erweitert, der sämtliche Vorkommen von "/" und "\" im relativen Pfad ausfindig macht und diese durch das Trennzeichen des aktuellen Betriebssystems ersetzt. Somit
-            ist das Projekt auch mit Beispieldaten sowohl für Windows als auch für Unixoide Betriebssysteme lauffähig.</p>
+        <p>
+            Bei dem Test auf Linux sind zwei wesentliche Probleme aufgetreten, für die es galt einen Workaround zu finden. Einerseits ist hierbei aufgefallen, dass durch phpmyadmin standardmäßig Tabellen immer in Kleinbuchstaben gespeichert werden. Unter Windows
+            sind hierbei keine Probleme aufgetreten. Da Linux allerdings Case-Sensitiv ist, haben sämtliche Zugriffe auf mit camelCase geschriebene Tabellen nicht mehr Funktioniert. Das Problem wurd egelöst, indem im Base Model die Methode tablename()
+            grundsätzlich nur einen lower-case string zurückliefert.
+        </p>
+        <p>
+            Ein Weiteres Problem im Zusammenhang mit Linux ist bei den Bildern aufgetreten. Da die Pfade - zumindest - relativ in der Datenbank gespeichert wurden, wurde auch das Pfadtrennzeichen des aktuellen Betriebssystems in der Datenbank gespeichert. Da die
+            Bilder alle unter Windows hochgeladen wurden, handelte es sich hierbei um "\". Somit wurden sämtliche Bilder unter Linux nicht mehr angezeigt. Um das Problem zu beheben, ohne die Datenbank zu manipulieren oder die Bilder (ein weiteres mal)
+            erneut einlesen zu müssen, wurde die Image Klasse um einen Magic Getter erweitert, der sämtliche Vorkommen von "/" und "\" im relativen Pfad ausfindig macht und diese durch das Trennzeichen des aktuellen Betriebssystems ersetzt. Somit ist
+            das Projekt auch mit Beispieldaten sowohl für Windows als auch für Unixoide Betriebssysteme lauffähig.
+        </p>
         <h2 id="projectManagement">Projektplanung</h2>
         <h3>Meilensteinplan</h3>
         <h3>Auflistung des Zeitbedarfs</h3>
@@ -1809,6 +1813,12 @@
                 <td>Geringfügige CSS Anpassungen, Erweiterung der Doku</td>
                 <td>Robin Beck</td>
                 <td>1,5 h</td>
+            </tr>
+            <tr>
+                <td>02.02</td>
+                <td>CSS angepasst, Seitenverhältnis für Produktbilder vereinheitlicht, Produktauflistung und Warenkorb in Grid Layout eingepasst</td>
+                <td>Robin Beck</td>
+                <td>3,6 h</td>
             </tr>
         </table>
     </div>
