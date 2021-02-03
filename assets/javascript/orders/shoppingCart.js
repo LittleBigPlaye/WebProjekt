@@ -53,6 +53,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     } else {
                         cartBadgeText.parentElement.classList.remove('hidden');
                         numberOfProducts.innerHTML = targetArray['numberOfProducts'];
+
+                        //find price label of targetproduct
+                        var productPrice = document.getElementById('price' + targetArray['productID']);
+
+                        if (productPrice) {
+                            console.log('Test');
+                            productPrice.innerHTML = targetArray['targetPrice'] + ' €';
+                        }
+
                         if (parseInt(targetArray['numberOfProducts']) <= 99) {
                             cartBadgeText.innerHTML = targetArray['numberOfProducts'];
                         } else {

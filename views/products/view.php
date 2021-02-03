@@ -83,7 +83,7 @@
     <!-- product text -->
     <div class="productInformation">
         <p><?= htmlspecialchars($product->catchPhrase) ?></p>
-        <p class="price"><b>Preis:</b> <?= htmlspecialchars($product->standardPrice) ?> €</p>
+        <p class="price"><b>Preis:</b> <?= htmlspecialchars(number_format($product->standardPrice, '2', ',', '.')) ?> €</p>
         <p><b>Marke: </b><?= htmlspecialchars($product->vendor->vendorName) ?></p>
         <p><b>Typ: </b><?= htmlspecialchars($product->category->categoryName) ?></p>
         <hr>

@@ -483,8 +483,7 @@ form textarea {
     min-height: 150px;
 }
 
-form input[type=submit],
-{
+form input[type=submit] {
     color: #FFF;
     background-color: var(--orange);
     border-radius: 5px;

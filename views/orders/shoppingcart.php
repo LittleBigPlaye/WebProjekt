@@ -33,8 +33,8 @@
                         </div>
 
                         <div class="tableCell">
-                            <label for="price<?= $index ?>">Preis</label>
-                            <span id="price<?= $index ?>"><?= htmlspecialchars($orderItem->actualPrice) ?> €</span>
+                            <label for="price<?= $orderItem->product->id ?>">Preis</label>
+                            <span id="price<?= $orderItem->product->id ?>"><?= htmlspecialchars(number_format($orderItem->actualPrice, 2, ',', '.')) ?> €</span>
                         </div>
 
                         <form class="tableCell" method="Post">

@@ -36,7 +36,8 @@ class ordersController extends Controller
             }
 
             $order = new \myf\models\Order(array());
-                   
+            
+            $targetProductPrice = 0;
             //create new Order Item for each entry in cart
             foreach($_SESSION['shoppingCart'] as $productID => $quantity)
             {
@@ -53,6 +54,12 @@ class ordersController extends Controller
                     $currentOrderItem->actualPrice = $quantity * $currentProduct->standardPrice;
 
                     $order->addOrderItem($currentOrderItem);
+                    
+                    //set price of desired product for ajax purpose
+                    if(isset($targetProductID) && $currentProduct->id == $targetProductID) 
+                    {
+                        $targetProductPrice = $currentOrderItem->actualPrice;
+                    }
                 }
             }
 
@@ -61,10 +68,11 @@ class ordersController extends Controller
 
             if(isset($_POST['ajax']) && $_POST['ajax'] == 1) {
                 $returnArray = array(
-                    'productID' => $targetProductID,
-                    'targetQuantity' => $targetQuantity,
-                    'numberOfProducts' => $this->getNumberOfCartItems(),
-                    'totalPrice' => strval($totalPrice)
+                    'productID'         => $targetProductID,
+                    'targetQuantity'    => $targetQuantity,
+                    'targetPrice'       => number_format($targetProductPrice, 2, ',', '.'),
+                    'numberOfProducts'  => $this->getNumberOfCartItems(),
+                    'totalPrice'        => number_format($totalPrice, 2, ',', '.')
                 );
                 echo json_encode($returnArray);
                 exit(0);
@@ -72,7 +80,7 @@ class ordersController extends Controller
         }
         
         $this->setParam('orderItems', $orderItems);
-        $this->setParam('totalPrice', $totalPrice);
+        $this->setParam('totalPrice', number_format($totalPrice, 2, ',', '.'));
         $this->setParam('order'     , $order);
         $this->setParam('currentPosition', 'shoppingcart');
     }
