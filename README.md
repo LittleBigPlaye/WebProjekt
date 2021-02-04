@@ -1,36 +1,31 @@
-# WebProjekt
-WebProjekt FH
-
+# Projekt: MaskYourFace - Webentwicklung
 
 ## Webseite in Betrieb nehmen
-<section>
-  <p>
-    Als erstes muss dieses Repository gecloned werden und in em Verzeichnis hinterlegt werden, auf dem ein installierter Apache-Dienst den PHP-Code interpretieren und ausführen kann.
-  </p>
+### Klonen des Repositorys
+Als erstes muss dieses Repository geklont werden und in einem Verzeichnis hinterlegt werden, auf dem ein installierter Apache-Dienst den PHP-Code interpretieren und ausführen kann. (z. B. htdocs Ordner)
 
-  <p>
-  Um die Website in Betrieb nehmen zu können, muss zunächst eine SQL-Datei im phpmyadmin importiert werden. Diese SQL-Datei erstellt die notwendige Datenebank, mit 21 Produkten    und 2 Nutzern. <br>
-Die zu importierende Datei finden Sie im Repository unter: <br>
-  src/database/database_initialize.sql
-  </p>
+### Importieren der Datenbank
+Um die Website in Betrieb nehmen zu können, muss zunächst eine SQL-Datei im phpmyadmin importiert werden. Diese SQL-Datei erstellt die notwendige Datenbank, mit 21 Produkten und 2 Nutzern.
+
+Die zu importierende Datei finden Sie im Repository unter:  
+>src/database/database_initialize.sql
+
+### Nutzung der Vorgefertigten Benutzer  
+Nach erfolgreichem Importieren der Datenbank, stehen Ihnen nun 2 Benutzer zur Verfügung um Mask Your Face zu testen.  
+
+>**Nutzer 1**  
+>Kontotyp: Admin  
+>E-Mail: admin@admin.de  
+>Passwort: Admin12345678! 
+
+>**Nutzer 2**  
+>Test
+>Email: test@nutzer.de  
+>Passwort: Test12345678!
   
-  <p>
-  Wenn die SQL-Befehle alle erfolgreich waren, stehen Ihnen nun 2 Benutzer zur Verfügung um Mask Your Face zu testen. <br>
-  Nutzer 1 <br>
-  Admin <br>
-  EMail: admin@admin.de <br>
-  Passwort: Admin12345678! <br>
-  <br>
-  Nutzer 2 <br>
-  Test <br>
-  Email: test@nutzer.de <br>
-  Passwort: Test12345678!
-  </p>
-  
-  <p>
-  Der Unterschied zwischen dem Nutzer und dem Administrator sehen Sie in der Navigationsleiste. Der Nutzer findet dort nur "Mein Konto" und der Administrator hat ein aufklappbares Element "Administration". Dort finden sich die Punkt "Mein Konto", "Produkt anlegen" und "Benutzerverwalten". 
-  </p>
-</section>
 
+Der Unterschied zwischen dem Nutzer und dem Administrator sehen Sie in der Navigationsleiste.
 
+Der Nutzer findet dort nur "Mein Konto" und der Administrator hat ein aufklappbares Element "Administration". Dort finden sich die Punkt "Mein Konto", "Produkt anlegen" und "Benutzerverwalten". 
 
+Bei Bedarf können auch weitere Benutzer registriert werden. Beachten Sie hierbei, dass diese standardmäßig die Rolle "Benutzer" zugeordnet bekommen und somit **keine** administartoven Rechte haben.

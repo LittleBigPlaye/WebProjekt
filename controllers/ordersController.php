@@ -1,8 +1,6 @@
 <?php
 
-
 namespace myf\controller;
-
 
 use myf\core\Controller;
 use myf\models\Product;
