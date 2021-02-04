@@ -15,18 +15,18 @@ class Image extends BaseModel
         'createdAt'     =>  ['type' => BaseModel::TYPE_DATE    , 'null' => 'not null' ],
         'updatedAt'     =>  ['type' => BaseModel::TYPE_DATE    , 'null' => 'null'     ]    ,
         'imageName'     =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'not null', 'min' =>  5, 'max' => 150],
-        'imageURL'      =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'not null', 'min' =>  5, 'max' => 256],
-        'thumbnailURL'  =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'not null', 'min' =>  5, 'max' => 256]
+        'imagePath'     =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'not null', 'min' =>  5, 'max' => 256],
+        'thumbnailPath' =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'not null', 'min' =>  5, 'max' => 256]
     ];
 
     public function __get ($key){
-        if($key == 'path') 
+        if($key == 'imagePath') 
         {
-            return $this->fixPathName($this->imageURL);
+            return $this->fixPathName(parent::__get('imagePath'));
         }
         if($key == 'thumbnailPath') 
         {
-            return $this->fixPathName($this->thumbnailURL);
+            return $this->fixPathName(parent::__get('thumbnailPath'));
         }
         return parent::__get($key);
     }
@@ -34,13 +34,13 @@ class Image extends BaseModel
     public function delete(&$errors = null)
     {
         //make sure to delete the image file before deleting the image database entry
-        if(file_exists($this->imageURL))
+        if(file_exists($this->imagePath))
         {
-            unlink($this->imageURL);
+            unlink($this->imagePath);
         }
-        if(file_exists($this->thumbnailURL))
+        if(file_exists($this->thumbnailPath))
         {
-            unlink($this->thumbnailURL);
+            unlink($this->thumbnailPath);
         }
         parent::delete($errors);
     }

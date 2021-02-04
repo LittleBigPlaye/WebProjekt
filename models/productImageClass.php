@@ -32,9 +32,9 @@ class ProductImage extends BaseModel
             switch($key)
             {
                 case 'path':
-                    if($this->image !== null  && file_exists(PRODUCT_IMAGE_PATH . DIRECTORY_SEPARATOR . $this->image->path))
+                    if($this->image !== null  && file_exists(PRODUCT_IMAGE_PATH . DIRECTORY_SEPARATOR . $this->image->imagePath))
                     {
-                        return PRODUCT_IMAGE_PATH . DIRECTORY_SEPARATOR . $this->image->path;
+                        return PRODUCT_IMAGE_PATH . DIRECTORY_SEPARATOR . $this->image->imagePath;
                     }
                     else
                     {

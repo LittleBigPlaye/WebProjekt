@@ -81,15 +81,15 @@ CREATE TABLE `images` (
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedAt` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `imageName` varchar(150) DEFAULT NULL,
-  `imageURL` varchar(256) NOT NULL,
-  `thumbnailURL` varchar(256) NOT NULL
+  `imagePath` varchar(256) NOT NULL,
+  `thumbnailPath` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Daten für Tabelle `images`
 --
 
-INSERT INTO `images` (`id`, `createdAt`, `updatedAt`, `imageName`, `imageURL`, `thumbnailURL`) VALUES
+INSERT INTO `images` (`id`, `createdAt`, `updatedAt`, `imageName`, `imagePath`, `thumbnailPath`) VALUES
 (1, '2021-01-17 13:09:22', '2021-01-17 13:36:25', 'Maske-Vorschau', 'mask1\\img1.jpg', 'mask1\\thumb1.jpg'),
 (2, '2021-01-17 13:09:47', '2021-01-17 13:21:40', 'Maske-Vorschau', 'mask2\\img1.jpg', 'mask2\\thumb1.jpg'),
 (3, '2021-01-17 13:11:18', '2021-01-17 13:36:25', 'Maske-Frontal', 'mask1\\img2.jpg', 'mask1\\thumb2.jpg'),
