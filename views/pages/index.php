@@ -1,5 +1,4 @@
-<?php $numberOfSlides = 4 ?>
-
+<!-- @author John Klippstein, Robin Beck -->
 <section>
     <div>
         <h2>Unsere Dauerbrenner - Die halten alles auf!</h2>

@@ -1,11 +1,13 @@
 <?php
-/**
- * @author Robin Beck
- */
+
 namespace myf\models;
 
 use \myf\core\BaseModel as BaseModel;
 
+/**
+ * This Class is used to represent one single entry of the Categories table
+ * @author Robin Beck
+ */
 class Category extends BaseModel
 {
     const TABLENAME = '`categories`';

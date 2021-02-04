@@ -1,8 +1,4 @@
-<?php
-/**
- * @author Robin Beck
- */
-?>
+<!-- @author Robin Beck -->
 
 <div class="formWrapper">
     <form id="productForm" class="productForm new" method="post" enctype="multipart/form-data">

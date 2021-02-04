@@ -1,14 +1,14 @@
 <?php
 
-/**
- * @author Robin Beck
- */
-
 namespace myf\models;
 
 
 use myf\core\BaseModel as BaseModel;
 
+/**
+ * This Class represents one single entry of the orderItems table of the database
+ * @author Robin Beck
+ */
 class OrderItem extends BaseModel
 {
     const TABLENAME ='`orderItems`';
@@ -37,6 +37,12 @@ class OrderItem extends BaseModel
         return parent::__get($key);
     }
 
+    /**
+     * This function makes sure that the orderItem can only be saved, if a product is referenced
+     *
+     * @param [type] $errors
+     * @return void
+     */
     public function save(&$errors = null) 
     {
         if($this->productsID !== null && $this->ordersID !== null)

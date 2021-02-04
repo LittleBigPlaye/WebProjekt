@@ -2,6 +2,10 @@
 
 namespace myf\core;
 
+/**
+ * This class is used as a base for all controllers and provides some essential functions
+ * @author Robin Beck
+ */
 abstract class Controller
 {
     protected $controllerName   = null;
@@ -23,16 +27,32 @@ abstract class Controller
     }
 
 
+    /**
+     * This function is used to check wether a user is logged in or not
+     *
+     * @return boolean true, if a user is logged in
+     */
     public function isLoggedIn()
     {
         return (isset($_SESSION['isLoggedIn']) && ($_SESSION['isLoggedIn'] === true));
     }
 
+    /**
+     * This function is used to check wether the currently logged is user has administrative
+     * privileges or not
+     *
+     * @return boolean true, if the current user has administrative privileges
+     */
     public function isAdmin()
     {
         return ($this->isLoggedIn() && $this->currentLogin->user->role === 'admin');
     }
 
+    /**
+     * This function is used to update the current users "last active time"
+     *
+     * @return void
+     */
     public function updateLastActiveTime()
     {
         if($this->currentLogin != null)
@@ -43,13 +63,19 @@ abstract class Controller
         }
     }
 
+    /**
+     * This function is used to display / render the desired view
+     * It redirects to the 404 view, if no view has been found
+     *
+     * @return void
+     */
     public function renderView()
     {
         $viewPath = VIEWSPATH . $this->controllerName . DIRECTORY_SEPARATOR .  $this->actionName . '.php';
 
         if(!file_exists($viewPath))
         {
-            header('Location: index.php?c=errors&a=404');
+            $this->redirect('index.php?c=errors&a=404&err=view');
         }
 
         extract($this->params);
@@ -69,7 +95,7 @@ abstract class Controller
     /**
      * Used to unify the redirect process within the controllers
      *
-     * @param [type] $targetURL the url that should be reached
+     * @param string $targetURL the url that should be reached
      * @return void
      */
     protected function redirect ($targetURL) {
@@ -77,6 +103,14 @@ abstract class Controller
         exit(0);
     }
 
+    /**
+     * This function is used to add a param to the params array
+     * added params become available to the view after rendering
+     *
+     * @param string $key   the name that should be used for the param
+     * @param [type] $value tha actual value of the param
+     * @return void
+     */
     protected function setParam($key, $value = null)
     {
         $this->params[$key] = $value;
@@ -90,10 +124,11 @@ abstract class Controller
     }
 
     /**
-     * Adds items to the carts.
+     * This function is used to add items to the shopping cart.
+     * It can be also used to add items dynamically with ajax
      *
-     * @param [type] $productID must be id of existing product. The product must not be hidden
-     * @return void prints number of cart items, if ajax is set in post
+     * @param int $productID    must be id of existing product. The product must not be hidden
+     * @return void             prints number of cart items, if ajax is set in post
      */
     protected function addToCart($productID)
     {
@@ -123,9 +158,9 @@ abstract class Controller
     }
 
     /**
-     * calculates the total amount of products that are currently within the cart
+     * This function is used to calculate the current number of items inside the cart
      *
-     * @return @int the number of cart items, minimum: 0 
+     * @return int  the number of cart items, minimum: 0 
      */
     public function getNumberOfCartItems() 
     {

@@ -1,11 +1,14 @@
 <?php
-/**
- * @author Robin Beck
- */
+
 namespace myf\models;
 
 use \myf\core\BaseModel as BaseModel;
 
+/**
+ * This Class is used to represent one single entry of the products table
+ * It also contains relations to vendors, categories and productImages
+ * @author Robin Beck
+ */
 class Product extends BaseModel
 {
     const TABLENAME = '`products`';
@@ -62,6 +65,12 @@ class Product extends BaseModel
         }
     }
 
+    /**
+     * This function is used to save the product and all attached product images afterwards
+     *
+     * @param [type] $errors
+     * @return void
+     */
     public function save(&$errors = null) {
         //surrounding by transaction to make sure all inserts worked
         $this->startTransaction();
@@ -87,9 +96,17 @@ class Product extends BaseModel
         $productImages = [];
     }
 
+    /**
+     * This function is used to add a new image to the product
+     *
+     * @param string $imagePath     the (relative) path of the image
+     * @param string $thumbnailPath the (relative) path of the thumbnail
+     * @return void
+     */
     public function addImage($imagePath, $thumbnailPath) 
     {
-        if(Image::findOne('imageURL="' . $imagePath . '"') !== null)
+        //check if an image with the given path already exists
+        if(Image::findOne('imagePath="' . $imagePath . '"') !== null)
         {
             return false;
         }

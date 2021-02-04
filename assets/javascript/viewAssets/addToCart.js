@@ -1,5 +1,6 @@
 /**
- * This script is used to add items to the cart without reloading the site
+ * This script is used to add items to the shopping cart via ajax
+ * @author Robin Beck
  */
 var cartRequest = null;
 var btnCartAdders = null;

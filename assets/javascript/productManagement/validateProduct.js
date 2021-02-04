@@ -1,3 +1,10 @@
+/**
+ * This script is used to check if all inputs for any of 
+ * the forms "newProduct" or "editProduct" are valid
+ * It also checks if the desired product name is already in use via ajax
+ * @author Robin Beck
+ */
+
 document.addEventListener('DOMContentLoaded', function() {
     var btnSubmit = document.getElementById('submitForm');
 

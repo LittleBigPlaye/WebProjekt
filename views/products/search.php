@@ -1,9 +1,4 @@
-<?php
-
-/**
- * @author Robin Beck
- */
-?>
+<!-- @author Robin Beck -->
 
 <div class="productBoxWrapper">
     <div class="formWrapper search">

@@ -1,8 +1,4 @@
-<?php
-/**
- * @author Robin Beck
- */
-?>
+<!-- @author Robin Beck -->
 
 <div class="productViewWrapper">
     <h1><?= htmlspecialchars($product->productName ?? '') ?></h1>

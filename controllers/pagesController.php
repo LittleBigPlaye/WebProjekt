@@ -1,15 +1,20 @@
 <?php
 
+namespace myf\controller;
+
+use myf\models\Login;
+
 /**
- * 
+ * This Controller includes
+ * @author Hannes Lenz, Robin Beck
  */
-
- namespace myf\controller;
-
- use myf\models\Login;
-
- class PagesController extends \myf\core\controller
- {
+class PagesController extends \myf\core\controller
+{
+    /**
+     * This action is used to prepare the products that should be displayed on the index
+     *
+     * @return void
+     */
     public function actionIndex()
     {
         $this->setParam('currentPosition', 'index');
@@ -34,16 +39,25 @@
         $this->setParam('spotlightProducts', $spotlightProducts);
     }
 
+    /**
+     * This function is used to search products from a simple txt file in the database
+     * If no file is given or a product has not been found, a random product will be used instead
+     *
+     * @param string $filePath  path to the txt that contains the product names
+     * @return void
+     */
     private function fetchProductsFromFile($filePath = '')
     {
+        //read the given file
         $lines = null;
         if($filePath != '' && file_exists('config' . DIRECTORY_SEPARATOR . 'indexProductConfiguration.txt'))
         {
             $lines = file('config' . DIRECTORY_SEPARATOR . 'indexProductConfiguration.txt', FILE_IGNORE_NEW_LINES);
         }
-        $products = array();
-        $db = $GLOBALS['database'];
         
+        $db = $GLOBALS['database'];
+        $products = array();
+        //try to find all products with the corresponding product names
         if(is_array($lines) && count($lines) > 0)
         {
             foreach($lines as $line)
@@ -65,25 +79,30 @@
         return $products;
     }
 
-     public function actionImprint()
-     {  
-     }
+    /**
+     * This action does just exist to provide an imprint-view
+     *
+     * @return void
+     */
+    public function actionImprint()
+    {  
+    }
 
-     public function actionLogin()
-     {
+    public function actionLogin()
+    {
 
-         if($this->isLoggedIn())
-         {
-             $this->redirect('index.php?c=pages&a=index');
-         }
+        if($this->isLoggedIn())
+        {
+            $this->redirect('index.php?c=pages&a=index');
+        }
 
         $this->setParam('currentPosition', 'login');
-         //store error message
-         $errorMessages = [];
-         //database connection
-         $db= $GLOBALS['database'];
+        //store error message
+        $errorMessages = [];
+        //database connection
+        $db= $GLOBALS['database'];
 
-         //check if form is submitted
+        //check if form is submitted
         if(isset($_POST['submit']))
         {
             $email = trim($_POST["email"]);
@@ -95,12 +114,16 @@
 
             $login = \myf\models\Login::findOne('email=' . $db->quote($email));
             //check if user exists
-            if (Login::findOne('email LIKE' . $db->quote($email)) == null) {
+            if (Login::findOne('email LIKE' . $db->quote($email)) == null) 
+            {
                 $errorMessages['user'] = "Es existiert kein Benutzer mit dieser Email";
             } //check if user is enabled
-            elseif ($login->enabled != 1) {
+            elseif ($login->enabled != 1) 
+            {
                 $errorMessages['user_disabled'] = "Dieser Nutzer ist gesperrt.";
-            } elseif ($login->validated != 1) {
+            } 
+            elseif ($login->validated != 1) 
+            {
                 $errorMessages['user_validated'] = "Dieser Nutzer ist nicht validiert";
             }
             // Check if password is empty
@@ -113,7 +136,9 @@
                 if ($login->passwordResetHash == "")
                 {
                     $hashed_password = $login->passwordHash;
-                }else {
+                }
+                else
+                {
                     $hashed_password = $login->passwordResetHash;
                 }
 
@@ -134,7 +159,8 @@
                 {
 
                     $login->failedLoginCount++;
-                    if ($login->failedLoginCount == 5) {
+                    if ($login->failedLoginCount == 5) 
+                    {
                         $login->enabled = 0;
                     }
                     $login->save();
@@ -142,21 +168,21 @@
                 }
             }
         }
-         $this->setParam('errorMessages', $errorMessages);
+        $this->setParam('errorMessages', $errorMessages);
     }
 
-     public function actionLogout()
-     {
-         if($this->isLoggedIn())
-         {
-             $_SESSION['isLoggedIn'] = false;
-             session_destroy();
-         }
-         else
-         {
-            $this->redirect('index.php?c=pages&a=index'); 
-         }
-     }
+    public function actionLogout()
+    {
+        if($this->isLoggedIn())
+        {
+            $_SESSION['isLoggedIn'] = false;
+            session_destroy();
+        }
+        else
+        {
+        $this->redirect('index.php?c=pages&a=index'); 
+        }
+    }
 
 
  }

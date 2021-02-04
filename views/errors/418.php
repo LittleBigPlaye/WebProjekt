@@ -1,3 +1,5 @@
+<!-- @author Robin Beck -->
+
 <div class="errorPage">
     <h1>- 418 -<br> Kaffee kochen unmöglich</h1>
     <img src="assets/images/404.png" alt="Seite nicht gefunden">

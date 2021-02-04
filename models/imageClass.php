@@ -1,11 +1,12 @@
 <?php
-/**
- * @author Robin Beck
- */
 namespace myf\models;
 
 use \myf\core\BaseModel as BaseModel;
 
+/**
+ * This Class is used to represent one single entry of the images table
+ * @author Robin Beck
+ */
 class Image extends BaseModel
 {
     const TABLENAME = '`images`';
@@ -31,6 +32,12 @@ class Image extends BaseModel
         return parent::__get($key);
     }
 
+    /**
+     * This function is used to delete the entry from the database and unlinking the files before
+     *
+     * @param [type] $errors
+     * @return void
+     */
     public function delete(&$errors = null)
     {
         //make sure to delete the image file before deleting the image database entry
@@ -45,8 +52,13 @@ class Image extends BaseModel
         parent::delete($errors);
     }
 
-    //used to fix wrong directory separators from the database 
-    //(occurs, if images have been added on windows system and afterwards the server runs on a system with / as directory separator)
+    /**
+     * This function is used to fix wrong directory separators that might have been inserted into the database
+     * This problem occurs if the image has been added on e.g. a Windows system and has been ported to a unixoid system afterwards
+     *
+     * @param string $path  the path that should be fixed
+     * @return void         the fixed path
+     */
     private function fixPathName($path) 
     {
         $replacedPath = str_replace(['\\','/'], DIRECTORY_SEPARATOR , $path);

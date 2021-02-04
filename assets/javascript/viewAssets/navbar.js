@@ -1,5 +1,6 @@
 /**
- * This script is used to uncollapse other checkboxes of the navbar, to minimize the screen space the navbar uses in mobile mode
+ * This script is used to collapse uncollapsed submenus of the menu bar
+ * @author Robin Beck
  */
 
 document.addEventListener('DOMContentLoaded', function() {

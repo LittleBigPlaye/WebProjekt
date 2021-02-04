@@ -1,3 +1,5 @@
+<!-- @author John Klippstein, Robin Beck -->
+
 <div class="formWrapper imprint">
     <h1>Impressum</h1>
 

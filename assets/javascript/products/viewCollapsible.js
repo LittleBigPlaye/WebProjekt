@@ -1,3 +1,7 @@
+/**
+ * This script is used to controll the collapsible for the product view
+ * @author Robin Beck
+ */
 document.addEventListener('DOMContentLoaded', function() {
     var collapsibleToggle = document.getElementById('collapsibleToggle');
     var collapsible = document.getElementById('collapsible');

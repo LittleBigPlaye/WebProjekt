@@ -7,8 +7,19 @@ namespace myf\controller;
 use myf\core\Controller;
 use myf\models\Product;
 
+/**
+ * This Controller is used for order-specific actions, such as
+ * Showing the shopping cart, confirming an order
+ * @author Robin Beck
+ */
 class ordersController extends Controller
 {
+    /**
+     * This action is used to prepare the products that are shown within the shopping cart
+     * It also offers the ability to dynamically add or remove products with ajax
+     *
+     * @return void
+     */
     public function actionShoppingcart()
     {
         $orderItems = [];
@@ -85,6 +96,12 @@ class ordersController extends Controller
         $this->setParam('currentPosition', 'shoppingcart');
     }
 
+    /**
+     * This action is used to prepare the products listing that should be displayed within the order confirmation
+     * It is also used to confirm the current order
+     *
+     * @return void
+     */
     public function actionConfirmOrder() 
     {
         //redirect user to login if the user is not already logged in

@@ -1,14 +1,14 @@
 <?php
 
-/**
- * @author Robin Beck
- */
-
 namespace myf\models;
 
 
 use myf\core\BaseModel as BaseModel;
 
+/**
+ * This Class is used to represent one single entry of the orders table
+ * @author Robin Beck
+ */
 class Order extends BaseModel
 {
     const TABLENAME ='`orders`';
@@ -36,11 +36,23 @@ class Order extends BaseModel
         return parent::__get($key);
     }
 
+    /**
+     * This function is used to add a order item to the order
+     *
+     * @param \myf\models\OrderItem $orderItem  the order item that should be added
+     * @return void
+     */
     public function addOrderItem(&$orderItem)
     {
         array_push($this->orderItems, $orderItem);
     }
 
+    /**
+     * This function makes sure that all order items are saved before the order is saved
+     *
+     * @param [type] $errors
+     * @return void
+     */
     public function save(&$errors = null)
     {
         if(!empty($this->orderItems))
@@ -58,6 +70,11 @@ class Order extends BaseModel
         }
     }
 
+    /**
+     * This function is used to calculate the price of the order
+     *
+     * @return void
+     */
     public function calculateTotalPrice()
     {
         $totalPrice = 0;

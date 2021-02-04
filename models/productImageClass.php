@@ -1,11 +1,14 @@
 <?php
-/**
- * @author Robin Beck
- */
+
 namespace myf\models;
 
 use \myf\core\BaseModel as BaseModel;
 
+/**
+ * This Class is used to represent a single entry of the productImages table
+ * It also contains the relation to the images table
+ * @author Robin Beck
+ */
 class ProductImage extends BaseModel
 {
     const TABLENAME = '`productImages`';
@@ -40,7 +43,7 @@ class ProductImage extends BaseModel
                     {
                         return FALLBACK_IMAGE;
                     }
-                break;
+                    break;
                 
                 case 'thumbnailPath':
                     if($this->image !== null  && file_exists(PRODUCT_THUMBNAIL_PATH . DIRECTORY_SEPARATOR . $this->image->thumbnailPath))
@@ -51,11 +54,11 @@ class ProductImage extends BaseModel
                     {
                         return FALLBACK_IMAGE;
                     }
-                break;
+                    break;
 
                 case 'name':
                     return $this->image->imageName;
-                break;
+                    break;
                 default:
                     return $this->image;
             }
@@ -71,6 +74,13 @@ class ProductImage extends BaseModel
         $image = null;
     }
 
+    /**
+     * This function is used to save the attached image (if it has not been added to the database already)
+     * and to save the productImage entry itself
+     *
+     * @param [type] $errors
+     * @return void
+     */
     public function save(&$errors = null) {
         if($this->image != null)
         {
@@ -83,17 +93,32 @@ class ProductImage extends BaseModel
         parent::save();
     }
 
-    public function setImage($imageURL, $thumbnailURL, $imageName='')
+    /**
+     * This function is used to set the image that is referenced by this entry
+     *
+     * @param string $imagePath      relative path to the image
+     * @param string $thumbnailPath  relative path to the thumbnail
+     * @param string $imageName      name of the image
+     * @return void
+     */
+    public function setImage($imagePath, $thumbnailPath, $imageName='')
     {
         if($this->image == null)
         {   
             $this->image = new Image(array());
         }
-        $this->image->imageURL      = $imageURL;
-        $this->image->thumbnailURL  = $thumbnailURL;
-        $this->image->imageName     = $imageName;
+        $this->image->imagePath      = $imagePath;
+        $this->image->thumbnailPath  = $thumbnailPath;
+        $this->image->imageName      = $imageName;
     }
 
+    /**
+     * This function is used to make sure that the referenced image is also going to be deleted,
+     * if the image is not referenced by any other product images
+     *
+     * @param [type] $errors
+     * @return void
+     */
     public function delete(&$errors = null)
     {
         parent::delete($errors);

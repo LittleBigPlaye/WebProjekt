@@ -1,5 +1,7 @@
 <?php
 /**
+ * Products controller
+ * This controller contains different views to show products
  * @author Robin Beck
  */
 
@@ -8,6 +10,11 @@ namespace myf\controller;
 
  class ProductsController extends \myf\core\controller
  {
+    /**
+     * This view is used to show a specific product.
+     * If the given pid is not a number and equals "rand" a random product will be loaded
+     * 
+     */
     public function actionView()
     {
         $this->setParam('currentPosition', 'products');
@@ -61,6 +68,10 @@ namespace myf\controller;
         }
     }
   
+    /**
+     * This view is used to list, search filter or sort products
+     *
+     */
     public function actionSearch()
     {
         $this->setParam('currentPosition', 'products');
@@ -216,6 +227,14 @@ namespace myf\controller;
 
     }
 
+    /**
+     * This function appends a given where clause with given filters
+     *
+     * @param [type] $filterList    the list of filters that should be set
+     * @param [type] $where         the where statement that should be appended
+     * @param [type] $attributeName the name of the attribute that should be filtered
+     * @return void
+     */
     private function appendINQuery($filterList, &$where, $attributeName)
     {
         if(!empty($filterList))
@@ -235,6 +254,14 @@ namespace myf\controller;
         }
     }
     
+    /**
+     * This function appends a given where clause by a search string
+     *
+     * @param [type] $searchString  the string that should be searched within the database
+     * @param [type] $where         the where clause that should be appended
+     * @param [type] $attributes    the attributes where the string occurance should be searched in
+     * @return void
+     */
     private function appendSearchQuery($searchString, &$where, $attributes)
     {
         if(!empty($where) && !empty($searchString))
@@ -273,6 +300,12 @@ namespace myf\controller;
         }       
     }
 
+    /**
+     * This function calculates how many product pages exist
+     *
+     * @param string $where used to filter the products, e. g. to ignore hidden products
+     * @return void
+     */
     private function calculateNumberOfProductPages($where = '')
     {
         //calculate the number of pages
@@ -282,20 +315,35 @@ namespace myf\controller;
     }
 
 
+    /**
+     * This function makes sure that the current page is between the min
+     * number of pages and the max number of pages
+     *
+     * @param integer $currentPage      the currentPage that should be checked
+     * @param integer $numberOfPages    the max number of available pages
+     * @return integer $currentPage     the corrected current page
+     */
     private function determineCurrentPage($currentPage = 1, $numberOfPages)
     {
         $currentPage = ($currentPage > $numberOfPages) ? $numberOfPages : $currentPage;
-        if($numberOfPages > 0 && $currentPage > $numberOfPages)
+        if($currentPage > $numberOfPages)
         {
             $currentPage = $numberOfPages;
         }
-        else if($currentPage < 1)
+        else
         {
-            $currentPage = 1;
+            $currentPage = max($currentPage, 1);
         }
         return $currentPage;
     }
 
+    /**
+     * This function is used to determine the offset for the findRange function
+     *
+     * @param int $numberOfPages    the total number of available pages
+     * @param int $currentPage      the current page
+     * @return int  $startIndex     the offset for findRange
+     */
     private function calculateStartIndex($numberOfPages, $currentPage)
     {
         if($numberOfPages - $currentPage < PRODUCT_LIST_RANGE)
@@ -310,6 +358,16 @@ namespace myf\controller;
         return $startIndex;
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param int $numberOfPages    total amount of pages
+     * @param int $currentPage      the current page
+     * @param int $startIndex       the offset for findRange
+     * @param string $where         the where clause that should be appended
+     * @param string $orderBy       an order criteria
+     * @return \myf\models\Product  the list of found products
+     */
     private function prepareProductList(&$numberOfPages, &$currentPage, &$startIndex, $where = '', $orderBy = '')
     {
         $numberOfPages = $this->calculateNumberOfProductPages($where);
@@ -324,6 +382,13 @@ namespace myf\controller;
         return $products;
     }
 
+    /**
+     * This function takes products and returns a json containing information for product cards.
+     * It is used for dynamically loading more product cards via ajax
+     *
+     * @param \myf\models\Product $products the products that should be included in the json string
+     * @return string                       the json encoded array
+     */
     public function getProductsJson(&$products)
     {
         $productInfos = array();
@@ -348,6 +413,9 @@ namespace myf\controller;
         return $jsonString;
     }
 
+    /**
+     * This action is used to list all vendors and at least three products for each vendor
+     */
     public function actionVendors() 
     {
         $this->setParam('currentPosition', 'products');

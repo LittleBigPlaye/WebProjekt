@@ -1,3 +1,8 @@
+/**
+ * This script is used to dynamically load more products, 
+ * filter, search or order products via ajax
+ * @author Robin Beck
+ */
 document.addEventListener('DOMContentLoaded', function() {
 
     var request = null;

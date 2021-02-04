@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @Author Robin Beck
+ * @author Robin Beck
  */
 
 

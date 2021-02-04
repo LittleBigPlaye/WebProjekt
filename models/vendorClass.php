@@ -1,11 +1,13 @@
 <?php
-/**
- * @author Robin Beck
- */
+
 namespace myf\models;
 
 use \myf\core\BaseModel as BaseModel;
 
+/**
+ * This Class is used to represent a single entry of the vendors table
+ * @author Robin Beck
+ */
 class Vendor extends BaseModel
 {
     const TABLENAME = '`vendors`';

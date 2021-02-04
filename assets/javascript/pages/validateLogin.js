@@ -5,21 +5,17 @@ document.addEventListener('DOMContentLoaded', function() {
     var email = document.getElementById('email');
     //var password = document.getElementById('user_password');
 
-    if (btnSubmit)
-    {
-        btnSubmit.addEventListener('click', function(event)
-        {
+    if (btnSubmit) {
+        btnSubmit.addEventListener('click', function(event) {
             var formIsValid = true;
 
             var emailregex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/m;
             //check if email is set and valid
-            if (!email || email.value.length <= 0 || (!email.value.match(emailregex)))
-            {
+            if (!email || email.value.length <= 0 || (!email.value.match(emailregex))) {
                 email.classList.add("errorHighlight");
                 formIsValid = false;
             }
-            if (!formIsValid)
-            {
+            if (!formIsValid) {
                 event.preventDefault();
                 event.stopPropagation();
             }

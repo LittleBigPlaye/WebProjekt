@@ -1,3 +1,9 @@
+/**
+ * This script is used to show and hide the up button 
+ * It also enables smooth scrolling for the back to top function
+ * @author Robin Beck
+ */
+
 document.addEventListener('DOMContentLoaded', function() {
     var btnUp = document.getElementById('upButton');
 

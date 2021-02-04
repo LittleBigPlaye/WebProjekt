@@ -1,7 +1,8 @@
 <?php
 
 /**
- *  Alle
+ * This file is the entry point to all views 
+ * @author Hannes Lenz, John Klippstein, Robin Beck
  */
 
 //region load required files
@@ -52,7 +53,7 @@ if(file_exists(CONTROLLERSPATH . $controllerName . 'Controller.php'))
 
     if(!method_exists($controller, $actionMethod))
     {
-        header('Location: index.php?c=errors&a=404');
+        header('Location: index.php?c=errors&a=404&err=view');
     }
     else
     {
@@ -61,7 +62,7 @@ if(file_exists(CONTROLLERSPATH . $controllerName . 'Controller.php'))
 }
 else
 {
-    header('Location: index.php?c=errors&a=404');
+    header('Location: index.php?c=errors&a=404&err=controller');
 }
 //endregion
 
@@ -73,9 +74,19 @@ else
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Masken mit abwechslungsreicher gestaltung">
+    <meta name="keywords" content="Masken, Produkte">
+    
+    <!-- authors -->
+    <meta name="author" content="Hannes Lenz">
+    <meta name="author" content="John Klippstein">
+    <meta name="author" content="Robin Beck">
+
+    <!-- styles -->
     <link rel="stylesheet" href="assets/styles/style.css">
     <link rel="stylesheet" href="assets/styles/desktop.css">
     <link rel="stylesheet" href="assets/styles/navbar.css">
+    
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/icons/favicon.ico">
     <title>Mask Your Face</title>
 </head>

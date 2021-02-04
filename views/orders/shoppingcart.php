@@ -1,3 +1,5 @@
+<!-- @author Robin Beck -->
+
 <?php $cartCount = isset($_SESSION['shoppingCart']) ? array_sum($_SESSION['shoppingCart']) : ''; ?>
 <div class="shoppingCart">
     <h1>Warenkorb</h1>

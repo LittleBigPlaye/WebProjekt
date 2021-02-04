@@ -1,8 +1,4 @@
-<?php
-/**
- * @author Robin Beck
- */
-?>
+<!-- @author Robin Beck -->
 
 <?php if(isset($product)) : ?>
     <div class="formWrapper">

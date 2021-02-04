@@ -1,14 +1,17 @@
 <?php
 /**
+ * This Controller is used for administrative product tasks
+ * It includes views for creating new products and for editing existing ones
  * @author Robin Beck
  */
 
 namespace myf\controller;
 
-use myf\models\Login;
-
 class ProductManagementController extends \myf\core\controller
 {
+    /**
+     * This action is used to create a new product
+     */
     public function actionNew()
     {
        $this->setParam('currentPosition', 'administration');
@@ -110,7 +113,9 @@ class ProductManagementController extends \myf\core\controller
         $this->setParam('errorMessages', $errorMessages);
    }
 
-    
+    /**
+     * This action is used to edit an existing product
+     */
     public function actionEdit()
     {
 
@@ -152,7 +157,6 @@ class ProductManagementController extends \myf\core\controller
            }
            exit(0);
        }
-
        
        //obtain vendors from database
        $this->setParam('vendors', \myf\models\Vendor::find());
@@ -243,11 +247,11 @@ class ProductManagementController extends \myf\core\controller
     /**
      * This function is used to control if the inputs which are equal (between actionEdit and actionNew) are valid
      *
-     * @param [type] $name
-     * @param [type] $catchPhrase
-     * @param [type] $description
-     * @param [type] $price
-     * @param [type] $errorMessages
+     * @param string $name          name of the product
+     * @param string $catchPhrase   catch phrase of the product
+     * @param string $description   product description
+     * @param float  $price         price as float
+     * @param array  $errorMessages array where new error messages can be added
      * @return void
      */
     private function validateInputs($name, $catchPhrase, $description, $price, $vendor, $category, &$errorMessages)
@@ -331,8 +335,8 @@ class ProductManagementController extends \myf\core\controller
    /**
     * Adds all images to the given product
     *
-    * @param Product $product
-    * @param string  $imagesKey
+    * @param Product $product   product that should receive an image
+    * @param string  $imagesKey the key of the current image in $__FILES
     * @return void
     */
    private function addImagesToProduct(&$product, $imagesKey)
@@ -375,9 +379,9 @@ class ProductManagementController extends \myf\core\controller
    /**
     * Creates a thumbnail for a given image
     *
-    * @param string $sourcePath
-    * @param string $targetDirectory
-    * @param string $targetImageName
+    * @param string $sourcePath         path of the original image
+    * @param string $targetDirectory    target directory of the thumbnail
+    * @param string $targetImageName    target file name of the thumbnail
     * @return void empty string if thumbnail creation did not work, target subpath if creation was successful
     */
    private function createThumbnail($sourcePath, $targetDirectory, $targetImageName) {

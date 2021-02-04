@@ -1,5 +1,6 @@
-<h1>Unsere Marken</h1>
+<!-- @author Robin Beck -->
 
+<h1>Unsere Marken</h1>
 
 <?php foreach ($vendorProducts as $key => $currentVendorProducts) : ?>
     <div class="vendorsWrapper">

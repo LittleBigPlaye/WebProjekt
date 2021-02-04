@@ -1,3 +1,8 @@
+/**
+ * This script is used to control the spotlight on the index page
+ * @author Robin Beck
+ */
+
 document.addEventListener('DOMContentLoaded', function() {
     var slideIndex = 1;
     showSlides(slideIndex);

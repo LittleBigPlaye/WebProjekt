@@ -1,3 +1,7 @@
+/**
+ * This script is used to controll the image gallery on the product view page
+ * @author Robin Beck
+ */
 document.addEventListener('DOMContentLoaded', function() {
     initializeImageGallery();
 

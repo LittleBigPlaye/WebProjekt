@@ -1,3 +1,8 @@
+/**
+ * This script is used to change the amount of products via ajax
+ * @author Robin Beck
+ */
+
 document.addEventListener('DOMContentLoaded', function() {
     var buttons = document.getElementsByClassName('cartQuantitySubmit');
     var request = null;
