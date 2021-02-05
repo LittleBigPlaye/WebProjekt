@@ -90,6 +90,13 @@ class PagesController extends \myf\core\controller
 
     public function actionLogin()
     {
+        //check if there are any success messages in the session
+        if(isset($_SESSION['success']))
+        {
+            $successMessage = $_SESSION['success'];
+            unset($_SESSION['success']);
+            $this->setParam('successMessage', $successMessage);
+        }
 
         if($this->isLoggedIn())
         {

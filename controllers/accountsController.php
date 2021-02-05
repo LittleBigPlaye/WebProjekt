@@ -222,9 +222,10 @@ class accountsController extends Controller
                 //create new login and save
                 $login = new Login($loginData);
                 $login->save();
-
+                $_SESSION['success'] = 'Der neue Nutzer wurde angelegt';
                 $successMessage = 'Der neue Nutzer wurde angelegt';
             }
+            $this->redirect('index.php?c=pages&a=login');
         }
         $this->setParam('errorMessages', $errorMessages);
         $this->setParam('succesMessage', $successMessage);
@@ -373,6 +374,7 @@ class accountsController extends Controller
                     $updateLogin=Login::findOne('usersID='.$userID);
                     $updateLogin->passwordHash = $savePassword;
                     $updateLogin->save();
+                    $_SESSION['success']= 'Das war super!';
                     $successMessage = "Das war super!";
                 }
                 else
@@ -384,6 +386,8 @@ class accountsController extends Controller
             {
                 $errorMessage = 'Das Passwort entspricht nicht den Anforderungen. Mindestens 8 Zeichen, Groß-, Kleinbuchstaben, 2 Ziffern und 2 Sonderzeichen';
             }
+            $this->updateLastActiveTime();
+            $this->redirect('index.php?c=accounts&a=myspace');
         }
 
         $this->setParam('errorMessage', $errorMessage);
@@ -434,8 +438,11 @@ class accountsController extends Controller
                 $userData->phone = $phone;
 
                 $userData->save();
-                $successMessage = "Änderungen sind gespeichert!";
+                $_SESSION['success']= 'Änderungen sind gespeichert!';
+
             }
+            $this->updateLastActiveTime();
+            $this->redirect('index.php?c=accounts&a=myspace');
         }
 
         $this->setParam('errorMessage', $errorMessage);
@@ -482,7 +489,8 @@ class accountsController extends Controller
                 if($address !== null)
                 {
                     $adressID = $address->id;
-                    $successMessage = 'Keine Änderungen nötig';
+                    $_SESSION['success']= 'Das war erfolgreich.';
+
                 }
                 else
                 {
@@ -498,17 +506,23 @@ class accountsController extends Controller
                     $adress->save();
                     $adressID = $adress->id;
 
-                    //set address and save
-                    $userData->addressesID = $adressID;
-                    $userData->save();
+                    //set address
                     $this->setParam('address',$adress);
-                    $successMessage = 'Änderungen erfolgreich gespeichert';
+                    $_SESSION['success']= 'Änderungen erfolgreich gespeichert';
+
                 }
+                $userData->addressesID = $adressID;
+                $userData->save();
             }
+            $this->updateLastActiveTime();
+            $this->redirect('index.php?c=accounts&a=myspace');
         }
 
         $this->setParam('errorMessage', $errorMessage);
         $this->setParam('successMessage', $successMessage);
+
+
+
     }
 
     public function actionWaitingArea(){
