@@ -17,9 +17,9 @@
             </div>
         <?php endforeach; ?>
 
-        <?php if(isset($succesMessage) && !empty($succesMessage)) : ?>
+        <?php if(isset($successMessage) && !empty($successMessage)) : ?>
             <input class="messageToggle" type="checkbox" id="successToggle">
-            <div class="message successMessage">
+            <div class="message successMessages">
                 <label class="messageClose" for="successToggle">&times</label>
                 <p><?= $successMessage ?></p>
             </div>
