@@ -132,7 +132,7 @@ nav .active a {
 }
 
 
-/* Cart item counter */
+/* #region CartItemCounter */
 
 .cartBadge {
     border-radius: 45%;
@@ -161,6 +161,9 @@ nav .active a {
     text-align: center;
     vertical-align: center;
 }
+
+
+/* #endregion */
 
 nav li img {
     height: 1em;
@@ -251,5 +254,8 @@ nav li img {
     #navToggleLabel,
     nav a {
         padding: 1em 1.5em 0.6em 1.5em;
+    }
+    nav li li a {
+        padding: 1em 1.5em 1em 1.5em;
     }
 }

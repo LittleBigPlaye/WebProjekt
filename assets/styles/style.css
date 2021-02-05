@@ -109,8 +109,13 @@ p {
     margin: 10px;
     background-color: white;
     display: flex;
+    flex-direction: row;
     align-items: center;
     border-radius: 5px;
+}
+
+.productCard .catchPhrase {
+    font-size: .9em;
 }
 
 .productCard.hidden {
@@ -1379,6 +1384,26 @@ form label {
     max-width: 80%;
     margin: 20px auto;
     padding: 15px 50px;
+}
+
+.imprint .gridWrapper {
+    display: grid;
+    grid-template-columns: auto;
+    padding: 10px;
+    margin: 0 auto;
+}
+
+.imprint .gridItem {
+    text-align: left;
+    padding: 15px;
+}
+
+.imprint .gridItem p {
+    text-align: left;
+}
+
+.imprint .gridItem h2 {
+    text-align: left;
 }
 
 .imprint p {
