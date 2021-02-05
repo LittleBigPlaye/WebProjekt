@@ -60,7 +60,7 @@
                 </div>
 
                 <div class="row">
-                    <!-- placeholder, might be replaced, if the shop starts to offer real products with real shipping costs -->
+                    <!-- placeholder, could be replaced, if the shop starts to offer real products with real shipping costs -->
                     <div class="cell left">Versand</div>
                     <div class="cell right">kostenlos</div>
                 </div>

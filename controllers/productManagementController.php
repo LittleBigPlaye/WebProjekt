@@ -63,7 +63,7 @@ class ProductManagementController extends \myf\core\controller
 
             $this->validateInputs($name, $catchPhrase, $description, $price, $vendor, $category, $errorMessages);
 
-            //check if productname is not new
+            //check if product name is not new
             if(!empty($name) && \myf\models\Product::findOne('productName LIKE ' . $db->quote($name)) !== null)
             {
                 $errorMessages['productFound'] = 'Es existiert bereits ein Produkt mit dem von Ihnen gewünschten Namen!';
@@ -382,7 +382,7 @@ class ProductManagementController extends \myf\core\controller
     * @param string $sourcePath         path of the original image
     * @param string $targetDirectory    target directory of the thumbnail
     * @param string $targetImageName    target file name of the thumbnail
-    * @return void empty string if thumbnail creation did not work, target subpath if creation was successful
+    * @return void                      empty string if thumbnail creation did not work, target subpath if creation was successful
     */
    private function createThumbnail($sourcePath, $targetDirectory, $targetImageName) {
         $sourceImage  = null;
