@@ -106,16 +106,14 @@ p {
 
 .productCard {
     padding: 20px;
-    margin: 10px;
+    margin: 15px;
     background-color: white;
     display: flex;
-    flex-direction: row;
-    align-items: center;
     border-radius: 5px;
 }
 
 .productCard .catchPhrase {
-    font-size: .9em;
+    font-size: .6vw;
 }
 
 .productCard.hidden {
@@ -153,11 +151,13 @@ p {
 
 .productCard .productPreview:not(.hidden) {
     background: var(--orange);
+    border-bottom: 5px solid var(--orange);
     position: relative;
 }
 
 .productCard .productPreview.hidden {
-    background: #333333;
+    background: var(--darkgrey);
+    border-bottom: 5px solid var(--darkgrey);
     position: relative;
 }
 
@@ -1205,11 +1205,10 @@ form label {
 }
 
 .tableCell .productPreview {
-    /* padding: 10px; */
     display: block;
     border-bottom: solid 5px var(--orange);
     margin: 5px auto;
-    max-width: 100%;
+    max-width: 10px;
 }
 
 .cartTotal {

@@ -121,7 +121,7 @@
         padding: 15px;
         grid-template-columns: 2fr 2fr 1fr 1fr;
         grid-template-areas: ". heading . ." "content content content total";
-        font-size: 1.3em;
+        font-size: 1.1em;
     }
     .cartTotal {
         max-height: 200px;
