@@ -482,7 +482,7 @@ class accountsController extends Controller
                 if($address !== null)
                 {
                     $adressID = $address->id;
-                    $succesMessage = 'Keine Änderungen nötig';
+                    $successMessage = 'Keine Änderungen nötig';
                 }
                 else
                 {
@@ -502,7 +502,7 @@ class accountsController extends Controller
                     $userData->addressesID = $adressID;
                     $userData->save();
                     $this->setParam('address',$adress);
-                    $succesMessage = 'Änderungen erfolgreich gespeichert';
+                    $successMessage = 'Änderungen erfolgreich gespeichert';
                 }
             }
         }
