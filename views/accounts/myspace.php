@@ -85,7 +85,7 @@
                         <?=$orderItem->quantity?> Stück
                     </div>
                     <div class="tableCell center">
-                        <?=$orderItem->actualPrice*$orderItem->quantity?> €
+                        <?=$orderItem->formattedActualPrice?> €
                     </div>
                 </div>
                 <?php endforeach ?>
