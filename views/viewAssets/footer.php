@@ -6,7 +6,7 @@
             <br>
             <a href="index.php?c=pages&a=imprint">Impressum</a>
             <br>
-            <a href="documentation/documentation.html">Dokumentation</a>
+            <a href="docs/index.html">Dokumentation</a>
             <br>
         </div>
         <hr>

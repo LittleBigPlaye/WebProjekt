@@ -9,8 +9,9 @@ body {
     margin: 0 auto;
     background-color: white;
     counter-reset: h2counter;
-    counter-reset: h3c;
+    counter-reset: h3counter;
     counter-reset: h4counter;
+    counter-reset: h5counter;
     counter-reset: image;
     font-family: 'Nunito', sans-serif;
     background-color: #e2e2e2;
@@ -31,21 +32,43 @@ p+h5 {
     margin-top: 40px !important;
 }
 
-h1 {
+.headline {
+    width: 100%;
     position: absolute;
     background-color: #242424;
-    width: 100%;
-    margin-right: 50px;
     top: 0;
-    padding-left: 280px;
-    z-index: 4;
     margin-top: 0px;
-    padding-top: 15px;
-    padding-left: 20px;
+    z-index: 4;
+}
+
+.headline b {
+    color: white;
+    padding-bottom: 10px;
+    padding-left: 280px;
+}
+
+.headline h1 {
+    padding-left: 280px;
+    padding-top: 5px;
+    margin-top: 0px;
+    margin-bottom: 0px;
     height: 50px;
     color: white;
+}
+
+h1:not(.headline h1) {
     counter-reset: h2counter;
-    /* counter-reset: h3c; */
+    visibility: hidden;
+}
+
+h2:after {
+    content: ' ';
+    display: block;
+    border: 2px solid black;
+}
+
+#intro {
+    margin-top: 0px;
 }
 
 h2 {
@@ -201,7 +224,8 @@ a:hover {
 }
 
 table {
-    max-width: 1150px;
+    width: 90%;
+    max-width: 1500px;
     /* margin: 15px auto; */
     margin: 15px 0;
 }
@@ -231,8 +255,8 @@ tr:nth-child(odd) {
 }
 
 img {
-    max-height: 300px;
-    max-width: 600px;
+    max-height: 500px;
+    max-width: 1500px;
     display: block;
 }
 

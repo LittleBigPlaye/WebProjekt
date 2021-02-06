@@ -19,7 +19,7 @@ class OrderItem extends BaseModel
         'productsID'  =>  ['type' => BaseModel::TYPE_INT      , 'null' => 'null'],
         'ordersID'    =>  ['type' => BaseModel::TYPE_INT      , 'null' => 'null'],
         'quantity'    =>  ['type' => BaseModel::TYPE_INT     , 'null' => 'null'],
-        'actualPrice' => ['type' => BaseModel::TYPE_DECIMAL  , 'null' => 'null']
+        'actualPrice' =>  ['type' => BaseModel::TYPE_DECIMAL  , 'null' => 'null']
     ];
 
     private $product = null;
