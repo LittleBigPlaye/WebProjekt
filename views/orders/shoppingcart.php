@@ -36,7 +36,7 @@
 
                         <div class="tableCell">
                             <label for="price<?= $orderItem->product->id ?>">Preis</label>
-                            <span id="price<?= $orderItem->product->id ?>"><?= htmlspecialchars(number_format($orderItem->actualPrice, 2, ',', '.')) ?> €</span>
+                            <span id="price<?= $orderItem->product->id ?>"><?= htmlspecialchars($orderItem->formattedActualPrice) ?> €</span>
                         </div>
 
                         <form class="tableCell" method="Post">

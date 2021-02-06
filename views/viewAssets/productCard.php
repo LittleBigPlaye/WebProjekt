@@ -41,7 +41,7 @@ if (isset($isPrefab)) {
             <?php endif; ?>
         </div>
 
-        <p class="price"><?= htmlspecialchars(number_format($product->standardPrice, '2', ',', '.') . ' €') ?></p>
+        <p class="price"><?= htmlspecialchars($product->formattedPrice . ' €') ?></p>
         <p class="catchPhrase"><?= htmlspecialchars($product->catchPhrase) ?></p>
     </a>
 </div>

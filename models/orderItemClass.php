@@ -34,6 +34,11 @@ class OrderItem extends BaseModel
             }
             return $this->product;
         }
+        else if($key == 'formattedActualPrice')
+        {
+            $actualPrice = parent::__get('actualPrice');
+            return number_format($actualPrice, 2, ',', '.');
+        }
         return parent::__get($key);
     }
 

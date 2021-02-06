@@ -82,7 +82,7 @@ class Order extends BaseModel
         {
             $totalPrice += $orderItem->actualPrice;
         }
-        return $totalPrice;
+        return number_format($totalPrice, '2', ',', '.');
     }
 
     public function __destruct()
