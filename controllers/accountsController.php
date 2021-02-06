@@ -229,6 +229,7 @@ class accountsController extends Controller
         }
         $this->setParam('errorMessages', $errorMessages);
         $this->setParam('succesMessage', $successMessage);
+        $this->setPositionIndicator(Controller::POSITION_LOGIN);
     }
 
     public function actionAdminusermanagement()
@@ -305,9 +306,7 @@ class accountsController extends Controller
         {
             $this->redirect('index.php?c=pages&a=login');
         }
-
-
-
+        $this->setPositionIndicator(Controller::POSITION_ADMINISTRATION);
     }
 
     public function actionMySpace ()
@@ -345,6 +344,7 @@ class accountsController extends Controller
             //if own userid is null, the user will redirect to the login
             $this->redirect('index.php?c=pages&a=login');
         }
+        $this->setPositionIndicator(Controller::POSITION_ADMINISTRATION);
     }
 
     public function actionChangeSecrets()
@@ -374,8 +374,8 @@ class accountsController extends Controller
                     $updateLogin=Login::findOne('usersID='.$userID);
                     $updateLogin->passwordHash = $savePassword;
                     $updateLogin->save();
-                    $_SESSION['success']= 'Das war super!';
-                    $successMessage = "Das war super!";
+                    $_SESSION['success']= 'Das Passwort wurde erfolgreich geändert!';
+                    $successMessage = "Das Passwort wurde erfolgreich geändert!";
                 }
                 else
                 {
@@ -392,6 +392,7 @@ class accountsController extends Controller
 
         $this->setParam('errorMessage', $errorMessage);
         $this->setParam('successMessage', $successMessage);
+        $this->setPositionIndicator(Controller::POSITION_ADMINISTRATION);
     }
 
     public function actionChangePersonalData()
@@ -438,7 +439,7 @@ class accountsController extends Controller
                 $userData->phone = $phone;
 
                 $userData->save();
-                $_SESSION['success']= 'Änderungen sind gespeichert!';
+                $_SESSION['success']= 'Ihre Personas wurden erfolgreich aktualisiert!';
 
             }
             $this->updateLastActiveTime();
@@ -447,6 +448,7 @@ class accountsController extends Controller
 
         $this->setParam('errorMessage', $errorMessage);
         $this->setParam('successMessage', $successMessage);
+        $this->setPositionIndicator(Controller::POSITION_ADMINISTRATION);
     }
 
     public function actionChangeAddress()
@@ -489,8 +491,6 @@ class accountsController extends Controller
                 if($address !== null)
                 {
                     $adressID = $address->id;
-                    $_SESSION['success']= 'Das war erfolgreich.';
-
                 }
                 else
                 {
@@ -508,11 +508,10 @@ class accountsController extends Controller
 
                     //set address
                     $this->setParam('address',$adress);
-                    $_SESSION['success']= 'Änderungen erfolgreich gespeichert';
-
                 }
                 $userData->addressesID = $adressID;
                 $userData->save();
+                $_SESSION['success']= 'Ihre Adresse wurde erfolgreich aktualisiert!';
             }
             $this->updateLastActiveTime();
             $this->redirect('index.php?c=accounts&a=myspace');
@@ -520,15 +519,14 @@ class accountsController extends Controller
 
         $this->setParam('errorMessage', $errorMessage);
         $this->setParam('successMessage', $successMessage);
-
-
-
+        $this->setPositionIndicator(Controller::POSITION_ADMINISTRATION);
     }
 
     public function actionWaitingArea(){
         /**
          * no functions are needed at this moment
          */
+        $this->setPositionIndicator(Controller::POSITION_ADMINISTRATION);
     }
 
 }

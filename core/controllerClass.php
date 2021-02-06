@@ -8,6 +8,15 @@ namespace myf\core;
  */
 abstract class Controller
 {
+    //used to identify the current Position
+    const POSITION_INDEX            = 'index';
+    const POSITION_PRODUCTS         = 'products';
+    const POSITION_LOGIN            = 'login';
+    const POSITION_CART             = 'cart';
+    const POSITION_ABOUT_US         = 'aboutUs';
+    const POSITION_ADMINISTRATION   = 'administration';
+    
+    
     protected $controllerName   = null;
     protected $actionName       = null;
     protected $currentLogin      = null;
@@ -90,6 +99,16 @@ abstract class Controller
         require_once (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'footer.php');
         require_once (VIEWSPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'upButton.php');
 
+    }
+
+    /**
+     * This function is used to highlight the current logical position in the navbar
+     *
+     * @param string $position  the name
+     * @return void
+     */
+    protected function setPositionIndicator($position) {
+        $this->setParam('currentPosition', $position);
     }
 
     /**

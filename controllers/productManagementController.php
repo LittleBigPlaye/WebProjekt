@@ -7,14 +7,18 @@
 
 namespace myf\controller;
 
-class ProductManagementController extends \myf\core\controller
+use \myf\core\Controller;
+use \myf\models\Vendor;
+use \myf\models\Category;
+use \myf\models\Product;
+
+class ProductManagementController extends Controller
 {
     /**
      * This action is used to create a new product
      */
     public function actionNew()
     {
-       $this->setParam('currentPosition', 'administration');
        $errorMessages = [];
        if(!$this->isLoggedIn())
        {
@@ -28,17 +32,17 @@ class ProductManagementController extends \myf\core\controller
        
        
         //obtain vendors from database
-        $this->setParam('vendors', \myf\models\Vendor::find());
+        $this->setParam('vendors', Vendor::find());
 
         //obtain categories from database
-        $this->setParam('categories', \myf\models\Category::find());
+        $this->setParam('categories', Category::find());
 
         //ajax database check
         if(isset($_POST['ajax']) && $_POST['ajax'] == 1 && isset($_POST['submitForm']) && $_POST['productName']) 
         {
             $name = trim($_POST['productName'] ?? '');
             $db = $GLOBALS['database'];
-            if(!empty($name) && \myf\models\Product::findOne('productName LIKE ' . $db->quote($name)) !== null)
+            if(!empty($name) && Product::findOne('productName LIKE ' . $db->quote($name)) !== null)
             {
                 echo 'Das Produkt existiert bereits';
             }
@@ -64,7 +68,7 @@ class ProductManagementController extends \myf\core\controller
             $this->validateInputs($name, $catchPhrase, $description, $price, $vendor, $category, $errorMessages);
 
             //check if product name is not new
-            if(!empty($name) && \myf\models\Product::findOne('productName LIKE ' . $db->quote($name)) !== null)
+            if(!empty($name) && Product::findOne('productName LIKE ' . $db->quote($name)) !== null)
             {
                 $errorMessages['productFound'] = 'Es existiert bereits ein Produkt mit dem von Ihnen gewünschten Namen!';
             }
@@ -84,7 +88,7 @@ class ProductManagementController extends \myf\core\controller
             if(count($errorMessages) === 0)
             {
                 //build new product
-                $product = new \myf\models\Product(array());
+                $product = new Product(array());
                 $product->productName        = $name;
                 $product->catchPhrase        = $catchPhrase;
                 $product->productDescription = $description;
@@ -111,6 +115,7 @@ class ProductManagementController extends \myf\core\controller
             }
         }
         $this->setParam('errorMessages', $errorMessages);
+        $this->setPositionIndicator(Controller::POSITION_ADMINISTRATION);
    }
 
     /**
@@ -118,8 +123,6 @@ class ProductManagementController extends \myf\core\controller
      */
     public function actionEdit()
     {
-
-        $this->setParam('currentPosition', 'products');
         $errorMessages = [];
        
        //check if the user is logged in
@@ -139,19 +142,19 @@ class ProductManagementController extends \myf\core\controller
        $product = null;
 
        //check if the product that has to be edited exists
-       if($productID == null || !is_numeric($productID) || \myf\models\Product::findOne('id=' . $productID) == null)
+       if($productID == null || !is_numeric($productID) || Product::findOne('id=' . $productID) == null)
        {
            $this->redirect('Location: index.php?c=errors&a=404');
        }
 
-       $product = \myf\models\Product::findOne('id=' . $productID);
+       $product = Product::findOne('id=' . $productID);
 
        //ajax database check
        if(isset($_POST['ajax']) && $_POST['ajax'] == 1 && isset($_POST['submitForm']) && $_POST['productName']) 
        {
            $name = trim($_POST['productName'] ?? '');
            $db = $GLOBALS['database'];
-           if(!empty($name) && ($name != $product->productName) && \myf\models\Product::findOne('productName LIKE ' . $db->quote($name)) !== null)
+           if(!empty($name) && ($name != $product->productName) && Product::findOne('productName LIKE ' . $db->quote($name)) !== null)
            {
                echo 'Das Produkt existiert bereits';
            }
@@ -159,16 +162,15 @@ class ProductManagementController extends \myf\core\controller
        }
        
        //obtain vendors from database
-       $this->setParam('vendors', \myf\models\Vendor::find());
+       $this->setParam('vendors', Vendor::find());
        
        //obtain categories from database
-       $this->setParam('categories', \myf\models\Category::find());
+       $this->setParam('categories', Category::find());
        $this->setParam('product', $product);   
        
        //get inputs from from
        if(isset($_POST['submitForm']))
        {
-            echo var_dump($_GET);
             //retrieve inputs from form
             $name        = trim($_POST['productName'] ?? '');
             $catchPhrase = trim($_POST['catchPhrase'] ?? '');
@@ -184,7 +186,7 @@ class ProductManagementController extends \myf\core\controller
 
             $db = $GLOBALS['database'];
             //check if productname is not new
-            if(!empty($name) && ($name != $product->productName) && \myf\models\Product::findOne('productName LIKE ' . $db->quote($name)) !== null)
+            if(!empty($name) && ($name != $product->productName) && Product::findOne('productName LIKE ' . $db->quote($name)) !== null)
             {
                 $errorMessages['productFound'] = 'Es existiert bereits ein Produkt mit dem von Ihnen gewünschten Namen!';
             }
@@ -242,6 +244,7 @@ class ProductManagementController extends \myf\core\controller
             }
         }
         $this->setParam('errorMessages', $errorMessages);
+        $this->setPositionIndicator(Controller::POSITION_ADMINISTRATION);
     }
 
     /**
@@ -290,13 +293,13 @@ class ProductManagementController extends \myf\core\controller
 
         $db = $GLOBALS['database'];
         //check if vendor exists
-        if(empty($vendor) || \myf\models\Vendor::findOne('id=' . $db->quote($vendor)) == null)
+        if(empty($vendor) || Vendor::findOne('id=' . $db->quote($vendor)) == null)
         {
             $errorMessages['vendor'] = 'Wählen Sie eine gültige Marke aus.';
         }
 
         //check if category exists
-        if(empty($category) || \myf\models\Category::findOne('id=' . $db->quote($category)) == null)
+        if(empty($category) || Category::findOne('id=' . $db->quote($category)) == null)
         {
             $errorMessages['category'] = 'Wählen Sie eine gültige Kategorie aus.';
         }
@@ -339,44 +342,44 @@ class ProductManagementController extends \myf\core\controller
     * @param string  $imagesKey the key of the current image in $__FILES
     * @return void
     */
-   private function addImagesToProduct(&$product, $imagesKey)
-   {
+    private function addImagesToProduct(&$product, $imagesKey)
+    {
         //generate a unique directory name by using the id from the db
         $subfolderName = 'mask' . $product->id;   
-       $directoryName = PRODUCT_IMAGE_PATH . DIRECTORY_SEPARATOR . $subfolderName;
-       //create directory, if it does not exist
-       if(!file_exists($directoryName))
-       {
-           mkdir($directoryName, 0755, true);
-       }
+        $directoryName = PRODUCT_IMAGE_PATH . DIRECTORY_SEPARATOR . $subfolderName;
+        //create directory, if it does not exist
+        if(!file_exists($directoryName))
+        {
+            mkdir($directoryName, 0755, true);
+        }
 
-       //upload images
-       foreach($_FILES['productImages']['name'] as $key => $value)
-       {
-           //create unique filename by checking how many files are in the targetDir and always add 1 to the number of files
-           $fileCount = 0;
-           $files = glob($directoryName . DIRECTORY_SEPARATOR . '*');
-           if($files)
-           {
-               $fileCount = count($files);
-           }
+        //upload images
+        foreach($_FILES['productImages']['name'] as $key => $value)
+        {
+            //create unique filename by checking how many files are in the targetDir and always add 1 to the number of files
+            $fileCount = 0;
+            $files = glob($directoryName . DIRECTORY_SEPARATOR . '*');
+            if($files)
+            {
+                $fileCount = count($files);
+            }
 
-           $imageName       = $fileCount + 1;
-           $fileType        = pathinfo($_FILES['productImages']['name'][$key], PATHINFO_EXTENSION); 
-           $fileName        = 'img' . $imageName . '.' . $fileType;
-           $targetPath      = $directoryName . DIRECTORY_SEPARATOR . $fileName;
+            $imageName       = $fileCount + 1;
+            $fileType        = pathinfo($_FILES['productImages']['name'][$key], PATHINFO_EXTENSION); 
+            $fileName        = 'img' . $imageName . '.' . $fileType;
+            $targetPath      = $directoryName . DIRECTORY_SEPARATOR . $fileName;
 
-           //try to upload the file
-           $uploadWasSuccessful = \move_uploaded_file($_FILES['productImages']['tmp_name'][$key], $targetPath);
-           if($uploadWasSuccessful)
-           {
-               $thumbnailPath = $this->createThumbnail($targetPath, $subfolderName . DIRECTORY_SEPARATOR ,  'thumb' . $imageName);
-               $product->addImage($subfolderName . DIRECTORY_SEPARATOR . $fileName, $thumbnailPath);
-           }
-       }
-   }
+            //try to upload the file
+            $uploadWasSuccessful = \move_uploaded_file($_FILES['productImages']['tmp_name'][$key], $targetPath);
+            if($uploadWasSuccessful)
+            {
+                $thumbnailPath = $this->createThumbnail($targetPath, $subfolderName . DIRECTORY_SEPARATOR ,  'thumb' . $imageName);
+                $product->addImage($subfolderName . DIRECTORY_SEPARATOR . $fileName, $thumbnailPath);
+            }
+        }
+    }
 
-   /**
+    /**
     * Creates a thumbnail for a given image
     *
     * @param string $sourcePath         path of the original image
@@ -384,7 +387,7 @@ class ProductManagementController extends \myf\core\controller
     * @param string $targetImageName    target file name of the thumbnail
     * @return void                      empty string if thumbnail creation did not work, target subpath if creation was successful
     */
-   private function createThumbnail($sourcePath, $targetDirectory, $targetImageName) {
+    private function createThumbnail($sourcePath, $targetDirectory, $targetImageName) {
         $sourceImage  = null;
 
         //determine which imagecreate function shouldn be used;
@@ -429,5 +432,5 @@ class ProductManagementController extends \myf\core\controller
             return $targetDirectory . $targetImageName .  '.jpg';
         }
         return '';
-   }
+    }
 }

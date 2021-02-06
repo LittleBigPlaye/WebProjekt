@@ -4,6 +4,8 @@ namespace myf\controller;
 
 use myf\core\Controller;
 use myf\models\Product;
+use \myf\models\Order;
+use \myf\models\OrderItem;
 
 /**
  * This Controller is used for order-specific actions, such as
@@ -20,6 +22,7 @@ class ordersController extends Controller
      */
     public function actionShoppingcart()
     {
+        $this->setPositionIndicator(Controller::POSITION_CART);
         $orderItems = [];
         $totalPrice = 0;
         $order = null;
@@ -44,7 +47,7 @@ class ordersController extends Controller
                 }
             }
 
-            $order = new \myf\models\Order(array());
+            $order = new Order(array());
             
             $targetProductPrice = 0;
             //create new Order Item for each entry in cart
@@ -52,11 +55,11 @@ class ordersController extends Controller
             {
                 
                 //check if product ID is valid
-                $currentProduct = \myf\models\Product::findOne('id=' . $productID . ' AND isHidden=0');
+                $currentProduct = Product::findOne('id=' . $productID . ' AND isHidden=0');
                 if($currentProduct !== null)
                 {
                     //add new Item to orders
-                    $currentOrderItem = new \myf\models\OrderItem(array());
+                    $currentOrderItem = new OrderItem(array());
                     
                     $currentOrderItem->quantity = $quantity;
                     $currentOrderItem->productsID = $productID;
@@ -67,7 +70,7 @@ class ordersController extends Controller
                     //set price of desired product for ajax purpose
                     if(isset($targetProductID) && $currentProduct->id == $targetProductID) 
                     {
-                        $targetProductPrice = $currentOrderItem->actualPrice;
+                        $targetProductPrice = $currentOrderItem->formattedActualPrice;
                     }
                 }
             }
@@ -79,9 +82,9 @@ class ordersController extends Controller
                 $returnArray = array(
                     'productID'         => $targetProductID,
                     'targetQuantity'    => $targetQuantity,
-                    'targetPrice'       => number_format($targetProductPrice, 2, ',', '.'),
+                    'targetPrice'       => $targetProductPrice,
                     'numberOfProducts'  => $this->getNumberOfCartItems(),
-                    'totalPrice'        => number_format($totalPrice, 2, ',', '.')
+                    'totalPrice'        => $totalPrice
                 );
                 echo json_encode($returnArray);
                 exit(0);
@@ -89,9 +92,8 @@ class ordersController extends Controller
         }
         
         $this->setParam('orderItems', $orderItems);
-        $this->setParam('totalPrice', number_format($totalPrice, 2, ',', '.'));
+        $this->setParam('totalPrice', $totalPrice);
         $this->setParam('order'     , $order);
-        $this->setParam('currentPosition', 'shoppingcart');
     }
 
     /**
@@ -102,6 +104,8 @@ class ordersController extends Controller
      */
     public function actionConfirmOrder() 
     {
+        $this->setPositionIndicator(Controller::POSITION_CART);
+        
         //redirect user to login if the user is not already logged in
         if(!$this->isLoggedIn())
         {
@@ -143,7 +147,4 @@ class ordersController extends Controller
         
         $this->setParam('order', $order);
     }
-
-
-
 }

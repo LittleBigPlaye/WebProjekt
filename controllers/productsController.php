@@ -8,7 +8,12 @@
 
 namespace myf\controller;
 
- class ProductsController extends \myf\core\controller
+use \myf\core\Controller    as Controller;
+use \myf\models\Vendor      as Vendor;
+use \myf\models\Category    as Category;
+use \myf\models\Product     as Product;
+
+ class ProductsController extends Controller
  {
     /**
      * This view is used to show a specific product.
@@ -17,7 +22,6 @@ namespace myf\controller;
      */
     public function actionView()
     {
-        $this->setParam('currentPosition', 'products');
         //check if the given pid is valid formatted
         if(!isset($_GET['pid']) || !(is_numeric($_GET['pid']) || $_GET['pid'] == 'random'))
         {
@@ -43,11 +47,11 @@ namespace myf\controller;
         // try to find product with id in database
         if($_GET['pid'] == 'random')
         {
-            $product = \myf\models\Product::findOne('', 'RAND()');
+            $product = Product::findOne('', 'RAND()');
         }
         else
         {
-            $product = \myf\models\Product::findOne('id=' . $productID . $whereClause);
+            $product = Product::findOne('id=' . $productID . $whereClause);
         }
 
         // check if product has been found
@@ -66,6 +70,7 @@ namespace myf\controller;
         {
             $this->redirect('index.php?c=errors&a=404');
         }
+        $this->setPositionIndicator(Controller::POSITION_PRODUCTS);
     }
   
     /**
@@ -74,7 +79,6 @@ namespace myf\controller;
      */
     public function actionSearch()
     {
-        $this->setParam('currentPosition', 'products');
         //check if products should be added to cart
         if(isset($_POST['addToCart']) && is_numeric($_POST['addToCart']))
         {
@@ -82,11 +86,11 @@ namespace myf\controller;
         }
 
         //obtain vendors from database
-        $vendors = \myf\models\Vendor::find();
+        $vendors = Vendor::find();
         $this->setParam('vendors', $vendors);
 
         //obtain categories from database
-        $categories = \myf\models\Category::find();
+        $categories = Category::find();
         $this->setParam('categories', $categories);
 
         $isAdmin = $this->isAdmin();
@@ -195,10 +199,6 @@ namespace myf\controller;
         $startIndex = 0;        
         
         $products = $this->prepareProductList($numberOfPages, $currentPage, $startIndex, $where, $order);
-        $this->setParam('numberOfPages', $numberOfPages);
-        $this->setParam('currentPage', $currentPage);
-        $this->setParam('startIndex', $startIndex);
-        $this->setParam('products', $products);
 
         if(isset($_POST['ajax']) && $_POST['ajax'] == 1) 
         {
@@ -224,7 +224,12 @@ namespace myf\controller;
             }
         }
         $this->setParam('getString', $getString);
-
+        $this->setParam('numberOfPages', $numberOfPages);
+        $this->setParam('currentPage', $currentPage);
+        $this->setParam('startIndex', $startIndex);
+        $this->setParam('products', $products);
+        
+        $this->setPositionIndicator(Controller::POSITION_PRODUCTS);
     }
 
     /**
@@ -309,7 +314,7 @@ namespace myf\controller;
     private function calculateNumberOfProductPages($where = '')
     {
         //calculate the number of pages
-        $numberOfProducts = count(\myf\models\Product::find($where));
+        $numberOfProducts = count(Product::find($where));
         $numberOfPages = ceil($numberOfProducts / PRODUCTS_PER_PAGE);
         return $numberOfPages;
     }
@@ -378,7 +383,7 @@ namespace myf\controller;
         $startIndex = $this->calculateStartIndex($numberOfPages, $currentPage);
 
         //get products from database
-        $products = \myf\models\Product::findRange(($currentPage-1) * PRODUCTS_PER_PAGE, PRODUCTS_PER_PAGE, $where, $orderBy);
+        $products = Product::findRange(($currentPage-1) * PRODUCTS_PER_PAGE, PRODUCTS_PER_PAGE, $where, $orderBy);
         return $products;
     }
 
@@ -404,7 +409,7 @@ namespace myf\controller;
                 'name'          => $product->productName,
                 'catchPhrase'   => $product->catchPhrase,
                 'image'         => $thumbnailPath,
-                'price'         => $product->standardPrice,
+                'price'         => $product->formattedPrice,
                 'isHidden'      => $product->isHidden
             );
             array_push($productInfos, $currentProductInfo);
@@ -418,8 +423,6 @@ namespace myf\controller;
      */
     public function actionVendors() 
     {
-        $this->setParam('currentPosition', 'products');
-
         //check if products should be added to cart
         if(isset($_POST['addToCart']) && is_numeric($_POST['addToCart']))
         {
@@ -427,18 +430,19 @@ namespace myf\controller;
         }
 
         //fetch all vendors from database
-        $vendors = \myf\models\Vendor::find('', 'vendorName ASC');
+        $vendors = Vendor::find('', 'vendorName ASC');
 
         //fetch three random products for each vendor
         $vendorProducts = [];
         $db = $GLOBALS['database'];
         foreach($vendors as $key => $vendor)
         {
-            $vendorProducts[$key] = \myf\models\Product::findRange(0,3,'vendorsID = ' . $db->quote($vendor->id) . ' AND isHidden=0', 'RAND()');
+            $vendorProducts[$key] = Product::findRange(0,3,'vendorsID = ' . $db->quote($vendor->id) . ' AND isHidden=0', 'RAND()');
             
         }
 
         $this->setParam('vendors', $vendors);
         $this->setParam('vendorProducts', $vendorProducts);
+        $this->setPositionIndicator(Controller::POSITION_PRODUCTS);
     }
 }
