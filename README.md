@@ -32,3 +32,64 @@ Der Unterschied zwischen dem Nutzer und dem Administrator sehen Sie in der Navig
 Der Nutzer findet dort nur "Mein Konto" und der Administrator hat ein aufklappbares Element "Administration". Dort finden sich die Punkt "Mein Konto", "Produkt anlegen" und "Benutzerverwalten".
 
 Bei Bedarf können auch weitere Benutzer registriert werden. Beachten Sie hierbei, dass diese standardmäßig die Rolle "Benutzer" zugeordnet bekommen und somit **keine** administartoven Rechte haben.
+
+## Kurzübersicht: Ordnerstruktur
+
+### /assets
+In /assets sind folgende Dateien enthalten:
+- css - styles (styles)
+- javascript - Dateien (javascript)
+- bilder (images)
+- Schriftart(en) (fonts)
+
+### /config
+In /config sind folgende Dateien enthalten:
+- Datenbankkonfiguration (database.php)
+- Bildeinstellungen (für Uploads) (imageSettings.php)
+- allgemeine Projekteinstellungen (init.php)
+- Namen der Produkte, die auf der Startseite in der ersten Produktreihe angezeigt werden (indexProductConfiguration.txt)
+
+### /controllers
+In /controllers sind die jeweiligen Controller gelistet:
+
+- Accountverwaltung / Registrierung / Nutzeradministration (accountsController.php)
+- Fehlermeldungen (errorsController.php)
+- Warenkorb und Bestellungen (ordersController.php)
+- allgemeine Seiten wie Startseite, Impressum, Login (pagesController.php)
+- Produktverwaltung (Anlage, Bearbeitung) (productManagementController.php)
+- Produktansichten (Suche, Ansicht, Markenübersicht) (productsController.php)
+
+### /core
+In /core befinden sich die Basisklassen für Controller und Models
+
+- Basis Model (Grundlegende Funktionen für Datenbankzugriff via Models) (baseModelClass.php)
+- Grundlegende Funktionen für alle Controller (controllerClass.php)
+
+### /docs
+In /docs befindet sich die Dokumentation des Projektes. Die Dokumentation kann über einen Link im Footer erreicht werden
+
+### /models
+In /models befinden sich die models, für den Datenbankzugriff. Im Gegensatz, zu den Tabellen der Datenbank sind die Models im Singular gehalten.
+
+- Tabelle "addresses" (addressClass.php)
+- Tabelle "categories" (categoryClass.php)
+- Tabelle "images" (imageClass.php)
+- Tabelle "logins" (loginClass.php)
+- Tabelle "orders" (orderClass.php)
+- Tabelle "orderItems" (orderItemClass.php)
+- Tabelle "products" (productClass.php)
+- Tabelle "productImages" (productImage.php)
+- Tabelle "users" (userClass.php)
+- Tabelle "vendors" (vendorClass.php)
+
+### /src
+In /src sind sowohl die Datenbank als MySQL-Workbench Projekt sowie der Datenbankdump als auch die use cases nochmals als .drawio Datei enthalten. (Die Use-Cases sind ebenfalls in der Dokumentation als Bilder gelistet)
+
+- Datenbankspezifische Dateien (database)
+- Use-Case Diagramme (useCases)
+
+### /views
+In /views sind die jeweiligen Seiten enthalten. Hierbei sind die Seiten nach den jeweiligen Actions benannt und befinden sich jeweils in einem Ordner, der den Namen der Controller Klasse trägt, in der sich die zugehörige "action"-Methode befindet.
+
+### /index.php
+Die Datei /index.php stellt den Einstiegspunkt in das Projekt dar.
