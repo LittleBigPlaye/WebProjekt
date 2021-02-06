@@ -36,6 +36,7 @@ body {
     color: var(--fontColor);
 }
 
+h1,
 h2,
 p {
     text-align: center;
@@ -105,11 +106,18 @@ p {
 }
 
 .productCard {
+    text-align: left;
     padding: 20px;
     margin: 15px;
     background-color: white;
     display: flex;
     border-radius: 5px;
+    box-shadow: 0 2px 4px 0 #00000033, 0 3px 5px 0 #0000007c;
+    transition: .2s ease-in-out;
+}
+
+.productCard:hover {
+    box-shadow: 0 5px 10px 0 #00000033, 0 10px 15px 0 #0000007c;
 }
 
 .productCard .catchPhrase {
@@ -124,11 +132,6 @@ p {
 .productCard a {
     text-decoration: none;
     color: var(--fontColor);
-}
-
-.productCard:hover {
-    box-shadow: 0 8px 16px 0 #00000033, 0 12px 20px 0 #0000007c;
-    transition: .2s ease-in-out;
 }
 
 .productCard .title {
@@ -278,13 +281,13 @@ p {
 }
 
 .spotlightElement {
-    box-shadow: 0 4px 8px 0 #00000033, 0 6px 20px 0 #00000030;
+    box-shadow: 0 2px 4px 0 #00000033, 0 3px 10px 0 #00000030;
+    transition: .3s ease-in-out;
     overflow: hidden;
 }
 
 .spotlightElement:hover {
     box-shadow: 0 8px 16px 0 #00000033, 0 12px 20px 0 #0000007c;
-    transition: .3s ease;
 }
 
 .spotlightElement .text {
@@ -546,8 +549,9 @@ form input[type=checkbox] {
 
 .customCheckbox img {
     position: absolute;
-    width: 130%;
+    width: 130% !important;
     top: -4px;
+    left: 0px;
 }
 
 .customCheckbox input[type=checkbox]:checked+div {
@@ -1102,6 +1106,7 @@ form label {
 
 .vendorsWrapper {
     width: 95%;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -1307,6 +1312,13 @@ form label {
     font-weight: bold;
     color: white;
     background-color: #363636 !important;
+}
+
+.table.userManagement .customCheckbox {
+    display: block;
+    margin: auto auto;
+    float: none;
+    text-align: center;
 }
 
 

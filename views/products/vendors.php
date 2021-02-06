@@ -1,5 +1,4 @@
 <!-- @author Robin Beck -->
-
 <h1>Unsere Marken</h1>
 
 <?php foreach ($vendorProducts as $key => $currentVendorProducts) : ?>
@@ -29,4 +28,5 @@
         </div>
     </div>
 <?php endforeach; ?>
+
 <script src="<?= JAVASCRIPTPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'addToCart.js' ?>"></script>

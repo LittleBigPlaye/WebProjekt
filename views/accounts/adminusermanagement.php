@@ -65,12 +65,17 @@
 
                     <div class="tableCell center">
                         <label class="mobileLabel" for="passwordReset<?=$index?>">Passwort zurücksetzen</label>
-                        <input id="passwordReset<?=$index?>" type="checkbox" id="passwordReset" name="passwordReset" >
-                        
+                        <!-- <input id="passwordReset<?=$index?>" type="checkbox" name="passwordReset" > -->
+                        <label for="passwordReset<?=$index?>">
+                            <span class="customCheckbox">
+                                <input type="checkbox" name="passwordReset" id="passwordReset<?=$index?>"/>
+                                <div><img src="assets/images/icons/tick.svg" alt=""></div>
+                            </span>
+                        </label>
                     </div>
 
                     <div class="tableCell center">
-                        <input type="submit" class="buttonForAll" name="saveChanges" value="Änderungen speichern">
+                        <input type="submit" name="saveChanges" value="Änderungen speichern">
                     </div>
             </form>
         <?php endforeach ?>

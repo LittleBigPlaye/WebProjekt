@@ -80,7 +80,6 @@
         background-color: white;
         border-radius: 5px;
         margin: 15px auto;
-        width: 80%;
     }
     .vendorsWrapper label {
         padding: 0;
@@ -138,6 +137,23 @@
     }
     .table.userManagement {
         padding: 5px;
+        width: 90%;
+        max-width: 2000px;
+    }
+    .table.userManagement:not(.tableRow.head) .tableCell span {
+        display: block;
+        margin-top: 18px;
+    }
+    .table.userManagement label {
+        margin-top: 25px;
+    }
+    .table.table.userManagement .head {
+        font-size: 1.3em;
+    }
+    .table.userManagement input,
+    .table.userManagement select {
+        margin: 5px 0 !important;
+        font-size: 1em;
     }
     .table .tableRow {
         display: table-row;
@@ -222,11 +238,5 @@
     }
     .productForm {
         max-width: 1000px;
-    }
-}
-
-@media screen and (min-width: 1700px) {
-    .vendorsWrapper {
-        max-width: 1000px !important;
     }
 }
