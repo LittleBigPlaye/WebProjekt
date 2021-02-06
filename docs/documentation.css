@@ -8,13 +8,17 @@ body {
 body {
     margin: 0 auto;
     background-color: white;
-    counter-reset: h2counter;
-    counter-reset: h3counter;
-    counter-reset: h4counter;
-    counter-reset: h5counter;
     counter-reset: image;
     font-family: 'Nunito', sans-serif;
     background-color: #e2e2e2;
+    counter-reset: h2counter;
+}
+
+h2,
+h3,
+h4,
+h5 {
+    color: #333333;
 }
 
 p,
@@ -56,15 +60,15 @@ p+h5 {
     color: white;
 }
 
-h1:not(.headline h1) {
+
+/* .headline {
     counter-reset: h2counter;
-    visibility: hidden;
-}
+} */
 
 h2:after {
     content: ' ';
     display: block;
-    border: 2px solid black;
+    border: .5px solid #333333;
 }
 
 #intro {
@@ -89,13 +93,13 @@ h3:before {
     content: counter(h2counter) "." counter(h3counter) "\0000a0\0000a0";
 }
 
+h4 {
+    counter-reset: h5counter;
+}
+
 h4:before {
     counter-increment: h4counter;
     content: counter(h2counter) "." counter(h3counter) "." counter(h4counter)"\0000a0\0000a0";
-}
-
-h4 {
-    counter-reset: h5counter;
 }
 
 h5:before {
@@ -120,7 +124,8 @@ h4+h3,
 h4+h2,
 h5+h4,
 h5+h3,
-h5+h2 {
+h5+h2,
+table+h3 {
     margin-top: 20px !important;
 }
 
@@ -169,11 +174,11 @@ b+p {
 
 a {
     text-decoration: none;
-    color: #444444;
+    color: inherit;
 }
 
 a:hover {
-    color: orange;
+    color: rgb(65, 65, 65);
     transition: .2s ease-in-out;
 }
 
@@ -184,7 +189,7 @@ a:hover {
 
 .imageTitle {
     font-size: 0.8em;
-    color: #333333;
+    color: #5c5c5c;
     margin: 0 auto;
     display: block;
     margin-bottom: 15px;
@@ -226,8 +231,8 @@ a:hover {
 table {
     width: 90%;
     max-width: 1500px;
-    /* margin: 15px auto; */
     margin: 15px 0;
+    margin-bottom: 50px;
 }
 
 th {
