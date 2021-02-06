@@ -119,7 +119,7 @@
         display: grid;
         padding: 15px;
         grid-template-columns: 2fr 2fr 1fr 1fr;
-        grid-template-areas: ". heading . ." "content content content total";
+        grid-template-areas: ". heading . ." "content content content total" ". notFound . .";
         font-size: 1.1em;
     }
     .cartTotal {

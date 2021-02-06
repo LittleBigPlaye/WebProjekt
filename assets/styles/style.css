@@ -1173,7 +1173,7 @@ form label {
     padding: 5px;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-areas: "heading" "content" "total"
+    grid-template-areas: "heading" "content" "total" "notFound"
 }
 
 .shoppingCart button {
@@ -1189,6 +1189,10 @@ form label {
 
 .shoppingCart button:hover {
     background-color: #474747;
+}
+
+.shoppingCart .emptySearch {
+    grid-area: notFound;
 }
 
 .shoppingCart h1 {
