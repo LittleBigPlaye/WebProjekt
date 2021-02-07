@@ -6,7 +6,7 @@ var cartRequest = null;
 var btnCartAdders = null;
 var cartBadgeText = null;
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     //get all cart buttons of the current page
     btnCartAdders = document.getElementsByClassName('cartButton');
     cartBadge = document.getElementById('cartBadge');
@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (cartRequest) {
         //add a listener to all found buttons
-        Array.prototype.forEach.call(btnCartAdders, function(btnAddToCart) {
-            btnAddToCart.addEventListener('click', function(event) {
+        Array.prototype.forEach.call(btnCartAdders, function (btnAddToCart) {
+            btnAddToCart.addEventListener('click', function (event) {
                 event.preventDefault();
                 event.stopPropagation();
 
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-        cartRequest.onreadystatechange = function() {
+        cartRequest.onreadystatechange = function () {
             if (this.readyState == XMLHttpRequest.DONE) {
                 if (this.status == 200) {
                     //check if there are items in the cart
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
 
                 } else {
-                    alert(this.statusText);
+                    alert('Da hat etwas nicht funktioniert!\nBitte versuchen Sie es erneut oder Laden Sie die Seite neu, sollte der Fehler weiterhin bestehen.');
                 }
             }
         }
