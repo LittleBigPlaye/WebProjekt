@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     var btnSubmit = document.getElementById('submit');
 
     //get input fields from form
@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     //var password = document.getElementById('user_password');
 
     if (btnSubmit) {
-        btnSubmit.addEventListener('click', function(event) {
+        btnSubmit.addEventListener('click', function (event) {
             var formIsValid = true;
 
             var emailregex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/m;
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 event.preventDefault();
                 event.stopPropagation();
             }
-            return formisValid;
+            return formIsValid;
         });
     }
 });

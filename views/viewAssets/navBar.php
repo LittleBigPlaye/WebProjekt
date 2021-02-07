@@ -19,8 +19,8 @@ else if ($cartCount > 99) {
     <label for="navToggle" id="navToggleLabel">Navigation<span class="dropIcon">&#9776;</span></label>
     <input type="checkbox" id="navToggle">
 
-    <ul class="mainNav clearfix">
-        <li class="<?= ($currentPosition == Controller::POSITION_INDEX) ? 'active' : '' ?> homePage"><a href="?c=pages&a=index">
+    <ul class="mainNav clearfix" id="mainNav">
+        <li class="<?= ($currentPosition == Controller::POSITION_INDEX) ? 'active' : '' ?> homePage"><a href="index.php?c=pages&a=index">
                 <span>Startseite</span>
                 <img class="smallLogo" src="assets/images/icons/myf_logo_scmall.svg" alt="Startseite">
             </a></li>

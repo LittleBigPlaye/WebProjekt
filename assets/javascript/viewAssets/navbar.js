@@ -3,11 +3,11 @@
  * @author Robin Beck
  */
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     var checkboxes = document.getElementsByClassName('subNavToggle');
 
-    Array.prototype.forEach.call(checkboxes, function(checkbox, index) {
-        checkbox.addEventListener('change', function() {
+    Array.prototype.forEach.call(checkboxes, function (checkbox, index) {
+        checkbox.addEventListener('change', function () {
             if (this.checked) {
                 showSubNavigation(index);
             }
