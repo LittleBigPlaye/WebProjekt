@@ -87,6 +87,10 @@ class PagesController extends \myf\core\controller
     public function actionImprint()
     {  
     }
+    public function actionAboutus()
+    {
+
+    }
 
     public function actionLogin()
     {
@@ -106,7 +110,7 @@ class PagesController extends \myf\core\controller
         if(isset($_POST['submit']))
         {
             $email = trim($_POST["email"]);
-            $password = $_POST["user_password"];
+            $password = $_POST["password"];
             // Check if email is empty
             if (empty(trim($_POST["email"]))) {
                 $errorMessages['email'] = "Bitte gib eine Email an.";
@@ -127,7 +131,7 @@ class PagesController extends \myf\core\controller
                 $errorMessages['user_validated'] = "Dieser Nutzer ist nicht validiert";
             }
             // Check if password is empty
-            if (empty(trim($_POST["user_password"]))) {
+            if (empty(trim($password))) {
                 $errorMessages['password'] = "Bitte gib ein Passwort ein.";
             }
 
