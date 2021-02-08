@@ -373,6 +373,7 @@ class accountsController extends Controller
                     //set new password and save
                     $updateLogin=Login::findOne('usersID='.$userID);
                     $updateLogin->passwordHash = $savePassword;
+                    $updateLogin->passwordResetHash = "";
                     $updateLogin->save();
                     $_SESSION['success']= 'Das Passwort wurde erfolgreich geändert!';
                     $successMessage = "Das Passwort wurde erfolgreich geändert!";

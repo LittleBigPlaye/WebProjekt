@@ -88,6 +88,10 @@ class PagesController extends Controller
     public function actionImprint()
     {  
     }
+    public function actionAboutus()
+    {
+
+    }
 
     public function actionLogin()
     {
@@ -115,7 +119,7 @@ class PagesController extends Controller
         if(isset($_POST['submit']))
         {
             $email = trim($_POST["email"]);
-            $password = $_POST["user_password"];
+            $password = $_POST["password"];
             // Check if email is empty
             if (empty(trim($_POST["email"]))) {
                 $errorMessages['email'] = "Bitte gib eine Email an.";
@@ -136,7 +140,7 @@ class PagesController extends Controller
                 $errorMessages['user_validated'] = "Dieser Nutzer ist nicht validiert";
             }
             // Check if password is empty
-            if (empty(trim($_POST["user_password"]))) {
+            if (empty(trim($password))) {
                 $errorMessages['password'] = "Bitte gib ein Passwort ein.";
             }
 
@@ -158,7 +162,6 @@ class PagesController extends Controller
                     $_SESSION['currentLogin'] = serialize($login);
                     $_SESSION['isLoggedIn'] = true;
                     $_SESSION['userID'] = $login->usersID;
-                    $login->passwordResetHash = "";
                     $login->failedLoginCount = 0;
                     $login->lastLogin = date('Y-m-d H:i:s');
                     $login->save();
