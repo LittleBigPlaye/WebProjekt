@@ -1,17 +1,17 @@
-<?php if(isset($errorMessage) && !empty($errorMessage)) : ?>
-    <input class="messageToggle" type="checkbox" id="errorToggle">
-    <div class="message errorMessage">
-        <label class="messageClose" for="errorToggle">&times</label>
-        <p><?= htmlspecialchars($message) ?></p>
-    </div>
+<?php if (isset($errorMessage) && !empty($errorMessage)) : ?>
+<input class="messageToggle" type="checkbox" id="errorToggle">
+<div class="message errorMessage">
+    <label class="messageClose" for="errorToggle">&times</label>
+    <p><?= htmlspecialchars($message) ?></p>
+</div>
 <?php endif ?>
 
-<?php if(isset($succesMessage) && !empty($succesMessage)) : ?>
-    <input class="messageToggle" type="checkbox" id="successToggle">
-    <div class="message successMessage">
-        <label class="messageClose" for="successToggle">&times</label>
-        <p><?= $successMessage ?></p>
-    </div>
+<?php if (isset($succesMessage) && !empty($succesMessage)) : ?>
+<input class="messageToggle" type="checkbox" id="successToggle">
+<div class="message successMessage">
+    <label class="messageClose" for="successToggle">&times</label>
+    <p><?= $successMessage ?></p>
+</div>
 <?php endif ?>
 
 <div class="formWrapper">
@@ -20,51 +20,40 @@
 
         <div class="input">
             <label class="required" for="firstName">Vorname</label>
-            <input type="text" id="firstName" name="firstName" value="<?=htmlspecialchars($user->firstName)?>" >
+            <input type="text" id="firstName" name="firstName" value="<?= htmlspecialchars($user->firstName) ?>">
             <span class="errorInfo">Bitte geben Sie ihren Vornamen an!</span>
         </div>
-        <br>
 
         <div class="input">
             <label class="optional" for="secondName">Zweitname</label>
-            <input type="text" id="secondName" name="secondName" value="<?=htmlspecialchars($user->secondName)?>">
+            <input type="text" id="secondName" name="secondName" value="<?= htmlspecialchars($user->secondName) ?>">
 
         </div>
-        <br>
 
         <div class="input">
             <label class="required" for="lastName">Nachname</label>
-            <input type="text" id="lastName" name="lastName" value="<?=htmlspecialchars($user->lastName)?>">
+            <input type="text" id="lastName" name="lastName" value="<?= htmlspecialchars($user->lastName) ?>">
             <span class="errorInfo">Bitte geben Sie ihren Nachnamen an!</span>
         </div>
-        <br>
 
         <div class="input">
             <label class="required" for="birthDate">Geburtstag</label>
-            <input id="birthDate" name="birthDate" type="date" value="<?=$user->birthDate?>">
-            <span class="errorInfo">Nach dem Alter fragt man nicht, jedoch brauchen wir Trotzdem ihr Geburtsdatum von Ihnen.</span>
+            <input id="birthDate" name="birthDate" type="date" value="<?= $user->birthDate ?>">
+            <span class="errorInfo">Nach dem Alter fragt man nicht, jedoch brauchen wir Trotzdem ihr Geburtsdatum von
+                Ihnen.</span>
         </div>
-        <br>
-
 
         <label class="optional" for="gender">Geschlecht</label>
         <select name="gender">
-            <option value="m"
-                <?= ($user->gender === "m") ? 'selected' : '' ?>
-            >männlich</option>
-            <option value="f"
-                <?= ($user->gender === "f") ? 'selected' : '' ?>
-            >weiblich</option>
-            <option value="u"
-                <?= ($user->gender === "u") ? 'selected' : '' ?>
-            >divers</option>
+            <option value="m" <?= ($user->gender === "m") ? 'selected' : '' ?>>männlich</option>
+            <option value="f" <?= ($user->gender === "f") ? 'selected' : '' ?>>weiblich</option>
+            <option value="u" <?= ($user->gender === "u") ? 'selected' : '' ?>>divers</option>
         </select>
-        <br>
-        <br>
+
         <label class="optional" for="phone">Telefonnummer</label>
-        <input type="text" id="phone" name="phone" value="<?=htmlspecialchars($user->phone)?>">
-        <br>
+        <input type="text" id="phone" name="phone" value="<?= htmlspecialchars($user->phone) ?>">
+
         <input id="submit" type="submit" name="submit" value="Speichern">
     </form>
 </div>
-<script src="<?=JAVASCRIPTPATH . 'accounts' . DIRECTORY_SEPARATOR . 'validatePersonas.js'?>"></script>
+<script src="<?= JAVASCRIPTPATH . 'accounts' . DIRECTORY_SEPARATOR . 'validatePersonas.js' ?>"></script>

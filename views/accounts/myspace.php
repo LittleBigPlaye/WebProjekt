@@ -5,11 +5,11 @@
         </h1>
 
         <?php if (isset($successMessage)) : ?>
-        <input class="messageToggle" type="checkbox" id="successToggle">
-        <div class="message successMessage">
-            <label class="messageClose" for="successToggle">&times</label>
-            <p><?= $successMessage ?></p>
-        </div>
+            <input class="messageToggle" type="checkbox" id="successToggle">
+            <div class="message successMessage">
+                <label class="messageClose" for="successToggle">&times</label>
+                <p><?= $successMessage ?></p>
+            </div>
         <?php endif ?>
 
         <h2>Persönliche Daten</h2>
@@ -42,7 +42,6 @@
 
 
         <hr>
-        <br>
 
         <h2>Meine Bestellungen</h2>
         <section class="formWrapper jsRelevant">
@@ -54,42 +53,42 @@
         <section class="formWrapper">
             <?php foreach ($orders as $order) : ?>
 
-            <h3>Bestellung <?= htmlspecialchars($order->id) ?></h3>
+                <h3>Bestellung <?= htmlspecialchars($order->id) ?></h3>
 
-            <div class="table">
-                <div class="tableRow head">
-                    <div class="tableCell center">
-                        Bezeichnung
+                <div class="table">
+                    <div class="tableRow head">
+                        <div class="tableCell center">
+                            Bezeichnung
+                        </div>
+                        <div class="tableCell center">
+                            Artikelnummer
+                        </div>
+                        <div class="tableCell center">
+                            Anzahl
+                        </div>
+                        <div class="tableCell center">
+                            Preis
+                        </div>
                     </div>
-                    <div class="tableCell center">
-                        Artikelnummer
-                    </div>
-                    <div class="tableCell center">
-                        Anzahl
-                    </div>
-                    <div class="tableCell center">
-                        Preis
-                    </div>
-                </div>
-                <?php foreach ($order->orderItems as $orderItem) : ?>
+                    <?php foreach ($order->orderItems as $orderItem) : ?>
 
-                <div class="tableRow">
-                    <div class="tableCell center">
-                        <?= $orderItem->product->productName ?>
-                    </div>
-                    <div class="tableCell center">
-                        <?= htmlspecialchars(str_pad($orderItem->product->id, 12, '0', STR_PAD_LEFT)) ?>
-                    </div>
-                    <div class="tableCell center">
-                        <?= $orderItem->quantity ?> Stück
-                    </div>
-                    <div class="tableCell center">
-                        <?= $orderItem->formattedActualPrice ?> €
-                    </div>
+                        <div class="tableRow">
+                            <div class="tableCell center">
+                                <?= $orderItem->product->productName ?>
+                            </div>
+                            <div class="tableCell center">
+                                <?= htmlspecialchars(str_pad($orderItem->product->id, 12, '0', STR_PAD_LEFT)) ?>
+                            </div>
+                            <div class="tableCell center">
+                                <?= $orderItem->quantity ?> Stück
+                            </div>
+                            <div class="tableCell center">
+                                <?= $orderItem->formattedActualPrice ?> €
+                            </div>
+                        </div>
+                    <?php endforeach ?>
                 </div>
-                <?php endforeach ?>
-            </div>
-            <hr>
+                <hr>
             <?php endforeach ?>
         </section>
 </div>

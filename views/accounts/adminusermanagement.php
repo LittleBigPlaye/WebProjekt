@@ -12,74 +12,62 @@
             <div class="tableCell center">Bestätigung</div>
         </div>
 
-        <?php foreach($logins as $index => $login) : ?>
-            <form class="tableRow" method="post">
+        <?php foreach ($logins as $index => $login) : ?>
+        <form class="tableRow" method="post">
 
-                    <input type="hidden"name="user" value="<?=htmlspecialchars($login->user->id)?>">
+            <input type="hidden" name="user" value="<?= htmlspecialchars($login->user->id) ?>">
 
-                    <div class="tableCell center">
-                        <label class="mobileLabel" for="firstName<?=$index?>">Vorname</label>
-                        <span id=firstName<?=$index?>><?=htmlspecialchars($login->user->firstName)?></span>
-                    </div>
-                    
-                    <div class="tableCell center">
-                        <label class="mobileLabel" for="lastName<?=$index?>">Nachname</label>
-                        <span id="lastName<?=$index?>"><?=htmlspecialchars($login->user->lastName)?></span>
-                    </div>
-                    
-                    <div class="tableCell center">
-                        <label class="mobileLabel" for="usertype<?=$index?>">Kontotyp</label>
-                        <select id="usertype<?=$index?>" name="role">
-                            <option value="admin"
-                                <?= ($login->user->role === 'admin') ? 'selected' : '' ?>>
-                                Admin</option>
-                            <option value="user"
-                                <?= ($login->user->role === 'user') ? 'selected' : '' ?>>
-                                Nutzer</option>
-                        </select>
-                    </div>
+            <div class="tableCell center">
+                <label class="mobileLabel" for="firstName<?= $index ?>">Vorname</label>
+                <span id=firstName<?= $index ?>><?= htmlspecialchars($login->user->firstName) ?></span>
+            </div>
 
-                    <div class="tableCell center">
-                        <label class="mobileLabel" for="validated<?=$index?>">Validierung</label>
-                        <select id="validadet<?=$index?>" name="validated">
-                            <option value="1"
-                                <?= ($login->validated) ? 'selected' : '' ?>
-                            >validiert</option>
-                            <option value="0"
-                                <?= ($login->validated) ? '' : 'selected' ?>
-                            >nicht validiert</option>
-                        </select>
-                    </div>
+            <div class="tableCell center">
+                <label class="mobileLabel" for="lastName<?= $index ?>">Nachname</label>
+                <span id="lastName<?= $index ?>"><?= htmlspecialchars($login->user->lastName) ?></span>
+            </div>
 
-                    <div class="tableCell center">
-                        <label class="mobileLabel" for="enabled<?=$index?>">Kontostatus</label>
-                        <select id="enabled<?=$index?>" name="enabled">
-                            <option value="1"
-                                <?= ($login->enabled) ? 'selected' : '' ?>
-                            >aktiv</option>
-                            <option value="0"
-                                <?= ($login->enabled) ? '' : 'selected' ?>
-                            >gesperrt</option>
-                        </select>
-                    </div>
+            <div class="tableCell center">
+                <label class="mobileLabel" for="usertype<?= $index ?>">Kontotyp</label>
+                <select id="usertype<?= $index ?>" name="role">
+                    <option value="admin" <?= ($login->user->role === 'admin') ? 'selected' : '' ?>>
+                        Admin</option>
+                    <option value="user" <?= ($login->user->role === 'user') ? 'selected' : '' ?>>
+                        Nutzer</option>
+                </select>
+            </div>
 
-                    <div class="tableCell center">
-                        <label class="mobileLabel" for="passwordReset<?=$index?>">Passwort zurücksetzen</label>
-                        <!-- <input id="passwordReset<?=$index?>" type="checkbox" name="passwordReset" > -->
-                        <label for="passwordReset<?=$index?>">
-                            <span class="customCheckbox">
-                                <input type="checkbox" name="passwordReset" id="passwordReset<?=$index?>"/>
-                                <div><img src="assets/images/icons/tick.svg" alt=""></div>
-                            </span>
-                        </label>
-                    </div>
+            <div class="tableCell center">
+                <label class="mobileLabel" for="validated<?= $index ?>">Validierung</label>
+                <select id="validadet<?= $index ?>" name="validated">
+                    <option value="1" <?= ($login->validated) ? 'selected' : '' ?>>validiert</option>
+                    <option value="0" <?= ($login->validated) ? '' : 'selected' ?>>nicht validiert</option>
+                </select>
+            </div>
 
-                    <div class="tableCell center">
-                        <input type="submit" name="saveChanges" value="Änderungen speichern">
-                    </div>
-            </form>
+            <div class="tableCell center">
+                <label class="mobileLabel" for="enabled<?= $index ?>">Kontostatus</label>
+                <select id="enabled<?= $index ?>" name="enabled">
+                    <option value="1" <?= ($login->enabled) ? 'selected' : '' ?>>aktiv</option>
+                    <option value="0" <?= ($login->enabled) ? '' : 'selected' ?>>gesperrt</option>
+                </select>
+            </div>
+
+            <div class="tableCell center">
+                <label class="mobileLabel" for="passwordReset<?= $index ?>">Passwort zurücksetzen</label>
+                <!-- <input id="passwordReset<?= $index ?>" type="checkbox" name="passwordReset" > -->
+                <label for="passwordReset<?= $index ?>">
+                    <span class="customCheckbox">
+                        <input type="checkbox" name="passwordReset" id="passwordReset<?= $index ?>" />
+                        <div><img src="assets/images/icons/tick.svg" alt=""></div>
+                    </span>
+                </label>
+            </div>
+
+            <div class="tableCell center">
+                <input type="submit" name="saveChanges" value="Änderungen speichern">
+            </div>
+        </form>
         <?php endforeach ?>
     </div>
 </div>
-
-
