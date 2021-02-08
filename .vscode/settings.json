@@ -1,0 +1,21 @@
+{
+    "cSpell.includeRegExpList": [
+        "/\\**\\*/",
+        "* \"'(?:[^'\\\\n]|\\\\\\\\')*'\""
+    ],
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MariaDB",
+            "name": "maskyourface",
+            "username": "root",
+            "database": "maskyourface",
+            "password": ""
+        }
+    ]
+}

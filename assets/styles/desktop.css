@@ -5,6 +5,7 @@
 }
 
 @media screen and (min-width: 900px) {
+    /* #region header */
     .logo1 {
         display: inline-block;
         position: relative;
@@ -17,20 +18,8 @@
     .header .icon {
         display: none;
     }
-    body {
-        margin: 0px;
-        background: #e1e1e1;
-        color: #384047;
-    }
-    h1,
-    h2,
-    p {
-        text-align: center;
-    }
-    /* spotlight */
-    .productSpotlight {
-        max-width: 1000px;
-    }
+    /* #endregion */
+    /* #region forms */
     .registerForm {
         width: 60% !important;
     }
@@ -53,21 +42,44 @@
     .orderConfirmationForm {
         text-align: left;
     }
-    .productViewWrapper {
-        background-color: white;
-        width: 50%;
-        margin: 0 auto;
-        border-radius: 5px;
+    .loginForm {
+        width: 450px;
     }
+    /* #region filter form */
+    .filterForm {
+        display: block !important;
+        width: 250px !important;
+        margin-top: 15px !important;
+        border-radius: 5px 5px 5px 5px !important;
+    }
+    .filterForm select {
+        cursor: pointer;
+    }
+    .filterToggle {
+        display: none;
+        cursor: pointer;
+    }
+    .filterForm .desktopTitle {
+        display: block;
+        font-size: 1.3em;
+    }
+    .filterToggleLabel {
+        display: none;
+    }
+    .filterToggleLabel .dropIcon {
+        float: right;
+    }
+    /* #endregion */
+    /* #endregion */
     .errorPage img {
         width: 40%;
     }
+    /* #region vendors */
     .vendorsWrapper {
         padding: 15px;
         background-color: white;
         border-radius: 5px;
         margin: 15px auto;
-        width: 80%;
     }
     .vendorsWrapper label {
         padding: 0;
@@ -88,35 +100,35 @@
         left: 0px;
         width: 350px;
     }
+    .vendorsWrapper .products {
+        max-width: 100% !important;
+    }
+    /* #endregion */
     .input .errorInfo {
         min-width: 10%;
         max-width: 100%;
     }
-    .loginForm {
-        width: 450px;
-    }
     .productCard {
         max-width: 300px;
     }
-    .vendorsWrapper .products {
-        max-width: 100% !important;
-    }
+    /* #region shoppingCart */
     .cartListing {
-        /* width: 70%; */
         margin-left: 0;
     }
     .shoppingCart {
         display: grid;
         padding: 15px;
         grid-template-columns: 2fr 2fr 1fr 1fr;
-        grid-template-areas: ". heading . ." "content content content total";
-        font-size: 1.3em;
+        grid-template-areas: ". heading . ." "content content content total" ". notFound . .";
+        font-size: 1.1em;
     }
     .cartTotal {
         max-height: 200px;
         padding: 10px;
         border-radius: 5px;
     }
+    /* #endregion */
+    /* #region psuedoTable */
     .table {
         display: table;
         margin: 0 auto;
@@ -125,6 +137,23 @@
     }
     .table.userManagement {
         padding: 5px;
+        width: 90%;
+        max-width: 2000px;
+    }
+    .table.userManagement:not(.tableRow.head) .tableCell span {
+        display: block;
+        margin-top: 18px;
+    }
+    .table.userManagement label {
+        margin-top: 25px;
+    }
+    .table.table.userManagement .head {
+        font-size: 1.3em;
+    }
+    .table.userManagement input,
+    .table.userManagement select {
+        margin: 5px 0 !important;
+        font-size: 1em;
     }
     .table .tableRow {
         display: table-row;
@@ -157,6 +186,17 @@
     .table.userManagement .tableCell {
         width: 14%;
     }
+    /* #endregion  */
+    /* #region products */
+    .productViewWrapper {
+        background-color: white;
+        width: 50%;
+        margin: 0 auto;
+        border-radius: 5px;
+    }
+    .productSpotlight {
+        max-width: 1000px;
+    }
     form.moreProducts {
         width: 400px;
     }
@@ -164,12 +204,6 @@
         width: 500px;
         margin: 0 auto;
         margin-bottom: 15px;
-    }
-    .imprint {
-        max-width: 60%;
-    }
-    .footer {
-        flex-direction: row;
     }
     .productBoxWrapper {
         max-width: 2500px;
@@ -179,30 +213,17 @@
         grid-template-columns: 1fr 10fr 2fr;
         grid-template-areas: ". search ." "sidebar content ." ". pager ." ". loadMore .";
     }
-    /* #region filter form */
-    .filterForm {
-        display: block !important;
-        width: 250px !important;
-        border-radius: 5px 5px 5px 5px !important;
+    /* #endregion products */
+    .imprint {
+        width: 60%;
+        max-width: 1000px;
     }
-    .filterForm select {
-        cursor: pointer;
+    .imprint .gridWrapper {
+        grid-template-columns: 1fr 1fr 1fr;
     }
-    .filterToggle {
-        display: none;
-        cursor: pointer;
+    .footer {
+        flex-direction: row;
     }
-    .filterForm .desktopTitle {
-        display: block;
-        font-size: 1.3em;
-    }
-    .filterToggleLabel {
-        display: none;
-    }
-    .filterToggleLabel .dropIcon {
-        float: right;
-    }
-    /* #endregion */
 }
 
 @media screen and (min-width: 1110px) {
@@ -217,12 +238,5 @@
     }
     .productForm {
         max-width: 1000px;
-    }
-}
-
-@media screen and (min-width: 1700px) {
-    /* #endregion */
-    .vendorsWrapper {
-        max-width: 1000px !important;
     }
 }

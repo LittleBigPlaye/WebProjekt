@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function()
+document.addEventListener('DOMContentLoaded', function ()
 {
     var btnSubmit = document.getElementById('submit');
 
@@ -7,11 +7,11 @@ document.addEventListener('DOMContentLoaded', function()
     var password = document.getElementById('password')
 
     if (btnSubmit) {
-        btnSubmit.addEventListener('click', function(event)
+        btnSubmit.addEventListener('click', function (event)
         {
             var formIsValid = true;
-            var emailregex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/m;
 
+            var emailregex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/m;
             //check if email is set and valid
             if (!email || email.value.length <= 0 || (!email.value.match(emailregex)))
             {

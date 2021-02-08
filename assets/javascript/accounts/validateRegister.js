@@ -6,6 +6,12 @@ document.addEventListener('DOMContentLoaded', function() {
     var lastName = document.getElementById('lastName');
     var email = document.getElementById('email');
     var birthDate = document.getElementById('birthdate');
+    var password = document.getElementById('password');
+    var password2 = document.getElementById('password2');
+    var street = document.getElementById('street');
+    var streetNumber = document.getElementById('streetNumber');
+    var zipCode = document.getElementById('zipCode');
+    var city = document.getElementById('city');
 
     var registerForm = document.getElementById('registerForm');
 
@@ -63,6 +69,67 @@ document.addEventListener('DOMContentLoaded', function() {
                 {
                 birthDate.classList.remove('errorHighlight');
             }
+
+            //check if password is set
+            if (!password || password.value.length <= 0)
+            {
+                password.classList.add("errorHighlight");
+                formIsValid = false;
+            } else
+            {
+                password.classList.remove('errorHighlight');
+            }
+
+            //check if password2 is set
+            if (!password2 || password2.value.length <= 0)
+            {
+                password2.classList.add("errorHighlight");
+                formIsValid = false;
+            } else
+            {
+                password2.classList.remove('errorHighlight');
+            }
+
+            //check if street is set
+            if (!street || street.value.length <= 0)
+            {
+                street.classList.add("errorHighlight");
+                formIsValid = false;
+            } else
+            {
+                street.classList.remove('errorHighlight');
+            }
+
+            //check if streetNumber is set
+            if (!streetNumber || streetNumber.value.length <= 0)
+            {
+                streetNumber.classList.add("errorHighlight");
+                formIsValid = false;
+            } else
+            {
+                streetNumber.classList.remove('errorHighlight');
+            }
+
+            //check if zipCode is set
+            if (!zipCode || zipCode.value.length <= 0)
+            {
+                zipCode.classList.add("errorHighlight");
+                formIsValid = false;
+            } else
+            {
+                zipCode.classList.remove('errorHighlight');
+            }
+
+            //check if city is set
+            if (!city || city.value.length <= 0)
+            {
+                city.classList.add("errorHighlight");
+                formIsValid = false;
+            } else
+            {
+                city.classList.remove('errorHighlight');
+            }
+
 
             if (!formIsValid || request) {
                 event.preventDefault();

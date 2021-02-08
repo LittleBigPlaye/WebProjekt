@@ -2,13 +2,14 @@
 
 namespace myf\controller;
 
-use myf\models\Login;
-
+use myf\models\Login    as Login;
+use myf\core\Controller as Controller;
+use myf\models\Product  as Product;
 /**
  * This Controller includes
  * @author Hannes Lenz, Robin Beck
  */
-class PagesController extends \myf\core\controller
+class PagesController extends Controller
 {
     /**
      * This action is used to prepare the products that should be displayed on the index
@@ -17,7 +18,7 @@ class PagesController extends \myf\core\controller
      */
     public function actionIndex()
     {
-        $this->setParam('currentPosition', 'index');
+        $this->setPositionIndicator(Controller::POSITION_INDEX);
         //check if products should be added to cart
         if(isset($_POST['addToCart']) && is_numeric($_POST['addToCart']))
         {
@@ -25,7 +26,7 @@ class PagesController extends \myf\core\controller
         }
 
         //fetch products for product spotlight
-        $spotlightProducts = \myf\models\Product::findRange(0,4,'isHidden = 0', 'createdAt DESC');
+        $spotlightProducts = Product::findRange(0,4,'isHidden = 0', 'createdAt DESC');
 
         //open file and read products from file
         $lines = null;
@@ -62,10 +63,10 @@ class PagesController extends \myf\core\controller
         {
             foreach($lines as $line)
             {
-                $currentProduct = \myf\models\Product::findOne('productName LIKE ' . $db->quote($line) . ' AND isHidden = 0');
+                $currentProduct = Product::findOne('productName LIKE ' . $db->quote($line) . ' AND isHidden = 0');
                 if($currentProduct === null)
                 {
-                    $currentProduct = \myf\models\Product::findOne('isHidden = 0', 'RAND()');
+                    $currentProduct = Product::findOne('isHidden = 0', 'RAND()');
                 }
                 array_push($products, $currentProduct);
             }
@@ -74,7 +75,7 @@ class PagesController extends \myf\core\controller
         else
         {
             //read three random products
-            $products = \myf\models\Product::findRange(0,3,'isHidden = 0', 'RAND()');
+            $products = Product::findRange(0,3,'isHidden = 0', 'RAND()');
         }
         return $products;
     }
@@ -94,13 +95,21 @@ class PagesController extends \myf\core\controller
 
     public function actionLogin()
     {
+        $this->setPositionIndicator(Controller::POSITION_LOGIN);
+        
+        //check if there are any success messages in the session
+        if(isset($_SESSION['success']))
+        {
+            $successMessage = $_SESSION['success'];
+            unset($_SESSION['success']);
+            $this->setParam('successMessage', $successMessage);
+        }
 
         if($this->isLoggedIn())
         {
             $this->redirect('index.php?c=pages&a=index');
         }
 
-        $this->setParam('currentPosition', 'login');
         //store error message
         $errorMessages = [];
         //database connection
@@ -116,7 +125,7 @@ class PagesController extends \myf\core\controller
                 $errorMessages['email'] = "Bitte gib eine Email an.";
             }
 
-            $login = \myf\models\Login::findOne('email=' . $db->quote($email));
+            $login = Login::findOne('email=' . $db->quote($email));
             //check if user exists
             if (Login::findOne('email LIKE' . $db->quote($email)) == null) 
             {

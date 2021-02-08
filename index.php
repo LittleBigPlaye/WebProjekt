@@ -14,7 +14,7 @@ require_once 'config' . DIRECTORY_SEPARATOR . 'imageSettings.php';
 // load core files
 require_once COREPATH . 'functions.php';
 require_once COREPATH . 'controllerClass.php';
-require_once COREPATH . '_baseModelClass.php';
+require_once COREPATH . 'baseModelClass.php';
 
 // load all models
 foreach(glob('models/*.php') as $modelClass)

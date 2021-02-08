@@ -2,48 +2,64 @@
 
 <div class="formWrapper imprint">
     <h1>Impressum</h1>
-
-    <a class="impressumLinkColor" href="documentation\documentation.html">Hier geht es zur Dokumentation</a>
-
     <h2>Angaben gem&auml;&szlig; &sect; 5 TMG</h2>
-    <section class="centered">
-        <p>Mask Your Face GmbH<br />
-            Fantasieweg 1337<br />
-            Geb&auml;ude 44<br />
-            121212 Knechtschaftsburg</p>
+    <div class="gridWrapper">
+        <section class="gridItem">
+            <h2>Mask Your Face GmbH</h2>
+            <p>
+                Fantasieweg 1337<br>
+                Gebäude 44<br>
+                121212 Knechtschaftsburg
+            </p>
+            <p>Handelsregister: HRB 999999<br>
+                Registergericht: Amtsgericht Knechtschaftsburg
+            </p>
+        </section>
 
-        <p>Handelsregister: HRB 999999<br />
-            Registergericht: Amtsgericht Knechtschaftsburg</p>
+        <section class="gridItem">
+            <h2>Kontakt</h2>
 
-        <p><strong>Vertreten durch:</strong><br />
-            Hannes Lenz,<br />
-            John Klippstein,<br />
-            Robin Beck</p>
+            <p>Telefon: +49 (0) 123 44 55 66<br>
+                Telefax: +49 (0) 123 44 55 99<br>
+                E-Mail: maskyourface@thisisnotarealmail.de</p>
+        </section>
 
-        <p><strong>Vorsitzender des Aufsichtsrats:</strong><br />
-            John Klippstein</p>
-    </section>
-    <h2>Kontakt</h2>
-    <section class="centered">
-        <p>Telefon: +49 (0) 123 44 55 66<br />
-            Telefax: +49 (0) 123 44 55 99<br />
-            E-Mail: maskyourface@thisisnotarealmail.de</p>
-    </section>
-    <h2>Umsatzsteuer-ID</h2>
-    <section class="centered">
-        <p>Umsatzsteuer-Identifikationsnummer gem&auml;&szlig; &sect; 27 a Umsatzsteuergesetz:<br />
-            DE999999999</p>
-    </section>
-    <h2>Gewerbeanmeldung</h2>
+        <section class="gridItem">
+            <h2>Vertreten durch:</h2>
+            <p>
+                Hannes Lenz,<br>
+                John Klippstein,<br>
+                Robin Beck
+                <br>
+                <br>
+                <b>Vorsitzender des Aufsichtsrats:</b><br>
+                John Klippstein
+            </p>
+        </section>
 
-        <p>Die Gewerbeanmeldung nach &sect; 34c GewO wurde am 01.11.2020 durch Ordnungsamt Knechtschaftsburg erteilt.</p>
+        <section class="gridItem">
+            <h2>Umsatzsteuer-ID</h2>
 
-        <h2>EU-Streitschlichtung</h2>
-        <p>Die Europ&auml;ische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr</a>.<br /> Unsere E-Mail-Adresse finden Sie oben im Impressum.</p>
+            <p>Umsatzsteuer-Identifikationsnummer gemäß <br>§ 27 a Umsatzsteuergesetz:
+                DE999999999</p>
+        </section>
+
+        <section class="gridItem">
+            <h2>Gewerbeanmeldung</h2>
+
+            <p>Die Gewerbeanmeldung nach &sect; 34c GewO wurde am 01.11.2020 durch Ordnungsamt Knechtschaftsburg erteilt.</p>
+        </section>
+
+        <section class="gridItem">
+            <h2>EU-Streitschlichtung</h2>
+            <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr</a>.<br> Unsere E-Mail-Adresse finden Sie oben im Impressum.</p>
+        </section>
+    </div>
+
 
     <h2>Verbraucher&shy;streit&shy;beilegung/Universal&shy;schlichtungs&shy;stelle</h2>
 
-        <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+    <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
 
     <h3>Haftung f&uuml;r Inhalte</h3>
     <p>Als Diensteanbieter sind wir gem&auml;&szlig; &sect; 7 Abs.1 TMG f&uuml;r eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach &sect;&sect; 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, &uuml;bermittelte oder gespeicherte fremde Informationen zu &uuml;berwachen oder nach Umst&auml;nden zu forschen, die auf eine rechtswidrige T&auml;tigkeit hinweisen.</p>

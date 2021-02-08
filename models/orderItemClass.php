@@ -19,7 +19,7 @@ class OrderItem extends BaseModel
         'productsID'  =>  ['type' => BaseModel::TYPE_INT      , 'null' => 'null'],
         'ordersID'    =>  ['type' => BaseModel::TYPE_INT      , 'null' => 'null'],
         'quantity'    =>  ['type' => BaseModel::TYPE_INT     , 'null' => 'null'],
-        'actualPrice' => ['type' => BaseModel::TYPE_DECIMAL  , 'null' => 'null']
+        'actualPrice' =>  ['type' => BaseModel::TYPE_DECIMAL  , 'null' => 'null']
     ];
 
     private $product = null;
@@ -33,6 +33,11 @@ class OrderItem extends BaseModel
                 $this->product = Product::findOne('id=' . $this->productsID);
             }
             return $this->product;
+        }
+        else if($key == 'formattedActualPrice')
+        {
+            $actualPrice = parent::__get('actualPrice');
+            return number_format($actualPrice, 2, ',', '.');
         }
         return parent::__get($key);
     }

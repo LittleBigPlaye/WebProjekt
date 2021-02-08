@@ -222,12 +222,14 @@ class accountsController extends Controller
                 //create new login and save
                 $login = new Login($loginData);
                 $login->save();
-
+                $_SESSION['success'] = 'Der neue Nutzer wurde angelegt';
                 $successMessage = 'Der neue Nutzer wurde angelegt';
             }
+            $this->redirect('index.php?c=pages&a=login');
         }
         $this->setParam('errorMessages', $errorMessages);
         $this->setParam('succesMessage', $successMessage);
+        $this->setPositionIndicator(Controller::POSITION_LOGIN);
     }
 
     public function actionAdminusermanagement()
@@ -304,9 +306,7 @@ class accountsController extends Controller
         {
             $this->redirect('index.php?c=pages&a=login');
         }
-
-
-
+        $this->setPositionIndicator(Controller::POSITION_ADMINISTRATION);
     }
 
     public function actionMySpace ()
@@ -344,6 +344,7 @@ class accountsController extends Controller
             //if own userid is null, the user will redirect to the login
             $this->redirect('index.php?c=pages&a=login');
         }
+        $this->setPositionIndicator(Controller::POSITION_ADMINISTRATION);
     }
 
     public function actionChangeSecrets()
@@ -373,7 +374,8 @@ class accountsController extends Controller
                     $updateLogin=Login::findOne('usersID='.$userID);
                     $updateLogin->passwordHash = $savePassword;
                     $updateLogin->save();
-                    $successMessage = "Das war super!";
+                    $_SESSION['success']= 'Das Passwort wurde erfolgreich geändert!';
+                    $successMessage = "Das Passwort wurde erfolgreich geändert!";
                 }
                 else
                 {
@@ -384,10 +386,13 @@ class accountsController extends Controller
             {
                 $errorMessage = 'Das Passwort entspricht nicht den Anforderungen. Mindestens 8 Zeichen, Groß-, Kleinbuchstaben, 2 Ziffern und 2 Sonderzeichen';
             }
+            $this->updateLastActiveTime();
+            $this->redirect('index.php?c=accounts&a=myspace');
         }
 
         $this->setParam('errorMessage', $errorMessage);
         $this->setParam('successMessage', $successMessage);
+        $this->setPositionIndicator(Controller::POSITION_ADMINISTRATION);
     }
 
     public function actionChangePersonalData()
@@ -434,12 +439,16 @@ class accountsController extends Controller
                 $userData->phone = $phone;
 
                 $userData->save();
-                $successMessage = "Änderungen sind gespeichert!";
+                $_SESSION['success']= 'Ihre Personas wurden erfolgreich aktualisiert!';
+
             }
+            $this->updateLastActiveTime();
+            $this->redirect('index.php?c=accounts&a=myspace');
         }
 
         $this->setParam('errorMessage', $errorMessage);
         $this->setParam('successMessage', $successMessage);
+        $this->setPositionIndicator(Controller::POSITION_ADMINISTRATION);
     }
 
     public function actionChangeAddress()
@@ -482,7 +491,6 @@ class accountsController extends Controller
                 if($address !== null)
                 {
                     $adressID = $address->id;
-                    $succesMessage = 'Keine Änderungen nötig';
                 }
                 else
                 {
@@ -498,23 +506,27 @@ class accountsController extends Controller
                     $adress->save();
                     $adressID = $adress->id;
 
-                    //set address and save
-                    $userData->addressesID = $adressID;
-                    $userData->save();
+                    //set address
                     $this->setParam('address',$adress);
-                    $succesMessage = 'Änderungen erfolgreich gespeichert';
                 }
+                $userData->addressesID = $adressID;
+                $userData->save();
+                $_SESSION['success']= 'Ihre Adresse wurde erfolgreich aktualisiert!';
             }
+            $this->updateLastActiveTime();
+            $this->redirect('index.php?c=accounts&a=myspace');
         }
 
         $this->setParam('errorMessage', $errorMessage);
         $this->setParam('successMessage', $successMessage);
+        $this->setPositionIndicator(Controller::POSITION_ADMINISTRATION);
     }
 
     public function actionWaitingArea(){
         /**
          * no functions are needed at this moment
          */
+        $this->setPositionIndicator(Controller::POSITION_ADMINISTRATION);
     }
 
 }

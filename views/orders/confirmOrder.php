@@ -6,14 +6,15 @@
 
         <p>Bitte prüfen Sie vor dem Absenden der Bestellung, ob die nachfolgenden Angaben korrekt sind!</p>
 
+        <!-- Address of the customer -->
         <h2>Zieladresse</h2>
         <p class="customerData">
             <?= htmlspecialchars($user->salutation . ' ' . $user->firstName . ' ' . $user->secondName . ' ' . $user->lastName)?><br>
             <?= htmlspecialchars($address->street . ' ' . $address->streetNumber)?><br>
             <?= htmlspecialchars($address->zipCode . ' ' . $address->city)?><br>
         </p>
-        <!-- Hier Adresse anzeigen -->
 
+        <!-- listing of the products -->
         <h2>Kauf-Übersicht</h2>
         <div class="table orderConfirmation">
             <div class="tableRow head">
@@ -45,6 +46,7 @@
                 </div>
             <?php endforeach; ?>
         
+            <!-- Listing of the total amount of products and the product price -->
             <div class="tableRow bottom">
                     <div class="tableCell"></div>
                     <div class="tableCell"></div>

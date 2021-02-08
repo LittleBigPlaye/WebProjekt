@@ -1,6 +1,8 @@
 <div class="formWrapper">
     <form class="loginForm" action="index.php?c=pages&a=login" method="post">
+
         <h1>Login</h1>
+
         <?php foreach($errorMessages as $key => $message) : ?>
             <input class="messageToggle" type="checkbox" id="errorToggle<?=$key?>">
             <div class="message errorMessage">
@@ -8,6 +10,15 @@
                 <p><?= htmlspecialchars($message) ?></p>
             </div>
         <?php endforeach; ?>
+
+        <?php if(isset($successMessage)) :?>
+            <input class="messageToggle" type="checkbox" id="successToggle">
+            <div class="message successMessage">
+                <label class="messageClose" for="successToggle">&times</label>
+                <p><?= $successMessage ?></p>
+            </div>
+        <?php endif ?>
+
         <div class="input"><label for="email">Email:</label>
             <input type="text" id="email" name="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
             <span class="errorInfo">Bitte geben Sie eine korrekte E-Mail an!</span>

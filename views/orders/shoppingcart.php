@@ -36,7 +36,7 @@
 
                         <div class="tableCell">
                             <label for="price<?= $orderItem->product->id ?>">Preis</label>
-                            <span id="price<?= $orderItem->product->id ?>"><?= htmlspecialchars(number_format($orderItem->actualPrice, 2, ',', '.')) ?> €</span>
+                            <span id="price<?= $orderItem->product->id ?>"><?= htmlspecialchars($orderItem->formattedActualPrice) ?> €</span>
                         </div>
 
                         <form class="tableCell" method="Post">
@@ -60,7 +60,7 @@
                 </div>
 
                 <div class="row">
-                    <!-- placeholder, might be replaced, if the shop starts to offer real products with real shipping costs -->
+                    <!-- placeholder, could be replaced, if the shop starts to offer real products with real shipping costs -->
                     <div class="cell left">Versand</div>
                     <div class="cell right">kostenlos</div>
                 </div>

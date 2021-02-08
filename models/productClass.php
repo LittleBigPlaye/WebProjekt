@@ -32,36 +32,36 @@ class Product extends BaseModel
 
     public function __get($key) 
     {
-        //relation to table "vendors"
-        if($key == 'vendor')
+        switch($key) 
         {
-            if($this->vendor == null)
-            {
-                $this->vendor = Vendor::findOne('id=' . $this->vendorsID);
-            }
-            return $this->vendor;
-        }
-        //relation to table "categories"
-        else if($key == 'category')
-        {
-            if($this->category == null)
-            {
-                $this->category = Category::findOne('id=' . $this->categoriesID);
-            }
-            return $this->category;
-        }
-        //relation to table "productImages"
-        else if($key == 'images')
-        {
-            if(count($this->productImages) === 0)
-            {
-                $this->productImages = ProductImage::find('productsID=' . $this->id);
-            }
-            return $this->productImages;
-        }
-        else
-        {
-            return parent::__get($key);
+            case 'vendor':
+                if($this->vendor == null)
+                {
+                    $this->vendor = Vendor::findOne('id=' . $this->vendorsID);
+                }
+                return $this->vendor;
+                break;
+            case 'category':
+                if($this->category == null)
+                {
+                    $this->category = Category::findOne('id=' . $this->categoriesID);
+                }
+                return $this->category;
+                break;
+            case 'images':
+                if(count($this->productImages) === 0)
+                {
+                    $this->productImages = ProductImage::find('productsID=' . $this->id);
+                }
+                return $this->productImages;
+                break;
+            case 'formattedPrice':
+                $standardPrice = parent::__get('standardPrice');
+                return number_format($standardPrice, 2, ',', '.');
+                break;
+            default:
+                return parent::__get($key);
+                break;
         }
     }
 
