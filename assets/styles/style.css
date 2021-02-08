@@ -656,7 +656,7 @@ form label {
 
 .productBoxWrapper {
     display: grid;
-    width: 100%;
+    width: 95%;
     grid-template-columns: 1fr;
     grid-template-areas: "search""sidebar""content""pager""loadMore";
 }

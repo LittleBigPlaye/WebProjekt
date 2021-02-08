@@ -143,7 +143,7 @@ nav .active a {
     width: 35px;
     height: 35px;
     text-align: center;
-    font-size: .8em;
+    font-size: .85em;
     background: #eb7d00;
     color: white;
     transition: visibility 0.2s, opacity 0.1s linear;
@@ -176,7 +176,7 @@ nav li img {
 @media screen and (min-width: 900px) {
     nav .mainNav {
         display: block;
-        height: 3.45em;
+        height: 3.47em;
         background-color: #191919;
     }
 
