@@ -5,11 +5,11 @@
         </h1>
 
         <?php if (isset($successMessage)) : ?>
-            <input class="messageToggle" type="checkbox" id="successToggle">
-            <div class="message successMessage">
-                <label class="messageClose" for="successToggle">&times</label>
-                <p><?= $successMessage ?></p>
-            </div>
+        <input class="messageToggle" type="checkbox" id="successToggle">
+        <div class="message successMessage">
+            <label class="messageClose" for="successToggle">&times</label>
+            <p><?= $successMessage ?></p>
+        </div>
         <?php endif ?>
 
         <h2>Persönliche Daten</h2>
@@ -32,63 +32,62 @@
 
 
         <h2>Änderungen stehen bevor</h2>
-        <section class="formWrapper">
+        <p class="formWrapper">
 
-            <a href="index.php?c=accounts&a=changesecrets">Passwort ändern</a>
-            <a href="index.php?c=accounts&a=changepersonaldata">Personas ändern</a>
+            <a href="index.php?c=accounts&a=changesecrets">Passwort ändern</a><br>
+            <a href="index.php?c=accounts&a=changepersonaldata">Persönliche Daten ändern</a><br>
             <a href="index.php?c=accounts&a=changeaddress">Adresse ändern</a>
 
-        </section>
+        </p>
 
 
         <hr>
 
         <h2>Meine Bestellungen</h2>
-        <section class="formWrapper jsRelevant">
+        <p class="formWrapper jsRelevant">
             Machen Sie etwas sinnvolles während Sie auf Ihre Bestellung/en warten (Tastatur notwendig)<br>
             <a href="index.php?c=accounts&a=waitingArea">Etwas sinnvolles</a>
-            <br>
-        </section>
+        </p>
 
         <section class="formWrapper">
             <?php foreach ($orders as $order) : ?>
 
-                <h3>Bestellung <?= htmlspecialchars($order->id) ?></h3>
+            <h3>Bestellung <?= htmlspecialchars($order->id) ?></h3>
 
-                <div class="table">
-                    <div class="tableRow head">
-                        <div class="tableCell center">
-                            Bezeichnung
-                        </div>
-                        <div class="tableCell center">
-                            Artikelnummer
-                        </div>
-                        <div class="tableCell center">
-                            Anzahl
-                        </div>
-                        <div class="tableCell center">
-                            Preis
-                        </div>
+            <div class="table">
+                <div class="tableRow head">
+                    <div class="tableCell center">
+                        Bezeichnung
                     </div>
-                    <?php foreach ($order->orderItems as $orderItem) : ?>
-
-                        <div class="tableRow">
-                            <div class="tableCell center">
-                                <?= $orderItem->product->productName ?>
-                            </div>
-                            <div class="tableCell center">
-                                <?= htmlspecialchars(str_pad($orderItem->product->id, 12, '0', STR_PAD_LEFT)) ?>
-                            </div>
-                            <div class="tableCell center">
-                                <?= $orderItem->quantity ?> Stück
-                            </div>
-                            <div class="tableCell center">
-                                <?= $orderItem->formattedActualPrice ?> €
-                            </div>
-                        </div>
-                    <?php endforeach ?>
+                    <div class="tableCell center">
+                        Artikelnummer
+                    </div>
+                    <div class="tableCell center">
+                        Anzahl
+                    </div>
+                    <div class="tableCell center">
+                        Preis
+                    </div>
                 </div>
-                <hr>
+                <?php foreach ($order->orderItems as $orderItem) : ?>
+
+                <div class="tableRow">
+                    <div class="tableCell center">
+                        <?= $orderItem->product->productName ?>
+                    </div>
+                    <div class="tableCell center">
+                        <?= htmlspecialchars(str_pad($orderItem->product->id, 12, '0', STR_PAD_LEFT)) ?>
+                    </div>
+                    <div class="tableCell center">
+                        <?= $orderItem->quantity ?> Stück
+                    </div>
+                    <div class="tableCell center">
+                        <?= $orderItem->formattedActualPrice ?> €
+                    </div>
+                </div>
+                <?php endforeach ?>
+            </div>
+            <hr>
             <?php endforeach ?>
         </section>
 </div>

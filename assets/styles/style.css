@@ -46,6 +46,25 @@ p {
     text-align: center;
 }
 
+p a {
+    color: var(--darkgrey);
+    text-decoration: none;
+    font-weight: bolder;
+    transition: .1s ease-in-out;
+}
+
+p a:hover {
+    color: var(--orange);
+}
+
+p a::before {
+    content: "» ";
+}
+
+p a:after {
+    content: " «";
+}
+
 .content {
     min-height: 60em;
     width: 100%;
@@ -1088,10 +1107,12 @@ form label {
     margin: 20px auto;
     width: 95%;
     border-radius: 10px;
+    font-size: 1.3em;
 }
 
 .errorPage img {
-    width: 80%;
+    width: 60%;
+    max-width: 400px;
 }
 
 
