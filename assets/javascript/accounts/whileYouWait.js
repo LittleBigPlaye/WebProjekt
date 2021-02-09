@@ -216,7 +216,6 @@ function updateLoop() {
             counter++;
             speedCounter++;
             placeFood();
-
         }
 
 
@@ -230,15 +229,12 @@ function updateLoop() {
         gc.fillStyle = "#000000";
 
         for (var i = 0; i < segments.length; i++) {
-
             gc.fillRect(segments[i].x * CELLSIZE, segments[i].y * CELLSIZE, CELLSIZE, CELLSIZE);
-
         }
 
 
         gc.fillStyle = "#eb7d00";
         gc.fillRect(foodX * CELLSIZE, foodY * CELLSIZE, CELLSIZE, CELLSIZE);
-
     }
 }
 

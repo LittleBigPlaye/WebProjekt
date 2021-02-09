@@ -371,7 +371,7 @@ class accountsController extends Controller
                 if(password_verify($newPassword2,$savePassword))
                 {
                     //set new password and save
-                    $updateLogin=Login::findOne('usersID='.$userID);
+                    $updateLogin=$this->currentLogin;
                     $updateLogin->passwordHash = $savePassword;
                     $updateLogin->passwordResetHash = "";
                     $updateLogin->save();

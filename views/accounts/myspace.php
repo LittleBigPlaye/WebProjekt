@@ -20,7 +20,7 @@
             <label>Nachname: <span> <?= htmlspecialchars($user->lastName) ?></span></label>
             <label>Geburtstag: <span><?= htmlspecialchars(date('d.m.Y', strtotime($user->birthDate))) ?></span></label>
             <label>Telefonnummer: <span><?= htmlspecialchars($user->phone) ?></span></label>
-            <label>Geschlecht: <span><?= htmlspecialchars($user->gender) ?></span></label>
+            <label>Geschlecht: <span><?= htmlspecialchars($user->choosenGender) ?></span></label>
             <h2>Adresse</h2>
             <label>Strasse: <span><?= htmlspecialchars($address->street) ?></span></label>
             <label>Hausnummer: <span><?= htmlspecialchars($address->streetNumber) ?></span></label>

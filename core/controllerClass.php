@@ -67,7 +67,6 @@ abstract class Controller
         if($this->currentLogin != null)
         {
             $this->currentLogin->lastActive = date('Y-m-d H:i:s');
-            echo date('Y-m-d H:i:s');
             $this->currentLogin->save();
         }
     }

@@ -52,6 +52,20 @@ class User extends BaseModel
                     return '';
             }
         }
+        else if ($key == 'choosenGender')
+        {
+            switch($this->gender)
+            {
+                case 'm':
+                    return 'männlich';
+                case 'f':
+                    return 'weiblich';
+                case 'u':
+                    return 'divers';
+                default:
+                    return 'Keine Angabe';
+            }
+        }
         else
         {
             return parent::__get($key);
