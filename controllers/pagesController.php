@@ -167,6 +167,8 @@ class PagesController extends Controller
         if ($this->isLoggedIn()) {
             $_SESSION['isLoggedIn'] = false;
             session_destroy();
+            //redirect to index width delay
+            header("refresh:5; url=index.php");
         } else {
             $this->redirect('index.php?c=pages&a=index');
         }
