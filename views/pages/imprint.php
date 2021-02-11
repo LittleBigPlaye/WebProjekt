@@ -19,9 +19,11 @@
         <section class="gridItem">
             <h2>Kontakt</h2>
 
-            <p>Telefon: +49 (0) 123 44 55 66<br>
+            <p>
+                Telefon: +49 (0) 123 44 55 66<br>
                 Telefax: +49 (0) 123 44 55 99<br>
-                E-Mail: maskyourface@thisisnotarealmail.de</p>
+                E-Mail: maskyourface@thisisnotarealmail.de
+            </p>
         </section>
 
         <section class="gridItem">
