@@ -17,8 +17,9 @@ abstract class BaseModel
     protected $params = [];
 
     /**
-     * _baseModellClass constructor.
-     * @param $params
+     * The constructor automatically matches database attributes to the corresponding param
+     * 
+     * @param array $params   parameters of the object to be build
      *
      */
     public function __construct($params)
@@ -36,12 +37,6 @@ abstract class BaseModel
         }
     }
 
-
-    /**
-     * @param $key
-     * @return mixed
-     * @throws Exception
-     */
     public function __get($key)
     {
 
@@ -52,11 +47,6 @@ abstract class BaseModel
         throw new \Exception('You can not access to property "'.$key.'" for the class "'.get_called_class());
     }
 
-    /**
-     * @param $key
-     * @param $value
-     * @throws Exception
-     */
     public function __set($key, $value)
     {
         if (array_key_exists($key, $this->schema)) {
@@ -69,39 +59,42 @@ abstract class BaseModel
 
 
     /**
-     * @param $errors
+     * This function is used to insert an new entry into the database
+     * 
+     * @param array $errors   used to add potential error messages to an array (optional)
      * @return bool
      */
     protected function insert(&$errors)
     {
         $db = $GLOBALS['database'];
+      
+        $sql = 'INSERT INTO '.self::tablename().' (';
+        $valueString = ' VALUES (';
+
+        foreach ($this->schema as $key => $schemaOptions)
+        {
+            if(!isset($schemaOptions['autoincrement']) || $schemaOptions['autoincrement'] === false)
+            {
+                $sql .= '`'.$key.'`,';
+
+                if($this->data[$key] === null)
+                {
+                    $valueString .='NULL,';
+                }
+                else
+                {
+                    $valueString .= $db->quote($this->data[$key]).',';
+                }
+            }
+        }
+
+        $sql = trim($sql,',');
+        $valueString = trim($valueString, ',');
+
+        $sql .= ')'.$valueString.')';
 
         try
         {
-            $sql = 'INSERT INTO '.self::tablename().' (';
-            $valueString = ' VALUES (';
-
-            foreach ($this->schema as $key => $schemaOptions)
-            {
-                if(!isset($schemaOptions['autoincrement']) || $schemaOptions['autoincrement'] === false)
-                {
-                    $sql .= '`'.$key.'`,';
-
-                    if($this->data[$key] === null)
-                    {
-                        $valueString .='NULL,';
-                    }
-                    else
-                    {
-                        $valueString .= $db->quote($this->data[$key]).',';
-                    }
-                }
-            }
-
-            $sql = trim($sql,',');
-            $valueString = trim($valueString, ',');
-
-            $sql .= ')'.$valueString.')';
             $statment = $db->prepare($sql);
             $result = $statment->execute();
             if($result !== 0)
@@ -110,41 +103,40 @@ abstract class BaseModel
             }
 
             return true;
-
         }
         catch (\PDOException $e)
         {
             $errors[]='Error inserting '.get_called_class();
-            die($e->getMessage());
         }
         return false;
-
     }
 
 
     /**
-     * @param $errors
+     * This function is used to update an entry that already exists in the database and has a valid id
+     * 
+     * @param array $errors     used to add potential error messages to an array (optional)
      * @return bool
      *
      */
     protected function update(&$errors)
     {
         $db = $GLOBALS['database'];
+       
+        $sql = 'UPDATE '.self::tablename().' SET ';
+        foreach ($this->schema as $key => $schemaOptions)
+        {
+            if($this->data[$key] !== null)
+            {
+                $sql .= $key. ' = '.$db->quote($this->data[$key]).',';
+            }
+        }
+
+        $sql = trim($sql,',');
+        $sql .= ' WHERE id = '.$this->data['id'];
 
         try
         {
-            $sql = 'UPDATE '.self::tablename().' SET ';
-            foreach ($this->schema as $key => $schemaOptions)
-            {
-                if($this->data[$key] !== null)
-                {
-                    $sql .= $key. ' = '.$db->quote($this->data[$key]).',';
-                }
-            }
-
-            $sql = trim($sql,',');
-            $sql .= ' WHERE id = '.$this->data['id'];
-
             $statement = $db->prepare($sql);
             $statement->execute();
 
@@ -159,7 +151,10 @@ abstract class BaseModel
 
 
     /**
-     * @param null $errors
+     * This function is used to check if all attributes match the given restrictions such as min / max length
+     * 
+     * @param array $errors  used to add potential error messages to an array (optional)
+     * 
      * @return bool
      */
     public function validate (&$errors = null)
@@ -177,20 +172,15 @@ abstract class BaseModel
             }
         }
 
-        if(count($errors) === 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return (count($errors) === 0);
     }
 
     /**
-     * @param $attribute
-     * @param $value
-     * @param $schemaOptions
+     * This function is used to validate a given attribute
+     * 
+     * @param $attribute        the attribute that should be validated
+     * @param $value            the value of the attribute
+     * @param $schemaOptions    the options for the given attribute
      * @return array|bool
      */
     protected function validateValue($attribute, &$value, &$schemaOptions)
@@ -200,30 +190,32 @@ abstract class BaseModel
 
         switch ($type)
         {
-            case BaseModel::TYPE_INT:
-                break;
-            case BaseModel::TYPE_FLOAT:
-                break;
             case BaseModel::TYPE_STRING:
+            
+                //check if the min length is valid
+                if(isset($schemaOptions['min']) && mb_strlen($value) < $schemaOptions['min'])
                 {
-                    if(isset($schemaOptions['min']) && mb_strlen($value) < $schemaOptions['min'])
-                    {
-                        $errors[] = $attribute.': String needs min. '.$schemaOptions['min'].' charackters!';
-                    }
-
-                    if(isset($schemaOptions['max']) && mb_strlen($value) > $schemaOptions['max'])
-                    {
-                        $errors[] = $attribute.': String can have max. '.$schemaOptions['max'].' charackters!';
-                    }
-                    if(isset($schemaOptions['null']) && $schemaOptions['null'] == 'not null' && empty($value))
-                    {
-                        $errors[] = $attribute . ": Must not be NULL!";
-                    }
-                    if(isset($schemaOptions['allowedValues']) && !in_array($value, $schemaOptions['allowedValues']))
-                    {
-                        $errors[] = $attribute . ": Must be in valid range";
-                    }
+                    $errors[] = $attribute.': String needs min. '.$schemaOptions['min'].' charackters!';
                 }
+
+                //check if the max length is valid
+                if(isset($schemaOptions['max']) && mb_strlen($value) > $schemaOptions['max'])
+                {
+                    $errors[] = $attribute.': String can have max. '.$schemaOptions['max'].' charackters!';
+                }
+
+                //check if the value shall not be null
+                if(isset($schemaOptions['null']) && $schemaOptions['null'] == 'not null' && empty($value))
+                {
+                    $errors[] = $attribute . ": Must not be NULL!";
+                }
+
+                //check if the values are inside a range of allowed values
+                if(isset($schemaOptions['allowedValues']) && !in_array($value, $schemaOptions['allowedValues']))
+                {
+                    $errors[] = $attribute . ": Must be in valid range";
+                }
+            
                 break;
         }
 
@@ -232,7 +224,10 @@ abstract class BaseModel
 
 
     /**
-     * @return |null
+     * This function is used to obtain the tablename of the table that fits to the current class
+     * To bypass case-sensitivity the class name is always converted to lower case
+     * 
+     * @return null|string
      */
     public static function tablename()
     {
@@ -245,7 +240,10 @@ abstract class BaseModel
     }
 
     /**
-     * @param string $where
+     * This function is used to get an array of results from the database
+     * 
+     * @param string $where     the where clause that should be applied to the query
+     * @param string $order     the order by clause that should be applied to the query
      * @return mixed
      */
     public static function find($where = '', $order = '')
@@ -286,7 +284,10 @@ abstract class BaseModel
 
 
     /**
-     * @param string $where
+     * This function is used to find just one explicit result
+     * 
+     * @param string $where     the where clause that should be used for the database query
+     * @param string $order     the order by clause thet should be used for the database query
      * @return mixed
      */
     public static function findOne($where='', $orderBy='')
@@ -325,6 +326,15 @@ abstract class BaseModel
         return $result;
     }
 
+    /**
+     * This function is used to obtain a range of result sets from the database
+     *
+     * @param int    $offset    the offset that should be used for the query
+     * @param int    $length    the number of results that should be returned
+     * @param string $where     the where clause for the query
+     * @param string $orderBy   the order by clause for the query
+     * @return void
+     */
     public static function findRange($offset, $length, $where='', $orderBy='')
     {
         $db  = $GLOBALS['database'];
@@ -361,7 +371,9 @@ abstract class BaseModel
     }
 
     /**
-     * @param null $errors
+     * This function is used to automatically choose whether an entry should be inserted or just updated
+     * 
+     * @param null $errors  used to add potential error messages to an array (optional)
      */
     public function save(&$errors = null)
     {
@@ -377,7 +389,9 @@ abstract class BaseModel
 
 
     /**
-     * @param null $errors
+     * This function is used to delete an existing entry from the database
+     * 
+     * @param array $errors     used to add potential error messages to an array (optional)
      * @return bool
      */
     public function delete(&$errors = null)
@@ -397,6 +411,12 @@ abstract class BaseModel
         return false;
     }
 
+    /**
+     * This function is used to start a database transaction
+     *
+     * @param array $errors    used to add potential error messages to an array (optional)
+     * @return void
+     */
     public function startTransaction(&$errors = null) {
         $db = $GLOBALS['database'];
         try 
@@ -409,7 +429,13 @@ abstract class BaseModel
         }
     }
 
-    public function stopTransaction() {
+    /**
+     * This function is used to stop a database transaction
+     *
+     * @param array $errors    used to add potential error messages to an array (optional)
+     * @return void
+     */
+    public function stopTransaction(&$errors = null) {
         $db = $GLOBALS['database'];
         try
         {
