@@ -16,13 +16,13 @@ use myf\models\Login;
 class accountsController extends Controller
 {
 
+    /**
+     * In this function we manage the registration
+     *
+     * @return void
+     */
     public function actionRegister()
     {
-
-        /**
-         * In this function we manage the registration
-         */
-
         $errorMessages = [];
         $successMessage = '';
         
@@ -30,6 +30,7 @@ class accountsController extends Controller
         if (isset($_POST['ajax']) && $_POST['ajax'] == 1 && $_POST['submitForm'] && $_POST['email'])
         {
             $email = trim($_POST['email'] ?? '');
+            
             $db = $GLOBALS['database'];
             if(!empty($email) && \myf\models\Login::findOne('email like'.$db->quote($email)) != null)
             {
@@ -178,10 +179,11 @@ class accountsController extends Controller
                 {
                     //if address is null we create a new one. for this we save the data in an array
                     $adressData=array(
-                        'street'=> $street,
-                        'streetNumber' => $streetNumber,
-                        'city' => $city,
-                        'zipCode' => $zipCode);
+                        'street'        => $street,
+                        'streetNumber'  => $streetNumber,
+                        'city'          => $city,
+                        'zipCode'       => $zipCode
+                    );
 
                     //create new address and save
                     $adress = new Address($adressData);
@@ -191,13 +193,14 @@ class accountsController extends Controller
 
                 //set array for new user
                 $userData = array(
-                    'firstName' => $firstName,
-                    'secondName' => $secondName,
-                    'lastName' => $lastName,
-                    'gender' => $gender,
-                    'birthDate' => $birthdate,
-                    'addressesID' => $adressID,
-                    'role' => 'user');
+                    'firstName'     => $firstName,
+                    'secondName'    => $secondName,
+                    'lastName'      => $lastName,
+                    'gender'        => $gender,
+                    'birthDate'     => $birthdate,
+                    'addressesID'   => $adressID,
+                    'role'          => 'user'
+                );
 
                 //create new user and save
                 $user = new User($userData);
@@ -212,12 +215,13 @@ class accountsController extends Controller
 
                 //set array for the new login
                 $loginData = array(
-                    'validated' => $validated,
-                    'enabled' => $enabled,
-                    'email' => $email,
-                    'failedLoginCount' => $failedLoginCount,
-                    'passwordHash' => $savePassword,
-                    'usersID' => $user->id);
+                    'validated'         => $validated,
+                    'enabled'           => $enabled,
+                    'email'             => $email,
+                    'failedLoginCount'  => $failedLoginCount,
+                    'passwordHash'      => $savePassword,
+                    'usersID'           => $user->id
+                );
 
                 //create new login and save
                 $login = new Login($loginData);
@@ -232,27 +236,29 @@ class accountsController extends Controller
         $this->setPositionIndicator(Controller::POSITION_LOGIN);
     }
 
+    /**
+     * In this function we managed the administration of the users
+     *
+     * @return void
+     */
     public function actionAdminusermanagement()
     {
-
-        /**
-         * In this function we managed the administration of the users
-         */
-
         // check if the user have the role admin
         if($this->isAdmin())
         {
             // the following "if" check if the the submit was send
             if(isset($_POST['saveChanges']))
             {
-                $enabled =$_POST['enabled']; //select
-                $validated = $_POST['validated']; //select
-                $passwordReset = isset($_POST['passwordReset']); //checkbox
-                $loginID = $_POST['user'];
-                $userRole = $_POST['role'];
+                $enabled        = $_POST['enabled']; //select
+                $validated      = $_POST['validated']; //select
+                $passwordReset  = isset($_POST['passwordReset']); //checkbox
+                $loginID        = $_POST['user'];
+                $userRole       = $_POST['role'];
+
+                $db = $GLOBALS['database'];
 
                 //get the login from a special user
-                $loginUpdate = Login::findOne('usersID='.$loginID);
+                $loginUpdate = Login::findOne('usersID='. $db->quote($loginID));
 
                 //set enabled or disabled
                 if($enabled === '1')
@@ -296,7 +302,7 @@ class accountsController extends Controller
             }
 
             //get all users with login
-            $users = User::find();
+            $users  = User::find();
             $logins = Login::find();
 
             $this->setParam('users',$users);
@@ -309,12 +315,13 @@ class accountsController extends Controller
         $this->setPositionIndicator(Controller::POSITION_ADMINISTRATION);
     }
 
+    /**
+     * with this function we managed the view "mySpace"
+     *
+     * @return void
+     */
     public function actionMySpace ()
     {
-        /**
-         * with this function we managed the view "mySpace"
-         */
-
         //check if there are any success messages in the session
         if(isset($_SESSION['success']))
         {
@@ -330,13 +337,15 @@ class accountsController extends Controller
         if($myOwnID != '')
         {
             //get own data
-            $userData = User::findOne('id='.$myOwnID);
+            $userData    = User::findOne('id='.$myOwnID);
             $addressData = Address::findOne('id='.$userData->addressesID);
+            
             $this->setParam('user',$userData);
             $this->setParam('address',$addressData);
 
             $loginData = Login::findOne('usersID='.$myOwnID);
             $orderData = Order::find('loginsID='.$loginData->id);
+            
             $this->setParam('orders',$orderData);
         }
         else
@@ -347,34 +356,36 @@ class accountsController extends Controller
         $this->setPositionIndicator(Controller::POSITION_ADMINISTRATION);
     }
 
+    /**
+     * with this function we manage the passwordchange
+     *
+     * @return void
+     */
     public function actionChangeSecrets()
     {
-        /**
-         * with this function we manage the passwordchange
-         */
-
-        $errorMessage = '';
+        $errorMessage   = '';
         $successMessage = '';
-        $userID = $_SESSION['userID'];
 
         // the following "if" check if the the submit was send
         if(isset($_POST['changePassword']))
         {
-            $newPassword1 = $_POST['password'] ?? "";
+            $newPassword1 = $_POST['password']  ?? "";
             $newPassword2 = $_POST['password2'] ?? "";
 
             //check if the password match the regex
             if (preg_match('/^(?=.*?[A-Z])(?=.*?[a-z].*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/m', $newPassword1))
             {
                 $savePassword=password_hash($newPassword1,PASSWORD_DEFAULT);
+                
                 //compare password with password2
                 if(password_verify($newPassword2,$savePassword))
                 {
                     //set new password and save
-                    $updateLogin=$this->currentLogin;
+                    $updateLogin = $this->currentLogin;
                     $updateLogin->passwordHash = $savePassword;
                     $updateLogin->passwordResetHash = "";
                     $updateLogin->save();
+
                     $_SESSION['success']= 'Das Passwort wurde erfolgreich geändert!';
                     $successMessage = "Das Passwort wurde erfolgreich geändert!";
                 }
@@ -396,33 +407,33 @@ class accountsController extends Controller
         $this->setPositionIndicator(Controller::POSITION_ADMINISTRATION);
     }
 
+    /**
+     * with this function we will manage the change of personal data
+     *
+     * @return void
+     */
     public function actionChangePersonalData()
     {
-        /**
-         * with this function we will manage the change of personal data
-         */
-
-        $errorMessage = '';
+        $errorMessage   = '';
         $successMessage = '';
 
         //get necessary data´s
         $userID = $_SESSION['userID'];
 
-        $firstName = $_POST['firstName'] ?? '';
+        $firstName  = $_POST['firstName'] ?? '';
         $secondName = $_POST['secondName'] ?? '';
-        $lastName = $_POST['lastName'] ?? '';
-        $birthDate = $_POST['birthDate'] ?? '';
-        $gender = $_POST['gender'] ?? '';
-        $phone = $_POST['phone'] ?? '';
+        $lastName   = $_POST['lastName'] ?? '';
+        $birthDate  = $_POST['birthDate'] ?? '';
+        $gender     = $_POST['gender'] ?? '';
+        $phone      = $_POST['phone'] ?? '';
 
-        $userData = User::findOne('id='.$userID);
+        $userData = User::findOne('id=' . $userID);
 
         $this->setParam('user',$userData);
 
         //check if submit was send
         if(isset($_POST['submit']))
         {
-
             //proof if all important fields are not empty
             if(empty($firstName) || empty($lastName) || empty($birthDate) )
             {
@@ -432,16 +443,15 @@ class accountsController extends Controller
             {
 
                 //set data´s for the user and save them
-                $userData->firstName = $firstName;
-                $userData->secondName = $secondName;
-                $userData->lastName = $lastName;
-                $userData->birthDate = $birthDate;
-                $userData->gender = $gender;
-                $userData->phone = $phone;
+                $userData->firstName    = $firstName;
+                $userData->secondName   = $secondName;
+                $userData->lastName     = $lastName;
+                $userData->birthDate    = $birthDate;
+                $userData->gender       = $gender;
+                $userData->phone        = $phone;
 
                 $userData->save();
                 $_SESSION['success']= 'Ihre Personas wurden erfolgreich aktualisiert!';
-
             }
             $this->updateLastActiveTime();
             $this->redirect('index.php?c=accounts&a=myspace');
@@ -452,13 +462,14 @@ class accountsController extends Controller
         $this->setPositionIndicator(Controller::POSITION_ADMINISTRATION);
     }
 
+    /**
+     * with this function we manage the change of the address
+     *
+     * @return void
+     */
     public function actionChangeAddress()
     {
-
-        /**
-         * with this function we manage the change of the address
-         */
-        $errorMessage = '';
+        $errorMessage   = '';
         $successMessage = '';
 
         $db = $GLOBALS['database'];
@@ -466,29 +477,33 @@ class accountsController extends Controller
         $userID = $_SESSION['userID'];
 
         //get all paramaters
-        $street = $_POST['street'] ?? '';
+        $street       = $_POST['street'] ?? '';
         $streetNumber = $_POST['streetNumber'] ?? '';
-        $city = $_POST['city'] ?? '';
-        $zipCode = $_POST['zipCode'] ?? '';
+        $city         = $_POST['city'] ?? '';
+        $zipCode      = $_POST['zipCode'] ?? '';
 
         //get the user
-        $userData=User::findOne('id='.$userID);
-        $addressAtStart=$userData->address;
+        $userData = User::findOne('id='.$userID);
+        $addressAtStart = $userData->address;
         $this->setParam('address',$addressAtStart);
 
         //check if submit was send
         if(isset($_POST['submit']))
         {
-
             //proof if all important fields are not empty
             if(empty($street) || empty($streetNumber) || empty($city) || empty($zipCode))
             {
                 $errorMessage = 'Nicht alle nötigen Felder sind ausgefüllt';
             }
-            else{
+            else
+            {
                 //check if the address still exists
-                $address = Address::findOne("street=".$db->quote($street)." AND streetnumber=".$db->quote($streetNumber).
-                    " AND city=".$db->quote($city)." AND zipCode=".$db->quote($zipCode));
+                $address = Address::findOne( "street=".$db->quote($street) .
+                                             " AND streetnumber=" . $db->quote($streetNumber) .
+                                             " AND city=" . $db->quote($city) .
+                                             " AND zipCode=" . $db->quote($zipCode)
+                );
+
                 if($address !== null)
                 {
                     $adressID = $address->id;
@@ -497,10 +512,11 @@ class accountsController extends Controller
                 {
                     //set array for the address
                     $adressData=array(
-                        'street'=> $street,
-                        'streetNumber' => $streetNumber,
-                        'city' => $city,
-                        'zipCode' => $zipCode);
+                        'street'        => $street,
+                        'streetNumber'  => $streetNumber,
+                        'city'          => $city,
+                        'zipCode'       => $zipCode
+                    );
 
                     //create new address and save
                     $adress = new Address($adressData);
@@ -523,10 +539,12 @@ class accountsController extends Controller
         $this->setPositionIndicator(Controller::POSITION_ADMINISTRATION);
     }
 
+    /**
+     * no functions are needed at this moment
+     *
+     * @return void
+     */
     public function actionWaitingArea(){
-        /**
-         * no functions are needed at this moment
-         */
         $this->setPositionIndicator(Controller::POSITION_ADMINISTRATION);
     }
 

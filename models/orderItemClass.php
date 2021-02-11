@@ -59,5 +59,6 @@ class OrderItem extends BaseModel
     public function __destruct()
     {
         $this->product = null;
+        parent::__destruct();
     }
 }

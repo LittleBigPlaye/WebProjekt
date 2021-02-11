@@ -291,6 +291,7 @@ p a:after {
     max-width: 95%;
     position: relative;
     margin: auto;
+    margin-bottom: 45px;
 }
 
 .productSpotlight .productLink {

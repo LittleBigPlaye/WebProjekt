@@ -71,7 +71,8 @@ class ProductImage extends BaseModel
 
     public function __destruct()
     {
-        $image = null;
+        $this->image = null;
+        parent::__destruct();
     }
 
     /**

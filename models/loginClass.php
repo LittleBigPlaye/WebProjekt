@@ -48,4 +48,8 @@ class Login extends BaseModel
         }
     }
 
+    public function __destruct() {
+        $this->user = null;
+        parent::__destruct();
+    }
 }

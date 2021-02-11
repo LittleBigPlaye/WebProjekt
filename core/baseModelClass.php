@@ -447,4 +447,11 @@ abstract class BaseModel
         }
     }
 
+
+    public function __destruct() 
+    {
+        $this->data   = [];
+        $this->params = [];
+    }
+
 }

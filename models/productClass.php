@@ -91,9 +91,9 @@ class Product extends BaseModel
 
     public function __destruct()
     {
-        $vendor        = null;
-        $category      = null;
-        $productImages = [];
+        $this->vendor        = null;
+        $this->category      = null;
+        $this->productImages = [];
     }
 
     /**

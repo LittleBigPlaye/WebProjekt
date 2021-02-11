@@ -12,7 +12,6 @@ require_once 'config' . DIRECTORY_SEPARATOR . 'database.php';
 require_once 'config' . DIRECTORY_SEPARATOR . 'imageSettings.php';
 
 // load core files
-require_once COREPATH . 'functions.php';
 require_once COREPATH . 'controllerClass.php';
 require_once COREPATH . 'baseModelClass.php';
 

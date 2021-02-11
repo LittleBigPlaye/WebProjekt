@@ -87,6 +87,7 @@ class Order extends BaseModel
 
     public function __destruct()
     {
-        $orderItems = [];
+        $this->orderItems = [];
+        parent::__destruct();
     }
 }

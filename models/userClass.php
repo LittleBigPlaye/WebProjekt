@@ -31,49 +31,46 @@ class User extends BaseModel
 
     public function __get($key)
     {
-        //relation to table "addresses"
-        if($key == 'address')
+        switch($key)
         {
-            if($this->address == null)
-            {
-                $this->address = Address::findOne('id=' .$this->addressesID);
-            }
-            return $this->address;
-        }
-        else if ($key == 'salutation')
-        {
-            switch($this->gender)
-            {
-                case 'm':
-                    return 'Herr';
-                case 'f':
-                    return 'Frau';
-                default:
-                    return '';
-            }
-        }
-        else if ($key == 'choosenGender')
-        {
-            switch($this->gender)
-            {
-                case 'm':
-                    return 'männlich';
-                case 'f':
-                    return 'weiblich';
-                case 'u':
-                    return 'divers';
-                default:
-                    return 'Keine Angabe';
-            }
-        }
-        else
-        {
-            return parent::__get($key);
+            case 'address':
+                if($this->address == null)
+                {
+                    $this->address = Address::findOne('id=' .$this->addressesID);
+                }
+                return $this->address;
+                break;
+            case 'salutation':
+                switch($this->gender)
+                {
+                    case 'm':
+                        return 'Herr';
+                    case 'f':
+                        return 'Frau';
+                    default:
+                        return '';
+                }
+                break;
+            case 'choosenGener':
+                switch($this->gender)
+                {
+                    case 'm':
+                        return 'männlich';
+                    case 'f':
+                        return 'weiblich';
+                    case 'u':
+                        return 'divers';
+                    default:
+                        return 'Keine Angabe';
+                }
+                break;
+            default:
+                return parent::__get($key);
         }
     }
 
     public function __destruct()
     {
-        $addresses = null;
+        $this->address = null;
     }
 }
