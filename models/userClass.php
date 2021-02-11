@@ -51,7 +51,7 @@ class User extends BaseModel
                         return '';
                 }
                 break;
-            case 'choosenGener':
+            case 'choosenGender':
                 switch($this->gender)
                 {
                     case 'm':
