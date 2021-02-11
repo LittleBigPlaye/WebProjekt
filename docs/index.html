@@ -581,12 +581,35 @@
                         </p>
                     </section>
                     <section>
-                    <h4>Footer</h4>
+                        <h4>Footer</h4>
                         <p>
                             Der Footer ist in 3 Teile untergliedert. Im ersten Abschnitt befindet sich der Name der Firma und was diese eighentlich macht. Dann ist in dem Bereich auch der Link zum Impressum und zur Dokumentation.
                             Im Bereich des zweiten Abschnittes werden die Inhaber der Website namentlich genannt.
                             Der dritte und letzte Abschnitt beinhaltet die Anschrift, in dem Fall eine fiktive, unter der die Inhaber der Seite erreichbar sind.
                         </p>
+                    </section>
+                    <!-- Benachrichtigungen -->
+                    <section>
+                        <h4>Benachrichtigungen</h4>
+                        <p>
+                            Um dem Nutzer in bestimmten Situationen zu benachrichtigen wurden schließbare Benachrichtigungen eingefügt. Die Benachrichtigungen sind farblich kodiert, um dem Benutzer bereits anhand der Farbe zu zeigen, worum es in der Nachricht geht.
+                            Es werden folgende Farben unterschieden:
+                        </p>
+                        <ul>
+                            <li>rot (Fehlermeldungen)</li>
+                            <li>gelb (Warnmeldung)</li>
+                            <li>grün (Erfolgsmeldungen)</li>
+                        </ul>
+                        <img class="largeImage" src="images/page_content/notification_messages.png" alt="Dialogarten">
+                        <span class="imageTitle">Übersicht der verschiedenen Dialogarten</span>
+                        <p>
+                            Die Warnmeldungen werden dem Nutzer hauptächlich auf den Seiten angezeigt, auf denen der Benutzerkomfort maßgeblich unter der Deaktivierung leitet. Bzw. die Funktionalität "eingeschränkt" ist. 
+                            Beispiele hierfür sind der Produktspotlight auf der Startseite sowie die Produktgalerie auf der Produktansicht, die nicht funktionieren, wenn Javascript deaktiviert ist.
+                        </p>
+                        <p>
+                            Damit Benutzer - egal ob mit, oder ohne Javascript - die Meldungen ausblenden können, wurde hierfür eine unsichtbare checkbox genutzt, die den zugehörigen Nachrichtendialog bei Klick versteckt.
+                        </p>
+                        
                     </section>
                 </section>
                 <!-- Allgemeine Seiten -->
@@ -602,7 +625,7 @@
                         <b>Nutzung von Javascript</b>
                         <p>
                             Der Spotlight auf der Startseite wurde mit Javascript umgesetzt. Damit Nutzer ohne aktives Javascript nicht bemerken, dass der Spotlight normalerweise mehrere Produkte anzeigt, wird für ohne Javascript lediglich das erste Produkt angezeigt. Sowohl der
-                        "Weiter"- als auch der "Zurück"-Pfeil werden hierfür ausgeblendet.
+                            "Weiter"- als auch der "Zurück"-Pfeil werden hierfür ausgeblendet.
                         </p>
                     </section>
                     <h4>Impressum</h4>
@@ -615,36 +638,36 @@
                         <h4>Alle Produkte anzeigen</h4>
                         <p>
                             "Alle produkte anzeigen" verbindet sowohl die Auflistung aller Produkte, als auch die Such / Sortier und Filterfunktion. In der Desktop Ansicht werden die Produkte in Reihen untereinander angezeigt, während in der Mobilen Ansicht alle Produkte untereinander
-                        dargestellt werden. Die filterleiste wird in der Desktopansicht schmal am linken Bildschirmrand dargestellt. In der mobilen Ansicht wechselt die Filterleiste zu einer Horizontalen Filterleiste, die Standardmäßig eingeklappt ist
-                        und vom Nutzer ausgeklappt werden kann. Ähnlich wie bei der Navigationsleiste kommt auch hier eine Checkbox zum Einsatz, sodass der User kein Javascript benötigt.
+                            dargestellt werden. Die filterleiste wird in der Desktopansicht schmal am linken Bildschirmrand dargestellt. In der mobilen Ansicht wechselt die Filterleiste zu einer Horizontalen Filterleiste, die Standardmäßig eingeklappt ist
+                            und vom Nutzer ausgeklappt werden kann. Ähnlich wie bei der Navigationsleiste kommt auch hier eine Checkbox zum Einsatz, sodass der User kein Javascript benötigt.
                         </p>
                         <p>
                             Für normale Nutzer und nicht angemeldete Nutzer sind lediglich Produkte sichtbar, die nicht als "Versteckt" angelegt wurde. Wenn der Nutzer Administrator ist, werden auch versteckte Produkte angezeigt. Anstelle eines "Zum Warenkorb hinzufügen" Buttons
-                        haben versteckte Produkte ein geschlossenes Auge als Symbol am unteren rechten Bildrand. Zusätzlich wird bei versteckten Symbolen das Vorschaubild in Graustufen dargestellt und der Untere - normalerweise orangefarbene - Rand ebenfalls
-                        grau abgebildet.
+                            haben versteckte Produkte ein geschlossenes Auge als Symbol am unteren rechten Bildrand. Zusätzlich wird bei versteckten Symbolen das Vorschaubild in Graustufen dargestellt und der Untere - normalerweise orangefarbene - Rand ebenfalls
+                            grau abgebildet.
                         </p>
                         <p>
                             Die Suchfunktion bietet dem Nutzer die Möglichkeit gezielt nach Artikeln zu suchen. Hierfür wird jeder mit Leerzeichen getrennte Suchbegriff in dem Namen, der Beschreibung und der Catchphrase der Produkte gesucht. Die Suchleiste kann maximal 200 Zeichen
-                        beinhalten. Um - zumindest ein Stück weit - abzusichern, dass diese 200 Zeichen nicht überschritten werden, wird vor dem Absenden der Suche (für Nutzer mit aktivem Javascript) geprüft, ob die eingegebene Suche die Zeichenanzahl
-                        überschreibt und ggf. auf 200 Zeichen gekürzt. Für die Suche selbst werden vor der Bildung der Abfrage alle doppelten Begriffe aus dem Suchstring entfernt.
+                            beinhalten. Um - zumindest ein Stück weit - abzusichern, dass diese 200 Zeichen nicht überschritten werden, wird vor dem Absenden der Suche (für Nutzer mit aktivem Javascript) geprüft, ob die eingegebene Suche die Zeichenanzahl
+                            überschreibt und ggf. auf 200 Zeichen gekürzt. Für die Suche selbst werden vor der Bildung der Abfrage alle doppelten Begriffe aus dem Suchstring entfernt.
                         </p>
                         <p>
                             Der Nutzer hat zusätzich die Möglichkeit Produkte zu filtern. Hierbei stehen die Möglichkeiten nach Marken, Produktkategorien, Mindestpreis sowie Höchstpreis zu filtern. Zusätzlich kann der Nutzer die Artikel noch Nach Produktbezeichnung, Preis und Einstelldatum
-                        (Jeweils auf- und absteigend) sortieren.
+                            (Jeweils auf- und absteigend) sortieren.
                         </p>
                         <b>Nutzung von Javascript</b>
                         <p>
                             Die Nutzung der Produktseite unterscheidet sich für Nutzer mit activem Javascript von der für Nutzer ohne aktives Javascript. Bei Aktiviertem Javascript können - ohne Neuladen der gesamten Seite - weitere Produkte via Ajax nachgeladen werden. Nutzt der
-                        Nutzer die Suche oder die Filterfunktion, so werden ebenfalls nur die Produkte nachgeladen. Zusätzlich wird die Adresse mit den entsprechenden Get-Parametern ausgestattet, sodass ein "Weitersenden" der Suchergebnisse Problemlos
-                        möglich ist.
+                            Nutzer die Suche oder die Filterfunktion, so werden ebenfalls nur die Produkte nachgeladen. Zusätzlich wird die Adresse mit den entsprechenden Get-Parametern ausgestattet, sodass ein "Weitersenden" der Suchergebnisse Problemlos
+                            möglich ist.
                             <br>
                             Für das Nachladen der Produkte werden lediglich die Relevanten Informationen vom Server angefordert. Die Produktkacheln baut der Client hierbei mithilfe von Javascript aus einem erhaltenen JSON-String selbstständig zu einer
-                        Kachel zusammen. Hierfür verwendet er eine im Body versteckte "Prefab"-Kachel, die unbefüllt ist.
+                            Kachel zusammen. Hierfür verwendet er eine im Body versteckte "Prefab"-Kachel, die unbefüllt ist.
                         </p>
-                        <p></p>
+
                         <p>
                             Pro Produktseite werden nicht alle Artikel angezeigt. Mithilfe der Seitenleiste am unteren Bildschirmrand kann der Nutzer zwischen den produktseiten navigieren. Aktuell werden pro Produktseite 20 Produkte angezeigt. Die Anzahl der anzuzeigenden Produkte
-                        kann in der Datei "config/init.php" angepasst werden
+                            kann in der Datei "config/init.php" angepasst werden
                         </p>
                     </section>
                     <!-- Unsere Marken -->
@@ -1995,20 +2018,19 @@
                             <td>2,5 h</td>
                         </tr>
                         <tr>
-                        <td>09.02</td>
+                            <td>09.02</td>
                             <td>Fehlerbehebung ResetPassword und Geschlechterauswahl</td>
                             <td>John Klippstein</td>
                             <td>3 h</td>
                         </tr>
                         <td>11.02</td>
-                            <td>Dokumentation</td>
-                            <td>John Klippstein</td>
-                            <td>2 h</td>
-                        </tr>
-
-                    </table>
-                </section>
+                        <td>Dokumentation</td>
+                        <td>John Klippstein</td>
+                        <td>2 h</td>
+                    </tr>
+                </table>
             </section>
-        </div>
-    </body>
+        </section>
+    </div>
+</body>
 </html>

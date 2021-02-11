@@ -1,6 +1,7 @@
 <!-- @author Robin Beck -->
 
 <div class="productBoxWrapper">
+    <!-- form for search bar -->
     <div class="formWrapper search">
         <form id="searchForm" class="searchForm" method="Get">
             <input type="hidden" name="c" value="products" />
@@ -41,8 +42,10 @@
         </form>
     </div>
 
+    <!-- form for filters -->
     <div class="formWrapper sideBar">
 
+        <!-- checkbox to toggle visibility of the form in mobile mode -->
         <label for="filterToggle" class="filterToggleLabel">Filter<span class="dropIcon">&#9776;</span></label>
         <input type="checkbox" id="filterToggle" class="filterToggle">
 
@@ -128,6 +131,7 @@
         </section>
     </div>
 
+    <!-- pager - only visible, if no javascript is active -->
     <div id="pagesList" class="pagesList">
         <!-- Button to return to first product list -->
         <a href="index.php?<?= $getString ?>&page=<?= 1 ?>">&laquo;</a>
@@ -143,13 +147,11 @@
         <a href="index.php?<?= $getString ?>&page=<?= $numberOfPages ?>">&raquo;</a>
     </div>
 
-
+    <!-- load more button - only visible, if javascript is active -->
     <form id="loadMoreForm" class="moreProducts">
         <input type="submit" name="submit" value="Mehr anzeigen">
     </form>
 </div>
-
-
 
 <script src="<?= JAVASCRIPTPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'addToCart.js' ?>"></script>
 <script src="<?= JAVASCRIPTPATH . 'products' . DIRECTORY_SEPARATOR . 'listProducts.js' ?>"></script>

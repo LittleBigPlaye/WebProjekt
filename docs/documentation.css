@@ -8,9 +8,9 @@ body {
 body {
     margin: 0 auto;
     background-color: white;
-    counter-reset: image;
     font-family: 'Nunito', sans-serif;
     background-color: #e2e2e2;
+    counter-reset: image;
     counter-reset: h2counter;
 }
 

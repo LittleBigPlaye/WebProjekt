@@ -1,5 +1,5 @@
 <?php
-//create an empty product card for ajax purposes
+//used to create an empty product card for ajax purposes, is variable is set
 if (isset($isPrefab)) {
     $product = new \myf\models\Product(array(
         'id' => -1
