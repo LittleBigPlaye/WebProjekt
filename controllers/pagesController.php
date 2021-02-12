@@ -29,10 +29,7 @@ class PagesController extends Controller
         //fetch products for product spotlight
         $spotlightProducts = Product::findRange(0, 4, 'isHidden = 0', 'createdAt DESC');
 
-        //open file and read products from file
-        $lines = null;
         //check if file is available
-
         $cardProductsFirstRow = $this->fetchProductsFromFile('config' . DIRECTORY_SEPARATOR . 'indexProductConfiguration.txt');
         $cardProductsSecondRow = $this->fetchProductsFromFile();
 
@@ -89,7 +86,7 @@ class PagesController extends Controller
     public function actionImprint()
     {
     }
-    
+
     public function actionAboutus()
     {
         $this->setPositionIndicator(Controller::POSITION_ABOUT_US);
