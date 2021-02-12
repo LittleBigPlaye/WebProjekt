@@ -195,7 +195,7 @@ nav li img {
         background-color: #191919;
     }
 
-    nav li.right {
+    nav .rightAligned {
         float: right;
     }
 

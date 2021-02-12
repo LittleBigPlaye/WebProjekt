@@ -20,17 +20,23 @@ else if ($cartCount > 99) {
     <input type="checkbox" id="navToggle">
 
     <ul class="mainNav clearfix" id="mainNav">
-        <li class="<?= ($currentPosition == Controller::POSITION_INDEX) ? 'active' : '' ?> homePage"><a href="index.php?c=pages&a=index">
+
+        <li class="<?= ($currentPosition == Controller::POSITION_INDEX) ? 'active' : '' ?> homePage">
+            <a href="index.php?c=pages&a=index">
                 <span>Startseite</span>
                 <img class="smallLogo" src="assets/images/icons/myf_logo_scmall.svg" alt="Startseite">
-            </a></li>
+            </a>
+        </li>
 
         <!-- Products -->
-        <li <?= ($currentPosition == Controller::POSITION_PRODUCTS) ? 'class="active"' : '' ?>><label class="subNavTitle" for="dropToggle01"><a>Produkte
-                    <span class="dropIcon">▾</span>
-                    <label title="toggle dropDown" class="dropIcon" for="dropToggle01">▾</label>
+        <li <?= ($currentPosition == Controller::POSITION_PRODUCTS) ? 'class="active"' : '' ?>>
+            <label class="subNavTitle" for="dropToggle01">
+                <a>Produkte
+                        <span class="dropIcon">▾</span>
+                        <label title="toggle dropDown" class="dropIcon" for="dropToggle01">▾</label>
                 </a>
             </label>
+
             <input type="checkbox" id="dropToggle01" class="subNavToggle">
             <ul class="subNav">
                 <li><a href="index.php?c=products&a=search">Alle Artikel</a></li>
@@ -39,48 +45,63 @@ else if ($cartCount > 99) {
             </ul>
         </li>
 
-        <!-- Login / Logout -->
-        <?php if ($this->isLoggedIn()) : ?>
-            <li class="right"><a href="index.php?c=pages&a=logout">Logout</a></li>
-        <?php else : ?>
-            <li <?= ($currentPosition == Controller::POSITION_LOGIN) ? 'class="right active"' : 'class="right"' ?>><a href="index.php?c=pages&a=login">Login</a></li>
-        <?php endif; ?>
+        
+        <div class="rightAligned">
+            <li <?= ($currentPosition == Controller::POSITION_CART) ? 'class="right active"' : 'class="right"' ?>>
+                <a href="index.php?c=orders&a=shoppingcart">Warenkorb <img src="assets/images/icons/shopping_cart.svg" alt="">
+                    <span class="cartBadge <?= empty($cartCount) ? 'hidden' : '' ?>" id="cartBadge">
+                        <p id="cartBadgeText">
+                            <?= $cartCount ?>
+                        </p>
+                    </span>
+                </a>
+            </li>    
 
-        <li <?= ($currentPosition == Controller::POSITION_ABOUT_US)? 'class ="right active"' : 'class ="right"'?>>
-            <a href="index.php?c=pages&a=aboutus">About Us</a></li>
-        <!-- Administration -->
-        <?php if ($this->isLoggedIn()) : ?>
-            <?php if ($this->isAdmin()) : ?>
-                <li class="<?= ($currentPosition == Controller::POSITION_ADMINISTRATION) ? 'active ' : '' ?>right"><label class="subNavTitle" for="dropToggle02"><a>Administration
-                            <span class="dropIcon">▾</span>
-                            <label title="toggle dropDown" class="dropIcon" for="dropToggle02">▾</label>
-                        </a>
-                    </label>
-                    <input type="checkbox" id="dropToggle02" class="subNavToggle">
-                    <ul class="subNav">
-                        <li><a href="index.php?c=accounts&a=myspace">Mein Konto</a></li>
-                        <li><a href="index.php?c=productManagement&a=new">Produkt anlegen</a>
-                        <li><a href="index.php?c=accounts&a=adminusermanagement">Benutzer verwalten</a></li>
-                    </ul>
-                </li>
+            <!-- Administration -->
+            <?php if ($this->isLoggedIn()) : ?>
+                <?php if ($this->isAdmin()) : ?>
+                    <li class="<?= ($currentPosition == Controller::POSITION_ADMINISTRATION) ? 'active ' : '' ?>right">
+                        <label class="subNavTitle" for="dropToggle02">
+                            <a>Administration
+                                <span class="dropIcon">▾</span>
+                                <label title="toggle dropDown" class="dropIcon" for="dropToggle02">▾</label>
+                            </a>
+                        </label>
+                        
+                        <input type="checkbox" id="dropToggle02" class="subNavToggle">
+                        <ul class="subNav">
+                            <li>
+                                <a href="index.php?c=accounts&a=myspace">Mein Konto</a>
+                            </li>
+                            <li>
+                                <a href="index.php?c=productManagement&a=new">Produkt anlegen</a>
+                            </li>
+                            <li>
+                                <a href="index.php?c=accounts&a=adminusermanagement">Benutzer verwalten</a> 
+                            </li>
+                        </ul>
+                    </li>
+                <?php else : ?>
+                    <li class="<?= ($currentPosition == Controller::POSITION_ADMINISTRATION) ? 'active ' : '' ?>right">
+                        <a href="index.php?c=accounts&a=myspace">Mein Konto</a>
+                    </li>
+                <?php endif; ?>
+            <?php endif; ?>
+
+            <!-- About Us -->
+            <li <?= ($currentPosition == Controller::POSITION_ABOUT_US)? 'class ="right active"' : 'class ="right"'?>>
+                <a href="index.php?c=pages&a=aboutus">About Us</a>
+            </li>
+
+            <!-- Login / Logout -->
+            <?php if ($this->isLoggedIn()) : ?>
+                <li class="right"><a href="index.php?c=pages&a=logout">Logout</a></li>
             <?php else : ?>
-                <li class="<?= ($currentPosition == Controller::POSITION_ADMINISTRATION) ? 'active ' : '' ?>right">
-                    <a href="index.php?c=accounts&a=myspace">Mein Konto</a>
+                <li <?= ($currentPosition == Controller::POSITION_LOGIN) ? 'class="right active"' : 'class="right"' ?>>
+                    <a href="index.php?c=pages&a=login">Login</a>
                 </li>
             <?php endif; ?>
-        <?php endif; ?>
-
-
-
-        <li <?= ($currentPosition == Controller::POSITION_CART) ? 'class="right active"' : 'class="right"' ?>>
-            <a href="index.php?c=orders&a=shoppingcart">Warenkorb <img src="assets/images/icons/shopping_cart.svg" alt="">
-                <span class="cartBadge <?= empty($cartCount) ? 'hidden' : '' ?>" id="cartBadge">
-                    <p id="cartBadgeText"><?= $cartCount ?></p>
-                </span>
-            </a>
-        </li>
-
-
+        </div>
     </ul>
 </nav>
 <script src="<?= JAVASCRIPTPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'navbar.js' ?>"></script>
