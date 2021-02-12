@@ -268,3 +268,16 @@ img {
 .largeImage {
     max-width: 100% !important;
 }
+
+.row {
+    display: flex;
+}
+
+.column {
+    flex: 50%;
+    padding: 5px;
+}
+
+.column img {
+    max-width: 100%;
+}

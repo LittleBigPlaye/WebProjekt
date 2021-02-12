@@ -676,6 +676,7 @@ form label {
 
 .productBoxWrapper {
     display: grid;
+    margin: 0 auto;
     width: 95%;
     grid-template-columns: 1fr;
     grid-template-areas: "search""sidebar""content""pager""loadMore";
