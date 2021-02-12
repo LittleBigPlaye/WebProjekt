@@ -21,17 +21,15 @@ class PagesController extends Controller
     {
         $this->setPositionIndicator(Controller::POSITION_INDEX);
         //check if products should be added to cart
-        if (isset($_POST['addToCart']) && is_numeric($_POST['addToCart'])) {
+        if (isset($_POST['addToCart']) && is_numeric($_POST['addToCart'])) 
+        {
             $this->addToCart($_POST['addToCart']);
         }
 
         //fetch products for product spotlight
         $spotlightProducts = Product::findRange(0, 4, 'isHidden = 0', 'createdAt DESC');
 
-        //open file and read products from file
-        $lines = null;
         //check if file is available
-
         $cardProductsFirstRow = $this->fetchProductsFromFile('config' . DIRECTORY_SEPARATOR . 'indexProductConfiguration.txt');
         $cardProductsSecondRow = $this->fetchProductsFromFile();
 
@@ -51,24 +49,29 @@ class PagesController extends Controller
     {
         //read the given file
         $lines = null;
-        if ($filePath != '' && file_exists('config' . DIRECTORY_SEPARATOR . 'indexProductConfiguration.txt')) {
+        if ($filePath != '' && file_exists('config' . DIRECTORY_SEPARATOR . 'indexProductConfiguration.txt')) 
+        {
             $lines = file('config' . DIRECTORY_SEPARATOR . 'indexProductConfiguration.txt', FILE_IGNORE_NEW_LINES);
         }
 
         $db = $GLOBALS['database'];
         $products = array();
         //try to find all products with the corresponding product names
-        if (is_array($lines) && count($lines) > 0) {
-            foreach ($lines as $line) {
+        if (is_array($lines) && count($lines) > 0) 
+        {
+            foreach ($lines as $line) 
+            {
                 $currentProduct = Product::findOne('productName LIKE ' . $db->quote($line) . ' AND isHidden = 0');
-                if ($currentProduct === null) {
+                if ($currentProduct === null) 
+                {
                     $currentProduct = Product::findOne('isHidden = 0', 'RAND()');
                 }
                 array_push($products, $currentProduct);
             }
         }
         //fallback if no products are listed within the file or the file is empty
-        else {
+        else 
+        {
             //read three random products
             $products = Product::findRange(0, 3, 'isHidden = 0', 'RAND()');
         }
@@ -83,6 +86,7 @@ class PagesController extends Controller
     public function actionImprint()
     {
     }
+
     public function actionAboutus()
     {
         $this->setPositionIndicator(Controller::POSITION_ABOUT_US);
@@ -93,13 +97,15 @@ class PagesController extends Controller
         $this->setPositionIndicator(Controller::POSITION_LOGIN);
 
         //check if there are any success messages in the session
-        if (isset($_SESSION['success'])) {
+        if (isset($_SESSION['success'])) 
+        {
             $successMessage = $_SESSION['success'];
             unset($_SESSION['success']);
             $this->setParam('successMessage', $successMessage);
         }
 
-        if ($this->isLoggedIn()) {
+        if ($this->isLoggedIn()) 
+        {
             $this->redirect('index.php?c=pages&a=index');
         }
 
@@ -113,35 +119,46 @@ class PagesController extends Controller
             $email = trim($_POST["email"]);
             $password = $_POST["password"];
             // Check if email is empty
-            if (empty(trim($_POST["email"]))) {
+            if (empty(trim($_POST["email"]))) 
+            {
                 $errorMessages['email'] = "Bitte gib eine Email an.";
             }
 
             $login = Login::findOne('email=' . $db->quote($email));
             //check if user exists
-            if (Login::findOne('email LIKE' . $db->quote($email)) == null) {
+            if (Login::findOne('email LIKE' . $db->quote($email)) == null) 
+            {
                 $errorMessages['user'] = "Es existiert kein Benutzer mit dieser Email";
             } //check if user is enabled
-            elseif ($login->enabled != 1) {
+            elseif ($login->enabled != 1) 
+            {
                 $errorMessages['user_disabled'] = "Dieser Nutzer ist gesperrt.";
-            } elseif ($login->validated != 1) {
+            } 
+            elseif ($login->validated != 1) 
+            {
                 $errorMessages['user_validated'] = "Dieser Nutzer ist nicht validiert";
             }
             // Check if password is empty
-            if (empty(trim($password))) {
+            if (empty(trim($password))) 
+            {
                 $errorMessages['password'] = "Bitte gib ein Passwort ein.";
             }
 
-            if (count($errorMessages) === 0) {
-                if ($login->passwordResetHash == "") {
+            if (count($errorMessages) === 0) 
+            {
+                if ($login->passwordResetHash == "") 
+                {
                     $hashed_password = $login->passwordHash;
-                } else {
+                } 
+                else 
+                {
                     $hashed_password = $login->passwordResetHash;
                 }
 
 
                 //check if password hash is valid
-                if (password_verify($password, $hashed_password)) {
+                if (password_verify($password, $hashed_password)) 
+                {
                     $_SESSION['currentLogin'] = serialize($login);
                     $_SESSION['isLoggedIn'] = true;
                     $login->failedLoginCount = 0;
@@ -149,10 +166,13 @@ class PagesController extends Controller
                     $login->save();
                     $_SESSION['userID'] = $login->usersID;
                     $this->redirect('index.php?c=pages&a=index');
-                } else {
+                } 
+                else 
+                {
 
                     $login->failedLoginCount++;
-                    if ($login->failedLoginCount == 5) {
+                    if ($login->failedLoginCount == 5) 
+                    {
                         $login->enabled = 0;
                     }
                     $login->save();
@@ -165,12 +185,15 @@ class PagesController extends Controller
 
     public function actionLogout()
     {
-        if ($this->isLoggedIn()) {
+        if ($this->isLoggedIn()) 
+        {
             $_SESSION['isLoggedIn'] = false;
             session_destroy();
             //redirect to index width delay
             header("refresh:5; url=index.php");
-        } else {
+        } 
+        else 
+        {
             $this->redirect('index.php?c=pages&a=index');
         }
     }

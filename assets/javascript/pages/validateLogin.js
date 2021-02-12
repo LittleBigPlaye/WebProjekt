@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function ()
                 event.preventDefault();
                 event.stopPropagation();
             }
-            return formisValid;
+            return formIsValid;
         });
     }
 });
