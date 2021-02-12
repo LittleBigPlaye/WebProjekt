@@ -46,6 +46,8 @@ else if ($cartCount > 99) {
             <li <?= ($currentPosition == Controller::POSITION_LOGIN) ? 'class="right active"' : 'class="right"' ?>><a href="index.php?c=pages&a=login">Login</a></li>
         <?php endif; ?>
 
+        <li <?= ($currentPosition == Controller::POSITION_ABOUT_US)? 'class ="right active"' : 'class ="right"'?>>
+            <a href="index.php?c=pages&a=aboutus">About Us</a></li>
         <!-- Administration -->
         <?php if ($this->isLoggedIn()) : ?>
             <?php if ($this->isAdmin()) : ?>
@@ -77,6 +79,8 @@ else if ($cartCount > 99) {
                 </span>
             </a>
         </li>
+
+
     </ul>
 </nav>
 <script src="<?= JAVASCRIPTPATH . 'viewAssets' . DIRECTORY_SEPARATOR . 'navbar.js' ?>"></script>

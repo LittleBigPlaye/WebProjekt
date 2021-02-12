@@ -85,6 +85,7 @@ class PagesController extends Controller
     }
     public function actionAboutus()
     {
+        $this->setPositionIndicator(Controller::POSITION_ABOUT_US);
     }
 
     public function actionLogin()
