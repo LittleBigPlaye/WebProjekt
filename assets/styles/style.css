@@ -144,7 +144,7 @@ p a:after {
 }
 
 .productCard .catchPhrase {
-    font-size: .6vw;
+    font-size: .8em;
 }
 
 .productCard.hidden {
@@ -1194,7 +1194,7 @@ form label {
 
 .shoppingCart {
     width: 95%;
-    margin: 15px auto;
+    margin: 15px auto !important;
     background: white;
     border-radius: 5px;
     padding: 5px;
@@ -1228,7 +1228,7 @@ form label {
 }
 
 .cartListing {
-    width: 95%;
+    width: 100%;
     grid-area: content;
     margin: 0 auto;
     height: 100%;
@@ -1249,13 +1249,17 @@ form label {
 
 .cartTotal {
     grid-area: total;
-    position: sticky;
+    /* position: sticky; */
     bottom: 0;
     width: 95%;
     margin: 0 auto;
     padding: 5px;
     background-color: #e0e0e0;
     border-radius: 5px 5px 0px 0px;
+}
+
+.shoppingCart .imageWrapper {
+    margin-top: 15px;
 }
 
 .cartTotal .table {
@@ -1333,10 +1337,6 @@ form label {
     text-align: left;
     width: 90%;
     margin: 0 auto;
-}
-
-.table .tableCell img {
-    width: 90%;
 }
 
 .table .tableRow.bottom {

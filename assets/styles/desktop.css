@@ -112,21 +112,32 @@
         max-width: 300px;
     }
     /* #region shoppingCart */
-    .cartListing {
-        margin-left: 0;
-    }
     .shoppingCart {
         display: grid;
-        padding: 15px;
+        margin: 5px;
+        padding-top: 0px;
+        max-width: 100%;
         grid-template-columns: 2fr 2fr 1fr 1fr;
         grid-template-areas: ". heading . ." "content content content total" ". notFound . .";
         font-size: 1.1em;
     }
+
+.shoppingCart.table {
+    margin: 0;
+}
+
+    .shoppingCart .tableCell {
+        padding: 10px !important;
+        padding-top: 0px !important;
+    }
+
     .cartTotal {
+        width: 90%;
         max-height: 200px;
         padding: 10px;
         border-radius: 5px;
     }
+    
     /* #endregion */
     /* #region psuedoTable */
     .table {

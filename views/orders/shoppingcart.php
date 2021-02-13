@@ -6,7 +6,7 @@
 
     <?php if ($order !== null) : ?>
         <div class="cartListing">
-            <div class="table shoppingCart">
+            <div class="table cart">
                 <div class="tableRow head">
                     <div class="tableCell">Produkte</div>
                     <div class="tableCell"></div>
