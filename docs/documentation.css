@@ -280,4 +280,9 @@ img {
 
 .column img {
     max-width: 100%;
+    margin: 0 auto;
+}
+
+.column span {
+    text-align: center;
 }
