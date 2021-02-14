@@ -61,7 +61,7 @@ class ProductManagementController extends Controller
             $category    = $_POST['category'] ?? '';
             $isHidden    = $_POST['visibility'] ?? '';
 
-            $isHidden = ($isHidden == 'hidden') ? true : false;
+            $isHidden = ($isHidden == 'hidden') ? 1 : 0;
 
             $db = $GLOBALS['database'];
 
@@ -180,7 +180,7 @@ class ProductManagementController extends Controller
             $category    = $_POST['category'] ?? '';
             $isHidden    = $_POST['visibility'] ?? '';
 
-            $isHidden = ($isHidden == 'hidden') ? true : false;
+            $isHidden = ($isHidden == 'hidden') ? 1 : 0;
 
             $this->validateInputs($name, $catchPhrase, $description, $price, $vendor, $category, $errorMessages);
 

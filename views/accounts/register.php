@@ -66,7 +66,7 @@
 
         <label class="optional">Geschlecht:</label>
         <select name="gender">
-            <option value="null">keine Angabe</option>
+            <option value="">keine Angabe</option>
             <option value="m">männlich</option>
             <option value="f">weiblich</option>
             <option value="u">divers</option>

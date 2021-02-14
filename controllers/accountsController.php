@@ -57,6 +57,8 @@ class accountsController extends Controller
             $city           = $_POST['city'] ?? "";
             $zipCode        = $_POST['zipCode'] ?? "";
 
+            $gender = ($gender == '') ? null : $gender;
+
             $db = $GLOBALS['database'];
 
             /**
