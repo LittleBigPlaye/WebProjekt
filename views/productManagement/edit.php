@@ -35,6 +35,7 @@
 
                         <label for="deleteImage<?=$productImage->id?>">Bild "<?= htmlspecialchars($productImage->name)?>" löschen?
                         <input type="checkbox" id="deleteImage<?=$productImage->id?>" name="deleteImage<?=$productImage->id?>"></label>
+                        <hr>
                     <?php endforeach; ?>
                 </div>
             <?php endif; ?>
@@ -103,6 +104,7 @@
                             echo htmlspecialchars($_POST['productPrice']);
                         }?>">
                 <span class="errorInfo">Bitte geben Sie einen Preis mit maximal zwei Nachkommastellen an!</span>
+                <span class="currency">€</span>
             </div>
 
             <div class="input">

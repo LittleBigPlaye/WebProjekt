@@ -527,6 +527,12 @@ form textarea:focus {
     background-color: var(--highlightColor);
 }
 
+.input .currency {
+    position: absolute;
+    top: 40%;
+    right: 15px;
+}
+
 form input:hover,
 form select:hover,
 form textarea:hover {

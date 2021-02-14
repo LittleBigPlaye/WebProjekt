@@ -46,6 +46,7 @@
             <input type="number" max="99999.99" min="0" step="0.01" id="productPrice" name="productPrice" required
                 value="<?= $_POST['productPrice'] ?? '' ?>"/>
             <span class="errorInfo">Bitte geben Sie einen Preis mit maximal zwei Nachkommastellen an!</span>
+            <span class="currency">€</span>
         </div>
 
         <div class="input">
