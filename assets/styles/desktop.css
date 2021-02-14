@@ -1,3 +1,14 @@
+:root {
+    --orange: #eb7d00;
+    --darkgrey: #333;
+    --fontColor: #384047;
+    --fontColorLight: #6f7172;
+    --background: #e1e1e1;
+    --highlightColor: #f1f1f1;
+    --white: white;
+    --black: black;
+}
+
 @media screen and (min-width: 430px) {
     .productCard {
         width: 270px;
@@ -5,112 +16,135 @@
 }
 
 @media screen and (min-width: 900px) {
+
     /* #region header */
     .logo1 {
         display: inline-block;
         position: relative;
-        height: 230px;
+        height: 190px;
         top: 12px;
     }
+
     .logo2 {
         display: none;
     }
+
     .header .icon {
         display: none;
     }
+
     /* #endregion */
+
+    .productCard {
+        max-width: 300px;
+    }
+
     /* #region forms */
-    .registerForm {
+    .registerForm,
+    .productForm,
+    .orderConfirmationForm,
+    .imprint {
         width: 60% !important;
+        max-width: 1000px;
     }
-    .productForm {
-        width: 60% !important;
-    }
+
     .loginForm {
         width: 450px !important;
     }
-    .orderConfirmationForm {
-        width: 60%;
-    }
+
+    /* #region orderConfirmationForm */
     .orderConfirmationForm input[type=submit] {
         width: 400px;
         margin: 25px auto;
     }
+
     .orderConfirmationForm h2 {
         text-align: left;
     }
+
     .orderConfirmationForm {
         text-align: left;
     }
-    .loginForm {
-        width: 450px;
-    }
-    /* #region filter form */
+
+    /* #endregion */
+
+    /* #region filterForm */
     .filterForm {
         display: block !important;
         width: 250px !important;
         margin-top: 15px !important;
         border-radius: 5px 5px 5px 5px !important;
     }
+
     .filterForm select {
         cursor: pointer;
     }
+
     .filterToggle {
         display: none;
         cursor: pointer;
     }
+
     .filterForm .desktopTitle {
         display: block;
         font-size: 1.3em;
     }
+
     .filterToggleLabel {
         display: none;
     }
+
     .filterToggleLabel .dropIcon {
         float: right;
     }
+
     /* #endregion */
     /* #endregion */
     .errorPage img {
         width: 40%;
     }
+
     /* #region vendors */
     .vendorsWrapper {
         padding: 15px;
-        background-color: white;
+        background-color: var(--white);
         border-radius: 5px;
         margin: 15px auto;
     }
+
     .vendorsWrapper label {
         padding: 0;
         margin-left: 15px;
         text-align: left;
         cursor: default;
     }
+
     .vendorContainer {
         display: block;
         width: 100%;
-        background-color: white;
+        background-color: var(--white);
         text-align: center;
         border-radius: 0px 0px 5px 5px;
     }
+
     .vendorContainer .customSubmit {
         margin-left: 15px;
         display: block;
         left: 0px;
         width: 350px;
     }
+
     .vendorsWrapper .products {
         max-width: 100% !important;
     }
+
     /* #endregion */
+    /* the error popup that is displayed if errors have been found while javascript avlidation */
     .input .errorInfo {
         min-width: 10%;
         max-width: 100%;
     }
-    .productCard {
-        max-width: 300px;
-    }
+
     /* #region shoppingCart */
     .shoppingCart {
         display: grid;
@@ -118,13 +152,13 @@
         padding-top: 0px;
         max-width: 100%;
         grid-template-columns: 2fr 2fr 1fr 1fr;
-        grid-template-areas: ". heading . ." "content content content total" ". notFound . .";
+        grid-template-areas: ". heading . .""content content content total"". notFound . .";
         font-size: 1.1em;
     }
 
-.shoppingCart.table {
-    margin: 0;
-}
+    .shoppingCart.table {
+        margin: 0;
+    }
 
     .shoppingCart .tableCell {
         padding: 10px !important;
@@ -137,47 +171,56 @@
         padding: 10px;
         border-radius: 5px;
     }
-    
+
     /* #endregion */
-    /* #region psuedoTable */
+    /* #region pseudoTable */
     .table {
         display: table;
         margin: 0 auto;
         text-align: center;
         width: 100%;
     }
+
     .table.userManagement {
         padding: 5px;
         width: 90%;
         max-width: 2000px;
     }
+
     .table.userManagement:not(.tableRow.head) .tableCell span {
         display: block;
         margin-top: 18px;
     }
+
     .table.userManagement label {
         margin-top: 25px;
     }
+
     .table.table.userManagement .head {
         font-size: 1.3em;
     }
+
     .table.userManagement input,
     .table.userManagement select {
         margin: 5px 0 !important;
         font-size: 1em;
     }
+
     .table .tableRow {
         display: table-row;
     }
+
     .table .tableRow::after {
         clear: both;
     }
+
     .table .tableRow.head {
         font-weight: bold;
         display: table-header-group;
-        color: white;
-        background-color: #363636
+        color: var(--white);
+        background-color: var(--darkgrey);
     }
+
     .table .tableCell {
         padding: 5px;
         display: table-cell;
@@ -185,53 +228,60 @@
         vertical-align: top;
         width: 25%;
     }
+
     .table .tableRow.bottom {
         display: table-row;
     }
+
     label.mobileLabel {
         display: none;
     }
+
     .mobileLabel.input[type=checkbox] {
         display: block;
     }
+
     .table.userManagement .tableCell {
         width: 14%;
     }
+
     /* #endregion  */
     /* #region products */
     .productViewWrapper {
-        background-color: white;
+        background-color: var(--white);
         width: 50%;
         margin: 0 auto;
         border-radius: 5px;
     }
+
     .productSpotlight {
         max-width: 1000px;
     }
+
     form.moreProducts {
         width: 400px;
     }
+
     .emptySearch {
         width: 500px;
         margin: 0 auto;
         margin-bottom: 15px;
     }
+
     .productBoxWrapper {
         max-width: 2500px;
         margin: 0 auto;
         padding: 25px;
         display: grid;
         grid-template-columns: 1fr 10fr 2fr;
-        grid-template-areas: ". search ." "sidebar content ." ". pager ." ". loadMore .";
+        grid-template-areas: ". search .""sidebar content ."". pager ."". loadMore .";
     }
+
     /* #endregion products */
-    .imprint {
-        width: 60%;
-        max-width: 1000px;
-    }
     .imprint .gridWrapper {
         grid-template-columns: 1fr 1fr 1fr;
     }
+
     .footer {
         flex-direction: row;
     }
@@ -240,14 +290,5 @@
 @media screen and (min-width: 1110px) {
     .products.frontPage {
         flex-direction: row;
-    }
-}
-
-@media screen and (min-width: 1400px) {
-    .registerForm {
-        max-width: 1000px;
-    }
-    .productForm {
-        max-width: 1000px;
     }
 }
