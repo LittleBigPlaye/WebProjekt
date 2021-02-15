@@ -130,6 +130,10 @@ abstract class BaseModel
             {
                 $sql .= $key. ' = '.$db->quote($this->data[$key]).',';
             }
+            else 
+            {
+                $sql .= $key. ' = NULL,';
+            }
         }
 
         $sql = trim($sql,',');
