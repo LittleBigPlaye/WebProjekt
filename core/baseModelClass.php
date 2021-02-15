@@ -126,13 +126,13 @@ abstract class BaseModel
         $sql = 'UPDATE '.self::tablename().' SET ';
         foreach ($this->schema as $key => $schemaOptions)
         {
-            if($this->data[$key] !== null)
-            {
-                $sql .= $key. ' = '.$db->quote($this->data[$key]).',';
-            }
-            else 
+            if($this->data[$key] === null || empty($this->data[$key]))
             {
                 $sql .= $key. ' = NULL,';
+            }
+            else
+            {
+                $sql .= $key. ' = '.$db->quote($this->data[$key]).',';
             }
         }
 
