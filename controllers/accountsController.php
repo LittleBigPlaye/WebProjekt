@@ -389,6 +389,8 @@ class accountsController extends Controller
 
                     $_SESSION['success']= 'Das Passwort wurde erfolgreich geändert!';
                     $successMessage = "Das Passwort wurde erfolgreich geändert!";
+                    $this->updateLastActiveTime();
+                    $this->redirect('index.php?c=accounts&a=myspace');
                 }
                 else
                 {
@@ -399,8 +401,7 @@ class accountsController extends Controller
             {
                 $errorMessage = 'Das Passwort entspricht nicht den Anforderungen. Mindestens 8 Zeichen, Groß-, Kleinbuchstaben, 2 Ziffern und 2 Sonderzeichen';
             }
-            $this->updateLastActiveTime();
-            $this->redirect('index.php?c=accounts&a=myspace');
+
         }
 
         $this->setParam('errorMessage', $errorMessage);
@@ -532,9 +533,10 @@ class accountsController extends Controller
                 $userData->addressesID = $adressID;
                 $userData->save();
                 $_SESSION['success']= 'Ihre Adresse wurde erfolgreich aktualisiert!';
+                $this->updateLastActiveTime();
+                $this->redirect('index.php?c=accounts&a=myspace');
             }
-            $this->updateLastActiveTime();
-            $this->redirect('index.php?c=accounts&a=myspace');
+
         }
 
         $this->setParam('errorMessage', $errorMessage);

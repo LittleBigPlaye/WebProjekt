@@ -2,7 +2,7 @@
 <input class="messageToggle" type="checkbox" id="errorToggle">
 <div class="message errorMessage">
     <label class="messageClose" for="errorToggle">&times</label>
-    <p><?= htmlspecialchars($message) ?></p>
+    <p><?= htmlspecialchars($errorMessage) ?></p>
 </div>
 <?php endif ?>
 
@@ -20,7 +20,7 @@
 
         <div class="input">
             <label class="required" for="firstName">Vorname</label>
-            <input type="text" id="firstName" name="firstName" value="<?= htmlspecialchars($user->firstName) ?>">
+            <input type="text" id="firstName" name="firstName" required value="<?= htmlspecialchars($user->firstName) ?>">
             <span class="errorInfo">Bitte geben Sie ihren Vornamen an!</span>
         </div>
 
@@ -32,13 +32,13 @@
 
         <div class="input">
             <label class="required" for="lastName">Nachname</label>
-            <input type="text" id="lastName" name="lastName" value="<?= htmlspecialchars($user->lastName) ?>">
+            <input type="text" id="lastName" name="lastName" required value="<?= htmlspecialchars($user->lastName) ?>">
             <span class="errorInfo">Bitte geben Sie ihren Nachnamen an!</span>
         </div>
 
         <div class="input">
             <label class="required" for="birthDate">Geburtstag</label>
-            <input id="birthDate" name="birthDate" type="date" value="<?= $user->birthDate ?>">
+            <input id="birthDate" name="birthDate" type="date" required value="<?= $user->birthDate ?>">
             <span class="errorInfo">Nach dem Alter fragt man nicht, jedoch brauchen wir Trotzdem ihr Geburtsdatum von
                 Ihnen.</span>
         </div>
