@@ -57,8 +57,6 @@ class accountsController extends Controller
             $city           = $_POST['city'] ?? "";
             $zipCode        = $_POST['zipCode'] ?? "";
 
-            $gender = ($gender == '') ? null : $gender;
-
             $db = $GLOBALS['database'];
 
             /**
@@ -175,12 +173,12 @@ class accountsController extends Controller
                 if($address !== null)
                 {
                     // if address is not null, address still exists and get the id from existing address
-                    $adressID = $address->id;
+                    $addressID = $address->id;
                 }
                 else
                 {
                     //if address is null we create a new one. for this we save the data in an array
-                    $adressData=array(
+                    $addressData=array(
                         'street'        => $street,
                         'streetNumber'  => $streetNumber,
                         'city'          => $city,
@@ -188,9 +186,9 @@ class accountsController extends Controller
                     );
 
                     //create new address and save
-                    $adress = new Address($adressData);
-                    $adress->save();
-                    $adressID = $adress->id;
+                    $address = new Address($addressData);
+                    $address->save();
+                    $address = $address->id;
                 }
 
                 //set array for new user
@@ -200,7 +198,7 @@ class accountsController extends Controller
                     'lastName'      => $lastName,
                     'gender'        => $gender,
                     'birthDate'     => $birthdate,
-                    'addressesID'   => $adressID,
+                    'addressesID'   => $addressID,
                     'role'          => 'user'
                 );
 
@@ -230,8 +228,9 @@ class accountsController extends Controller
                 $login->save();
                 $_SESSION['success'] = 'Der neue Nutzer wurde angelegt';
                 $successMessage = 'Der neue Nutzer wurde angelegt';
+                $this->redirect('index.php?c=pages&a=login');
             }
-            $this->redirect('index.php?c=pages&a=login');
+
         }
         $this->setParam('errorMessages', $errorMessages);
         $this->setParam('succesMessage', $successMessage);
