@@ -429,6 +429,7 @@ class accountsController extends Controller
         $gender     = $_POST['gender'] ?? '';
         $phone      = $_POST['phone'] ?? '';
 
+
         $userData = User::findOne('id=' . $userID);
 
         $this->setParam('user',$userData);
@@ -451,6 +452,7 @@ class accountsController extends Controller
                 $userData->birthDate    = $birthDate;
                 $userData->gender       = $gender;
                 $userData->phone        = $phone;
+
 
                 $userData->save();
                 $_SESSION['success']= 'Ihre Personas wurden erfolgreich aktualisiert!';

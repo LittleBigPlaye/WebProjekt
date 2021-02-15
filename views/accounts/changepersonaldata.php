@@ -48,7 +48,7 @@
             <option value="m" <?= ($user->gender === "m") ? 'selected' : '' ?>>männlich</option>
             <option value="f" <?= ($user->gender === "f") ? 'selected' : '' ?>>weiblich</option>
             <option value="u" <?= ($user->gender === "u") ? 'selected' : '' ?>>divers</option>
-            <option value="null" <?= ($user->gender === "") ? 'selected' : '' ?>>keine Angabe</option>
+            <option value="" <?= ($user->gender === "") ? 'selected' : '' ?>>keine Angabe</option>
         </select>
 
         <label class="optional" for="phone">Telefonnummer</label>
