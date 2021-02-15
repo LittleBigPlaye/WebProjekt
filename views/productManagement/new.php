@@ -37,7 +37,7 @@
 
         <div class="input">
             <label for="productDescription" class="required">Produktbeschreibung</label>
-            <textarea id="productDescription" name="productDescription" rows="10" maxlength="5000"><?= $_POST['productDescription'] ?? '' ?></textarea>
+            <textarea id="productDescription" name="productDescription" rows="10" maxlength="5000" required><?= $_POST['productDescription'] ?? '' ?></textarea>
             <span class="errorInfo">Bitte geben Sie eine Beschreibung an! (max. 5000 Zeichen)</span>
         </div>
 

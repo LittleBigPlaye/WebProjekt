@@ -49,7 +49,7 @@
 
             <div class="input">
                 <label for="productName" class="required">Produktbezeichnung</label>
-                <input type="text" name="productName" id="productName" placeholder="Bezeichnung eingeben..."
+                <input type="text" required name="productName" id="productName" maxlength="120" placeholder="Bezeichnung eingeben..."
                     value="<?php
                         if(!isset($_POST['productName']) || empty($_POST['productName']))
                         {
@@ -64,7 +64,7 @@
 
             <div class="input">
                 <label for="catchPhrase" class="optional">Catchphrase</label>
-                <input type="text" name="catchPhrase" id="catchPhrase"
+                <input type="text" name="catchPhrase" id="catchPhrase" maxlength="150"
                     value ="<?php
                         if(!isset($_POST['catchPhrase']) || empty($_POST['catchPhrase']))
                         {
@@ -79,7 +79,7 @@
 
             <div class="input">
                 <label for="productDescription" class="required">Produktbeschreibung</label>
-                <textarea id="productDescription" name="productDescription"><?php
+                <textarea id="productDescription" name="productDescription" rows="10" maxlength="5000" required><?php
                         if(!isset($_POST['productDescription']) || empty($_POST['productDescription']))
                         {
                             echo htmlspecialchars($product->productDescription);
@@ -93,7 +93,7 @@
 
             <div class="input">
                 <label for="productPrice" class="required">Produktpreis</label>
-                <input type="number" min="1" step="any" id="productPrice" name="productPrice"
+                <input type="number" max="99999.99" min="0" step="0.01" id="productPrice" name="productPrice" required
                     value="<?php
                         if(!isset($_POST['productPrice']) || empty($_POST['productPrice']))
                         {
@@ -109,7 +109,7 @@
 
             <div class="input">
                 <label for="vendor" class="required">Marke</label>
-                <select id="vendor" name="vendor">
+                <select id="vendor" name="vendor" required>
                     <?php foreach ($vendors as $vendor) : ?>
                         <option value="<?= $vendor->id ?>" 
                         <?php 
@@ -127,7 +127,7 @@
 
             <div class="input">
                 <label for="category" class="required">Kategorie</label>
-                <select id="category" name="category">
+                <select id="category" name="category" required>
                     <?php foreach ($categories as $category) : ?>
                         <option value="<?= $category->id ?>" 
                             <?php 
