@@ -20,20 +20,20 @@
 
         <div class="input">
             <label class="required" for="firstName">Vorname</label>
-            <input type="text" id="firstName" name="firstName" required value="<?= htmlspecialchars($user->firstName) ?>">
+            <input type="text" id="firstName" name="firstName" maxlength="50" required value="<?= htmlspecialchars($user->firstName) ?>">
             <span class="errorInfo">Bitte geben Sie ihren Vornamen an!</span>
         </div>
 
         <div class="input">
             <label class="optional" for="secondName">Zweitname</label>
-            <input type="text" id="secondName" name="secondName" value="<?= htmlspecialchars($user->secondName) ?>">
-
+            <input type="text" id="secondName" name="secondName" maxlength="50" value="<?= htmlspecialchars($user->secondName) ?>">
+            <span class="errorInfo">Die Eingabe ist zu lang</span>
         </div>
 
         <div class="input">
             <label class="required" for="lastName">Nachname</label>
-            <input type="text" id="lastName" name="lastName" required value="<?= htmlspecialchars($user->lastName) ?>">
-            <span class="errorInfo">Bitte geben Sie ihren Nachnamen an!</span>
+            <input type="text" id="lastName" name="lastName" maxlength="50" required value="<?= htmlspecialchars($user->lastName) ?>">
+            <span class="errorInfo">Bitte geben Sie ihren realen Nachnamen an!</span>
         </div>
 
         <div class="input">
@@ -52,7 +52,7 @@
         </select>
 
         <label class="optional" for="phone">Telefonnummer</label>
-        <input type="text" id="phone" name="phone" value="<?= htmlspecialchars($user->phone) ?>">
+        <input type="text" id="phone" name="phone" maxlength="26" value="<?= htmlspecialchars($user->phone) ?>">
 
         <input id="submit" type="submit" name="submit" value="Speichern">
     </form>

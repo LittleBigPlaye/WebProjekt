@@ -68,17 +68,35 @@ class accountsController extends Controller
             {
                 $errorMessages['firstName'] = 'Es muss ein Vorname angegeben werden.';
             }
+            elseif (strlen($firstName) > 50)
+            {
+                $errorMessages['firstName'] = 'Eingabe bei Vorname ist zu lang!';
+            }
+
+            //check length secondName
+            if(strlen($secondName) > 50)
+            {
+                $errorMessages['secondName'] = 'Eingabe bei Zweitname ist zu lang!';
+            }
 
             //check lastName
             if(empty($lastName))
             {
                 $errorMessages['lastName'] = 'Es muss ein Nachname angegeben werden.';
             }
+            elseif (strlen($lastName) > 50)
+            {
+                $errorMessages['lastName'] = 'Eingabe bei Nachname ist zu lang!';
+            }
 
             //check email
             if(empty($email))
             {
                 $errorMessages['email'] = 'Es muss eine EMail angegeben werden.';
+            }
+            elseif (strlen($email) > 320)
+            {
+                $errorMessages['EmailValidation'] = "Die Eingabe bei EMail ist zu lang";
             }
 
             //check password
@@ -120,6 +138,7 @@ class accountsController extends Controller
                 $errorMessages['EmailValidation'] = "Ungültige Eingabe der Email";
             }
 
+
             //check if user exists
             if(Login::findOne('email LIKE'.$db->quote($email)) !== null)
             {
@@ -139,9 +158,13 @@ class accountsController extends Controller
                 }
 
             //check street
-            if(empty($street))
+            if(empty($street) )
             {
                 $errorMessages['street'] = 'Es muss eine Strasse angegeben werden';
+            }
+            elseif (strlen($street) > 255)
+            {
+                $errorMessages['street'] = 'Eingabe bei Strasse ist zu lang!';
             }
 
             //check streetNumber
@@ -149,17 +172,29 @@ class accountsController extends Controller
             {
                 $errorMessages['streetNumber'] = 'Es muss eine Hausnummer angegeben werden';
             }
+            elseif (strlen($streetNumber) > 10)
+            {
+                $errorMessages['streetNumber'] = 'Eingabe bei Hausnummer ist zu lang!';
+            }
 
             //check zipCode
             if(empty($zipCode))
             {
                 $errorMessages['zipCode'] = 'Es muss eine Postleitzahl angegeben werden';
             }
+            elseif (strlen($zipCode) > 12)
+            {
+                $errorMessages['zipCode'] = 'Eingabe bei der Postleitzahl ist zu lang!';
+            }
 
             //check city
             if(empty($city))
             {
                 $errorMessages['city'] = 'Es muss eine Stadt angegeben werden';
+            }
+            elseif (strlen($city) > 60)
+            {
+                $errorMessages['city'] = 'Eingabe bei Sder Stadt ist zu lang!';
             }
 
             //check if no errors exist
@@ -444,21 +479,62 @@ class accountsController extends Controller
             }
             else
             {
+                //Check firstName
+                if(empty($firstName))
+                {
+                    $errorMessages['firstName'] = 'Es muss ein Vorname angegeben werden.';
+                }
+                elseif (strlen($firstName) > 50)
+                {
+                    $errorMessages['firstName'] = 'Eingabe bei Vorname ist zu lang!';
+                }
 
-                //set data´s for the user and save them
-                $userData->firstName    = $firstName;
-                $userData->secondName   = $secondName;
-                $userData->lastName     = $lastName;
-                $userData->birthDate    = $birthDate;
-                $userData->gender       = $gender;
-                $userData->phone        = $phone;
+                //check length secondName
+                if(strlen($secondName) > 50)
+                {
+                    $errorMessages['secondName'] = 'Eingabe bei Zweitname ist zu lang!';
+                }
+
+                //check lastName
+                if(empty($lastName))
+                {
+                    $errorMessages['lastName'] = 'Es muss ein Nachname angegeben werden.';
+                }
+                elseif (strlen($lastName) > 50)
+                {
+                    $errorMessages['lastName'] = 'Eingabe bei Nachname ist zu lang!';
+                }
+
+                //check birthdate
+                if(empty($birthDate))
+                {
+                    $errorMessages['birthDate'] = 'Es muss das Geburtsdatum angegeben werden.';
+                }
+
+                //check length secondName
+                if(strlen($phone) > 26)
+                {
+                    $errorMessages['phone'] = 'Eingabe bei Telefon ist zu lang!';
+                }
+
+                if(count($errorMessages) === 0)
+                {
+                    //set data´s for the user and save them
+                    $userData->firstName    = $firstName;
+                    $userData->secondName   = $secondName;
+                    $userData->lastName     = $lastName;
+                    $userData->birthDate    = $birthDate;
+                    $userData->gender       = $gender;
+                    $userData->phone        = $phone;
 
 
-                $userData->save();
-                $_SESSION['success']= 'Ihre Personas wurden erfolgreich aktualisiert!';
+                    $userData->save();
+                    $_SESSION['success']= 'Ihre Personas wurden erfolgreich aktualisiert!';
+                    $this->updateLastActiveTime();
+                    $this->redirect('index.php?c=accounts&a=myspace');
+                }
             }
-            $this->updateLastActiveTime();
-            $this->redirect('index.php?c=accounts&a=myspace');
+
         }
 
         $this->setParam('errorMessage', $errorMessage);
@@ -501,42 +577,85 @@ class accountsController extends Controller
             }
             else
             {
-                //check if the address still exists
-                $address = Address::findOne( "street=".$db->quote($street) .
-                                             " AND streetnumber=" . $db->quote($streetNumber) .
-                                             " AND city=" . $db->quote($city) .
-                                             " AND zipCode=" . $db->quote($zipCode)
-                );
-
-                if($address !== null)
+                //check street
+                if(empty($street) )
                 {
-                    $adressID = $address->id;
+                    $errorMessages['street'] = 'Es muss eine Strasse angegeben werden';
                 }
-                else
+                elseif (strlen($street) > 255)
                 {
-                    //set array for the address
-                    $adressData=array(
-                        'street'        => $street,
-                        'streetNumber'  => $streetNumber,
-                        'city'          => $city,
-                        'zipCode'       => $zipCode
+                    $errorMessages['street'] = 'Eingabe bei der Strasse ist zu lang!';
+                }
+
+                //check streetNumber
+                if(empty($streetNumber))
+                {
+                    $errorMessages['streetNumber'] = 'Es muss eine Hausnummer angegeben werden';
+                }
+                elseif (strlen($streetNumber) > 10)
+                {
+                    $errorMessages['streetNumber'] = 'Eingabe bei der Hausnummer ist zu lang!';
+                }
+
+                //check zipCode
+                if(empty($zipCode))
+                {
+                    $errorMessages['zipCode'] = 'Es muss eine Postleitzahl angegeben werden';
+                }
+                elseif (strlen($zipCode) > 12)
+                {
+                    $errorMessages['zipCode'] = 'Eingabe bei der Postleitzahl ist zu lang!';
+                }
+
+                //check city
+                if(empty($city))
+                {
+                    $errorMessages['city'] = 'Es muss eine Stadt angegeben werden';
+                }
+                elseif (strlen($city) > 60)
+                {
+                    $errorMessages['city'] = 'Eingabe bei der Stadt ist zu lang!';
+                }
+
+
+                if(count($errorMessages) === 0)
+                {
+                    //check if the address still exists
+                    $address = Address::findOne( "street=".$db->quote($street) .
+                        " AND streetnumber=" . $db->quote($streetNumber) .
+                        " AND city=" . $db->quote($city) .
+                        " AND zipCode=" . $db->quote($zipCode)
                     );
 
-                    //create new address and save
-                    $adress = new Address($adressData);
-                    $adress->save();
-                    $adressID = $adress->id;
+                    if($address !== null)
+                    {
+                        $adressID = $address->id;
+                    }
+                    else
+                    {
+                        //set array for the address
+                        $adressData=array(
+                            'street'        => $street,
+                            'streetNumber'  => $streetNumber,
+                            'city'          => $city,
+                            'zipCode'       => $zipCode
+                        );
 
-                    //set address
-                    $this->setParam('address',$adress);
+                        //create new address and save
+                        $adress = new Address($adressData);
+                        $adress->save();
+                        $adressID = $adress->id;
+
+                        //set address
+                        $this->setParam('address',$adress);
+                    }
+                    $userData->addressesID = $adressID;
+                    $userData->save();
+                    $_SESSION['success']= 'Ihre Adresse wurde erfolgreich aktualisiert!';
+                    $this->updateLastActiveTime();
+                    $this->redirect('index.php?c=accounts&a=myspace');
                 }
-                $userData->addressesID = $adressID;
-                $userData->save();
-                $_SESSION['success']= 'Ihre Adresse wurde erfolgreich aktualisiert!';
-                $this->updateLastActiveTime();
-                $this->redirect('index.php?c=accounts&a=myspace');
             }
-
         }
 
         $this->setParam('errorMessage', $errorMessage);

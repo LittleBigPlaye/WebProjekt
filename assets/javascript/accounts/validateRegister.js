@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //get input fields from form
     var firstName = document.getElementById('firstName');
+    var secondName = document.getElementById('secondName');
     var lastName = document.getElementById('lastName');
     var email = document.getElementById('email');
     var birthDate = document.getElementById('birthdate');
@@ -29,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
             formIsValid = true;
 
             //check if firstName is set
-            if (!firstName || firstName.value.length <= 0)
+            if (!firstName || firstName.value.length <= 0 || firstName.value.length > 50)
             {
                 firstName.classList.add("errorHighlight");
                 formIsValid = false;
@@ -39,8 +40,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 firstName.classList.remove('errorHighlight');
             }
 
+            //check if secondName is valid
+            if (secondName.value.length > 50)
+            {
+                secondName.classList.add("errorHighlight");
+                formIsValid = false;
+            }
+            else
+            {
+                secondName.classList.remove('errorHighlight');
+            }
+
+
             //check if lastName is set
-            if (!lastName || lastName.value.length <= 0)
+            if (!lastName || lastName.value.length <= 0 || lastName.value.length > 50)
             {
                 lastName.classList.add("errorHighlight");
                 formIsValid = false;
@@ -50,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             //check if email is set
-            if (!email || email.value.length <= 0)
+            if (!email || email.value.length <= 0 || email.value.length > 320)
             {
                 email.classList.add("errorHighlight");
                 email.nextElementSibling.innerHTML = 'Bitte geben Sie ihre E-Mail an!';
@@ -91,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             //check if street is set
-            if (!street || street.value.length <= 0)
+            if (!street || street.value.length <= 0 || street.value.length > 255)
             {
                 street.classList.add("errorHighlight");
                 formIsValid = false;
@@ -101,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             //check if streetNumber is set
-            if (!streetNumber || streetNumber.value.length <= 0)
+            if (!streetNumber || streetNumber.value.length <= 0 || streetNumber.value.length > 10)
             {
                 streetNumber.classList.add("errorHighlight");
                 formIsValid = false;
@@ -111,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             //check if zipCode is set
-            if (!zipCode || zipCode.value.length <= 0)
+            if (!zipCode || zipCode.value.length != 5)
             {
                 zipCode.classList.add("errorHighlight");
                 formIsValid = false;
@@ -121,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             //check if city is set
-            if (!city || city.value.length <= 0)
+            if (!city || city.value.length <= 0 || city.value.length > 60)
             {
                 city.classList.add("errorHighlight");
                 formIsValid = false;

@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
         {
             var formIsValid = true;
             //check if street is set
-            if (!street || street.value.length <= 0)
+            if (!street || street.value.length <= 0 || street.value.length > 255)
             {
                 street.classList.add("errorHighlight");
                 formIsValid = false;
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             //check if streetNumber is set
-            if (!streetNumber || streetNumber.value.length <= 0)
+            if (!streetNumber || streetNumber.value.length <= 0 || streetNumber.value.length > 10)
             {
                 streetNumber.classList.add("errorHighlight");
                 formIsValid = false;
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             //check if city is set
-            if (!city || city.value.length <= 0)
+            if (!city || city.value.length <= 0 || city.value.length > 60)
             {
                 city.classList.add("errorHighlight");
                 formIsValid = false;
