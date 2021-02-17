@@ -34,10 +34,11 @@
             <span class="errorInfo">Bitte geben Sie ihren Vornamen an!</span>
         </div>
 
-
+        <div class="input">
             <label class="optional" for="secondName">Zweitname:</label>
             <input  type="text" id="secondName" name="secondName" placeholder="zweiter Vorname" maxlength="50" value="<?=htmlspecialchars($_POST['secondName'] ?? '')?>">
             <span class="errorInfo">Der Zweitname ist zu lang</span>
+        </div>
 
         <div class="input">
             <label class="required" for="lastName">Nachname:</label>

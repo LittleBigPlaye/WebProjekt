@@ -160,11 +160,11 @@ class accountsController extends Controller
             //check street
             if(empty($street) )
             {
-                $errorMessages['street'] = 'Es muss eine Strasse angegeben werden';
+                $errorMessages['street'] = 'Es muss eine Straße angegeben werden';
             }
             elseif (strlen($street) > 255)
             {
-                $errorMessages['street'] = 'Eingabe bei Strasse ist zu lang!';
+                $errorMessages['street'] = 'Eingabe bei Straße ist zu lang!';
             }
 
             //check streetNumber
@@ -194,7 +194,7 @@ class accountsController extends Controller
             }
             elseif (strlen($city) > 60)
             {
-                $errorMessages['city'] = 'Eingabe bei Sder Stadt ist zu lang!';
+                $errorMessages['city'] = 'Eingabe bei der Stadt ist zu lang!';
             }
 
             //check if no errors exist
@@ -260,7 +260,9 @@ class accountsController extends Controller
 
                 //create new login and save
                 $login = new Login($loginData);
-                $login->save();
+                $login->save($error);
+                echo var_dump($error);
+                die();
                 $_SESSION['success'] = 'Der neue Nutzer wurde angelegt';
                 $successMessage = 'Der neue Nutzer wurde angelegt';
                 $this->redirect('index.php?c=pages&a=login');
