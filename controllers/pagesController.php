@@ -118,15 +118,15 @@ class PagesController extends Controller
         if (isset($_POST['submit'])) {
             $email = trim($_POST["email"]);
             $password = $_POST["password"];
+            $login = Login::findOne('email=' . $db->quote($email));
+            //check if user exists
             // Check if email is empty
             if (empty(trim($_POST["email"]))) 
             {
                 $errorMessages['email'] = "Bitte gib eine Email an.";
             }
-
-            $login = Login::findOne('email=' . $db->quote($email));
             //check if user exists
-            if (Login::findOne('email LIKE' . $db->quote($email)) == null) 
+            elseif (Login::findOne('email LIKE' . $db->quote($email)) == null)
             {
                 $errorMessages['user'] = "Es existiert kein Benutzer mit dieser Email";
             } //check if user is enabled
