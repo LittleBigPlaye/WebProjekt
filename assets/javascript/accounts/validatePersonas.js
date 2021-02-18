@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var secondName = document.getElementById('secondName');
     var lastName = document.getElementById('lastName');
     var birthDate = document.getElementById('birthDate');
-    var phone = document.getElementById('ohone');
+    var phone = document.getElementById('phone');
 
 
     //check if submit button has been found
