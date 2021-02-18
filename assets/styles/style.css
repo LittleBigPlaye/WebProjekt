@@ -1102,6 +1102,7 @@ form label {
     bottom: -15px;
     overflow: hidden;
     border-radius: 50%;
+    z-index: 1;
 }
 
 .badge.edit {

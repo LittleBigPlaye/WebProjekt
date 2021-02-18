@@ -6,7 +6,7 @@
         <input class="messageToggle" type="checkbox" id="infoToggle">
         <div class="message warningMessage">
             <label class="messageClose" for="infoToggle">&times</label>
-            <p>Bitte beachten Sie, dass sie Javascript aktivieren müssen, um von allen komfortfunktionen dieser Seite profitieren zu können!</p>
+            <p>Bitte beachten Sie, dass Sie Javascript aktivieren müssen, um von allen komfortfunktionen dieser Seite profitieren zu können!</p>
         </div>
     </noscript>
 

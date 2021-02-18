@@ -1,5 +1,5 @@
 /**
- * This script is used to controll the collapsible for the product view
+ * This script is used to control the collapsible for the product view
  * @author Robin Beck
  */
 document.addEventListener('DOMContentLoaded', function() {
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (collapsibleToggle && collapsible) {
         collapsibleToggle.addEventListener('click', function() {
-            // alert(collapsible.style.maxHeight);
+
             if (collapsible.style.maxHeight != minHeight) {
                 if (collapsibleToggleLabel) {
                     collapsibleToggleLabel.style.transform = 'rotate(0)';
