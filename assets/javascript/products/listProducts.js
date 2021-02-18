@@ -70,9 +70,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 event.preventDefault();
                 event.stopPropagation();
                 clearProductList();
+                
                 //replace all characters that are not alphanumeric
                 var searchString = searchInput.value.replace(/[^A-Za-z0-9äöüß ]/, '');
-                console.log(searchString);
+                
                 //shorten the search String to a maximum of 200 characters
                 if (searchString.length > 200) {
                     searchString.value = searchString.value.substr(0, 200);
@@ -81,6 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 //apply searchString to hidden search in filterForm
                 var hiddenSearch = document.getElementById('hiddenSearch');
                 hiddenSearch.value = searchString;
+                
                 sendRequest(filterForm);
                 btnLoadMore.style.display = 'block';
             });
@@ -105,7 +107,6 @@ document.addEventListener('DOMContentLoaded', function() {
             var formData = new FormData(form);
 
             //used to replace the browser url
-            //used before adding the page value, to prevent the user from getting the plain json output
             var targetURL = buildGetString(formData);
 
             formData.append('page', nextPage);
@@ -181,11 +182,11 @@ document.addEventListener('DOMContentLoaded', function() {
             var newProductCard = productCardPrefab.firstElementChild.cloneNode(true);
 
             //set information for the target product card
-            newProductCard.querySelector('a').href = 'index.php?c=products&a=view&pid=' + cardInfos['id'];
-            newProductCard.querySelector('.productImage').src = cardInfos['image'];
-            newProductCard.querySelector('.title').innerHTML = cardInfos['name'];
+            newProductCard.querySelector('a').href                 = 'index.php?c=products&a=view&pid=' + cardInfos['id'];
+            newProductCard.querySelector('.productImage').src      = cardInfos['image'];
+            newProductCard.querySelector('.title').innerHTML       = cardInfos['name'];
             newProductCard.querySelector('.catchPhrase').innerHTML = cardInfos['catchPhrase'];
-            newProductCard.querySelector('.price').innerHTML = cardInfos['price'] + ' €';
+            newProductCard.querySelector('.price').innerHTML       = cardInfos['price'] + ' €';
 
             //set visibility of addTo Card and is Hidden badge
             var addToCartBadge = newProductCard.querySelectorAll('.badge')[0];
