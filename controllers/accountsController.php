@@ -43,19 +43,19 @@ class accountsController extends Controller
         // the following "if" check if the the submit was send
         if(isset($_POST['submitForm']))
         {
-            $firstName      = $_POST['firstName'] ?? "";
-            $secondName     = $_POST['secondName']  ?? "";
-            $lastName       = $_POST['lastName']  ?? "";
-            $email          = $_POST['email'];
-            $password       = $_POST['password']  ?? "";
-            $password2      = $_POST['password2']  ?? "";
-            $gender         = $_POST['gender']  ?? "";
-            $birthdate      = $_POST['birthdate']  ?? "";
+            $firstName      = $_POST['firstName'] ?? '';
+            $secondName     = $_POST['secondName']  ?? '';
+            $lastName       = $_POST['lastName']  ?? '';
+            $email          = $_POST['email'] ?? '';
+            $password       = $_POST['password']  ?? '';
+            $password2      = $_POST['password2']  ?? '';
+            $gender         = $_POST['gender']  ?? '';
+            $birthdate      = $_POST['birthdate']  ?? '';
 
-            $street         = $_POST['street'] ?? "";
-            $streetNumber   = str_replace(' ', '', $_POST['streetNumber'] ?? "");
-            $city           = $_POST['city'] ?? "";
-            $zipCode        = $_POST['zipCode'] ?? "";
+            $street         = $_POST['street'] ?? '';
+            $streetNumber   = str_replace(' ', '', $_POST['streetNumber'] ?? '');
+            $city           = $_POST['city'] ?? '';
+            $zipCode        = $_POST['zipCode'] ?? '';
 
             $db = $GLOBALS['database'];
 
@@ -124,7 +124,7 @@ class accountsController extends Controller
 
                 //check if password and password2 the same
                 if(!password_verify($password2,$savePassword)){
-                    $errorMessages['ComparePassword'] = "Schau mal Passwort";
+                    $errorMessages['ComparePassword'] = 'Die angegebenen Passwörter stimmen nicht überein!';
                 }
             }
             else
@@ -135,14 +135,14 @@ class accountsController extends Controller
             //validate Email
             if(!filter_var($email, FILTER_VALIDATE_EMAIL))
             {
-                $errorMessages['EmailValidation'] = "Ungültige Eingabe der Email";
+                $errorMessages['EmailValidation'] = 'Ungültige Eingabe der Email';
             }
 
 
             //check if user exists
             if(Login::findOne('email LIKE'.$db->quote($email)) !== null)
             {
-                $errorMessages['User'] = "Der Benutzer existiert bereits.";
+                $errorMessages['User'] = 'Der Benutzer existiert bereits.';
                 if(isset($_POST['ajax'])&& $_POST['ajax']===1)
                 {
                     echo $errorMessages['User'];
@@ -150,12 +150,12 @@ class accountsController extends Controller
                 }
             }
             else
+            {
+                if(isset($_POST['ajax'])&& $_POST['ajax'] === 1)
                 {
-                    if(isset($_POST['ajax'])&& $_POST['ajax']===1)
-                    {
-                        exit(0);
-                    }
+                    exit(0);
                 }
+            }
 
             //check street
             if(empty($street) )
@@ -201,8 +201,11 @@ class accountsController extends Controller
             if(count($errorMessages) === 0)
             {
                 //get an address with the dates frim the post
-                $address = Address::findOne("street=".$db->quote($street)." AND streetnumber=".$db->quote($streetNumber).
-                    " AND city=".$db->quote($city)." AND zipCode=".$db->quote($zipCode));
+                $address =  Address::findOne('street=' . $db->quote($street) . 
+                                ' AND streetnumber=' . $db->quote($streetNumber).
+                                ' AND city=' .$db->quote($city). 
+                                ' AND zipCode=' .$db->quote($zipCode)
+                            );
 
                 //check if the address is null
                 if($address !== null)
@@ -375,8 +378,8 @@ class accountsController extends Controller
         if($myOwnID != '')
         {
             //get own data
-            $userData    = User::findOne('id='.$myOwnID);
-            $addressData = Address::findOne('id='.$userData->addressesID);
+            $userData    = User::findOne('id=' . $myOwnID);
+            $addressData = Address::findOne('id=' . $userData->addressesID);
             
             $this->setParam('user',$userData);
             $this->setParam('address',$addressData);
@@ -407,8 +410,8 @@ class accountsController extends Controller
         // the following "if" check if the the submit was send
         if(isset($_POST['changePassword']))
         {
-            $newPassword1 = $_POST['password']  ?? "";
-            $newPassword2 = $_POST['password2'] ?? "";
+            $newPassword1 = $_POST['password']  ?? '';
+            $newPassword2 = $_POST['password2'] ?? '';
 
             //check if the password match the regex
             if (preg_match('/^(?=.*?[A-Z])(?=.*?[a-z].*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/m', $newPassword1))
@@ -421,11 +424,11 @@ class accountsController extends Controller
                     //set new password and save
                     $updateLogin = $this->currentLogin;
                     $updateLogin->passwordHash = $savePassword;
-                    $updateLogin->passwordResetHash = "";
+                    $updateLogin->passwordResetHash = '';
                     $updateLogin->save();
 
                     $_SESSION['success']= 'Das Passwort wurde erfolgreich geändert!';
-                    $successMessage = "Das Passwort wurde erfolgreich geändert!";
+                    $successMessage = 'Das Passwort wurde erfolgreich geändert!';
                     $this->updateLastActiveTime();
                     $this->redirect('index.php?c=accounts&a=myspace');
                 }
@@ -623,11 +626,11 @@ class accountsController extends Controller
                 if(count($errorMessages) === 0)
                 {
                     //check if the address still exists
-                    $address = Address::findOne( "street=".$db->quote($street) .
-                        " AND streetnumber=" . $db->quote($streetNumber) .
-                        " AND city=" . $db->quote($city) .
-                        " AND zipCode=" . $db->quote($zipCode)
-                    );
+                    $address =  Address::findOne('street=' .$db->quote($street) .
+                                    ' AND streetnumber=' . $db->quote($streetNumber) .
+                                    ' AND city=' . $db->quote($city) .
+                                    ' AND zipCode=' . $db->quote($zipCode)
+                                );
 
                     if($address !== null)
                     {

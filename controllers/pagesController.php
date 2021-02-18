@@ -116,37 +116,37 @@ class PagesController extends Controller
 
         //check if form is submitted
         if (isset($_POST['submit'])) {
-            $email = trim($_POST["email"]);
-            $password = $_POST["password"];
+            $email = trim($_POST['email']);
+            $password = $_POST['password'];
             $login = Login::findOne('email=' . $db->quote($email));
             //check if user exists
             // Check if email is empty
-            if (empty(trim($_POST["email"]))) 
+            if (empty(trim($_POST['email']))) 
             {
-                $errorMessages['email'] = "Bitte gib eine Email an.";
+                $errorMessages['email'] = 'Bitte gib eine Email an.';
             }
             //check if user exists
             elseif (Login::findOne('email LIKE' . $db->quote($email)) == null)
             {
-                $errorMessages['user'] = "Es existiert kein Benutzer mit dieser Email";
+                $errorMessages['user'] = 'Es existiert kein Benutzer mit dieser Email';
             } //check if user is enabled
             elseif ($login->enabled != 1) 
             {
-                $errorMessages['user_disabled'] = "Dieser Nutzer ist gesperrt.";
+                $errorMessages['user_disabled'] = 'Dieser Nutzer ist gesperrt.';
             } 
             elseif ($login->validated != 1) 
             {
-                $errorMessages['user_validated'] = "Dieser Nutzer ist nicht validiert";
+                $errorMessages['user_validated'] = 'Dieser Nutzer ist nicht validiert';
             }
             // Check if password is empty
             if (empty(trim($password))) 
             {
-                $errorMessages['password'] = "Bitte gib ein Passwort ein.";
+                $errorMessages['password'] = 'Bitte gib ein Passwort ein.';
             }
 
             if (count($errorMessages) === 0) 
             {
-                if ($login->passwordResetHash == "") 
+                if ($login->passwordResetHash == '') 
                 {
                     $hashed_password = $login->passwordHash;
                 } 
@@ -176,7 +176,7 @@ class PagesController extends Controller
                         $login->enabled = 0;
                     }
                     $login->save();
-                    $errorMessages['wrong_password'] = "Deine Logindaten stimmen nicht überein";
+                    $errorMessages['wrong_password'] = 'Deine Logindaten stimmen nicht überein';
                 }
             }
         }
@@ -189,8 +189,9 @@ class PagesController extends Controller
         {
             $_SESSION['isLoggedIn'] = false;
             session_destroy();
+            
             //redirect to index width delay
-            header("refresh:5; url=index.php");
+            header('refresh:5; url=index.php');
         } 
         else 
         {

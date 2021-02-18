@@ -44,7 +44,7 @@ class ProductManagementController extends Controller
             $db = $GLOBALS['database'];
             if(!empty($name) && Product::findOne('productName LIKE ' . $db->quote($name)) !== null)
             {
-                echo 'Das Produkt existiert bereits';
+                echo 'Das Produkt existiert bereits.';
             }
             exit(0);
         }

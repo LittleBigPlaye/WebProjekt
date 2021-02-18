@@ -214,15 +214,14 @@ use \myf\models\Product     as Product;
             exit(0);
         }
 
-        //prepare getString for navigation
-        $getString = 'c=products&a=search';
-        foreach($_GET AS $name => $value)
+        //prepare get string for pagination
+        $getArray = $_GET;
+        if(isset($getArray['page']))
         {
-            if($name != 'c' && $name != 'a' && $name != 'page')
-            {
-                $getString .= '&' . $name . '=' . urlencode($value);
-            }
+            unset($getArray['page']);
         }
+        $getString = \http_build_query($getArray);
+
         $this->setParam('getString', $getString);
         $this->setParam('numberOfPages', $numberOfPages);
         $this->setParam('currentPage', $currentPage);
