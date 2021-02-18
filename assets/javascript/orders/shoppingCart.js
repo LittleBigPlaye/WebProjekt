@@ -63,7 +63,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         var productPrice = document.getElementById('price' + targetArray['productID']);
 
                         if (productPrice) {
-                            console.log('Test');
                             productPrice.innerHTML = targetArray['targetPrice'] + ' €';
                         }
 

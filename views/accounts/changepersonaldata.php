@@ -1,22 +1,14 @@
-<?php if (isset($errorMessage) && !empty($errorMessage)) : ?>
-<input class="messageToggle" type="checkbox" id="errorToggle">
-<div class="message errorMessage">
-    <label class="messageClose" for="errorToggle">&times</label>
-    <p><?= htmlspecialchars($errorMessage) ?></p>
-</div>
-<?php endif ?>
-
-<?php if (isset($succesMessage) && !empty($succesMessage)) : ?>
-<input class="messageToggle" type="checkbox" id="successToggle">
-<div class="message successMessage">
-    <label class="messageClose" for="successToggle">&times</label>
-    <p><?= $successMessage ?></p>
-</div>
-<?php endif ?>
-
 <div class="formWrapper">
     <form method="post" class="productForm" action="?c=accounts&a=changepersonaldata">
         <h1>Na? Hat sich das Geschlecht geändert?</h1>
+
+        <?php if (isset($errorMessage) && !empty($errorMessage)) : ?>
+            <input class="messageToggle" type="checkbox" id="errorToggle">
+            <div class="message errorMessage">
+                <label class="messageClose" for="errorToggle">&times</label>
+                <p><?= htmlspecialchars($errorMessage) ?></p>
+            </div>
+        <?php endif ?>
 
         <div class="input">
             <label class="required" for="firstName">Vorname</label>

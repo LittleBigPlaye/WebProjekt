@@ -12,14 +12,6 @@
             </div>
         <?php endif ?>
 
-        <?php if (isset($successMessage) && !empty($succesMessage)) : ?>
-            <input class="messageToggle" type="checkbox" id="successToggle">
-            <div class="message successMessage">
-                <label class="messageClose" for="successToggle">&times</label>
-                <p><?= htmlspecialchars($successMessage) ?></p>
-            </div>
-        <?php endif ?>
-
         <div class="input">
             <label class="required" for="street">Strasse</label>
             <input type="text" id="street" name="street" maxlength="255" required

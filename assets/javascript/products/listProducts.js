@@ -3,7 +3,7 @@
  * filter, search or order products via ajax
  * @author Robin Beck
  */
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
 
     var request = null;
 
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         if (btnLoadMore) {
-            btnLoadMore.addEventListener('click', function(event) {
+            btnLoadMore.addEventListener('click', function (event) {
                 event.preventDefault();
                 event.stopPropagation();
                 sendRequest(filterForm);
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (filterForm) {
             btnFilter = filterForm.querySelector('input[type=submit]');
             if (btnFilter) {
-                btnFilter.addEventListener('click', function(event) {
+                btnFilter.addEventListener('click', function (event) {
                     event.preventDefault();
                     event.stopPropagation();
                     clearProductList();
@@ -66,14 +66,14 @@ document.addEventListener('DOMContentLoaded', function() {
         var btnSearch = document.getElementById('searchSubmit');
         var searchInput = document.getElementById('search');
         if (btnSearch && searchInput) {
-            btnSearch.addEventListener('click', function(event) {
+            btnSearch.addEventListener('click', function (event) {
                 event.preventDefault();
                 event.stopPropagation();
                 clearProductList();
-                
+
                 //replace all characters that are not alphanumeric
                 var searchString = searchInput.value.replace(/[^A-Za-z0-9äöüß ]/, '');
-                
+
                 //shorten the search String to a maximum of 200 characters
                 if (searchString.length > 200) {
                     searchString.value = searchString.value.substr(0, 200);
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 //apply searchString to hidden search in filterForm
                 var hiddenSearch = document.getElementById('hiddenSearch');
                 hiddenSearch.value = searchString;
-                
+
                 sendRequest(filterForm);
                 btnLoadMore.style.display = 'block';
             });
@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         //wait for responses from server
-        request.onreadystatechange = function() {
+        request.onreadystatechange = function () {
             if (this.readyState == XMLHttpRequest.DONE) {
                 if (this.status == 200) {
                     if (this.responseText != '') {
@@ -182,11 +182,11 @@ document.addEventListener('DOMContentLoaded', function() {
             var newProductCard = productCardPrefab.firstElementChild.cloneNode(true);
 
             //set information for the target product card
-            newProductCard.querySelector('a').href                 = 'index.php?c=products&a=view&pid=' + cardInfos['id'];
-            newProductCard.querySelector('.productImage').src      = cardInfos['image'];
-            newProductCard.querySelector('.title').innerHTML       = cardInfos['name'];
+            newProductCard.querySelector('a').href = 'index.php?c=products&a=view&pid=' + cardInfos['id'];
+            newProductCard.querySelector('.productImage').src = cardInfos['image'];
+            newProductCard.querySelector('.title').innerHTML = cardInfos['name'];
             newProductCard.querySelector('.catchPhrase').innerHTML = cardInfos['catchPhrase'];
-            newProductCard.querySelector('.price').innerHTML       = cardInfos['price'] + ' €';
+            newProductCard.querySelector('.price').innerHTML = cardInfos['price'] + ' €';
 
             //set visibility of addTo Card and is Hidden badge
             var addToCartBadge = newProductCard.querySelectorAll('.badge')[0];
@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var addToCartButton = newProductCard.querySelector('.cartButton');
             if (addToCartButton) {
                 addToCartButton.value = cardInfos['id'];
-                addToCartButton.addEventListener('click', function(event) {
+                addToCartButton.addEventListener('click', function (event) {
                     event.preventDefault();
                     event.stopPropagation();
                     var parentForm = addToCartButton.parentElement;

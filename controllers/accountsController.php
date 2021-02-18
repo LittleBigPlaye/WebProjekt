@@ -226,7 +226,7 @@ class accountsController extends Controller
                     //create new address and save
                     $address = new Address($addressData);
                     $address->save();
-                    $address = $address->id;
+                    $addressID = $address->id;
                 }
 
                 //set array for new user
@@ -264,8 +264,7 @@ class accountsController extends Controller
                 //create new login and save
                 $login = new Login($loginData);
                 $login->save($error);
-                echo var_dump($error);
-                die();
+
                 $_SESSION['success'] = 'Der neue Nutzer wurde angelegt';
                 $successMessage = 'Der neue Nutzer wurde angelegt';
                 $this->redirect('index.php?c=pages&a=login');
