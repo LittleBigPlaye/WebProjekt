@@ -103,6 +103,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 password2.classList.remove('errorHighlight');
             }
 
+            //check if password === password2
+            if(password === password2)
+            {
+                password.classList.remove('errorHighlight');
+                password2.classList.remove("errorHighlight");
+            }
+            else
+            {
+                password.classList.add('errorHighlight');
+                password2.classList.add("errorHighlight");
+                formIsValid = false;
+            }
+
             //check if street is set
             if (!street || street.value.length <= 0 || street.value.length > 255)
             {

@@ -24,6 +24,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 formIsValid = false;
             }
 
+            //check if password === password2
+            if(password === password2)
+            {
+                password.classList.remove('errorHighlight');
+                password2.classList.remove("errorHighlight");
+            }
+            else
+            {
+                password.classList.add('errorHighlight');
+                password2.classList.add("errorHighlight");
+                formIsValid = false;
+            }
+
             if (!formIsValid) {
                 event.preventDefault();
                 event.stopPropagation();
