@@ -182,9 +182,12 @@ a:hover {
     transition: .2s ease-in-out;
 }
 
-.imageTitle::before {
+img {
     counter-increment: image;
-    content: "Abb. " counter(image) " : " "\0000a0\0000a0";
+}
+
+.imageTitle::before {
+    content: "Abbildung " counter(image) " : " "\0000a0\0000a0";
 }
 
 .imageTitle {
@@ -267,6 +270,7 @@ img {
 
 .largeImage {
     max-width: 100% !important;
+    max-height: 100% !important;
 }
 
 .row {
