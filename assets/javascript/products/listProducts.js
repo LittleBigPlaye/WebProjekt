@@ -25,7 +25,12 @@ document.addEventListener('DOMContentLoaded', function () {
         //reference to the current page number
         var nextPage = 2;
 
+        //used to obtain the filters for filtering
         var filterForm = document.getElementById('filterForm');
+
+        //used to have the latest applied filter settings, 
+        //just in case the filters have been changed without submit
+        var cachedFilterForm = filterForm.cloneNode(true);
 
         //hide the default paging
         if (paging) {
@@ -42,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
             btnLoadMore.addEventListener('click', function (event) {
                 event.preventDefault();
                 event.stopPropagation();
-                sendRequest(filterForm);
+                sendRequest(cachedFilterForm);
             });
         }
 
@@ -57,6 +62,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     event.stopPropagation();
                     clearProductList();
                     sendRequest(filterForm);
+                    //update the cached form for next load more action
+                    cachedFilterForm = filterForm.cloneNode(true);
                     btnLoadMore.style.display = 'block';
                 });
             }
@@ -69,6 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
             btnSearch.addEventListener('click', function (event) {
                 event.preventDefault();
                 event.stopPropagation();
+                //remove all product cards
                 clearProductList();
 
                 //replace all characters that are not alphanumeric
@@ -83,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 var hiddenSearch = document.getElementById('hiddenSearch');
                 hiddenSearch.value = searchString;
 
-                sendRequest(filterForm);
+                sendRequest(cachedFilterForm);
                 btnLoadMore.style.display = 'block';
             });
         }
