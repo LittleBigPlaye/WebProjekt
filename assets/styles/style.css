@@ -64,11 +64,11 @@ p a:hover {
 }
 
 p a::before {
-    content: "» ";
+    content: "\0000bb\000020";
 }
 
 p a:after {
-    content: " «";
+    content: "\000020\0000ab";
 }
 
 /* #endregion */
