@@ -64,11 +64,11 @@ p a:hover {
 }
 
 p a::before {
-    content: "» ";
+    content: '» ' ;
 }
 
 p a:after {
-    content: " «";
+    content: ' «';
 }
 
 /* #endregion */
