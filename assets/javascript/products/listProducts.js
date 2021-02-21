@@ -90,7 +90,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 //apply searchString to hidden search in filterForm
                 var hiddenSearch = document.getElementById('hiddenSearch');
                 hiddenSearch.value = searchString;
-
+                
+                //apply searchString to cached filterForm
+                var cachedSearch = cachedFilterForm.querySelector('#hiddenSearch');
+                cachedSearch.value = searchString;
+                
                 sendRequest(cachedFilterForm);
                 btnLoadMore.style.display = 'block';
             });
