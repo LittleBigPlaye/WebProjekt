@@ -147,7 +147,6 @@ p a:after {
     padding: 20px;
     margin: 15px;
     background-color: var(--white);
-    display: flex;
     border-radius: 5px;
     box-shadow: 0 2px 4px 0 #00000033, 0 3px 5px 0 #0000007c;
     transition: .2s ease-in-out;
