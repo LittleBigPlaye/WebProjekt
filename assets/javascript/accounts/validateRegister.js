@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             //check if password === password2
-            if(password === password2)
+            if(password.value === password2.value)
             {
                 password.classList.remove('errorHighlight');
                 password2.classList.remove("errorHighlight");
