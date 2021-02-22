@@ -116,9 +116,9 @@ class PagesController extends Controller
 
         //check if form is submitted
         if (isset($_POST['submit'])) {
-            $email = trim($_POST['email']);
-            $password = $_POST['password'];
-            $login = Login::findOne('email=' . $db->quote($email));
+            $email      = trim($_POST['email']);
+            $password   = $_POST['password'];
+            $login      = Login::findOne('email=' . $db->quote($email));
             //check if user exists
             // Check if email is empty
             if (empty(trim($_POST['email']))) 
@@ -148,16 +148,16 @@ class PagesController extends Controller
             {
                 if ($login->passwordResetHash == '') 
                 {
-                    $hashed_password = $login->passwordHash;
+                    $hashedPassword = $login->passwordHash;
                 } 
                 else 
                 {
-                    $hashed_password = $login->passwordResetHash;
+                    $hashedPassword = $login->passwordResetHash;
                 }
 
 
                 //check if password hash is valid
-                if (password_verify($password, $hashed_password)) 
+                if (password_verify($password, $hashedPassword)) 
                 {
                     $_SESSION['currentLogin'] = serialize($login);
                     $_SESSION['isLoggedIn'] = true;
@@ -176,7 +176,7 @@ class PagesController extends Controller
                         $login->enabled = 0;
                     }
                     $login->save();
-                    $errorMessages['wrong_password'] = 'Deine Logindaten stimmen nicht überein';
+                    $errorMessages['wrongPassword'] = 'Deine Logindaten stimmen nicht überein';
                 }
             }
         }
