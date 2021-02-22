@@ -7,6 +7,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     var btnUp = document.getElementById('upButton');
 
+    //enable smooth scrolling
+    document.documentElement.style.scrollBehavior = 'smooth';
+    
     if (btnUp) {
         //hide the button
         btnUp.style.display = 'none';
@@ -27,9 +30,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         btnUp.addEventListener('click', function(event) {
-            //enable smooth scrolling
-            document.documentElement.style.scrollBehavior = 'smooth';
-
             //scroll to document top (safari)
             document.body.scrollTop = 0;
 
