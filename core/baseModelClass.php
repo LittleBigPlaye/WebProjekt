@@ -77,7 +77,7 @@ abstract class BaseModel
             {
                 $sql .= '`'.$key.'`,';
 
-                if($this->data[$key] === null)
+                if($this->data[$key] === null || empty($this->data[$key]))
                 {
                     $valueString .='NULL,';
                 }
