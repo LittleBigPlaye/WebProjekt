@@ -18,7 +18,7 @@ class OrderItem extends BaseModel
         'updatedAt'   =>  ['type' => BaseModel::TYPE_DATE     , 'null' => 'null'     ],
         'productsID'  =>  ['type' => BaseModel::TYPE_INT      , 'null' => 'null'],
         'ordersID'    =>  ['type' => BaseModel::TYPE_INT      , 'null' => 'null'],
-        'quantity'    =>  ['type' => BaseModel::TYPE_INT     , 'null' => 'null'],
+        'quantity'    =>  ['type' => BaseModel::TYPE_INT      , 'null' => 'null'],
         'actualPrice' =>  ['type' => BaseModel::TYPE_DECIMAL  , 'null' => 'null']
     ];
 

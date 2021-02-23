@@ -15,9 +15,9 @@ class Image extends BaseModel
         'id'            =>  ['type' => BaseModel::TYPE_INT     , 'null' => 'not null' , 'autoincrement' => true],
         'createdAt'     =>  ['type' => BaseModel::TYPE_DATE    , 'null' => 'not null' ],
         'updatedAt'     =>  ['type' => BaseModel::TYPE_DATE    , 'null' => 'null'     ]    ,
-        'imageName'     =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'not null', 'min' =>  5, 'max' => 150],
-        'imagePath'     =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'not null', 'min' =>  5, 'max' => 256],
-        'thumbnailPath' =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'not null', 'min' =>  5, 'max' => 256]
+        'imageName'     =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'not null', 'max' => 150],
+        'imagePath'     =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'not null', 'max' => 256],
+        'thumbnailPath' =>  ['type' => BaseModel::TYPE_STRING  , 'null' => 'not null', 'max' => 256]
     ];
 
     public function __get ($key){
