@@ -125,6 +125,12 @@ class PagesController extends Controller
             {
                 $errorMessages['email'] = 'Bitte gib eine Email an.';
             }
+            //validate Email
+            elseif(!filter_var($email, FILTER_VALIDATE_EMAIL))
+            {
+                $errorMessages['EmailValidation'] = 'Ungültige Eingabe der Email';
+            }
+
             //check if user exists
             elseif (Login::findOne('email LIKE' . $db->quote($email)) == null)
             {
