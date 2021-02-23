@@ -24,8 +24,6 @@ class accountsController extends Controller
     public function actionRegister()
     {
         $errorMessages = [];
-        $successMessage = '';
-        
 
         if (isset($_POST['ajax']) && $_POST['ajax'] == 1 && $_POST['submitForm'] && $_POST['email'])
         {
@@ -401,6 +399,12 @@ class accountsController extends Controller
      */
     public function actionChangeSecrets()
     {
+        //redirect to login, if user is not logged in
+        if(!$this->isLoggedIn())
+        {
+            $this->redirect('index.php?c=pages&a=login');
+        }
+
         $errorMessage   = '';
 
         // the following "if" check if the the submit was send
@@ -450,6 +454,12 @@ class accountsController extends Controller
      */
     public function actionChangePersonalData()
     {
+        //redirect to login, if user is not logged in
+        if(!$this->isLoggedIn())
+        {
+            $this->redirect('index.php?c=pages&a=login');
+        }
+
         $errorMessage   = '';
 
         //get necessary data´s
@@ -546,6 +556,12 @@ class accountsController extends Controller
      */
     public function actionChangeAddress()
     {
+        //redirect to login, if user is not logged in
+        if(!$this->isLoggedIn())
+        {
+            $this->redirect('index.php?c=pages&a=login');
+        }
+
         $errorMessage   = '';
  
         $db = $GLOBALS['database'];
