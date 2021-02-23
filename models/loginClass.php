@@ -25,7 +25,7 @@ class Login extends BaseModel
         'failedLoginCount'          => ['type' => BaseModel::TYPE_INT,      'null' => 'not null'],
         'passwordHash'              => ['type' => BaseModel::TYPE_STRING,   'null' => 'not null'],
         'passwordResetHash'         => ['type' => BaseModel::TYPE_STRING,   'null' => 'null'],
-        'passwordResetCreatedAt'    => ['type' => BaseModel::TYPE_STRING,   'null' => 'not null'],
+        'passwordResetCreatedAt'    => ['type' => BaseModel::TYPE_STRING,   'null' => 'null'],
         'usersID'                   => ['type' => BaseModel::TYPE_INT,      'null' => 'not null']
         ];
 

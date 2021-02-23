@@ -241,27 +241,25 @@ class accountsController extends Controller
                 //create new user and save
                 $user = new User($userData);
                 $user->save();
-                $user->id;
 
                 //at this status of complitation of the website, enabled and validated will set on true
                 //failedLoginCount is 0
-                $validated = true;
-                $enabled   = true;
-                $failedLoginCount = 0;
 
                 //set array for the new login
                 $loginData = array(
-                    'validated'         => $validated,
-                    'enabled'           => $enabled,
+                    'validated'         => 1,
+                    'enabled'           => 1,
                     'email'             => $email,
-                    'failedLoginCount'  => $failedLoginCount,
+                    'failedLoginCount'  => 0,
                     'passwordHash'      => $savePassword,
                     'usersID'           => $user->id
                 );
 
+                
+
                 //create new login and save
                 $login = new Login($loginData);
-                $login->save($error);
+                $login->save();
 
                 $_SESSION['success'] = 'Der neue Nutzer wurde angelegt';
                 $this->redirect('index.php?c=pages&a=login');

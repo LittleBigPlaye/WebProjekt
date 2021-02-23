@@ -77,7 +77,7 @@ abstract class BaseModel
             {
                 $sql .= '`'.$key.'`,';
 
-                if($this->data[$key] === null || empty($this->data[$key]))
+                if($this->data[$key] === null || trim($this->data[$key]) === '')
                 {
                     $valueString .='NULL,';
                 }
@@ -126,7 +126,7 @@ abstract class BaseModel
         $sql = 'UPDATE '.self::tablename().' SET ';
         foreach ($this->schema as $key => $schemaOptions)
         {
-            if($this->data[$key] === null || empty($this->data[$key]))
+            if($this->data[$key] === null || trim($this->data[$key]) === '')
             {
                 $sql .= $key. ' = NULL,';
             }
