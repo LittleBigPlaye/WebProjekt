@@ -10,8 +10,12 @@ body {
     background-color: white;
     font-family: 'Nunito', sans-serif;
     background-color: #e2e2e2;
-    counter-reset: image;
+    /* counter-reset: image; */
     counter-reset: h2counter;
+}
+
+.content {
+    counter-reset: image;
 }
 
 h2,
@@ -59,11 +63,6 @@ p+h5 {
     height: 50px;
     color: white;
 }
-
-
-/* .headline {
-    counter-reset: h2counter;
-} */
 
 h2:after {
     content: ' ';
@@ -182,21 +181,7 @@ a:hover {
     transition: .2s ease-in-out;
 }
 
-img {
-    counter-increment: image;
-}
 
-.imageTitle::before {
-    content: "Abbildung " counter(image) " : " "\0000a0\0000a0";
-}
-
-.imageTitle {
-    font-size: 0.8em;
-    color: #5c5c5c;
-    margin: 0 auto;
-    display: block;
-    margin-bottom: 15px;
-}
 
 .sideNavigation {
     height: 100%;
@@ -289,4 +274,20 @@ img {
 
 .column span {
     text-align: center;
+}
+
+.imageTitle {
+    counter-increment: image 1;
+}
+
+.imageTitle::before {
+    content: "Abbildung " counter(image) " : " "\0000a0\0000a0";
+}
+
+.imageTitle {
+    font-size: 0.6em;
+    color: #5c5c5c;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 15px;
 }
