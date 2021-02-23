@@ -1,6 +1,6 @@
 <div class="formWrapper">
     <form method="post" class="productForm" action="?c=accounts&a=changepersonaldata">
-        <h1>Na? Hat sich das Geschlecht geändert?</h1>
+        <h1>Persönliche Daten ändern</h1>
 
         <?php if (isset($errorMessage) && !empty($errorMessage)) : ?>
             <input class="messageToggle" type="checkbox" id="errorToggle">

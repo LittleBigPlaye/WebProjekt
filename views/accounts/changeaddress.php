@@ -2,7 +2,7 @@
 
 <div class="formWrapper">
     <form method="post" class="productForm" action="?c=accounts&a=changeaddress">
-        <h1>Wie ist denn die neue Adresse?</h1>
+        <h1>Adresse ändern</h1>
 
         <?php if (isset($errorMessage) && !empty($errorMessage)) : ?>
             <input class="messageToggle" type="checkbox" id="errorToggle">

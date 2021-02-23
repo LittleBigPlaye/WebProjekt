@@ -13,8 +13,9 @@
     <div>
         <h2>Schöner können Sie ihr Gesicht nicht verstecken.</h2>
         <p>
-            Unsere Masken sind ein bewertes Produkt, was Milliarden Kindern Arbeit liefert. <br>
-            Nur Kinderhände sind in der Lage so feine Lagen zu legen und solch zierliche Stiche zu setzen
+            <!-- Neu -->
+            Unsere Masken sind bewärte Produkte aus handverlesenen Stoffen.<br>
+            Haptik und Tragegefühl sind unvergleichlich.
         </p>
         <br>
     </div>
@@ -39,10 +40,9 @@
     <h2>Die Götter wissen, dass sie sie brauchen</h2>
 </div>
 <p>
-    Unsere geklauten Motive werden ihr Leben bereichern <br>
-    Mit unseren Masken wird es Ihnen so unendlich leicht gemacht Ihre menschenverachtenden Gesichtszüge zu
-    verdecken.<br>
-    Nutzen Sie diese Möglichkeit!
+    <!-- Neu -->
+    Unsere Motive werden Ihr Leben bereichern.<br>
+    Sie werden die Masken in Ihrem Alltag nicht mehr missen wollen.
 </p>
 <br>
 
