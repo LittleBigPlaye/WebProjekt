@@ -1,7 +1,7 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     var btnSubmit = document.getElementById('submitForm');
 
-//get input fields from form
+    //get input fields from form
     var firstName = document.getElementById('firstName');
     var secondName = document.getElementById('secondName');
     var lastName = document.getElementById('lastName');
@@ -25,134 +25,95 @@ document.addEventListener('DOMContentLoaded', function() {
     //check if submit button has been found
     if (btnSubmit) {
         var formIsValid;
-        btnSubmit.addEventListener('click', function(event)
-        {
+        btnSubmit.addEventListener('click', function (event) {
             formIsValid = true;
 
             //check if firstName is set
-            if (!firstName || firstName.value.length <= 0 || firstName.value.length > 50)
-            {
+            if (!firstName || firstName.value.length <= 0 || firstName.value.length > 50) {
                 firstName.classList.add("errorHighlight");
                 formIsValid = false;
-            }
-            else
-                {
+            } else {
                 firstName.classList.remove('errorHighlight');
             }
 
             //check if secondName is valid
-            if (secondName.value.length > 50)
-            {
+            if (secondName.value.length > 50) {
                 secondName.classList.add("errorHighlight");
                 formIsValid = false;
-            }
-            else
-            {
+            } else {
                 secondName.classList.remove('errorHighlight');
             }
 
 
             //check if lastName is set
-            if (!lastName || lastName.value.length <= 0 || lastName.value.length > 50)
-            {
+            if (!lastName || lastName.value.length <= 0 || lastName.value.length > 50) {
                 lastName.classList.add("errorHighlight");
                 formIsValid = false;
-            } else
-                {
+            } else {
                 lastName.classList.remove('errorHighlight');
             }
 
             //check if email is set
-            if (!email || email.value.length <= 0 || email.value.length > 320)
-            {
+            if (!email || email.value.length <= 0 || email.value.length > 320) {
                 email.classList.add("errorHighlight");
                 email.nextElementSibling.innerHTML = 'Bitte geben Sie ihre E-Mail an!';
                 formIsValid = false;
-            } else
-                {
+            } else {
                 email.classList.remove('errorHighlight');
             }
 
             //check if birthDate is set
-            if (!birthDate || birthDate.value.length <= 0)
-            {
+            if (!birthDate || birthDate.value.length <= 0) {
                 birthDate.classList.add("errorHighlight");
                 formIsValid = false;
-            } else
-                {
+            } else {
                 birthDate.classList.remove('errorHighlight');
             }
 
-            //check if password is set
-            if (!password || password.value.length <= 0)
-            {
+            var regex = /^(?=.*?[A-Z])(?=.*?[a-z].*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/m;
+            if (!password || !password.value.match(regex)) {
                 password.classList.add("errorHighlight");
                 formIsValid = false;
-            } else
-            {
+            } else {
                 password.classList.remove('errorHighlight');
-            }
-
-            //check if password2 is set
-            if (!password2 || password2.value.length <= 0)
-            {
-                password2.classList.add("errorHighlight");
-                formIsValid = false;
-            } else
-            {
-                password2.classList.remove('errorHighlight');
-            }
-
-            //check if password === password2
-            if(password.value === password2.value)
-            {
-                password.classList.remove('errorHighlight');
-                password2.classList.remove("errorHighlight");
-            }
-            else
-            {
-                password.classList.add('errorHighlight');
-                password2.classList.add("errorHighlight");
-                formIsValid = false;
+                //check if password === password2
+                if (password.value === password2.value) {
+                    password2.classList.remove("errorHighlight");
+                } else {
+                    password2.classList.add("errorHighlight");
+                    formIsValid = false;
+                }
             }
 
             //check if street is set
-            if (!street || street.value.length <= 0 || street.value.length > 255)
-            {
+            if (!street || street.value.length <= 0 || street.value.length > 255) {
                 street.classList.add("errorHighlight");
                 formIsValid = false;
-            } else
-            {
+            } else {
                 street.classList.remove('errorHighlight');
             }
 
             //check if streetNumber is set
-            if (!streetNumber || streetNumber.value.length <= 0 || streetNumber.value.length > 10)
-            {
+            if (!streetNumber || streetNumber.value.length <= 0 || streetNumber.value.length > 10) {
                 streetNumber.classList.add("errorHighlight");
                 formIsValid = false;
-            } else
-            {
+            } else {
                 streetNumber.classList.remove('errorHighlight');
             }
 
             //check if zipCode is set
-            if (!zipCode || zipCode.value.length != 5)
-            {
+            if (!zipCode || zipCode.value.length != 5) {
                 zipCode.classList.add("errorHighlight");
                 formIsValid = false;
-            } else
-            {
+            } else {
                 zipCode.classList.remove('errorHighlight');
             }
 
             //check if city is set
-            if (!city || city.value.length <= 0 || city.value.length > 60)
-            {
+            if (!city || city.value.length <= 0 || city.value.length > 60) {
                 city.classList.add("errorHighlight");
                 formIsValid = false;
-            } else
-            {
+            } else {
                 city.classList.remove('errorHighlight');
             }
 
@@ -182,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         if (request) {
-            request.onreadystatechange = function() {
+            request.onreadystatechange = function () {
                 if (this.readyState == XMLHttpRequest.DONE) {
                     if (this.status == 200) {
                         //server returns non empty string, if product name is not new
