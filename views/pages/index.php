@@ -14,7 +14,7 @@
         <h2>Schöner können Sie ihr Gesicht nicht verstecken.</h2>
         <p>
             <!-- Neu -->
-            Unsere Masken sind bewärte Produkte aus handverlesenen Stoffen.<br>
+            Unsere Masken sind bewährte Produkte aus handverlesenen Stoffen.<br>
             Haptik und Tragegefühl sind unvergleichlich.
         </p>
         <br>
